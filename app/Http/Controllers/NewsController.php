@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use voku\helper\AntiXSS;
+use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -11,7 +13,16 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::orderByDesc('created_at')->get();
+
+        $data = array(
+            'head'  => "Berita",
+            'title' => "Berita",
+            'menu'  => "Berita",
+            'news'  => $news
+        );
+
+        return view('admin.news.index')->with($data);
     }
 
     /**
@@ -19,7 +30,13 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $data = array(
+            'head'  => "Berita",
+            'title' => "Berita",
+            'menu'  => "Tambah Berita",
+        );
+
+        return view('admin.news.add')->with($data);
     }
 
     /**

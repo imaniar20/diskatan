@@ -1,7 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Middleware\CheckLogin;
+
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +20,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+//public
 Route::get('/visi-misi', function () {
     return view('public.profil.visimisi');
 });
@@ -45,4 +51,24 @@ Route::get('/berita', function () {
 
 Route::get('/berita-detail', function () {
     return view('public.berita.detail');
+});
+//end
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::middleware([CheckLogin::class])->group(function () {
+        Route::get('/admin-dashboard', function () {
+            $data = array(
+                'head' => "Dashboard",
+                'title' => "Dashboard",
+                'menu' => "Dashboard"
+            );
+
+            return view('admin.home.index')->with($data);
+        });
+    });
+    Route::resource('/admin-berita', NewsController::class);
 });
