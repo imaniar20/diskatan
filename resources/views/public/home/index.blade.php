@@ -3,71 +3,108 @@
 @section('title', 'Home')
 
 @section('content')
-    <!-- Banner Carousel -->
-    <section class="banner-carousel fade-up">
-        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Hero Carousel Section -->
+    <section id="home" class="hero-section">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
             </div>
+
             <div class="carousel-inner">
+                <!-- Slide 1 -->
                 <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                        class="d-block w-100" alt="Pertanian">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2>Selamat Datang di Website Dinas Pertanian</h2>
-                        <p>Membangun pertanian yang maju, mandiri, dan modern</p>
+                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1600&h=900&fit=crop"
+                        alt="Forest">
+                    <div class="carousel-overlay">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Selamat Datang</h1>
+                            <p class="hero-subtitle">Dinas Perhutanan - Menjaga Hutan, Menjaga Masa Depan</p>
+                            <button class="hero-btn">Jelajahi Lebih Lanjut</button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                        class="d-block w-100" alt="Petani">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2>Meningkatkan Kesejahteraan Petani</h2>
-                        <p>Program pemberdayaan dan pelatihan untuk petani</p>
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=1600&h=900&fit=crop"
+                        alt="Green Forest">
+                    <div class="carousel-overlay">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Pelestarian Hutan</h1>
+                            <p class="hero-subtitle">Bersama Menjaga Kelestarian Alam untuk Generasi Mendatang</p>
+                            <button class="hero-btn">Pelajari Program Kami</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=1600&h=900&fit=crop"
+                        alt="Nature">
+                    <div class="carousel-overlay">
+                        <div class="hero-content">
+                            <h1 class="hero-title">Konservasi Alam</h1>
+                            <p class="hero-subtitle">Komitmen Kami dalam Melindungi Keanekaragaman Hayati</p>
+                            <button class="hero-btn">Lihat Kegiatan</button>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
         </div>
     </section>
 
-    <!-- Sejarah -->
-    <section id="profil" class="py-5 bg-light fade-up">
+    <!-- About Section -->
+    <section id="about" class="about-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="{{ asset('img/dinas/bg-1.jpg') }}" alt="Ketua Dinas Pertanian" class="profile-img">
-                    <h4 class="section-title text-center mt-3 mb-1">Dinas Ketahanan Pangan dan Pertanian</h4>
-                    {{-- <h4 class="text-warning">Kabupaten Kuningan</h4> --}}
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="about-img-container">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"
+                            alt="Dinas Perhutanan">
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="section-title text-center">Sejarah Singkat:</h5>
-                            <p class="card-text">
-                                "Sejarah Singkat Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan
 
-                                Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan sebagai salah satu wilayah di Jawa
-                                Barat beralamat di Jalan Raya Syech Manglayang No. 3 Windujanten Kecamatan Kadugede
-                                Kabupaten Kuningan Jawa Barat 45561, Telp/Fax. (0232) 877096, yang mempunyai kawasan
-                                budidaya lahan sawah yang relatif luas. Dalam rangka ketahanan pangan maka fungsi lahan
-                                dikawasan pertanian lahan basah, terutama lahan sawah beririgasi teknis harus tetap
-                                dipertahankan, Selain itu, dinas pertanian juga memiliki beberapa tugas dan fungsi lain
-                                seperti penyuluhan pertanian, merumuskan kebijakan pertanian, memutus kebijakan bidang
-                                pangan, administrasi ketatausahaan pertanian, pembinaan teknis pada pihak-pihak bidang
-                                pertanian, memastikan ketersedian pupuk pertanian, hingga penyaluran bantuan alat dan mesin
-                                pendukung pertanian. Selain itu, dinas pertanian juga adalah penjamis kesejahteraan petani
-                                melalui program memastikan memberikan asuransi usaha tani padi (AUPT). Oleh karenanya,
-                                terkait dengan fungsi dan tugasnya, dinas pertanian memiliki wewenang untuk mengeluarkan
-                                surat izin pertanian, izin alih fungsi, izin usaha pertanian, pembukaan lahan dan izin
-                                lainnya terkait pertanian."
-                            </p>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="about-text">
+                        <h2 class="section-title">Tentang Kami</h2>
+                        <h4 style="color: var(--secondary-green); margin-bottom: 20px;">Dinas Ketahanan Pangan dan Pertanian
+                        </h4>
+
+                        <p>Dinas Perhutanan merupakan lembaga pemerintah yang bertanggung jawab dalam pengelolaan dan
+                            pelestarian hutan di wilayah kami. Dengan komitmen tinggi terhadap keberlanjutan lingkungan,
+                            kami berupaya menjaga keseimbangan ekosistem hutan dan meningkatkan kesejahteraan masyarakat
+                            sekitar hutan.</p>
+
+                        <p>Sejak didirikan pada tahun 1985, kami telah mengimplementasikan berbagai program konservasi,
+                            reboisasi, dan pengelolaan hutan lestari. Melalui pendekatan yang inovatif dan partisipatif,
+                            kami terus berupaya mewujudkan hutan yang sehat dan produktif untuk generasi saat ini dan masa
+                            depan.</p>
+
+                        <div class="stats-box" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="row">
+                                <div class="col-4 stat-item">
+                                    <span class="stat-number">250K+</span>
+                                    <span class="stat-label">Hektar Hutan</span>
+                                </div>
+                                <div class="col-4 stat-item">
+                                    <span class="stat-number">1.2K+</span>
+                                    <span class="stat-label">Pohon Ditanam</span>
+                                </div>
+                                <div class="col-4 stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Program Aktif</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,282 +112,280 @@
         </div>
     </section>
 
-    <!-- Agenda Kegiatan -->
-    <section id="agenda" class="py-5 bg-soft-green fade-up">
+    <!-- Agenda Section -->
+    <section id="agenda" class="agenda-section">
         <div class="container">
-            <h2 class="section-title text-center">Agenda Kegiatan</h2>
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Agenda Kegiatan</h2>
+
             <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Pelatihan Pertanian Organik</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 15 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 08:00 - 15:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Balai Desa Sukamaju
-                                </p>
-                                <p>Pelatihan tentang teknik pertanian organik untuk peningkatan hasil panen</p>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="agenda-card">
+                        <div class="agenda-content">
+                            <div class="d-flex">
+                                <div class="agenda-date">
+                                    <span class="day">28</span>
+                                    <span class="month">Des</span>
+                                </div>
+                                <div class="flex-grow-1 ms-4">
+                                    <h4 class="agenda-title">Sosialisasi Program Reboisasi 2025</h4>
+                                    <div class="agenda-time">
+                                        <i class="bi bi-clock me-2"></i>09:00 - 15:00 WIB
+                                    </div>
+                                    <div class="agenda-location">
+                                        <i class="bi bi-geo-alt me-2"></i>Aula Dinas Perhutanan
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Penyerahan Bantuan Bibit Unggul</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 20 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 09:00 - 12:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Kantor Dinas Pertanian
-                                </p>
-                                <p>Penyerahan bantuan bibit tanaman unggul kepada kelompok tani</p>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="agenda-card">
+                        <div class="agenda-content">
+                            <div class="d-flex">
+                                <div class="agenda-date">
+                                    <span class="day">05</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="flex-grow-1 ms-4">
+                                    <h4 class="agenda-title">Pelatihan Konservasi Tanah dan Air</h4>
+                                    <div class="agenda-time">
+                                        <i class="bi bi-clock me-2"></i>08:00 - 16:00 WIB
+                                    </div>
+                                    <div class="agenda-location">
+                                        <i class="bi bi-geo-alt me-2"></i>Balai Latihan Kehutanan
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Workshop Pengolahan Hasil Pertanian</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 25 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 10:00 - 16:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Aula Kecamatan
-                                </p>
-                                <p>Workshop pengolahan produk pertanian untuk nilai tambah</p>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="agenda-card">
+                        <div class="agenda-content">
+                            <div class="d-flex">
+                                <div class="agenda-date">
+                                    <span class="day">12</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="flex-grow-1 ms-4">
+                                    <h4 class="agenda-title">Aksi Tanam Pohon Bersama Masyarakat</h4>
+                                    <div class="agenda-time">
+                                        <i class="bi bi-clock me-2"></i>07:00 - 12:00 WIB
+                                    </div>
+                                    <div class="agenda-location">
+                                        <i class="bi bi-geo-alt me-2"></i>Kawasan Hutan Lindung Gunung Hijau
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Monitoring Program Pertanian</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 30 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 07:00 - 17:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Desa Tani Makmur
-                                </p>
-                                <p>Monitoring dan evaluasi program pembangunan pertanian</p>
+
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="agenda-card">
+                        <div class="agenda-content">
+                            <div class="d-flex">
+                                <div class="agenda-date">
+                                    <span class="day">20</span>
+                                    <span class="month">Jan</span>
+                                </div>
+                                <div class="flex-grow-1 ms-4">
+                                    <h4 class="agenda-title">Workshop Pengelolaan Hasil Hutan Lestari</h4>
+                                    <div class="agenda-time">
+                                        <i class="bi bi-clock me-2"></i>09:00 - 17:00 WIB
+                                    </div>
+                                    <div class="agenda-location">
+                                        <i class="bi bi-geo-alt me-2"></i>Hotel Rimba Raya
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary">
-                    <i class="bi bi-calendar-week me-2"></i>Lihat Agenda Lengkap
-                </a>
             </div>
         </div>
     </section>
 
-    <!-- Berita -->
-    <section id="berita" class="py-5 bg-light fade-up">
+    <!-- News Section -->
+    <section id="news" class="news-section">
         <div class="container">
-            <h2 class="section-title text-center">Berita Terbaru</h2>
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Berita Terkini</h2>
+
             <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1592982537447-7444dc31f8e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 1">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Teknologi</span>
-                            <h5 class="card-title">Penerapan Smart Farming di Desa Makmur</h5>
-                            <p class="card-text">
-                                Dinas Pertanian memperkenalkan sistem smart farming untuk
-                                meningkatkan produktivitas pertanian...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 10 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&h=400&fit=crop"
+                            alt="News 1" class="news-img">
+                        <div class="news-content">
+                            <span class="news-badge">Konservasi</span>
+                            <h4 class="news-title">Program Reboisasi 2025 Targetkan 500 Ribu Pohon</h4>
+                            <p class="news-excerpt">Dinas Perhutanan menargetkan penanaman 500 ribu pohon di berbagai
+                                kawasan hutan pada tahun 2025 mendatang...</p>
+                            <div class="news-meta">
+                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>20 Des 2024</span>
+                                <a href="#" class="news-link">Baca Selengkapnya <i
+                                        class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 2">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Program</span>
-                            <h5 class="card-title">Bantuan Bibit Unggul untuk 1000 Petani</h5>
-                            <p class="card-text">
-                                Program distribusi bibit unggul telah menjangkau 1000 petani
-                                di wilayah kecamatan se-Kabupaten...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 5 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
+
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600&h=400&fit=crop"
+                            alt="News 2" class="news-img">
+                        <div class="news-content">
+                            <span class="news-badge">Prestasi</span>
+                            <h4 class="news-title">Dinas Perhutanan Raih Penghargaan Nasional</h4>
+                            <p class="news-excerpt">Berkat komitmen dalam menjaga kelestarian hutan, Dinas Perhutanan
+                                menerima penghargaan dari Kementerian...</p>
+                            <div class="news-meta">
+                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>18 Des 2024</span>
+                                <a href="#" class="news-link">Baca Selengkapnya <i
+                                        class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 3">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Prestasi</span>
-                            <h5 class="card-title">Petani Lokal Raih Penghargaan Nasional</h5>
-                            <p class="card-text">
-                                Kelompok tani binaan Dinas Pertanian meraih penghargaan
-                                nasional dalam lomba inovasi pertanian...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 2 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
+
+                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="news-card">
+                        <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&h=400&fit=crop"
+                            alt="News 3" class="news-img">
+                        <div class="news-content">
+                            <span class="news-badge">Kolaborasi</span>
+                            <h4 class="news-title">Kerjasama dengan Komunitas Lokal Diperluas</h4>
+                            <p class="news-excerpt">Untuk meningkatkan efektivitas program konservasi, kerjasama dengan
+                                berbagai komunitas lokal terus diperkuat...</p>
+                            <div class="news-meta">
+                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>15 Des 2024</span>
+                                <a href="#" class="news-link">Baca Selengkapnya <i
+                                        class="bi bi-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary">
-                    <i class="bi bi-newspaper me-2"></i>Lihat Semua Berita
-                </a>
             </div>
         </div>
     </section>
 
-    <section id="pengunjung" class="py-5 bg-soft-green fade-up">
+    <!-- Stats & Survey Section -->
+    <section id="stats" class="stats-survey-section">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title text-center">Statistik Pengunjung dan Survey Kepuasan</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="visitor-counter">
+                        <h3 class="counter-title">Total Pengunjung Website</h3>
+                        <span class="counter-number" id="visitorCount">125,847</span>
+                        <p class="counter-label">Pengunjung sejak Januari 2024</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="survey-box">
+                        <h3 class="survey-title">Survey Kepuasan Layanan</h3>
+                        <p style="color: #666; margin-bottom: 30px;">Bantu kami meningkatkan pelayanan dengan memberikan
+                            penilaian Anda</p>
+
+                        <div class="rating-group">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600;">Bagaimana pengalaman
+                                Anda?</label>
+                            <div class="rating-stars" id="ratingStars">
+                                <i class="bi bi-star-fill" data-rating="1"></i>
+                                <i class="bi bi-star-fill" data-rating="2"></i>
+                                <i class="bi bi-star-fill" data-rating="3"></i>
+                                <i class="bi bi-star-fill" data-rating="4"></i>
+                                <i class="bi bi-star-fill" data-rating="5"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600;">Saran & Masukan
+                                (Opsional)</label>
+                            <textarea class="form-control" rows="3" placeholder="Tulis saran Anda di sini..."></textarea>
+                        </div>
+
+                        <button class="btn submit-btn mt-3" onclick="submitSurvey()">
+                            <i class="bi bi-send me-2"></i>Kirim Survey
+                        </button>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-            <div class="row g-4">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Hubungi Kami</h2>
 
-                <!-- SURVEY -->
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-7 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="contact-form">
+                        <h4 style="color: var(--primary-green); margin-bottom: 30px; font-weight: 700;">Kirim Pesan atau
+                            Saran</h4>
 
-                            <h6 class="fw-semibold section-sub-title mb-3">
-                                Survey Kepuasan Pengunjung
-                            </h6>
-
-                            <div class="row align-items-center">
+                        <form id="contactForm">
+                            <div class="row">
                                 <div class="col-md-6">
-
-                                    <p class="small fw-semibold">
-                                        Menurut Anda, bagaimana tampilan, fitur dan isi konten dari website ini?
-                                    </p>
-
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Sangat Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Cukup Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Kurang</label>
-                                    </div>
-
-                                    <button class="btn btn-dark w-100">
-                                        Kirim
-                                    </button>
+                                    <input type="text" class="form-control" placeholder="Nama Lengkap *" required>
                                 </div>
-
                                 <div class="col-md-6">
-                                    <div id="chartSurvey"></div>
+                                    <input type="email" class="form-control" placeholder="Email *" required>
                                 </div>
                             </div>
 
-                        </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" placeholder="No. Telepon *" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-select">
+                                        <option selected>Pilih Kategori</option>
+                                        <option>Pertanyaan Umum</option>
+                                        <option>Pengaduan</option>
+                                        <option>Saran & Kritik</option>
+                                        <option>Kerjasama</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <textarea class="form-control" rows="5" placeholder="Pesan Anda *" required></textarea>
+
+                            <button type="submit" class="submit-btn">
+                                <i class="bi bi-send me-2"></i>Kirim Pesan
+                            </button>
+                        </form>
                     </div>
                 </div>
 
-                <!-- STAT PENGUNJUNG -->
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-body">
-                            <h6 class="fw-semibold section-sub-title mb-3">Pengunjung</h6>
-
-                            <ul class="list-group list-group-flush small">
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Total <span class="badge bg-secondary">128</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Tahun Ini <span class="badge bg-secondary">80</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Bulan Ini <span class="badge bg-secondary">32</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Minggu Ini <span class="badge bg-secondary">12</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Hari Ini <span class="badge bg-danger">4</span>
-                                </li>
-                            </ul>
-
+                <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="contact-info-box">
+                        <div class="contact-info-item">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <h5>Alamat Kantor</h5>
+                            <p>Jl. Raya Kehutanan No. 123<br>Kuningan, Jawa Barat 45511</p>
                         </div>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </section>
+                        <div class="contact-info-item">
+                            <i class="bi bi-telephone-fill"></i>
+                            <h5>Telepon</h5>
+                            <p>(0232) 123456<br>(0232) 123457</p>
+                        </div>
 
-    <!-- Kontak -->
-    <section id="kontak" class="py-5 bg-light fade-up">
-        <div class="container">
-            <h2 class="section-title text-center">Kontak Kami</h2>
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="subjek" class="form-label">Subjek</label>
-                                    <input type="text" class="form-control" id="subjek" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pesan" class="form-label">Pesan</label>
-                                    <textarea class="form-control" id="pesan" rows="5" required></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-send me-2"></i>Kirim Pesan
-                                    </button>
-                                </div>
-                            </form>
+                        <div class="contact-info-item">
+                            <i class="bi bi-envelope-fill"></i>
+                            <h5>Email</h5>
+                            <p>info@dinasperhutanan.go.id<br>humas@dinasperhutanan.go.id</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <i class="bi bi-clock-fill"></i>
+                            <h5>Jam Operasional</h5>
+                            <p>Senin - Jumat: 08:00 - 16:00 WIB<br>Sabtu - Minggu: Libur</p>
                         </div>
                     </div>
                 </div>
@@ -359,36 +394,3 @@
     </section>
 
 @endsection
-
-@push('after-script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            var options = {
-                chart: {
-                    type: 'donut',
-                    height: 260
-                },
-                series: [20, 40, 20, 20],
-                labels: ['Cukup Bagus', 'Bagus', 'Sangat Bagus', 'Kurang'],
-                legend: {
-                    position: 'bottom',
-                    fontSize: '13px'
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(val) {
-                        return val.toFixed(0) + "%";
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(
-                document.querySelector("#chartSurvey"),
-                options
-            );
-
-            chart.render();
-        });
-    </script>
-@endpush

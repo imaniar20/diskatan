@@ -71,21 +71,74 @@
                 }
             });
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            tinymce.init({
+                selector: '.tinymce',
+                license_key: 'gpl',
+                base_url: '/tinymce',
+                suffix: '.min',
 
-        tinymce.init({
-            selector: '.tinymce',
-            height: 450,
-            menubar: false,
-            plugins: 'lists link image table code',
-            toolbar: `
-                undo redo |
-                bold italic underline |
-                alignleft aligncenter alignright |
-                bullist numlist |
-                link image table |
-                code
-            `,
-            license_key: 'gpl'
+                height: 450,
+                plugins: 'image link lists table code',
+                toolbar: `
+                    undo redo |
+                    bold italic |
+                    alignleft aligncenter alignright |
+                    bullist numlist |
+                    image link table |
+                    code
+                `,
+
+                images_upload_url: "{{ route('admin.upload-image') }}",
+                images_upload_credentials: true,
+
+                // Use images_upload_handler for more control
+                images_upload_handler: function(blobInfo, progress) {
+                    return new Promise(function(resolve, reject) {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('POST', "{{ route('admin.upload-image') }}", true);
+                        xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                        xhr.upload.onprogress = function(e) {
+                            progress(e.loaded / e.total * 100);
+                        };
+
+                        xhr.onload = function() {
+                            if (xhr.status === 403) {
+                                reject('HTTP Error: ' + xhr.status, {
+                                    remove: true
+                                });
+                                return;
+                            }
+
+                            if (xhr.status < 200 || xhr.status >= 300) {
+                                reject('HTTP Error: ' + xhr.status);
+                                return;
+                            }
+
+                            var json = JSON.parse(xhr.responseText);
+
+                            if (!json || typeof json.location != 'string') {
+                                reject('Invalid JSON: ' + xhr.responseText);
+                                return;
+                            }
+
+                            resolve(json.location);
+                        };
+
+                        xhr.onerror = function() {
+                            reject('Image upload failed due to a XHR Transport error. Code: ' + xhr
+                                .status);
+                        };
+
+                        var formData = new FormData();
+                        formData.append('file', blobInfo.blob(), blobInfo.filename());
+                        formData.append('_token', '{{ csrf_token() }}'); // Add token to form data
+
+                        xhr.send(formData);
+                    });
+                }
+            });
         });
     </script>
 

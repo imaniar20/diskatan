@@ -10,7 +10,7 @@
         </nav>
     </div>
     <div class="section">
-        <form class="mb-4" id="formPeraturan" action="{{ route('admin-berita.store') }}" enctype="multipart/form-data">
+        <form class="mb-4" id="addBerita" action="{{ route('admin-berita.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-12" style="border-bottom: 0px">
@@ -18,18 +18,18 @@
                         <div class="card-body">
                             <div class="row mb-3">
                                 <div class="col-6">
-                                    <label for="name" class="form-label">Judul <span
+                                    <label for="title" class="form-label">Judul <span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="name" name="name"
+                                    <input type="text" class="form-control" id="title" name="title"
                                         placeholder="" />
-                                    <small class="text-danger error-message" id="error-name"></small>
+                                    <small class="text-danger" id="errTitle"></small>
                                 </div>
                                 <div class="col-6">
                                     <label for="thumbnail" class="form-label">Thumbnail <span
                                             class="text-danger">*</span></label>
-                                    <input type="file" class="form-control dropify" name="thumbnail" id="thumbnail">
-                                    <small class="text-danger error-message" id="error-thumbnail"></small>
-                                    <small>Batas 10mb. Jenis yang diizinkan : .png, .jpg, .jpeg</small>
+                                    <input type="file" class="form-control dropify" name="thumbnail" id="thumbnail" accept="image/*">
+                                    <small class="text-danger" id="errThumbnail"></small>
+                                    <small>Batas 2mb. Jenis yang diizinkan : .png, .jpg, .jpeg</small>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -37,23 +37,30 @@
                                     <label for="status" class="form-label">Status <span
                                             class="text-danger">*</span></label>
                                     <select class="form-select" id="status" name="status">
-                                        <option value="aktif">Aktif</option>
-                                        <option value="non_aktif">Tidak Aktif</option>
+                                        <option value="published">Published</option>
+                                        <option value="draft">Draf</option>
                                     </select>
-                                    <small class="text-danger error-message" id="error-status"></small>
+                                    <small class="text-danger" id="errStatus"></small>
                                 </div>
                                 <div class="col-6">
-                                    <label for="publication_date" class="form-label">Tanggal Publikasi <span
+                                    <label for="published_at" class="form-label">Tanggal Publikasi <span
                                             class="text-danger">*</span></label>
-                                    <input class="form-control" type="datetime-local" id="publication_date"
-                                        name="publication_date" />
-                                    <small class="text-danger error-message" id="error-publication_date"></small>
+                                    <input class="form-control" type="datetime-local" id="published_at"
+                                        name="published_at" />
+                                    <small class="text-danger" id="errPublished"></small>
                                 </div>
                             </div>
 
                             <div class="mb-3">
-                                <label for="content" class="form-label">Konten Berita</label>
-                                <textarea class="form-control tinymce" type="text" id="content" name="content" placeholder="Konten Berita"></textarea>
+                                <label for="newsContent" class="form-label">Konten Berita</label>
+                                <textarea class="form-control tinymce" type="text" id="newsContent" name="newsContent" placeholder="Konten Berita"></textarea>
+                                <small class="text-danger" id="errContent"></small>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="justify-content-center">
+                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,4 +69,117 @@
             </div>
         </form>
     </div>
+
+    <script>
+        const handlerTitle = (e) => {
+            let title = $('#title').val().trim();
+
+            if (!title) {
+                $('#errTitle').html('Judul Berita Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else if (title.length < 3) {
+                $('#errTitle').html('Setidaknya Judul Berita Minimal 3 Huruf');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errTitle').html('');
+                return true;
+            }
+        };
+
+        const handlerThumbnail = (e) => {
+            let input = document.getElementById('thumbnail');
+            let file = input.files[0];
+
+            // wajib
+            if (!file) {
+                $('#errThumbnail').html('Thumbnail Wajib Diisi');
+                e.preventDefault();
+                return false;
+            }
+
+            // ukuran maksimal 2MB
+            const maxSize = 2 * 1024 * 1024; // 2MB
+            if (file.size > maxSize) {
+                $('#errThumbnail').html('Ukuran thumbnail maksimal 2MB');
+                input.value = '';
+                e.preventDefault();
+                return false;
+            }
+
+            // tipe file
+            const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+            if (!allowedTypes.includes(file.type)) {
+                $('#errThumbnail').html('Thumbnail harus berformat PNG, JPG, atau JPEG');
+                input.value = '';
+                e.preventDefault();
+                return false;
+            }
+
+            // valid
+            $('#errThumbnail').html('');
+            return true;
+        };
+
+        const handlerStatus = (e) => {
+            let status = $('#status').val();
+
+            if (!status) {
+                $('#errStatus').html('Status Wajib Dipilih');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errStatus').html('');
+                return true;
+            }
+        };
+
+        const handlerPublished = (e) => {
+            let published = $('#published_at').val();
+
+            if (!published) {
+                $('#errPublished').html('Tanggal Publikasi Wajib Diisi');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errPublished').html('');
+                return true;
+            }
+        };
+
+        const handlerContent = (e) => {
+            let content = tinymce.get('newsContent').getContent({
+                format: 'text'
+            }).trim();
+
+            if (!content) {
+                $('#errContent').html('Konten Berita Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errContent').html('');
+                return true;
+            }
+        };
+
+        $('#addBerita').on('submit', function(e) {
+
+            let validTitle = handlerTitle(e);
+            let validThumb = handlerThumbnail(e);
+            let validStatus = handlerStatus(e);
+            let validPublished = handlerPublished(e);
+            let validContent = handlerContent(e);
+
+            if (
+                !validTitle ||
+                !validThumb ||
+                !validStatus ||
+                !validPublished ||
+                !validContent
+            ) {
+                return false;
+            }
+        });
+    </script>
 @endsection

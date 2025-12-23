@@ -16,6 +16,12 @@
 </head>
 
 <body>
+    <!-- Decorative Leaves -->
+    <div class="leaf-decoration leaf-1">🌿</div>
+    <div class="leaf-decoration leaf-2">🍃</div>
+    <div class="leaf-decoration leaf-3">🌿</div>
+    <div class="leaf-decoration leaf-4">🍃</div>
+
     @include('public.partials.navbar')
 
     <main>
@@ -25,7 +31,7 @@
     @include('public.partials.footer')
 
     @stack('before-script')
-    @include('public.partials.js')
+        @include('public.partials.js')
     @stack('after-script')
 
     @stack('scripts')

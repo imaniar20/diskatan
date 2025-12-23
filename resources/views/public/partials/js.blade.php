@@ -1,59 +1,153 @@
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- AOS Animation -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+{{-- Di @include('public.partials.header') atau section head --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+{{-- Di @include('public.partials.js') atau section scripts --}}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-
-<!-- Custom JS -->
-<script>
-    // Initialize carousel
-    document.addEventListener('DOMContentLoaded', function() {
-        var myCarousel = document.querySelector('#bannerCarousel');
-        if (myCarousel) {
-            var carousel = new bootstrap.Carousel(myCarousel, {
-                interval: 3000,
-                wrap: true
-            });
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
+@push('after-script')
+    <script>
+        // Initialize AOS
         AOS.init({
-            duration: 800,
-            once: false,
-            mirror: true
-        });
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const elements = document.querySelectorAll(".fade-up");
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                } else {
-                    entry.target.classList.remove("show"); // ⬅️ reset
-                }
-            });
-        }, {
-            threshold: 0.2
+            duration: 1000,
+            once: true
         });
 
-        elements.forEach(el => observer.observe(el));
-    });
-
-    $(document).ready(function() {
-        $('.datatable').each(function() {
-            if (!$.fn.DataTable.isDataTable(this)) {
-                new DataTable(this);
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
         });
-    });
-</script>
+
+        // Date and Time
+        function updateDateTime() {
+            const now = new Date();
+
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+                'Oktober', 'November', 'Desember'
+            ];
+
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const month = months[now.getMonth()];
+            const year = now.getFullYear();
+
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+
+            document.getElementById('current-date').textContent = `${dayName}, ${date} ${month} ${year}`;
+            document.getElementById('current-time').textContent = `${hours}:${minutes}:${seconds} WIB`;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Visitor Counter Animation
+        function animateCounter() {
+            const counter = document.getElementById('visitorCount');
+            const target = 125847;
+            const duration = 2000;
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target.toLocaleString('id-ID');
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current).toLocaleString('id-ID');
+                }
+            }, 16);
+        }
+
+        // Trigger counter animation when section is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('.stats-survey-section'));
+
+        // Rating Stars
+        const stars = document.querySelectorAll('#ratingStars i');
+        let selectedRating = 0;
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.rating);
+                updateStars(selectedRating);
+            });
+
+            star.addEventListener('mouseenter', function() {
+                const rating = parseInt(this.dataset.rating);
+                updateStars(rating);
+            });
+        });
+
+        document.getElementById('ratingStars').addEventListener('mouseleave', function() {
+            updateStars(selectedRating);
+        });
+
+        function updateStars(rating) {
+            stars.forEach(star => {
+                const starRating = parseInt(star.dataset.rating);
+                if (starRating <= rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Submit Survey
+        function submitSurvey() {
+            if (selectedRating === 0) {
+                alert('Silakan pilih rating terlebih dahulu!');
+                return;
+            }
+
+            alert(`Terima kasih atas penilaian Anda! Rating: ${selectedRating} bintang`);
+            selectedRating = 0;
+            updateStars(0);
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pesan Anda telah terkirim. Tim kami akan segera menghubungi Anda.');
+            this.reset();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

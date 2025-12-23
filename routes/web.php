@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckLogin;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,7 +43,7 @@ Route::get('/daftar-pejabat', function () {
 });
 
 Route::get('/agenda', function () {
-    return view('public.agenda.index');
+    return view('public.agenda.detail');
 });
 
 Route::get('/berita', function () {
@@ -71,4 +72,13 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
     Route::resource('/admin-berita', NewsController::class);
+
+    Route::post('/admin/upload-image', [ImageController::class, 'upload'])
+        ->middleware('web')
+        ->name('admin.upload-image');
+
+    Route::get('/download/{filename}', [ImageController::class, 'download'])
+        ->where('filename', '.*')
+        ->name('download.file');
+
 });

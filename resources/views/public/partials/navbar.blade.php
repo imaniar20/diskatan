@@ -1,74 +1,20 @@
-<style>
-    .navbar:not(.navbar-scrolled) .nav-link {
-        color: #2e7d32 !important;
-        position: relative;
-    }
+<!-- Top Date Time Bar -->
+<div class="top-bar">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="bi bi-calendar-event"></i>
+                <span id="current-date"></span>
+            </div>
+            <div>
+                <i class="bi bi-clock"></i>
+                <span id="current-time"></span>
+            </div>
+        </div>
+    </div>
+</div>
 
-    /* hover */
-    .navbar:not(.navbar-scrolled) .nav-link:hover {
-        color: #1b5e20 !important;
-    }
-
-    /* underline animasi */
-    .navbar:not(.navbar-scrolled) .nav-link::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: -6px;
-        width: 0;
-        height: 2px;
-        background: #2e7d32;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
-    }
-
-    .navbar:not(.navbar-scrolled) .nav-link:hover::after {
-        width: 70%;
-    }
-
-    /* kondisi scroll */
-    .navbar-scrolled .nav-link {
-        color: rgba(255, 255, 255, .9) !important;
-    }
-
-    /* hover */
-    .navbar-scrolled .nav-link:hover {
-        color: #fff !important;
-    }
-
-    /* background hover soft */
-    .navbar-scrolled .nav-link:hover {
-        background: rgba(255, 255, 255, .15);
-        border-radius: 999px;
-    }
-
-    .nav-link.active {
-        font-weight: 600;
-    }
-
-    /* aktif saat navbar putih */
-    .navbar:not(.navbar-scrolled) .nav-link.active::after {
-        width: 70%;
-    }
-
-    /* aktif saat navbar hijau */
-    .navbar-scrolled .nav-link.active {
-        background: rgba(255, 255, 255, .2);
-        border-radius: 999px;
-    }
-
-    .brand-title {
-        font-weight: 700;
-        font-size: 1.2rem;
-        letter-spacing: -0.3px;
-    }
-
-    .brand-subtitle {
-        font-size: 1rem;
-        opacity: 1rem;
-    }
-</style>
-
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
@@ -133,7 +79,8 @@
                         <li><a class="dropdown-item" href="#profil">Sekretariat</a></li>
                         <li><a class="dropdown-item" href="#struktur">Bidang Tanaman Pangan</a></li>
                         <li><a class="dropdown-item" href="#struktur">Bidang Hortikultura dan Perkebunan</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Pengolahan Hasil dan Konsumsi Pangan</a></li>
+                        <li><a class="dropdown-item" href="#struktur">Bidang Pengolahan Hasil dan Konsumsi Pangan</a>
+                        </li>
                         <li><a class="dropdown-item" href="#struktur">Bidang Cadangan dan Distribusi Pangan</a></li>
                         <li><a class="dropdown-item" href="#struktur">Bidang Penyuluhan</a></li>
                     </ul>
@@ -142,16 +89,3 @@
         </div>
     </div>
 </nav>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const navbar = document.querySelector(".navbar");
-
-        window.addEventListener("scroll", function() {
-            if (window.scrollY > 0) {
-                navbar.classList.add("navbar-scrolled");
-            } else {
-                navbar.classList.remove("navbar-scrolled");
-            }
-        });
-    });
-</script>

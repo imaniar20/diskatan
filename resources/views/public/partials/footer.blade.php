@@ -1,40 +1,57 @@
-<footer class="footer mt-5 fade-up">
+<!-- Footer -->
+<footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <h5 class="mb-3">
-                    <i class="bi bi-tree-fill me-2"></i>Dinas Pertanian
-                </h5>
-                <p>
-                    Menyediakan informasi terbaru seputar pertanian,
-                    program pemerintah, dan kegiatan pembangunan sektor pertanian.
+            <div class="col-lg-4 mb-4">
+                <h4 class="footer-title">Dinas Perhutanan</h4>
+                <p style="opacity: 0.8; line-height: 1.8;">
+                    Bersama menjaga kelestarian hutan untuk masa depan yang lebih hijau dan berkelanjutan.
                 </p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <h5 class="mb-3">Kontak Kami</h5>
-                <p>
-                    <i class="bi bi-geo-alt me-2"></i>
-                    Jl. Pertanian No. 123, Kota Pertanian
-                </p>
-                <p>
-                    <i class="bi bi-telephone me-2"></i>
-                    (021) 1234-5678
-                </p>
-                <p>
-                    <i class="bi bi-envelope me-2"></i>
-                    dinas-pertanian@example.com
-                </p>
+
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Menu</h5>
+                <ul class="footer-links">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#agenda">Agenda</a></li>
+                    <li><a href="#news">Berita</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
             </div>
-            <div class="col-md-4 mb-4">
-                <h5 class="mb-3">Jam Operasional</h5>
-                <p>Senin - Kamis: 08:00 - 16:00</p>
-                <p>Jumat: 08:00 - 11:00</p>
-                <p>Sabtu - Minggu: Tutup</p>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-title">Layanan</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Perizinan</a></li>
+                    <li><a href="#">Informasi Publik</a></li>
+                    <li><a href="#">Pengaduan</a></li>
+                    <li><a href="#">PPID</a></li>
+                    <li><a href="#">Download</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-title">Link Terkait</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Kementerian LHK</a></li>
+                    <li><a href="#">Pemerintah Daerah</a></li>
+                    <li><a href="#">TNBJ</a></li>
+                    <li><a href="#">KPH</a></li>
+                    <li><a href="#">KLHK</a></li>
+                </ul>
             </div>
         </div>
-        <hr class="bg-light">
-        <div class="text-center pt-3">
-            <p>&copy; {{ date('Y') }} Dinas Pertanian. All rights reserved.</p>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Dinas Perhutanan. All Rights Reserved. Dibuat dengan <i class="bi bi-heart-fill"
+                    style="color: #e74c3c;"></i> untuk Hutan Indonesia</p>
         </div>
     </div>
 </footer>
