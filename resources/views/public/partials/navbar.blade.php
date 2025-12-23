@@ -31,58 +31,58 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ url('/') }}">Home</a>
+                    <a class="nav-link {{ $menu == 'Home' ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom" href="#"
+                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $title == 'Profil' ? 'active' : '' }}" href="#"
                         id="profilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Profil
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="profilDropdown">
-                        <li><a class="dropdown-item" href="{{ url('/visi-misi') }}">Visi & Misi</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/sejarah') }}">Sejarah</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/struktur') }}">Struktur Organisasi</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/tupoksi') }}">Tugas Pokok dan Fungsi</a></li>
-                        <li><a class="dropdown-item" href="{{ url('/daftar-pejabat') }}">Daftar Pejabat</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Visi & Misi' ? 'active' : '' }}" href="{{ url('/visi-misi') }}">Visi & Misi</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Sejarah' ? 'active' : '' }}" href="{{ url('/sejarah') }}">Sejarah</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Struktur Organisasi' ? 'active' : '' }}" href="{{ url('/struktur') }}">Struktur Organisasi</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Tugas Pokok dan Fungsi' ? 'active' : '' }}" href="{{ url('/tupoksi') }}">Tugas Pokok dan Fungsi</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Daftar Pejabat' ? 'active' : '' }}" href="{{ url('/daftar-pejabat') }}">Daftar Pejabat</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/agenda') }}">Agenda</a>
+                    <a class="nav-link {{ $menu == 'Agenda' ? 'active' : '' }}" href="{{ url('/agenda') }}">Agenda</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/berita') }}">Berita</a>
+                    <a class="nav-link {{ $menu == 'Berita' ? 'active' : '' }}" href="{{ url('/berita') }}">Berita</a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom" href="#"
+                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Informasi' ? 'active' : '' }}" href="#"
                         id="informasiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Informasi
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="informasiDropdown">
-                        <li><a class="dropdown-item" href="#struktur">Komoditas Pertanian</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Harga Komoditas Pertanian</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Ruang Lingkup Pertanian</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Komoditas Pertanian' ? 'active' : '' }}" href="#struktur">Komoditas Pertanian</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Harga Komoditas Pertanian' ? 'active' : '' }}" href="#struktur">Harga Komoditas Pertanian</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Ruang Lingkup Pertanian' ? 'active' : '' }}" href="#struktur">Ruang Lingkup Pertanian</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom" href="#"
+                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Direktori' ? 'active' : '' }}" href="#"
                         id="direktoriDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Direktori
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="direktoriDropdown">
-                        <li><a class="dropdown-item" href="#profil">Sekretariat</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Tanaman Pangan</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Hortikultura dan Perkebunan</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Pengolahan Hasil dan Konsumsi Pangan</a>
+                        <li><a class="dropdown-item {{ $menu == 'Sekretariat' ? 'active' : '' }}" href="#profil">Sekretariat</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Bidang Tanaman Pangan' ? 'active' : '' }}" href="#struktur">Bidang Tanaman Pangan</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Bidang Hortikulatura dan Perkebunan' ? 'active' : '' }}" href="#struktur">Bidang Hortikultura dan Perkebunan</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Bidang Pengolajan Hasil dan Konsumsi Pangan' ? 'active' : '' }}" href="#struktur">Bidang Pengolahan Hasil dan Konsumsi Pangan</a>
                         </li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Cadangan dan Distribusi Pangan</a></li>
-                        <li><a class="dropdown-item" href="#struktur">Bidang Penyuluhan</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Bidang Cadangan dan Distribusi Pangan' ? 'active' : '' }}" href="#struktur">Bidang Cadangan dan Distribusi Pangan</a></li>
+                        <li><a class="dropdown-item {{ $menu == 'Bidang Penyuluhan' ? 'active' : '' }}" href="#struktur">Bidang Penyuluhan</a></li>
                     </ul>
                 </li>
             </ul>

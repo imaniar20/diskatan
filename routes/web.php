@@ -6,8 +6,13 @@ use App\Http\Middleware\CheckLogin;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AgendasController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ImageController;
+
+use App\Models\Agendas;
+use App\Models\News;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,36 +28,93 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //public
 Route::get('/visi-misi', function () {
-    return view('public.profil.visimisi');
+    $data = array(
+        'head' => "Profil",
+        'title' => "Profil",
+        'menu' => "Visi & Misi",
+    );
+
+    return view('public.profil.visimisi')->with($data);
 });
 
 Route::get('/sejarah', function () {
-    return view('public.profil.sejarah');
+    $data = array(
+        'head' => "Profil",
+        'title' => "Profil",
+        'menu' => "Sejarah",
+    );
+
+    return view('public.profil.sejarah')->with($data);
 });
 
 Route::get('/struktur', function () {
-    return view('public.profil.struktur');
+    $data = array(
+        'head' => "Profil",
+        'title' => "Profil",
+        'menu' => "Struktur Organisasi",
+    );
+
+    return view('public.profil.struktur')->with($data);
 });
 
 Route::get('/tupoksi', function () {
-    return view('public.profil.tupoksi');
+    $data = array(
+        'head' => "Profil",
+        'title' => "Profil",
+        'menu' => "Tugas Pokok dan Fungsi",
+    );
+
+    return view('public.profil.tupoksi')->with($data);
 });
 
 Route::get('/daftar-pejabat', function () {
-    return view('public.profil.daftarPejabat');
+    $data = array(
+        'head' => "Profil",
+        'title' => "Profil",
+        'menu' => "Daftar Pejabat",
+    );
+
+    return view('public.profil.daftarPejabat')->with($data);
 });
 
 Route::get('/agenda', function () {
-    return view('public.agenda.detail');
+    $agenda = Agendas::orderByDesc('date')->paginate(10);
+
+    $data = array(
+        'head' => "Agenda",
+        'title' => "Agenda",
+        'menu' => "Agenda",
+        'agenda' => $agenda
+    );
+
+    return view('public.agenda.index')->with($data);
 });
 
 Route::get('/berita', function () {
-    return view('public.berita.index');
+    $news = News::orderByDesc('published_at')->paginate(9);
+
+    $data = array(
+        'head' => "Berita",
+        'title' => "Berita",
+        'menu' => "Berita",
+        'news' => $news
+    );
+
+    return view('public.berita.index')->with($data);
 });
 
-Route::get('/berita-detail', function () {
-    return view('public.berita.detail');
-});
+Route::get('/berita/{slug}', function ($slug) {
+    $news = News::where('slug', $slug)->firstOrFail();
+
+    $data = array(
+        'head' => "Berita",
+        'title' => "Berita",
+        'menu' => "Berita",
+        'news' => $news
+    );
+
+    return view('public.berita.detail')->with($data);
+})->name('berita.detail');
 //end
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -71,6 +133,9 @@ Route::group(['middleware' => 'auth'], function () {
             return view('admin.home.index')->with($data);
         });
     });
+
+    Route::resource('/admin-agenda', AgendasController::class);
+
     Route::resource('/admin-berita', NewsController::class);
 
     Route::post('/admin/upload-image', [ImageController::class, 'upload'])

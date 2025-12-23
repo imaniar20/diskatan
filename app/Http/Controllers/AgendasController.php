@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
-use App\Models\News;
+use App\Models\Agendas;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
-class NewsController extends Controller
+class AgendasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $news = News::orderByDesc('created_at')->get();
+        $agenda = Agendas::orderByDesc('created_at')->get();
 
         $data = array(
-            'head' => "Berita",
-            'title' => "Berita",
-            'menu' => "Berita",
-            'news' => $news
+            'head' => "Agenda",
+            'title' => "Agenda",
+            'menu' => "Agenda",
+            'agenda' => $agenda
         );
 
-        return view('admin.news.index')->with($data);
+        return view('admin.agenda.index')->with($data);
     }
 
     /**
@@ -33,12 +33,12 @@ class NewsController extends Controller
     public function create()
     {
         $data = array(
-            'head' => "Berita",
-            'title' => "Berita",
-            'menu' => "Tambah Berita",
+            'head' => "Agenda",
+            'title' => "Agenda",
+            'menu' => "Tambah Agenda",
         );
 
-        return view('admin.news.add')->with($data);
+        return view('admin.agenda.add')->with($data);
     }
 
     /**
@@ -52,9 +52,9 @@ class NewsController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:3',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'status' => 'required|in:published,draft',
+            'location' => 'required|string|min:3',
             'published_at' => 'required|date',
-            'newsContent' => 'required',
+            'agendaContent' => 'required',
         ]);
 
         // 2. UPLOAD THUMBNAIL
@@ -67,13 +67,13 @@ class NewsController extends Controller
             $filename = Str::slug($request->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
 
             $thumbnailPath = $file->storeAs(
-                'news/thumbnail',
+                'agendas/thumbnail',
                 $filename,
                 'public'
             );
         }
 
-        $content = $antiXss->xss_clean($request->newsContent);
+        $content = $antiXss->xss_clean($request->agendaContent);
 
         preg_match_all('/<img[^>]+src="([^">]+)"/', $content, $matches);
 
@@ -85,23 +85,15 @@ class NewsController extends Controller
                     $tmpPath = str_replace('../storage/', '', $src);
                     // hasil: tmp/news/news-1766318148-WZdnr.png
 
-                    $newPath = str_replace('tmp', 'news/content', $tmpPath);
-
+                    $agendaPath = str_replace('tmp', 'agendas/content', $tmpPath);
+                    // dd($agendaPath);
                     if (Storage::disk('public')->exists($tmpPath)) {
                         // Move file
-                        Storage::disk('public')->move($tmpPath, $newPath);
+                        Storage::disk('public')->move($tmpPath, $agendaPath);
 
                         // Update src - TANPA ../
-                        $newSrc = asset('storage/' . $newPath);
-                        $content = str_replace($src, $newSrc, $content);
-
-                        // Debug
-                        \Log::info('Image processed', [
-                            'old' => $src,
-                            'new' => $newSrc,
-                            'tmp' => $tmpPath,
-                            'new_path' => $newPath
-                        ]);
+                        $agendaSrc = asset('storage/' . $agendaPath);
+                        $content = str_replace($src, $agendaSrc, $content);
                     }
                 }
             }
@@ -110,27 +102,27 @@ class NewsController extends Controller
         $this->cleanupTempDirectory();
 
         $title = $antiXss->xss_clean($request->title);
-        $slug = $this->generateUniqueSlugNews($title);
+        $slug = $this->generateUniqueSlugAgendas($title);
 
         // 3. SIMPAN DATA
-        News::create([
+        Agendas::create([
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
             'content' => $content,
-            'status' => $antiXss->xss_clean($request->status),
-            'published_at' => $antiXss->xss_clean($request->published_at)
+            'location' => $antiXss->xss_clean($request->location),
+            'date' => $antiXss->xss_clean($request->published_at)
         ]);
 
         // 4. REDIRECT
         return redirect()
-            ->route('admin-berita.index')
-            ->with('success', 'Berita berhasil ditambahkan');
+            ->route('admin-agenda.index')
+            ->with('success', 'Agenda berhasil ditambahkan');
     }
 
     private function cleanupTempDirectory()
     {
-        $tmpDir = 'tmp/news';
+        $tmpDir = 'tmp';
         if (Storage::disk('public')->exists($tmpDir)) {
             $files = Storage::disk('public')->files($tmpDir);
             if (empty($files)) {
@@ -144,7 +136,7 @@ class NewsController extends Controller
      */
     public function show(string $slug)
     {
-
+        
     }
 
     /**
@@ -152,17 +144,17 @@ class NewsController extends Controller
      */
     public function edit(string $slug)
     {
-        $news = News::where('slug', $slug)->first();
+        $news = Agendas::where('slug', $slug)->first();
         $fileExists = $news->thumbnail && Storage::disk('public')->exists('/' . $news->thumbnail);
 
         $data = array(
-            'head' => "Berita",
-            'title' => "Berita",
-            'menu' => "Ubah Berita",
+            'head' => "Agenda",
+            'title' => "Agenda",
+            'menu' => "Ubah Agenda",
             'news' => $news,
             'fileExists' => $fileExists
         );
-        return view('admin/news/edit')->with($data);
+        return view('admin/agenda/edit')->with($data);
     }
 
     /**
@@ -175,12 +167,12 @@ class NewsController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|min:3',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'status' => 'required|in:published,draft',
+            'location' => 'required|string|min:3',
             'published_at' => 'required|date',
-            'newsContent' => 'required',
+            'agendaContent' => 'required',
         ]);
 
-        $news = News::findOrFail($id);
+        $news = Agendas::findOrFail($id);
 
         $thumbnailPath = $news->thumbnail;
         if ($request->hasFile('thumbnail')) {
@@ -190,13 +182,13 @@ class NewsController extends Controller
             $filename = Str::slug($request->title) . '-' . time() . '.' . $file->getClientOriginalExtension();
 
             $thumbnailPath = $file->storeAs(
-                'news/thumbnail',
+                'agendas/thumbnail',
                 $filename,
                 'public'
             );
         }
 
-        $content = $antiXss->xss_clean($request->newsContent);
+        $content = $antiXss->xss_clean($request->agendaContent);
 
         preg_match_all('/<img[^>]+src="([^">]+)"/', $content, $matches);
 
@@ -235,7 +227,7 @@ class NewsController extends Controller
                         // Pastikan masih dalam folder tmp
                         if (Str::startsWith($relativePath, 'tmp/')) {
                             // Path baru untuk agenda
-                            $newPath = str_replace('tmp/', 'news/content/', $relativePath);
+                            $newPath = str_replace('tmp/', 'agendas/content/', $relativePath);
 
                             // Pindahkan file jika ada
                             if (Storage::disk('public')->exists($relativePath)) {
@@ -255,27 +247,28 @@ class NewsController extends Controller
             }
         }
 
+
         $this->cleanupTempDirectory();
 
         $title = $antiXss->xss_clean($request->title);
         $slug = $news->slug;
 
         if (strtolower($news->title) !== strtolower($title)) {
-            $slug = $this->generateUniqueSlugNews($title);
+            $slug = $this->generateUniqueSlugAgendas($title);
         }
         $news->update([
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
             'content' => $content,
-            'status' => $antiXss->xss_clean($request->status),
-            'published_at' => $antiXss->xss_clean($request->published_at),
+            'location' => $antiXss->xss_clean($request->location),
+            'date' => $antiXss->xss_clean($request->published_at),
             'updated_at' => now()
         ]);
 
         return redirect()
-            ->route('admin-berita.index')
-            ->with('success', 'Berita berhasil diperbarui');
+            ->route('admin-agenda.index')
+            ->with('success', 'Agenda berhasil diperbarui');
     }
 
     // Helper methods
@@ -317,18 +310,41 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $agenda = Agendas::where('slug', $slug)->first();
+        // hapus thumbnail
+        if ($agenda->thumbnail && Storage::disk('public')->exists($agenda->thumbnail)) {
+            Storage::disk('public')->delete($agenda->thumbnail);
+        }
+
+        // hapus gambar konten
+        if ($agenda->content) {
+            preg_match_all('/<img[^>]+src="([^">]+)"/i', $agenda->content, $matches);
+            foreach ($matches[1] ?? [] as $src) {
+                $path = parse_url($src, PHP_URL_PATH);
+                if ($path && str_starts_with($path, '/storage/agendas/content/')) {
+                    $file = ltrim(str_replace('/storage/', '', $path), '/');
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        }
+
+        $agenda->delete();
+
+        return response()->json([
+            'message' => 'Agenda berhasil dihapus'
+        ]);
+
     }
 
-    function generateUniqueSlugNews($title)
+    function generateUniqueSlugAgendas($title)
     {
         $slug = Str::limit(Str::slug($title), 150, '');
         $originalSlug = $slug;
         $count = 1;
 
-        while (News::where('slug', $slug)->exists()) {
+        while (Agendas::where('slug', $slug)->exists()) {
             $slug = $originalSlug . '-' . $count;
             $count++;
         }
@@ -336,3 +352,4 @@ class NewsController extends Controller
         return $slug;
     }
 }
+

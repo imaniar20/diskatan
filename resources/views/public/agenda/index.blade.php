@@ -408,15 +408,20 @@
 
                 <!-- LIST AGENDA -->
                 <div class="col-lg-8">
-
+                    @php
+                        $i = 0;
+                    @endphp
                     {{-- Loop agenda --}}
-                    @for ($i = 1; $i <= 5; $i++)
+                    @foreach ($agenda as $item)
+                        @php
+                            $i++;
+                        @endphp
                         <div class="card border-0 shadow-sm mb-4 agenda-card" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                             <div class="row g-0 align-items-center">
 
                                 <!-- FOTO -->
                                 <div class="col-md-4">
-                                    <img src="https://images.unsplash.com/photo-{{ 1560493676 + $i }}04071c5f467b?w=500&h=350&fit=crop"
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
                                         class="img-fluid agenda-img" alt="Agenda {{ $i }}">
                                 </div>
 
@@ -425,38 +430,18 @@
                                     <div class="card-body">
                                         <small class="text-muted">
                                             <i class="bi bi-calendar-event"></i>
-                                            {{ 20 + $i }} Desember 2024
+                                            {{ $item->date }}
                                             &nbsp;|&nbsp;
                                             <i class="bi bi-geo-alt"></i>
-                                            Aula Dinas Pertanian
+                                            {{ $item->location }}
                                         </small>
 
                                         <h5 class="mt-2 fw-semibold">
-                                            @if($i == 1)
-                                                Sosialisasi Program Reboisasi 2025
-                                            @elseif($i == 2)
-                                                Pelatihan Konservasi Tanah dan Air
-                                            @elseif($i == 3)
-                                                Aksi Tanam Pohon Bersama Masyarakat
-                                            @elseif($i == 4)
-                                                Workshop Pengelolaan Hasil Hutan Lestari
-                                            @else
-                                                Rapat Koordinasi Program Ketahanan Pangan
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </h5>
 
                                         <p class="text-muted small">
-                                            @if($i == 1)
-                                                Dinas Pertanian mengadakan sosialisasi program reboisasi untuk meningkatkan kesadaran masyarakat dalam menjaga kelestarian hutan dan lingkungan.
-                                            @elseif($i == 2)
-                                                Pelatihan untuk meningkatkan kapasitas petani dalam mengelola konservasi tanah dan air dengan metode modern dan ramah lingkungan.
-                                            @elseif($i == 3)
-                                                Kegiatan penanaman pohon bersama masyarakat di kawasan hutan lindung sebagai bentuk kepedulian terhadap lingkungan hidup.
-                                            @elseif($i == 4)
-                                                Workshop pengelolaan hasil hutan berkelanjutan untuk meningkatkan nilai tambah produk kehutanan masyarakat.
-                                            @else
-                                                Koordinasi program ketahanan pangan dengan seluruh stakeholder untuk memastikan ketersediaan pangan di wilayah Kuningan.
-                                            @endif
+                                            {!!  Str::limit($item->content, 160) !!}
                                         </p>
 
                                         <a href="#" class="btn btn-sm btn-outline-success">
@@ -468,28 +453,11 @@
 
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
 
                     <!-- PAGINATION -->
-                    <nav data-aos="fade-up" data-aos-delay="600">
-                        <ul class="pagination pagination-sm">
-                            <li class="page-item disabled">
-                                <span class="page-link">‹ Prev</span>
-                            </li>
-                            <li class="page-item active">
-                                <span class="page-link">1</span>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next ›</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    {{ $agenda->links('vendor.pagination.agenda') }}
+
 
                 </div>
 

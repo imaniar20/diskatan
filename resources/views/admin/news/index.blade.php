@@ -49,11 +49,12 @@
                                 </td>
                                 <td class="text-center">{{ $i++ }}</td>
                                 <td><img src="{{ asset('storage/' . $data['thumbnail']) }}" alt="gambar" width="100"></td>
-                                <td>{{ $data['title'] }}</td>
+                                <td>{{ Str::limit($data['title'], 20) }}</td>
                                 @php
                                     
                                 @endphp
-                                <td>{!! $data['content'] !!}</td>
+                                <td>{!! Str::limit($data['content'], 40) !!}</td>
+                                
                                 <td>
                                     @if ($data['status'] == 'published')
                                         <span class="badge bg-label-info me-1">Publish</span>

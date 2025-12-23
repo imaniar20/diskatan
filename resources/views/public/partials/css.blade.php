@@ -133,6 +133,10 @@
         position: relative;
     }
 
+    .dropdown-item.active, .dropdown-item:active{
+        background-color: var(--secondary-green);
+    }
+
     .nav-link.active::after {
         content: '';
         position: absolute;

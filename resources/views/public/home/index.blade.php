@@ -21,8 +21,8 @@
                     <div class="carousel-overlay">
                         <div class="hero-content">
                             <h1 class="hero-title">Selamat Datang</h1>
-                            <p class="hero-subtitle">Dinas Perhutanan - Menjaga Hutan, Menjaga Masa Depan</p>
-                            <button class="hero-btn">Jelajahi Lebih Lanjut</button>
+                            <p class="hero-subtitle">Dinas Ketahanan Pangan dan Pertanian</p>
+                            <a href="#about" class="hero-btn">Jelajahi Lebih Lanjut</a>
                         </div>
                     </div>
                 </div>
@@ -33,9 +33,10 @@
                         alt="Green Forest">
                     <div class="carousel-overlay">
                         <div class="hero-content">
-                            <h1 class="hero-title">Pelestarian Hutan</h1>
-                            <p class="hero-subtitle">Bersama Menjaga Kelestarian Alam untuk Generasi Mendatang</p>
-                            <button class="hero-btn">Pelajari Program Kami</button>
+                            <h1 class="hero-title">Membangun Tata Kelola Pemerintahan Daerah</h1>
+                            <p class="hero-subtitle">Profesional, Efektif, Demokratis, Dan Terpercaya Dengan Jiwa
+                                Kepemimpinan Nu SAJATI.</p>
+                            <a href="#about" class="hero-btn">Pelajari Program Kami</a>
                         </div>
                     </div>
                 </div>
@@ -46,9 +47,10 @@
                         alt="Nature">
                     <div class="carousel-overlay">
                         <div class="hero-content">
-                            <h1 class="hero-title">Konservasi Alam</h1>
-                            <p class="hero-subtitle">Komitmen Kami dalam Melindungi Keanekaragaman Hayati</p>
-                            <button class="hero-btn">Lihat Kegiatan</button>
+                            <h1 class="hero-title">Mewujudkan Masyarakat Kuningan Nu SAJATI</h1>
+                            <p class="hero-subtitle">Dalam Kehidupan Beragama Dan Bernegara Dalam Bingkai Kebangsaan Dan
+                                Kebhinekaan.</p>
+                            <a href="#about" class="hero-btn">Lihat Kegiatan</a>
                         </div>
                     </div>
                 </div>
@@ -69,8 +71,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
                     <div class="about-img-container">
-                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=600&fit=crop"
-                            alt="Dinas Perhutanan">
+                        <img src="{{ asset('img/dinas/bg-1.jpg') }}" alt="Dinas Perhutanan">
                     </div>
                 </div>
 
@@ -215,59 +216,24 @@
             <h2 class="section-title text-center mb-5" data-aos="fade-up">Berita Terkini</h2>
 
             <div class="row">
-                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="news-card">
-                        <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=600&h=400&fit=crop"
-                            alt="News 1" class="news-img">
-                        <div class="news-content">
-                            <span class="news-badge">Konservasi</span>
-                            <h4 class="news-title">Program Reboisasi 2025 Targetkan 500 Ribu Pohon</h4>
-                            <p class="news-excerpt">Dinas Perhutanan menargetkan penanaman 500 ribu pohon di berbagai
-                                kawasan hutan pada tahun 2025 mendatang...</p>
-                            <div class="news-meta">
-                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>20 Des 2024</span>
-                                <a href="#" class="news-link">Baca Selengkapnya <i
-                                        class="bi bi-arrow-right"></i></a>
+                @foreach ($news as $item)
+                    <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="news-card">
+                            <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                alt="News 1" class="news-img">
+                            <div class="news-content">
+                                <span class="news-badge">Berita</span>
+                                <h4 class="news-title">{{ Str::limit($item->title, 40) }}</h4>
+                                <p class="news-excerpt">{!! Str::limit($item->content, 160) !!}</p>
+                                <div class="news-meta">
+                                    <span class="news-date"><i class="bi bi-calendar3 me-2"></i>{{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}</span>
+                                    <a href="{{ route('berita.detail', $item->slug) }}" class="news-link">Baca Selengkapnya <i
+                                            class="bi bi-arrow-right"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="news-card">
-                        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600&h=400&fit=crop"
-                            alt="News 2" class="news-img">
-                        <div class="news-content">
-                            <span class="news-badge">Prestasi</span>
-                            <h4 class="news-title">Dinas Perhutanan Raih Penghargaan Nasional</h4>
-                            <p class="news-excerpt">Berkat komitmen dalam menjaga kelestarian hutan, Dinas Perhutanan
-                                menerima penghargaan dari Kementerian...</p>
-                            <div class="news-meta">
-                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>18 Des 2024</span>
-                                <a href="#" class="news-link">Baca Selengkapnya <i
-                                        class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="news-card">
-                        <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&h=400&fit=crop"
-                            alt="News 3" class="news-img">
-                        <div class="news-content">
-                            <span class="news-badge">Kolaborasi</span>
-                            <h4 class="news-title">Kerjasama dengan Komunitas Lokal Diperluas</h4>
-                            <p class="news-excerpt">Untuk meningkatkan efektivitas program konservasi, kerjasama dengan
-                                berbagai komunitas lokal terus diperkuat...</p>
-                            <div class="news-meta">
-                                <span class="news-date"><i class="bi bi-calendar3 me-2"></i>15 Des 2024</span>
-                                <a href="#" class="news-link">Baca Selengkapnya <i
-                                        class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

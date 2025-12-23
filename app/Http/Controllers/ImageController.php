@@ -15,9 +15,9 @@ class ImageController extends Controller
         ]);
 
         $file = $request->file('file');
-        $name = 'news-' . time() . '-' . Str::random(5) . '.' . $file->extension();
+        $name = 'content-' . time() . '-' . Str::random(5) . '.' . $file->extension();
 
-        $path = $file->storeAs('tmp/news', $name, 'public');
+        $path = $file->storeAs('tmp', $name, 'public');
 
         return response()->json([
             'location' => asset('storage/' . $path)

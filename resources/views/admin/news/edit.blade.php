@@ -10,7 +10,7 @@
         </nav>
     </div>
     <div class="section">
-        <form action="{{ route('admin-berita.update', $news->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="editBerita" action="{{ route('admin-berita.update', $news->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -76,7 +76,7 @@
 
                             <div class="mb-3">
                                 <div class="justify-content-center">
-                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                    <button type="submit" class="btn btn-warning">Ubah</button>
                                 </div>
                             </div>
                         </div>
@@ -111,16 +111,6 @@
 
             // Cek apakah ini mode edit (ada thumbnail lama)
             const isEditMode = document.getElementById('thumbnail').getAttribute('data-has-existing') === 'true';
-            const hasExistingFile = document.getElementById('currentThumbnail').value !== '';
-
-            // Validasi hanya WAJIB jika:
-            // 1. Bukan mode edit ATAU
-            // 2. Mode edit tapi tidak ada file lama
-            if (!file && (!isEditMode || !hasExistingFile)) {
-                $('#errThumbnail').html('Thumbnail Wajib Diisi');
-                e.preventDefault();
-                return false;
-            }
 
             // Jika ada file baru, validasi ukuran dan tipe
             if (file) {
@@ -189,7 +179,7 @@
             }
         };
 
-        $('#addBerita').on('submit', function(e) {
+        $('#editBerita').on('submit', function(e) {
 
             let validTitle = handlerTitle(e);
             let validThumb = handlerThumbnail(e);
