@@ -3,7 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-
     <!-- Hero Carousel Section -->
     <section id="home" class="hero-section">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -16,41 +15,103 @@
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=1600&h=900&fit=crop"
-                        alt="Forest">
+                    <img src="{{ asset('img/background/bg-2.jpg') }}" alt="Pertanian">
                     <div class="carousel-overlay">
-                        <div class="hero-content">
-                            <h1 class="hero-title">Selamat Datang</h1>
-                            <p class="hero-subtitle">Dinas Ketahanan Pangan dan Pertanian</p>
-                            <a href="#about" class="hero-btn">Jelajahi Lebih Lanjut</a>
+                        <div class="container">
+                            <div class="row align-items-center" style="min-height: 85vh;">
+                                <div class="col-lg-7">
+                                    <div class="hero-content">
+                                        <span class="welcome-badge" data-aos="fade-down">
+                                            Selamat Datang di Website Resmi
+                                        </span>
+                                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                                            Dinas Ketahanan Pangan <span class="text-warning">dan Pertanian</span>
+                                        </h1>
+                                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+                                            Mewujudkan ketahanan pangan yang berkelanjutan dan pertanian modern untuk
+                                            kesejahteraan masyarakat.
+                                        </p>
+                                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+                                            <a href="#about" class="btn btn-outline-light btn-lg px-4 py-3">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                Selengkapnya
+                                            </a>
+                                            <a href="#contact" class="btn btn-warning btn-lg px-4 py-3 me-3">
+                                                <i class="bi bi-file-earmark-text me-2"></i>
+                                                Kontak dan Saran
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=1600&h=900&fit=crop"
-                        alt="Green Forest">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&h=1080&fit=crop"
+                        alt="Pangan">
                     <div class="carousel-overlay">
-                        <div class="hero-content">
-                            <h1 class="hero-title">Membangun Tata Kelola Pemerintahan Daerah</h1>
-                            <p class="hero-subtitle">Profesional, Efektif, Demokratis, Dan Terpercaya Dengan Jiwa
-                                Kepemimpinan Nu SAJATI.</p>
-                            <a href="#about" class="hero-btn">Pelajari Program Kami</a>
+                        <div class="container">
+                            <div class="row align-items-center" style="min-height: 85vh;">
+                                <div class="col-lg-7">
+                                    <div class="hero-content">
+                                        <span class="welcome-badge" data-aos="fade-down">
+                                            Agenda Resmi
+                                        </span>
+                                        
+                                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                                            Agenda Strategis <span class="text-warning">Ketahanan Pangan</span>
+                                        </h1>
+                                        
+                                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+                                            Komitmen bersama dalam membangun sistem pangan
+                                            yang tangguh dan berkelanjutan.
+                                        </p>
+                                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+                                            <a href="#agenda" class="btn btn-warning btn-lg px-4 py-3 me-3">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                Selengkapnya
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Slide 3 -->
                 <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=1600&h=900&fit=crop"
-                        alt="Nature">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&h=1080&fit=crop"
+                        alt="Pertanian Modern">
                     <div class="carousel-overlay">
-                        <div class="hero-content">
-                            <h1 class="hero-title">Mewujudkan Masyarakat Kuningan Nu SAJATI</h1>
-                            <p class="hero-subtitle">Dalam Kehidupan Beragama Dan Bernegara Dalam Bingkai Kebangsaan Dan
-                                Kebhinekaan.</p>
-                            <a href="#about" class="hero-btn">Lihat Kegiatan</a>
+                        <div class="container">
+                            <div class="row align-items-center" style="min-height: 85vh;">
+                                <div class="col-lg-7">
+                                    <div class="hero-content">
+                                        <span class="welcome-badge" data-aos="fade-down">
+                                            Portal Pertanian Daerah
+                                        </span>
+                                        
+                                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                                            Pertanian Maju <span class="text-warning">& Pangan Berkelanjutan</span>
+                                        </h1>
+                                        
+                                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+                                            Mendorong pertanian yang inovatif, produktif,
+                                            dan berdaya saing melalui informasi terpercaya.
+                                        </p>
+                                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+                                            <a href="#news" class="btn btn-warning btn-lg px-4 py-3 me-3">
+                                                <i class="bi bi-arrow-right-circle me-2"></i>
+                                                Selengkapnya
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,6 +123,65 @@
             <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Stat 1 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="bi bi-geo-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">45,678</h3>
+                            <p class="stat-label">Hektar Luas Tanam</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="bi bi-bag-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">123,456</h3>
+                            <p class="stat-label">Ton Produksi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">2,345</h3>
+                            <p class="stat-label">Kelompok Tani</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number">98,5</h3>
+                            <p class="stat-label">Indeks Ketahanan Pangan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -78,7 +198,8 @@
                 <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
                     <div class="about-text">
                         <h2 class="section-title">Tentang Kami</h2>
-                        <h4 style="color: var(--secondary-green); margin-bottom: 20px;">Dinas Ketahanan Pangan dan Pertanian
+                        <h4 style="color: var(--secondary-green); margin-bottom: 20px;">Dinas Ketahanan Pangan dan
+                            Pertanian
                         </h4>
 
                         <p>Dinas Perhutanan merupakan lembaga pemerintah yang bertanggung jawab dalam pengelolaan dan
@@ -88,22 +209,23 @@
 
                         <p>Sejak didirikan pada tahun 1985, kami telah mengimplementasikan berbagai program konservasi,
                             reboisasi, dan pengelolaan hutan lestari. Melalui pendekatan yang inovatif dan partisipatif,
-                            kami terus berupaya mewujudkan hutan yang sehat dan produktif untuk generasi saat ini dan masa
+                            kami terus berupaya mewujudkan hutan yang sehat dan produktif untuk generasi saat ini dan
+                            masa
                             depan.</p>
 
                         <div class="stats-box" data-aos="zoom-in" data-aos-delay="200">
                             <div class="row">
                                 <div class="col-4 stat-item">
-                                    <span class="stat-number">250K+</span>
-                                    <span class="stat-label">Hektar Hutan</span>
+                                    <span class="stat-number2">250K+</span>
+                                    <span class="stat-label2">Hektar Hutan</span>
                                 </div>
                                 <div class="col-4 stat-item">
-                                    <span class="stat-number">1.2K+</span>
-                                    <span class="stat-label">Pohon Ditanam</span>
+                                    <span class="stat-number2">1.2K+</span>
+                                    <span class="stat-label2">Pohon Ditanam</span>
                                 </div>
                                 <div class="col-4 stat-item">
-                                    <span class="stat-number">50+</span>
-                                    <span class="stat-label">Program Aktif</span>
+                                    <span class="stat-number2">50+</span>
+                                    <span class="stat-label2">Program Aktif</span>
                                 </div>
                             </div>
                         </div>
@@ -226,9 +348,10 @@
                                 <h4 class="news-title">{{ Str::limit($item->title, 40) }}</h4>
                                 <p class="news-excerpt">{!! Str::limit($item->content, 160) !!}</p>
                                 <div class="news-meta">
-                                    <span class="news-date"><i class="bi bi-calendar3 me-2"></i>{{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}</span>
-                                    <a href="{{ route('berita.detail', $item->slug) }}" class="news-link">Baca Selengkapnya <i
-                                            class="bi bi-arrow-right"></i></a>
+                                    <span class="news-date"><i
+                                            class="bi bi-calendar3 me-2"></i>{{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}</span>
+                                    <a href="{{ route('berita.detail', $item->slug) }}" class="news-link">Baca
+                                        Selengkapnya <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +376,8 @@
                 <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1000">
                     <div class="survey-box">
                         <h3 class="survey-title">Survey Kepuasan Layanan</h3>
-                        <p style="color: #666; margin-bottom: 30px;">Bantu kami meningkatkan pelayanan dengan memberikan
+                        <p style="color: #666; margin-bottom: 30px;">Bantu kami meningkatkan pelayanan dengan
+                            memberikan
                             penilaian Anda</p>
 
                         <div class="rating-group">
@@ -291,7 +415,8 @@
             <div class="row">
                 <div class="col-lg-7 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
                     <div class="contact-form">
-                        <h4 style="color: var(--primary-green); margin-bottom: 30px; font-weight: 700;">Kirim Pesan atau
+                        <h4 style="color: var(--primary-green); margin-bottom: 30px; font-weight: 700;">Kirim Pesan
+                            atau
                             Saran</h4>
 
                         <form id="contactForm">
@@ -358,5 +483,4 @@
             </div>
         </div>
     </section>
-
 @endsection

@@ -14,7 +14,6 @@
 
     @stack('styles')
 </head>
-
 <body>
     <!-- Decorative Leaves -->
     <div class="leaf-decoration leaf-1">🌿</div>

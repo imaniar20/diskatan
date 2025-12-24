@@ -19,6 +19,6 @@ class HomeController extends Controller
             'news'  => $news
         );
 
-        return view('public.home.index')->with($data);
+        return view('public.home.main')->with($data);
     }
 }

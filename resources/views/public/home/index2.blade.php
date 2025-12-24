@@ -1,394 +1,605 @@
-@extends('public.layouts.app')
 
-@section('title', 'Home')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-@section('content')
-    <!-- Banner Carousel -->
-    <section class="banner-carousel fade-up">
-        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                        class="d-block w-100" alt="Pertanian">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2>Selamat Datang di Website Dinas Pertanian</h2>
-                        <p>Membangun pertanian yang maju, mandiri, dan modern</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-                        class="d-block w-100" alt="Petani">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2>Meningkatkan Kesejahteraan Petani</h2>
-                        <p>Program pemberdayaan dan pelatihan untuk petani</p>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
-    </section>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
 
-    <!-- Sejarah -->
-    <section id="profil" class="py-5 bg-light fade-up">
+        /* ============ CONTENT SECTION ============ */
+        .menu-section {
+            min-height: 100vh;
+            position: relative;
+            padding: 60px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ============ VIDEO BACKGROUND ============ */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* ============ LOGO SECTION ============ */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 15px;
+        }
+
+        .logo-wrapper {
+            display: inline-block;
+        }
+
+        .logo-wrapper img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 30px rgba(45, 106, 79, 0.2));
+        }
+
+        .header-text {
+            text-align: center;
+            padding: 15px 10px;
+        }
+
+        .floating-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-shadow:
+                0 1px 0 #ccc,
+                0 2px 0 #c9c9c9,
+                0 3px 0 #bbb,
+                0 4px 0 #b9b9b9,
+                0 5px 0 #aaa,
+                0 6px 1px rgba(0, 0, 0, .1),
+                0 0 5px rgba(0, 0, 0, .1),
+                0 1px 3px rgba(0, 0, 0, .3),
+                0 3px 5px rgba(0, 0, 0, .2),
+                0 5px 10px rgba(0, 0, 0, .25);
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .floating-subtext {
+            font-size: 1.1rem;
+            text-shadow:
+                0 2px 3px rgba(0, 0, 0, 0.3),
+                0 4px 7px rgba(0, 0, 0, 0.2);
+            margin: 5px 0;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+            color: white;
+        }
+
+        /* ============ MENU GRID ============ */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            text-decoration: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ============ ICON COLORS ============ */
+        .menu-item.purple {
+            background: linear-gradient(135deg, #9b7ef5, #7c5ce8);
+        }
+
+        .menu-item.cyan {
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+        }
+
+        .menu-item.green {
+            background: linear-gradient(135deg, #56d68f, #2ecc71);
+        }
+
+        .menu-item.blue {
+            background: linear-gradient(135deg, #667eea, #4568dc);
+        }
+
+        .menu-item.orange {
+            background: linear-gradient(135deg, #f8a170, #f87a4a);
+        }
+
+        .menu-item.lime {
+            background: linear-gradient(135deg, #9cdc7c, #7cb342);
+        }
+
+        .menu-item.yellow {
+            background: linear-gradient(135deg, #ffd86f, #ffc107);
+        }
+
+        .menu-item.teal {
+            background: linear-gradient(135deg, #4dd0e1, #26c6da);
+        }
+
+        /* ============ ICON WRAPPER ============ */
+        .icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .menu-item:hover .icon-wrapper {
+            transform: rotate(360deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .icon-wrapper i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        /* ============ MENU LABEL ============ */
+        .menu-label {
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+
+        /* ============ HOME BUTTON ============ */
+        .home-button-wrapper {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #16a34a, #40916c);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
+            border: none;
+        }
+
+        .home-button:hover {
+            background: linear-gradient(135deg, #40916c, #52b788);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(45, 106, 79, 0.4);
+        }
+
+        /* ============ PATTERN OVERLAY ============ */
+        .pattern-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, #2d6a4f 35px, #2d6a4f 36px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, #2d6a4f 35px, #2d6a4f 36px);
+        }
+
+        /* ============ RESPONSIVE - TABLET ============ */
+        @media (max-width: 1024px) {
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .floating-text {
+                font-size: 1.6rem;
+            }
+
+            .floating-subtext {
+                font-size: 1rem;
+            }
+        }
+
+        /* ============ RESPONSIVE - MOBILE LANDSCAPE ============ */
+        @media (max-width: 768px) {
+            .menu-section {
+                padding: 40px 0;
+            }
+
+            .logo-wrapper img {
+                width: 90px;
+                height: 90px;
+            }
+
+            .floating-text {
+                font-size: 1.3rem;
+                letter-spacing: 0.3px;
+            }
+
+            .floating-subtext {
+                font-size: 0.9rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 0 15px;
+            }
+
+            .menu-item {
+                padding: 25px 12px;
+                border-radius: 15px;
+            }
+
+            .icon-wrapper {
+                width: 65px;
+                height: 65px;
+                margin-bottom: 12px;
+            }
+
+            .icon-wrapper i {
+                font-size: 2rem;
+            }
+
+            .menu-label {
+                font-size: 0.85rem;
+            }
+
+            .home-button {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+
+            .home-button i {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* ============ RESPONSIVE - SMALL MOBILE ============ */
+        @media (max-width: 480px) {
+            .menu-section {
+                padding: 30px 0;
+            }
+
+            .logo-container {
+                margin-bottom: 25px;
+            }
+
+            .logo-wrapper img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .header-text {
+                padding: 10px 5px;
+            }
+
+            .floating-text {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+
+            .floating-subtext {
+                font-size: 0.75rem;
+                margin: 3px 0;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                padding: 0 12px;
+                margin-bottom: 30px;
+            }
+
+            .menu-item {
+                padding: 20px 10px;
+                border-radius: 12px;
+            }
+
+            .icon-wrapper {
+                width: 55px;
+                height: 55px;
+                margin-bottom: 10px;
+                border-radius: 12px;
+            }
+
+            .icon-wrapper i {
+                font-size: 1.6rem;
+            }
+
+            .menu-label {
+                font-size: 0.75rem;
+                line-height: 1.2;
+            }
+
+            .home-button-wrapper {
+                padding: 0 15px;
+            }
+
+            .home-button {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+                gap: 8px;
+            }
+
+            .home-button span {
+                font-size: 0.9rem;
+            }
+
+            .home-button i {
+                font-size: 0.9rem !important;
+            }
+        }
+
+        /* ============ RESPONSIVE - EXTRA SMALL ============ */
+        @media (max-width: 360px) {
+            .floating-text {
+                font-size: 1rem;
+            }
+
+            .floating-subtext {
+                font-size: 0.7rem;
+            }
+
+            .menu-grid {
+                gap: 10px;
+                padding: 0 10px;
+            }
+
+            .menu-item {
+                padding: 18px 8px;
+            }
+
+            .icon-wrapper {
+                width: 50px;
+                height: 50px;
+            }
+
+            .icon-wrapper i {
+                font-size: 1.4rem;
+            }
+
+            .menu-label {
+                font-size: 0.7rem;
+            }
+
+            .home-button {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ============ LANDSCAPE ORIENTATION ============ */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .menu-section {
+                padding: 20px 0;
+                min-height: auto;
+            }
+
+            .logo-container {
+                margin-bottom: 20px;
+            }
+
+            .logo-wrapper img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .header-text {
+                padding: 8px;
+            }
+
+            .floating-text {
+                font-size: 1rem;
+                margin-bottom: 5px;
+            }
+
+            .floating-subtext {
+                font-size: 0.75rem;
+                margin: 2px 0;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+
+            .menu-item {
+                padding: 15px 10px;
+            }
+
+            .icon-wrapper {
+                width: 50px;
+                height: 50px;
+                margin-bottom: 8px;
+            }
+
+            .icon-wrapper i {
+                font-size: 1.5rem;
+            }
+
+            .menu-label {
+                font-size: 0.7rem;
+            }
+
+            .home-button {
+                padding: 8px 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="https://kuningankab.go.id/asset/flash.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Video Overlay -->
+    <div class="video-overlay"></div>
+
+    <!-- Pattern Overlay -->
+    <div class="pattern-overlay"></div>
+
+    <!-- MENU SECTION -->
+    <section class="menu-section">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="{{ asset('img/dinas/bg-1.jpg') }}" alt="Ketua Dinas Pertanian" class="profile-img">
-                    <h4 class="section-title text-center mt-3 mb-1">Dinas Ketahanan Pangan dan Pertanian</h4>
-                    {{-- <h4 class="text-warning">Kabupaten Kuningan</h4> --}}
-                </div>
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="section-title text-center">Sejarah Singkat:</h5>
-                            <p class="card-text">
-                                "Sejarah Singkat Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan
 
-                                Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan sebagai salah satu wilayah di Jawa
-                                Barat beralamat di Jalan Raya Syech Manglayang No. 3 Windujanten Kecamatan Kadugede
-                                Kabupaten Kuningan Jawa Barat 45561, Telp/Fax. (0232) 877096, yang mempunyai kawasan
-                                budidaya lahan sawah yang relatif luas. Dalam rangka ketahanan pangan maka fungsi lahan
-                                dikawasan pertanian lahan basah, terutama lahan sawah beririgasi teknis harus tetap
-                                dipertahankan, Selain itu, dinas pertanian juga memiliki beberapa tugas dan fungsi lain
-                                seperti penyuluhan pertanian, merumuskan kebijakan pertanian, memutus kebijakan bidang
-                                pangan, administrasi ketatausahaan pertanian, pembinaan teknis pada pihak-pihak bidang
-                                pertanian, memastikan ketersedian pupuk pertanian, hingga penyaluran bantuan alat dan mesin
-                                pendukung pertanian. Selain itu, dinas pertanian juga adalah penjamis kesejahteraan petani
-                                melalui program memastikan memberikan asuransi usaha tani padi (AUPT). Oleh karenanya,
-                                terkait dengan fungsi dan tugasnya, dinas pertanian memiliki wewenang untuk mengeluarkan
-                                surat izin pertanian, izin alih fungsi, izin usaha pertanian, pembukaan lahan dan izin
-                                lainnya terkait pertanian."
-                            </p>
-                        </div>
+            <!-- Logo -->
+            <div class="logo-container">
+                <div class="logo-wrapper">
+                    <img src="{{ asset('img/logo/kuningan.png') }}" alt="Logo Kabupaten Kuningan">
+                    <div class="header-text">
+                        <h2 class="floating-text">WEBSITE RESMI</h2>
+                        <h4 class="floating-subtext">DINAS KETAHANAN PANGAN DAN PERTANIAN</h4>
+                        <h4 class="floating-subtext">KABUPATEN KUNINGAN</h4>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Agenda Kegiatan -->
-    <section id="agenda" class="py-5 bg-soft-green fade-up">
-        <div class="container">
-            <h2 class="section-title text-center">Agenda Kegiatan</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Pelatihan Pertanian Organik</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 15 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 08:00 - 15:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Balai Desa Sukamaju
-                                </p>
-                                <p>Pelatihan tentang teknik pertanian organik untuk peningkatan hasil panen</p>
-                            </div>
-                        </div>
+            <!-- Menu Grid -->
+            <div class="menu-grid">
+
+                <!-- Menu Item 1 -->
+                <a href="#" class="menu-item purple">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-shield-check"></i>
                     </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Penyerahan Bantuan Bibit Unggul</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 20 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 09:00 - 12:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Kantor Dinas Pertanian
-                                </p>
-                                <p>Penyerahan bantuan bibit tanaman unggul kepada kelompok tani</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Workshop Pengolahan Hasil Pertanian</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 25 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 10:00 - 16:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Aula Kecamatan
-                                </p>
-                                <p>Workshop pengolahan produk pertanian untuk nilai tambah</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="agenda-item">
-                                <h5 class="mb-1">Monitoring Program Pertanian</h5>
-                                <p class="text-muted mb-2">
-                                    <i class="bi bi-calendar-event me-1"></i> 30 Januari 2024
-                                    <i class="bi bi-clock ms-3 me-1"></i> 07:00 - 17:00 WIB
-                                </p>
-                                <p class="mb-1">
-                                    <i class="bi bi-geo-alt me-1"></i> Desa Tani Makmur
-                                </p>
-                                <p>Monitoring dan evaluasi program pembangunan pertanian</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary">
-                    <i class="bi bi-calendar-week me-2"></i>Lihat Agenda Lengkap
+                    <p class="menu-label">Layanan Perizinan</p>
                 </a>
-            </div>
-        </div>
-    </section>
 
-    <!-- Berita -->
-    <section id="berita" class="py-5 bg-light fade-up">
-        <div class="container">
-            <h2 class="section-title text-center">Berita Terbaru</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1592982537447-7444dc31f8e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 1">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Teknologi</span>
-                            <h5 class="card-title">Penerapan Smart Farming di Desa Makmur</h5>
-                            <p class="card-text">
-                                Dinas Pertanian memperkenalkan sistem smart farming untuk
-                                meningkatkan produktivitas pertanian...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 10 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
-                            </div>
-                        </div>
+                <!-- Menu Item 2 -->
+                <a href="#" class="menu-item cyan">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-bar-chart-fill"></i>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 2">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Program</span>
-                            <h5 class="card-title">Bantuan Bibit Unggul untuk 1000 Petani</h5>
-                            <p class="card-text">
-                                Program distribusi bibit unggul telah menjangkau 1000 petani
-                                di wilayah kecamatan se-Kabupaten...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 5 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-                            class="card-img-top" alt="Berita 3">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Prestasi</span>
-                            <h5 class="card-title">Petani Lokal Raih Penghargaan Nasional</h5>
-                            <p class="card-text">
-                                Kelompok tani binaan Dinas Pertanian meraih penghargaan
-                                nasional dalam lomba inovasi pertanian...
-                            </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
-                                    <i class="bi bi-calendar me-1"></i> 2 Jan 2024
-                                </small>
-                                <a href="#" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-primary">
-                    <i class="bi bi-newspaper me-2"></i>Lihat Semua Berita
+                    <p class="menu-label">Statistik Data</p>
                 </a>
+
+                <!-- Menu Item 3 -->
+                <a href="#" class="menu-item green">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+                    <p class="menu-label">Dokumen Publik</p>
+                </a>
+
+                <!-- Menu Item 4 -->
+                <a href="#" class="menu-item blue">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-phone"></i>
+                    </div>
+                    <p class="menu-label">Aplikasi Mobile</p>
+                </a>
+
+                <!-- Menu Item 5 -->
+                <a href="#" class="menu-item orange">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-camera-video"></i>
+                    </div>
+                    <p class="menu-label">Galeri Multimedia</p>
+                </a>
+
+                <!-- Menu Item 6 -->
+                <a href="#" class="menu-item lime">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-cup-hot"></i>
+                    </div>
+                    <p class="menu-label">Pengaduan Online</p>
+                </a>
+
+                <!-- Menu Item 7 -->
+                <a href="#" class="menu-item yellow">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-pie-chart-fill"></i>
+                    </div>
+                    <p class="menu-label">Dashboard Analitik</p>
+                </a>
+
+                <!-- Menu Item 8 -->
+                <a href="#" class="menu-item teal">
+                    <div class="icon-wrapper">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <p class="menu-label">Sistem Inventory</p>
+                </a>
+
             </div>
+
+            <!-- Home Button -->
+            <div class="home-button-wrapper">
+                <button id="btn-buka" class="home-button">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Halaman Beranda</span>
+                </button>
+            </div>
+
         </div>
     </section>
-
-    <section id="pengunjung" class="py-5 bg-soft-green fade-up">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title text-center">Statistik Pengunjung dan Survey Kepuasan</h2>
-            </div>
-
-            <div class="row g-4">
-
-                <!-- SURVEY -->
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-body">
-
-                            <h6 class="fw-semibold section-sub-title mb-3">
-                                Survey Kepuasan Pengunjung
-                            </h6>
-
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-
-                                    <p class="small fw-semibold">
-                                        Menurut Anda, bagaimana tampilan, fitur dan isi konten dari website ini?
-                                    </p>
-
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Sangat Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Cukup Bagus</label>
-                                    </div>
-                                    <div class="form-check mb-3">
-                                        <input class="form-check-input" type="radio" name="survey">
-                                        <label class="form-check-label">Kurang</label>
-                                    </div>
-
-                                    <button class="btn btn-dark w-100">
-                                        Kirim
-                                    </button>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div id="chartSurvey"></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- STAT PENGUNJUNG -->
-                <div class="col-lg-6">
-                    <div class="card shadow-sm border-0 h-100">
-                        <div class="card-body">
-                            <h6 class="fw-semibold section-sub-title mb-3">Pengunjung</h6>
-
-                            <ul class="list-group list-group-flush small">
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Total <span class="badge bg-secondary">128</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Tahun Ini <span class="badge bg-secondary">80</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Bulan Ini <span class="badge bg-secondary">32</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Minggu Ini <span class="badge bg-secondary">12</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between">
-                                    Hari Ini <span class="badge bg-danger">4</span>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Kontak -->
-    <section id="kontak" class="py-5 bg-light fade-up">
-        <div class="container">
-            <h2 class="section-title text-center">Kontak Kami</h2>
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <div class="card">
-                        <div class="card-body">
-                            <form>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="nama" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="subjek" class="form-label">Subjek</label>
-                                    <input type="text" class="form-control" id="subjek" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pesan" class="form-label">Pesan</label>
-                                    <textarea class="form-control" id="pesan" rows="5" required></textarea>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-send me-2"></i>Kirim Pesan
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-@endsection
-
-@push('after-script')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-            var options = {
-                chart: {
-                    type: 'donut',
-                    height: 260
-                },
-                series: [20, 40, 20, 20],
-                labels: ['Cukup Bagus', 'Bagus', 'Sangat Bagus', 'Kurang'],
-                legend: {
-                    position: 'bottom',
-                    fontSize: '13px'
-                },
-                dataLabels: {
-                    enabled: true,
-                    formatter: function(val) {
-                        return val.toFixed(0) + "%";
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(
-                document.querySelector("#chartSurvey"),
-                options
-            );
-
-            chart.render();
-        });
-    </script>
-@endpush
+    

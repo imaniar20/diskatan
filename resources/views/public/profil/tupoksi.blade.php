@@ -8,7 +8,7 @@
     .page-hero {
         position: relative;
         height: 400px;
-        background: linear-gradient(135deg, rgba(45, 106, 79, 0.85), rgba(64, 145, 108, 0.75)), 
+        background: linear-gradient(135deg, rgba(45, 106, 79, 0.85), rgba(64, 145, 108, 0)),
                     var(--hero-bg);
         background-size: cover;
         background-position: center;
