@@ -1,5 +1,5 @@
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -73,7 +73,7 @@
         }
 
         .floating-text {
-            font-size: 1.8rem;
+            font-size: 2.8rem;
             font-weight: 700;
             text-shadow:
                 0 1px 0 #ccc,
@@ -93,7 +93,7 @@
         }
 
         .floating-subtext {
-            font-size: 1.1rem;
+            font-size: 1.9rem;
             text-shadow:
                 0 2px 3px rgba(0, 0, 0, 0.3),
                 0 4px 7px rgba(0, 0, 0, 0.2);
@@ -496,7 +496,7 @@
     <!-- Video Background -->
     <div class="video-background">
         <video autoplay muted loop playsinline>
-            <source src="https://kuningankab.go.id/asset/flash.mp4" type="video/mp4">
+            <source src="{{ asset('videos/flash.mp4') }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -527,67 +527,67 @@
             <div class="menu-grid">
 
                 <!-- Menu Item 1 -->
-                <a href="#" class="menu-item purple">
+                <a href="https://kuningankab.go.id/" target="_blank" class="menu-item purple">
                     <div class="icon-wrapper">
-                        <i class="bi bi-shield-check"></i>
+                        <img src="{{ asset('img/logo/kuningan.png') }}" style="height: 60px;" alt="">
                     </div>
-                    <p class="menu-label">Layanan Perizinan</p>
+                    <p class="menu-label">Kabupaten Kuningan</p>
                 </a>
 
                 <!-- Menu Item 2 -->
-                <a href="#" class="menu-item cyan">
+                <a href="https://emonev.pertanian.go.id/" target="_blank" class="menu-item cyan">
                     <div class="icon-wrapper">
-                        <i class="bi bi-bar-chart-fill"></i>
+                        <img src="{{ asset('img/logo/emonev.png') }}" style="height: 60px;" alt="">
                     </div>
-                    <p class="menu-label">Statistik Data</p>
-                </a>
-
-                <!-- Menu Item 3 -->
-                <a href="#" class="menu-item green">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-file-earmark-text"></i>
-                    </div>
-                    <p class="menu-label">Dokumen Publik</p>
-                </a>
-
-                <!-- Menu Item 4 -->
-                <a href="#" class="menu-item blue">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-phone"></i>
-                    </div>
-                    <p class="menu-label">Aplikasi Mobile</p>
-                </a>
-
-                <!-- Menu Item 5 -->
-                <a href="#" class="menu-item orange">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-camera-video"></i>
-                    </div>
-                    <p class="menu-label">Galeri Multimedia</p>
-                </a>
-
-                <!-- Menu Item 6 -->
-                <a href="#" class="menu-item lime">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-cup-hot"></i>
-                    </div>
-                    <p class="menu-label">Pengaduan Online</p>
+                    <p class="menu-label">Emonev Kementan</p>
                 </a>
 
                 <!-- Menu Item 7 -->
-                <a href="#" class="menu-item yellow">
+                <a href="https://siwawan.kuningankab.go.id/" target="_blank" class="menu-item yellow">
                     <div class="icon-wrapper">
-                        <i class="bi bi-pie-chart-fill"></i>
+                        <img src="{{ asset('img/logo/kuningan.png') }}" style="height: 60px;" alt="">
                     </div>
-                    <p class="menu-label">Dashboard Analitik</p>
+                    <p class="menu-label">SI-Wawan</p>
                 </a>
 
                 <!-- Menu Item 8 -->
-                <a href="#" class="menu-item teal">
+                <a href="https://siwawan.kuningankab.go.id/dashboard.php" target="_blank" class="menu-item teal">
                     <div class="icon-wrapper">
-                        <i class="bi bi-box-seam"></i>
+                        <img src="{{ asset('img/logo/sipraja.png') }}" style="height: 60px;" alt="">
                     </div>
-                    <p class="menu-label">Sistem Inventory</p>
+                    <p class="menu-label">SIPRAJA</p>
+                </a>
+
+                <!-- Menu Item 3 -->
+                <a href="https://mpo.psp.pertanian.go.id/" target="_blank" class="menu-item green">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('img/logo/mpo.png') }}" style="width: 60px;" alt="">
+                    </div>
+                    <p class="menu-label">Model Pelaporan Online</p>
+                </a>
+
+                <!-- Menu Item 4 -->
+                <a href="https://pprk.bappenas.go.id/" target="_blank" class="menu-item blue">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('img/logo/pprk.png') }}" style="height: 60px;" alt="">
+                    </div>
+                    <p class="menu-label">Aksara</p>
+                </a>
+
+                <!-- Menu Item 5 -->
+                <a href="https://www.lkpp.go.id/" target="_blank" class="menu-item orange">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('img/logo/lkpp.png') }}" style="width: 60px;" alt="">
+                    </div>
+                    <p class="menu-label">LKPP</p>
+                </a>
+
+                <!-- Menu Item 6 -->
+                <a href="https://opendata.kuningankab.go.id/" target="_blank" class="menu-item lime">
+                    <div class="icon-wrapper">
+                        <img src="{{ asset('img/logo/opendata.png') }}" style="height: 60px;" alt="">
+                    </div>
+                    <p class="menu-label">Open Data Kuningan</p>
                 </a>
 
             </div>
@@ -602,4 +602,4 @@
 
         </div>
     </section>
-    
+

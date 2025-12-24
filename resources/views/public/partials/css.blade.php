@@ -47,10 +47,10 @@
         background: linear-gradient(135deg, var(--cream), var(--secondary-cream));
         color: var(--secondary-green);
         padding: 8px 0;
-        font-size: 0.9rem;
+        font-size: 1rem;
         position: relative;
         z-index: 1030;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
 
     .top-bar i {
@@ -646,7 +646,7 @@
         background: white;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
         transition: all 0.4s ease;
         height: 100%;
     }

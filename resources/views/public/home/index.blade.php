@@ -1,8 +1,4 @@
-@extends('public.layouts.app')
 
-@section('title', 'Home')
-
-@section('content')
     <!-- Hero Carousel Section -->
     <section id="home" class="hero-section">
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -483,4 +479,4 @@
             </div>
         </div>
     </section>
-@endsection
+

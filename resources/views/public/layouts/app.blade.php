@@ -27,7 +27,9 @@
         @yield('content')
     </main>
 
-    @include('public.partials.footer')
+    <div id="footer-active">
+        @include('public.partials.footer')
+    </div>
 
     @stack('before-script')
         @include('public.partials.js')
