@@ -9,9 +9,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AgendasController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\MessageController;
 
 use App\Models\Agendas;
 use App\Models\News;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,96 +29,25 @@ use App\Models\News;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//public
-Route::get('/visi-misi', function () {
-    $data = array(
-        'head' => "Profil",
-        'title' => "Profil",
-        'menu' => "Visi & Misi",
-    );
+Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
 
-    return view('public.profil.visimisi')->with($data);
-});
+Route::post('/contact', [MessageController::class, 'store'])
+    ->name('contact.store');
 
-Route::get('/sejarah', function () {
-    $data = array(
-        'head' => "Profil",
-        'title' => "Profil",
-        'menu' => "Sejarah",
-    );
+// profil
+Route::get('/visi-misi', [HomeController::class, 'visiMisi']);
+Route::get('/sejarah', [HomeController::class, 'sejarah']);
+Route::get('/struktur', [HomeController::class, 'struktur']);
+Route::get('/tupoksi', [HomeController::class, 'tupoksi']);
+Route::get('/daftar-pejabat', [HomeController::class, 'daftarPejabat']);
 
-    return view('public.profil.sejarah')->with($data);
-});
+// agenda
+Route::get('/agenda', [HomeController::class, 'agenda']);
 
-Route::get('/struktur', function () {
-    $data = array(
-        'head' => "Profil",
-        'title' => "Profil",
-        'menu' => "Struktur Organisasi",
-    );
-
-    return view('public.profil.struktur')->with($data);
-});
-
-Route::get('/tupoksi', function () {
-    $data = array(
-        'head' => "Profil",
-        'title' => "Profil",
-        'menu' => "Tugas Pokok dan Fungsi",
-    );
-
-    return view('public.profil.tupoksi')->with($data);
-});
-
-Route::get('/daftar-pejabat', function () {
-    $data = array(
-        'head' => "Profil",
-        'title' => "Profil",
-        'menu' => "Daftar Pejabat",
-    );
-
-    return view('public.profil.daftarPejabat')->with($data);
-});
-
-Route::get('/agenda', function () {
-    $agenda = Agendas::orderByDesc('date')->paginate(10);
-
-    $data = array(
-        'head' => "Agenda",
-        'title' => "Agenda",
-        'menu' => "Agenda",
-        'agenda' => $agenda
-    );
-
-    return view('public.agenda.index')->with($data);
-});
-
-Route::get('/berita', function () {
-    $news = News::orderByDesc('published_at')->paginate(9);
-
-    $data = array(
-        'head' => "Berita",
-        'title' => "Berita",
-        'menu' => "Berita",
-        'news' => $news
-    );
-
-    return view('public.berita.index')->with($data);
-});
-
-Route::get('/berita/{slug}', function ($slug) {
-    $news = News::where('slug', $slug)->firstOrFail();
-
-    $data = array(
-        'head' => "Berita",
-        'title' => "Berita",
-        'menu' => "Berita",
-        'news' => $news
-    );
-
-    return view('public.berita.detail')->with($data);
-})->name('berita.detail');
-//end
+// berita
+Route::get('/berita', [HomeController::class, 'berita']);
+Route::get('/berita/{slug}', [HomeController::class, 'beritaDetail'])->name('berita.detail');
+Route::post('/berita/cari', [HomeController::class, 'filterNews'])->name('berita.filter');
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);

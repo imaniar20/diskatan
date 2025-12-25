@@ -78,7 +78,7 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    animateCounter();
+                    // animateCounter();
                     observer.unobserve(entry.target);
                 }
             });
@@ -116,25 +116,6 @@
                 }
             });
         }
-
-        // Submit Survey
-        function submitSurvey() {
-            if (selectedRating === 0) {
-                alert('Silakan pilih rating terlebih dahulu!');
-                return;
-            }
-
-            alert(`Terima kasih atas penilaian Anda! Rating: ${selectedRating} bintang`);
-            selectedRating = 0;
-            updateStars(0);
-        }
-
-        // Contact Form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Terima kasih! Pesan Anda telah terkirim. Tim kami akan segera menghubungi Anda.');
-            this.reset();
-        });
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

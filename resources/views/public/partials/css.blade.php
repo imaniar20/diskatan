@@ -198,6 +198,12 @@
         animation: dropdownSlide 0.3s ease;
     }
 
+    .dropdown-menu .dropdown-item.active {
+        background-color: var(--primary-green);;
+        color: #ffffff;
+        /* opsional */
+    }
+
     @keyframes dropdownSlide {
         from {
             opacity: 0;

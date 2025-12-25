@@ -431,42 +431,9 @@
 
                 <!-- LIST BERITA -->
                 <div class="col-lg-8">
-                    <div class="row g-4">
-                        @php
-                            $i = 0;
-                        @endphp
-                        {{-- Loop agenda --}}
-                        @foreach ($news as $item)
-                            @php
-                                $i++;
-                            @endphp
-                            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
-                                <div class="card h-100 border-0 shadow-sm berita-card">
-                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        class="card-img-top" alt="Berita {{ $i }}">
+                    <div class="row g-4" id="news_body">
 
-                                    <div class="card-body d-flex flex-column">
-                                        <small class="text-muted mb-2">
-                                            {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
-                                        </small>
-
-                                        <h6 class="card-title fw-semibold">
-                                            {{ Str::limit($item->title, 40) }}
-                                        </h6>
-
-                                        <p class="card-text small text-muted">
-                                            {!! Str::limit($item->content, 160) !!}
-                                        </p>
-
-                                        <a href="{{ route('berita.detail', $item->slug) }}"
-                                            class="mt-auto btn btn-sm btn-outline-success">
-                                            <i class="bi bi-arrow-right-circle me-1"></i>
-                                            Baca Selengkapnya
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        @include('public.ajax.news', ['news' => $news])
 
                     </div>
 
@@ -485,10 +452,11 @@
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-search me-2"></i>Cari Berita
                             </h6>
-                            <form action="#" method="GET">
+                            <form id="filter-news">
+                                @csrf
                                 <div class="input-group">
-                                    <input type="text" name="q" class="form-control"
-                                        placeholder="Ketik judul berita...">
+                                    <input type="text" name="search" id="search" class="form-control"
+                                        placeholder="Cari judul berita...">
                                     <button class="btn btn-success" type="submit">
                                         <i class="bi bi-search"></i>
                                     </button>
@@ -503,33 +471,22 @@
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-newspaper me-2"></i>Berita Terbaru
                             </h6>
-
-                            @for ($i = 1; $i <= 5; $i++)
+                            @foreach ($lastest as $item)
                                 <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
-                                    <img src="https://images.unsplash.com/photo-{{ 1464226184 + $i }}884fa280b87c399?w=80&h=80&fit=crop"
-                                        alt="Berita {{ $i }}" class="sidebar-news-img">
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Berita" class="sidebar-news-img">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if ($i == 1)
-                                                Sosialisasi Pupuk Subsidi untuk Petani
-                                            @elseif($i == 2)
-                                                Panen Raya Padi Organik Sukses
-                                            @elseif($i == 3)
-                                                Workshop Teknologi Pertanian Modern
-                                            @elseif($i == 4)
-                                                Distribusi Bibit Gratis untuk Masyarakat
-                                            @else
-                                                Peningkatan Kualitas Hasil Panen
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-calendar3"></i> {{ 15 + $i }} Des 2024
+                                            <i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
@@ -540,34 +497,22 @@
                                 <i class="bi bi-fire me-2"></i>Paling Banyak Dilihat
                             </h6>
 
-                            @for ($i = 1; $i <= 5; $i++)
+                            @foreach ($popular as $item)
                                 <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
-                                    <img src="https://images.unsplash.com/photo-{{ 1542273917 + $i }}363-3b1817f69a2d?w=80&h=80&fit=crop" 
-                                         alt="Popular {{ $i }}"
-                                         class="sidebar-news-img">
-
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Berita" class="sidebar-news-img">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Inovasi Pertanian Ramah Lingkungan
-                                            @elseif($i == 2)
-                                                Program Ketahanan Pangan Daerah
-                                            @elseif($i == 3)
-                                                Ekspor Hasil Pertanian Meningkat
-                                            @elseif($i == 4)
-                                                Pelatihan Budidaya Organik Gratis
-                                            @else
-                                                Bantuan Alat Pertanian Modern
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ rand(450, 980) }} views
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
@@ -577,4 +522,29 @@
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#filter-news').on('submit', function(e) {
+                e.preventDefault();
+
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('berita.filter') }}",
+                    method: "POST",
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#news_body').html(response.data);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
