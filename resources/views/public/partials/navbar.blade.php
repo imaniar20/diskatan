@@ -67,7 +67,19 @@
                     <a class="nav-link {{ $menu == 'Berita' ? 'active' : '' }}" href="{{ url('/berita') }}">Berita</a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link {{ $menu == 'Program' ? 'active' : '' }}" href="{{ url('/berita') }}">Program</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ $menu == 'Data' ? 'active' : '' }}" href="{{ url('/berita') }}">Data dan Informasi</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="{{ url('/berita') }}">Layanan</a>
+                </li>
+
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Informasi' ? 'active' : '' }}"
                         href="#" id="informasiDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -82,9 +94,9 @@
                         <li><a class="dropdown-item {{ $menu == 'Ruang Lingkup Pertanian' ? 'active' : '' }}"
                                 href="#struktur">Ruang Lingkup Pertanian</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Direktori' ? 'active' : '' }}"
                         href="#" id="direktoriDropdown" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -106,7 +118,7 @@
                         <li><a class="dropdown-item {{ $menu == 'Bidang Penyuluhan' ? 'active' : '' }}"
                                 href="#struktur">Bidang Penyuluhan</a></li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
