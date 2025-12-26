@@ -48,7 +48,8 @@ class HomeController extends Controller
     {
         $this->visitor();
 
-        $news = News::orderByDesc('created_at')->take(3)->get();
+        $agenda = Agendas::orderByDesc('date')->take(4)->get();
+        $news = News::orderByDesc('published_at')->take(3)->get();
 
         //visitor ----------------------------------------------------------------------------------------------------------------------------------------------
         $currentUrl = request()->fullUrl();
@@ -60,6 +61,7 @@ class HomeController extends Controller
             'title' => "Home",
             'menu' => "Home",
             'news' => $news,
+            'agenda' => $agenda,
             'total' => $total
         );
 

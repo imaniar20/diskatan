@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <small class="text-muted">
                         <i class="bi bi-calendar-event"></i>
-                        {{ $item->date }}
+                        {{ \Carbon\Carbon::parse($item->date)->format('d M Y') }}
                         &nbsp;|&nbsp;
                         <i class="bi bi-geo-alt"></i>
                         {{ $item->location }}

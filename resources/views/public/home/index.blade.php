@@ -236,93 +236,38 @@
         <h2 class="section-title text-center mb-5" data-aos="fade-up">Agenda Kegiatan</h2>
 
         <div class="row">
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="agenda-card">
-                    <div class="agenda-content">
-                        <div class="d-flex">
-                            <div class="agenda-date">
-                                <span class="day">28</span>
-                                <span class="month">Des</span>
-                            </div>
-                            <div class="flex-grow-1 ms-4">
-                                <h4 class="agenda-title">Sosialisasi Program Reboisasi 2025</h4>
-                                <div class="agenda-time">
-                                    <i class="bi bi-clock me-2"></i>09:00 - 15:00 WIB
+            @foreach ($agenda as $item)
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="agenda-card">
+                        <div class="agenda-content">
+                            <div class="d-flex">
+                                <div class="agenda-date">
+                                    <span class="month">{{ \Carbon\Carbon::parse($item->date)->format('d') }}</span>
+                                    <span class="day">{{ \Carbon\Carbon::parse($item->date)->format('M') }}</span>
+                                    <span class="month">{{ \Carbon\Carbon::parse($item->date)->format('Y') }}</span>
                                 </div>
-                                <div class="agenda-location">
-                                    <i class="bi bi-geo-alt me-2"></i>Aula Dinas Perhutanan
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <div class="flex-grow-1 ms-4">
 
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="agenda-card">
-                    <div class="agenda-content">
-                        <div class="d-flex">
-                            <div class="agenda-date">
-                                <span class="day">05</span>
-                                <span class="month">Jan</span>
-                            </div>
-                            <div class="flex-grow-1 ms-4">
-                                <h4 class="agenda-title">Pelatihan Konservasi Tanah dan Air</h4>
-                                <div class="agenda-time">
-                                    <i class="bi bi-clock me-2"></i>08:00 - 16:00 WIB
-                                </div>
-                                <div class="agenda-location">
-                                    <i class="bi bi-geo-alt me-2"></i>Balai Latihan Kehutanan
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    <h4 class="agenda-title">{{ Str::limit($item->title, 40) }}</h4>
+                                    <div class="agenda-time">{!! Str::limit(preg_replace('/<img[^>]*>/i', '', $item->content), 100) !!}
+                                    </div>
+                                    <div class="agenda-location d-flex justify-content-between align-items-center">
+                                        <span>
+                                            <i class="bi bi-geo-alt me-2"></i>{{ $item->location }}
+                                        </span>
 
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="agenda-card">
-                    <div class="agenda-content">
-                        <div class="d-flex">
-                            <div class="agenda-date">
-                                <span class="day">12</span>
-                                <span class="month">Jan</span>
-                            </div>
-                            <div class="flex-grow-1 ms-4">
-                                <h4 class="agenda-title">Aksi Tanam Pohon Bersama Masyarakat</h4>
-                                <div class="agenda-time">
-                                    <i class="bi bi-clock me-2"></i>07:00 - 12:00 WIB
-                                </div>
-                                <div class="agenda-location">
-                                    <i class="bi bi-geo-alt me-2"></i>Kawasan Hutan Lindung Gunung Hijau
+                                        <a href="{{ route('agenda.detail', $item->slug) }}" class="news-link">
+                                            <i class="bi bi-eye me-1"></i>
+                                            Lihat Detail Agenda
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="agenda-card">
-                    <div class="agenda-content">
-                        <div class="d-flex">
-                            <div class="agenda-date">
-                                <span class="day">20</span>
-                                <span class="month">Jan</span>
-                            </div>
-                            <div class="flex-grow-1 ms-4">
-                                <h4 class="agenda-title">Workshop Pengelolaan Hasil Hutan Lestari</h4>
-                                <div class="agenda-time">
-                                    <i class="bi bi-clock me-2"></i>09:00 - 17:00 WIB
-                                </div>
-                                <div class="agenda-location">
-                                    <i class="bi bi-geo-alt me-2"></i>Hotel Rimba Raya
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
