@@ -119,12 +119,14 @@
             const index2 = document.getElementById('index2');
     
             const header = document.getElementById('header-active');
+            const top = document.getElementById('top-active');
             const footer = document.getElementById('footer-active');
     
     
             // saat loading selesai
             index.style.display = 'none';
             header.style.display = 'none';
+            top.style.display = 'none';
             footer.style.display = 'none';
             index2.style.display = 'block';
     
@@ -144,6 +146,7 @@
             const index2 = document.getElementById('index2');
     
             const header = document.getElementById('header-active');
+            const top = document.getElementById('top-active');
             const footer = document.getElementById('footer-active');
     
             // munculin curtain
@@ -159,6 +162,7 @@
                 index2.style.display = 'none';
                 index.style.display = 'block';
                 header.style.display = 'block';
+                top.style.display = 'block';
                 footer.style.display = 'block';
             }, 500);
     

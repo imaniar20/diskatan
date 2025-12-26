@@ -1,5 +1,5 @@
 <!-- Top Date Time Bar -->
-<div class="top-bar">
+<div class="top-bar" id="top-active">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
             <div>
