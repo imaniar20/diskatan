@@ -303,7 +303,7 @@
     <div class="container">
 
         <h2 class="sambutan-title">
-            Lokasi Kantor <span class="text-highlight">DISKATAN</span>
+            Lokasi <span class="text-highlight">Kantor</span>
         </h2>
 
         <!-- Content -->
