@@ -378,6 +378,13 @@
         transform: translateX(5px);
     }
     
+    .detail-content img {
+        width: 100%;
+        border-radius: 15px;
+        margin: 30px 0;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
     .sidebar-news-img {
         width: 70px;
         height: 70px;
@@ -517,136 +524,66 @@
                     <div class="card detail-card" data-aos="fade-up" data-aos-duration="1000">
                         <div class="card-body">
                             
-                            <!-- Featured Image -->
-                            <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1200&h=600&fit=crop" 
-                                 alt="Sosialisasi Program Reboisasi" 
-                                 class="featured-image"
-                                 data-aos="zoom-in"
-                                 data-aos-delay="200">
+                            <!-- Category Badge -->
+                            {{-- <span class="category-badge" data-aos="fade-up" data-aos-delay="100">
+                                <i class="bi bi-bookmark-fill me-1"></i>
+                                Program Unggulan
+                            </span> --}}
                             
                             <!-- Title -->
-                            <h1 class="detail-title" data-aos="fade-up" data-aos-delay="300">
-                                Sosialisasi Program Reboisasi 2025
+                            <h1 class="detail-title" data-aos="fade-up" data-aos-delay="200">
+                                {{ $agenda->title }}
                             </h1>
                             
                             <!-- Meta Info -->
-                            <div class="meta-info" data-aos="fade-up" data-aos-delay="400">
+                            <div class="meta-info" data-aos="fade-up" data-aos-delay="300">
                                 <div class="meta-item">
                                     <i class="bi bi-calendar-event"></i>
-                                    <div>
-                                        <small class="d-block" style="font-size: 0.85rem; color: #999;">Tanggal</small>
-                                        <strong>28 Desember 2024</strong>
-                                    </div>
+                                    <span>{{ \Carbon\Carbon::parse($agenda->published_at)->format('d-M-Y') }}</span>
                                 </div>
                                 <div class="meta-item">
-                                    <i class="bi bi-clock"></i>
-                                    <div>
-                                        <small class="d-block" style="font-size: 0.85rem; color: #999;">Waktu</small>
-                                        <strong>09:00 - 15:00 WIB</strong>
-                                    </div>
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>Admin Dinas</span>
                                 </div>
                                 <div class="meta-item">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <div>
-                                        <small class="d-block" style="font-size: 0.85rem; color: #999;">Lokasi</small>
-                                        <strong>Aula Dinas Pertanian</strong>
-                                    </div>
+                                    <i class="bi bi-eye"></i>
+                                    <span>{{ $agenda->visitor_count }} Views</span>
                                 </div>
                             </div>
 
-                            <!-- Info Boxes -->
-                            <div class="info-boxes" data-aos="fade-up" data-aos-delay="500">
-                                <div class="info-box">
-                                    <div class="info-box-icon">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                    <div class="info-box-label">Peserta</div>
-                                    <div class="info-box-value">100 Orang</div>
-                                </div>
-                                <div class="info-box">
-                                    <div class="info-box-icon">
-                                        <i class="bi bi-person-badge"></i>
-                                    </div>
-                                    <div class="info-box-label">Narasumber</div>
-                                    <div class="info-box-value">Dr. Ahmad Fauzi</div>
-                                </div>
-                                <div class="info-box">
-                                    <div class="info-box-icon">
-                                        <i class="bi bi-bookmark-check"></i>
-                                    </div>
-                                    <div class="info-box-label">Status</div>
-                                    <div class="info-box-value">Akan Datang</div>
-                                </div>
-                            </div>
-
+                            <!-- Featured Image -->
+                            <img src="{{ asset('storage/' . $agenda->thumbnail) }}"
+                                 alt="Program Reboisasi" 
+                                 class="featured-image"
+                                 data-aos="zoom-in"
+                                 data-aos-delay="400">
+                            
                             <!-- Content -->
-                            <div class="detail-content" data-aos="fade-up" data-aos-delay="600">
-                                <h5>Tentang Kegiatan</h5>
+                            <div class="detail-content" data-aos="fade-up" data-aos-delay="500">
                                 <p>
-                                    Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan mengadakan kegiatan sosialisasi Program Reboisasi 2025 
-                                    sebagai upaya meningkatkan kesadaran masyarakat dalam menjaga kelestarian hutan dan lingkungan hidup. 
-                                    Program ini merupakan bagian dari komitmen pemerintah daerah dalam mendukung pembangunan berkelanjutan 
-                                    dan pelestarian sumber daya alam.
+                                    {!! $agenda->content !!}
                                 </p>
+                                
+                            </div>
 
-                                <p>
-                                    Kegiatan ini akan menghadirkan para ahli di bidang kehutanan dan lingkungan yang akan membagikan 
-                                    pengetahuan dan pengalaman mereka mengenai pentingnya reboisasi, teknik penanaman yang baik, 
-                                    serta manfaat jangka panjang dari program ini bagi masyarakat dan lingkungan.
-                                </p>
-
-                                <h5>Tujuan Kegiatan</h5>
-                                <ul>
-                                    <li>Meningkatkan pemahaman masyarakat tentang pentingnya reboisasi untuk kelestarian lingkungan</li>
-                                    <li>Memberikan pengetahuan teknis tentang cara menanam dan merawat pohon dengan benar</li>
-                                    <li>Membangun kesadaran kolektif dalam menjaga hutan dan lahan hijau di Kabupaten Kuningan</li>
-                                    <li>Mendorong partisipasi aktif masyarakat dalam program penghijauan</li>
-                                    <li>Menyosialisasikan target penanaman 500 ribu pohon pada tahun 2025</li>
-                                </ul>
-
-                                <h5>Materi yang Akan Disampaikan</h5>
-                                <ol>
-                                    <li>Kondisi hutan dan lingkungan di Kabupaten Kuningan saat ini</li>
-                                    <li>Manfaat reboisasi bagi masyarakat dan lingkungan</li>
-                                    <li>Teknik penanaman dan pemilihan bibit yang tepat</li>
-                                    <li>Perawatan pohon untuk pertumbuhan optimal</li>
-                                    <li>Program insentif bagi peserta aktif reboisasi</li>
-                                </ol>
-
-                                <h5>Sasaran Peserta</h5>
-                                <p>
-                                    Kegiatan ini terbuka untuk umum dengan prioritas kepada:
-                                </p>
-                                <ul>
-                                    <li>Kelompok tani dan masyarakat sekitar hutan</li>
-                                    <li>Tokoh masyarakat dan pemuda karang taruna</li>
-                                    <li>Lembaga swadaya masyarakat (LSM) peduli lingkungan</li>
-                                    <li>Pegawai instansi pemerintah terkait</li>
-                                    <li>Mahasiswa dan pelajar yang tertarik dengan isu lingkungan</li>
-                                </ul>
-
-                                <h5>Pendaftaran</h5>
-                                <p>
-                                    Peserta yang berminat mengikuti kegiatan ini dapat mendaftar melalui:
-                                </p>
-                                <ul>
-                                    <li><strong>Langsung:</strong> Datang ke Kantor Dinas Pertanian Kabupaten Kuningan</li>
-                                    <li><strong>Telepon:</strong> (0232) 877096</li>
-                                    <li><strong>Email:</strong> info@dinasperhutanan.kuningankab.go.id</li>
-                                    <li><strong>Batas Pendaftaran:</strong> 25 Desember 2024</li>
-                                </ul>
-
-                                <p>
-                                    Peserta yang terdaftar akan mendapatkan sertifikat kehadiran, materi sosialisasi, 
-                                    dan bibit pohon gratis untuk ditanam di lingkungan masing-masing.
-                                </p>
+                            <!-- Tags -->
+                            <div class="tags-section" data-aos="fade-up" data-aos-delay="600">
+                                <h6 class="tags-title">
+                                    <i class="bi bi-tags"></i>
+                                    Tags
+                                </h6>
+                                <a href="#" class="tag-item">#Reboisasi</a>
+                                <a href="#" class="tag-item">#Lingkungan</a>
+                                <a href="#" class="tag-item">#ProgramUnggulan</a>
+                                <a href="#" class="tag-item">#Kuningan</a>
+                                <a href="#" class="tag-item">#Pertanian</a>
                             </div>
 
                             <!-- Share Section -->
                             <div class="share-section" data-aos="fade-up" data-aos-delay="700">
                                 <h6 class="share-title">
                                     <i class="bi bi-share"></i>
-                                    Bagikan Agenda Ini
+                                    Bagikan Berita Ini
                                 </h6>
                                 <div class="share-buttons">
                                     <a href="#" class="share-btn facebook" title="Share to Facebook">
@@ -660,6 +597,9 @@
                                     </a>
                                     <a href="#" class="share-btn telegram" title="Share to Telegram">
                                         <i class="bi bi-telegram"></i>
+                                    </a>
+                                    <a href="#" class="share-btn linkedin" title="Share to LinkedIn">
+                                        <i class="bi bi-linkedin"></i>
                                     </a>
                                     <a href="#" class="share-btn email" title="Share via Email">
                                         <i class="bi bi-envelope"></i>
@@ -675,73 +615,54 @@
                 <!-- SIDEBAR -->
                 <div class="col-lg-4">
 
-                    <!-- AGENDA TERDEKAT -->
+                    <!-- BERITA TERBARU -->
                     <div class="card border-0 shadow-sm mb-4 sidebar-card" data-aos="fade-left" data-aos-delay="300">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
-                                <i class="bi bi-clock-history me-2"></i>Agenda Terdekat
+                                <i class="bi bi-newspaper me-2"></i>Berita Terbaru
                             </h6>
-
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
-                                    <img src="https://images.unsplash.com/photo-{{ 1464226184 + $i }}884fa280b87c399?w=80&h=80&fit=crop" 
-                                         alt="Agenda {{ $i }}"
-                                         class="sidebar-news-img">
+                            @foreach ($lastest as $item)
+                                <a href="{{ route('agenda.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                    <!-- IMAGE -->
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="agenda" class="sidebar-news-img">
+                                    <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Pelatihan Budidaya Tanaman Organik
-                                            @elseif($i == 2)
-                                                Sosialisasi Pupuk Subsidi
-                                            @elseif($i == 3)
-                                                Pameran Hasil Pertanian
-                                            @elseif($i == 4)
-                                                Rapat Evaluasi Program
-                                            @else
-                                                Monitoring Lahan Pertanian
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-calendar3"></i> {{ 10 + $i }} Jan 2025
+                                            <i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
-                    <!-- AGENDA POPULER -->
+                    <!-- PALING BANYAK DILIHAT -->
                     <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-left" data-aos-delay="400">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
-                                <i class="bi bi-fire me-2"></i>Agenda Populer
+                                <i class="bi bi-fire me-2"></i>Paling Banyak Dilihat
                             </h6>
 
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
-                                    <img src="https://images.unsplash.com/photo-{{ 1542273917 + $i }}363-3b1817f69a2d?w=80&h=80&fit=crop" 
-                                         alt="Popular {{ $i }}"
-                                         class="sidebar-news-img">
+                            @foreach ($popular as $item)
+                                <a href="{{ route('agenda.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                    <!-- IMAGE -->
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="agenda" class="sidebar-news-img">
+                                    <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Panen Raya Padi Organik
-                                            @elseif($i == 2)
-                                                Festival Pertanian Kuningan
-                                            @elseif($i == 3)
-                                                Lomba Inovasi Pertanian
-                                            @elseif($i == 4)
-                                                Gelar Teknologi Pertanian
-                                            @else
-                                                Kampanye Pertanian Ramah Lingkungan
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ rand(250, 850) }} views
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -472,7 +472,7 @@
                                 <i class="bi bi-newspaper me-2"></i>Berita Terbaru
                             </h6>
                             @foreach ($lastest as $item)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
                                         alt="Berita" class="sidebar-news-img">
@@ -498,7 +498,7 @@
                             </h6>
 
                             @foreach ($popular as $item)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
                                         alt="Berita" class="sidebar-news-img">

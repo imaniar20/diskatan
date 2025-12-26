@@ -123,7 +123,13 @@
     }
     
     /* ============ AGENDA CARD ============ */
+    .agenda-card * {
+        pointer-events: auto;
+    }
+    
     .agenda-card {
+        position: relative;
+        z-index: 10;
         border-radius: 20px;
         overflow: hidden;
         transition: all 0.4s ease;
@@ -135,13 +141,16 @@
         transform: translateY(-10px);
         box-shadow: 0 20px 50px rgba(45, 106, 79, 0.15) !important;
         border-color: #52b788;
+        z-index: 999; /* Naik saat hover */
     }
     
+    /* CRITICAL: Image tidak boleh block click */
     .agenda-img {
         object-fit: cover;
         height: 100%;
         min-height: 250px;
         transition: all 0.4s ease;
+        pointer-events: none !important; /* Image tidak tangkap click */
     }
     
     .agenda-card:hover .agenda-img {
@@ -150,10 +159,21 @@
     
     .agenda-card .col-md-4 {
         overflow: hidden;
+        pointer-events: none !important; /* Column image tidak tangkap click */
+    }
+    
+    /* CRITICAL: Content area harus bisa menerima click */
+    .agenda-card .col-md-8 {
+        position: relative;
+        z-index: 50;
+        pointer-events: auto !important;
     }
     
     .agenda-card .card-body {
         padding: 25px;
+        position: relative;
+        z-index: 100;
+        pointer-events: auto !important;
     }
     
     .agenda-card h5 {
@@ -161,6 +181,7 @@
         font-family: 'Playfair Display', serif;
         font-weight: 700;
         transition: color 0.3s ease;
+        pointer-events: none; /* Heading tidak tangkap click */
     }
     
     .agenda-card:hover h5 {
@@ -169,26 +190,43 @@
     
     .agenda-card small {
         font-size: 0.9rem;
+        pointer-events: none;
     }
     
     .agenda-card small i {
         color: #52b788;
     }
     
+    .agenda-card p {
+        pointer-events: none;
+    }
+    
+    /* CRITICAL: Button HARUS bisa diklik */
     .agenda-card .btn-outline-success {
+        position: relative !important;
+        z-index: 9999 !important;
         border: 2px solid #52b788;
         color: #2d6a4f;
         font-weight: 600;
         padding: 8px 20px;
         border-radius: 25px;
         transition: all 0.3s ease;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        display: inline-block !important;
     }
     
     .agenda-card .btn-outline-success:hover {
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
-        border-color: #2d6a4f;
-        color: white;
+        background: linear-gradient(135deg, #2d6a4f, #40916c) !important;
+        border-color: #2d6a4f !important;
+        color: white !important;
         transform: translateX(5px);
+    }
+    
+    /* Fix untuk pseudo-elements jika ada */
+    .agenda-card::before,
+    .agenda-card::after {
+        pointer-events: none !important;
     }
     
     /* ============ PAGINATION ============ */
@@ -407,53 +445,10 @@
             <div class="row">
 
                 <!-- LIST AGENDA -->
-                <div class="col-lg-8">
-                    @php
-                        $i = 0;
-                    @endphp
-                    {{-- Loop agenda --}}
-                    @foreach ($agenda as $item)
-                        @php
-                            $i++;
-                        @endphp
-                        <div class="card border-0 shadow-sm mb-4 agenda-card" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
-                            <div class="row g-0 align-items-center">
-
-                                <!-- FOTO -->
-                                <div class="col-md-4">
-                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        class="img-fluid agenda-img" alt="Agenda {{ $i }}">
-                                </div>
-
-                                <!-- KONTEN -->
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <small class="text-muted">
-                                            <i class="bi bi-calendar-event"></i>
-                                            {{ $item->date }}
-                                            &nbsp;|&nbsp;
-                                            <i class="bi bi-geo-alt"></i>
-                                            {{ $item->location }}
-                                        </small>
-
-                                        <h5 class="mt-2 fw-semibold">
-                                            {{ Str::limit($item->title, 40) }}
-                                        </h5>
-
-                                        <p class="text-muted small">
-                                            {!!  Str::limit($item->content, 160) !!}
-                                        </p>
-
-                                        <a href="#" class="btn btn-sm btn-outline-success">
-                                            <i class="bi bi-eye me-1"></i>
-                                            Lihat Detail Agenda
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    @endforeach
+                <div class="col-lg-8" >
+                    <div id="agendas_body">
+                        @include('public.ajax.agendas', ['agenda' => $agenda])
+                    </div>
 
                     <!-- PAGINATION -->
                     {{ $agenda->links('vendor.pagination.agenda') }}
@@ -470,9 +465,11 @@
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-search me-2"></i>Cari Agenda
                             </h6>
-                            <form>
+                            <form id="filter-agenda">
+                                @csrf
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari judul agenda...">
+                                    <input type="text" name="search" id="search" class="form-control"
+                                        placeholder="Cari judul agenda...">
                                     <button class="btn btn-success" type="submit">
                                         <i class="bi bi-search"></i>
                                     </button>
@@ -488,33 +485,22 @@
                                 <i class="bi bi-clock-history me-2"></i>Agenda Terdekat
                             </h6>
 
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                            @foreach ($lastest as $item)
+                                <a href="{{ route('agenda.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
-                                    <img src="https://images.unsplash.com/photo-{{ 1464226184 + $i }}884fa280b87c399?w=80&h=80&fit=crop" 
-                                         alt="Agenda {{ $i }}"
-                                         class="sidebar-news-img">
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Agenda" class="sidebar-news-img">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Pelatihan Budidaya Tanaman Organik
-                                            @elseif($i == 2)
-                                                Sosialisasi Pupuk Subsidi
-                                            @elseif($i == 3)
-                                                Pameran Hasil Pertanian
-                                            @elseif($i == 4)
-                                                Rapat Evaluasi Program
-                                            @else
-                                                Monitoring Lahan Pertanian
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-calendar3"></i> {{ 10 + $i }} Jan 2025
+                                            <i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
@@ -525,34 +511,22 @@
                                 <i class="bi bi-fire me-2"></i>Agenda Populer
                             </h6>
 
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                            @foreach ($popular as $item)
+                                <a href="{{ route('agenda.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
-                                    <img src="https://images.unsplash.com/photo-{{ 1542273917 + $i }}363-3b1817f69a2d?w=80&h=80&fit=crop" 
-                                         alt="Popular {{ $i }}"
-                                         class="sidebar-news-img">
-
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Agenda" class="sidebar-news-img">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Panen Raya Padi Organik
-                                            @elseif($i == 2)
-                                                Festival Pertanian Kuningan
-                                            @elseif($i == 3)
-                                                Lomba Inovasi Pertanian
-                                            @elseif($i == 4)
-                                                Gelar Teknologi Pertanian
-                                            @else
-                                                Kampanye Pertanian Ramah Lingkungan
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ rand(250, 850) }} views
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -560,4 +534,29 @@
         </div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#filter-agenda').on('submit', function(e) {
+                e.preventDefault();
+
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('agenda.filter') }}",
+                    method: "POST",
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            $('#agendas_body').html(response.data);
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

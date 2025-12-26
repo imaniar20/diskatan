@@ -115,12 +115,84 @@ class HomeController extends Controller
     public function agenda()
     {
         $agenda = Agendas::orderByDesc('date')->paginate(10);
+        $lastest = Agendas::orderByDesc('date')->take(5)->get();
+        foreach ($agenda as $new) {
+            $new->visitor_count = \DB::table('visitors')
+                ->where('url', 'like', '%' . $new->slug)
+                ->count();
+        }
+
+        $popular = Agendas::select('agendas.*')
+            ->selectSub(function ($q) {
+                $q->from('visitors')
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
+            }, 'visitor_count')
+            ->orderByDesc('visitor_count')
+            ->limit(5)
+            ->get();
 
         return view('public.agenda.index', [
             'head' => 'Agenda',
             'title' => 'Agenda',
             'menu' => 'Agenda',
             'agenda' => $agenda,
+            'lastest' => $lastest,
+            'popular' => $popular
+        ]);
+    }
+
+    public function agendaDetail($slug)
+    {
+        $this->visitor();
+
+        $agenda = Agendas::where('slug', $slug)->firstOrFail();
+        $lastest = Agendas::orderByDesc('date')->take(5)->get();
+
+        $agenda->visitor_count = \DB::table('visitors')
+            ->where('url', 'like', '%' . $agenda->slug)
+            ->count();
+
+        $popular = Agendas::select('agendas.*')
+            ->selectSub(function ($q) {
+                $q->from('visitors')
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
+            }, 'visitor_count')
+            ->orderByDesc('visitor_count')
+            ->limit(5)
+            ->get();
+
+        return view('public.agenda.detail', [
+            'head' => 'Agenda',
+            'title' => 'Agenda',
+            'menu' => 'Agenda',
+            'agenda' => $agenda,
+            'lastest' => $lastest,
+            'popular' => $popular
+        ]);
+    }
+
+    public function filterAgendas(Request $request)
+    {
+        $antiXss = new AntiXSS();
+
+        $query = Agendas::query();
+
+        if ($request->search) {
+            $clean = $antiXss->xss_clean($request->search);
+
+            $query->where(function ($q) use ($clean, ) {
+                $q->where('title', 'like', "%" . $clean . "%");
+            });
+        }
+
+        $agenda = $query->orderBy('date', 'asc')->paginate(9)->appends(request()->query());
+
+
+        return response()->json([
+            'success' => true,
+            'data' => view('public.ajax.agendas', compact('agenda'))->render(),
         ]);
     }
 
@@ -161,11 +233,29 @@ class HomeController extends Controller
 
         $news = News::where('slug', $slug)->firstOrFail();
 
+        $lastest = News::orderByDesc('published_at')->take(5)->get();
+
+        $news->visitor_count = \DB::table('visitors')
+            ->where('url', 'like', '%' . $news->slug)
+            ->count();
+
+        $popular = News::select('news.*')
+            ->selectSub(function ($q) {
+                $q->from('visitors')
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', news.slug)"));
+            }, 'visitor_count')
+            ->orderByDesc('visitor_count')
+            ->limit(5)
+            ->get();
+
         return view('public.berita.detail', [
             'head' => 'Berita',
             'title' => 'Berita',
             'menu' => 'Berita',
             'news' => $news,
+            'lastest' => $lastest,
+            'popular' => $popular
         ]);
     }
 
@@ -173,7 +263,7 @@ class HomeController extends Controller
     {
         $antiXss = new AntiXSS();
 
-        $query = news::query();
+        $query = News::query();
 
         if ($request->search) {
             $clean = $antiXss->xss_clean($request->search);
@@ -183,7 +273,7 @@ class HomeController extends Controller
             });
         }
 
-        $news = $query->orderBy('created_at', 'asc')->paginate(9)->appends(request()->query());
+        $news = $query->orderBy('published_at', 'asc')->paginate(9)->appends(request()->query());
 
 
         return response()->json([

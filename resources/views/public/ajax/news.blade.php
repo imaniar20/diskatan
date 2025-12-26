@@ -21,7 +21,10 @@
                 </h6>
 
                 <p class="card-text small text-muted">
-                    {!! Str::limit($item->content, 160) !!}
+                    {!! Str::limit(
+                        preg_replace('/<img[^>]*>/i', '', $item->content),
+                        160
+                    ) !!}                    
                 </p>
 
                 <a href="{{ route('berita.detail', $item->slug) }}" class="mt-auto btn btn-sm btn-outline-success">

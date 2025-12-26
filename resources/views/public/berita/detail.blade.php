@@ -585,7 +585,7 @@
                                 </div>
                                 <div class="meta-item">
                                     <i class="bi bi-eye"></i>
-                                    <span>1,245 Views</span>
+                                    <span>{{ $news->visitor_count }} Views</span>
                                 </div>
                             </div>
 
@@ -659,67 +659,48 @@
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-newspaper me-2"></i>Berita Terbaru
                             </h6>
-
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
-                                    <img src="https://images.unsplash.com/photo-{{ 1464226184 + $i }}884fa280b87c399?w=80&h=80&fit=crop" 
-                                         alt="Berita {{ $i }}"
-                                         class="sidebar-news-img">
+                            @foreach ($lastest as $item)
+                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                    <!-- IMAGE -->
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Berita" class="sidebar-news-img">
+                                    <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Sosialisasi Pupuk Subsidi untuk Petani
-                                            @elseif($i == 2)
-                                                Panen Raya Padi Organik Sukses
-                                            @elseif($i == 3)
-                                                Workshop Teknologi Pertanian Modern
-                                            @elseif($i == 4)
-                                                Distribusi Bibit Gratis untuk Masyarakat
-                                            @else
-                                                Peningkatan Kualitas Hasil Panen
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-calendar3"></i> {{ 15 + $i }} Des 2024
+                                            <i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
 
-                    <!-- BERITA POPULER -->
+                    <!-- PALING BANYAK DILIHAT -->
                     <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-left" data-aos-delay="400">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
-                                <i class="bi bi-fire me-2"></i>Berita Populer
+                                <i class="bi bi-fire me-2"></i>Paling Banyak Dilihat
                             </h6>
 
-                            @for ($i = 1; $i <= 5; $i++)
-                                <a href="#" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
-                                    <img src="https://images.unsplash.com/photo-{{ 1542273917 + $i }}363-3b1817f69a2d?w=80&h=80&fit=crop" 
-                                         alt="Popular {{ $i }}"
-                                         class="sidebar-news-img">
+                            @foreach ($popular as $item)
+                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                    <!-- IMAGE -->
+                                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                                        alt="Berita" class="sidebar-news-img">
+                                    <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
-                                            @if($i == 1)
-                                                Inovasi Pertanian Ramah Lingkungan
-                                            @elseif($i == 2)
-                                                Program Ketahanan Pangan Daerah
-                                            @elseif($i == 3)
-                                                Ekspor Hasil Pertanian Meningkat
-                                            @elseif($i == 4)
-                                                Pelatihan Budidaya Organik Gratis
-                                            @else
-                                                Bantuan Alat Pertanian Modern
-                                            @endif
+                                            {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ rand(450, 980) }} views
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
                                         </div>
                                     </div>
                                 </a>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>

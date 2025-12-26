@@ -43,6 +43,8 @@ Route::get('/daftar-pejabat', [HomeController::class, 'daftarPejabat']);
 
 // agenda
 Route::get('/agenda', [HomeController::class, 'agenda']);
+Route::get('/agenda/{slug}', [HomeController::class, 'agendaDetail'])->name('agenda.detail');
+Route::post('/agenda/cari', [HomeController::class, 'filterAgendas'])->name('agenda.filter');
 
 // berita
 Route::get('/berita', [HomeController::class, 'berita']);
