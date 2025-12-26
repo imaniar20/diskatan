@@ -1,3 +1,232 @@
+<style>
+    /* ============ KEPALA DINAS SECTION ============ */
+    .kepala-dinas-section {
+        padding: 100px 0;
+        background: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .kepala-dinas-section::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: white;
+        clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* ============ FOTO KEPALA DINAS ============ */
+    .foto-kepala-wrapper {
+        position: relative;
+        border-radius: 30px;
+        overflow: visible;
+    }
+
+    .foto-decoration {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: 20px;
+        bottom: 20px;
+        /* background: linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(116, 198, 157, 0.1)); */
+        border-radius: 30px;
+        z-index: 1;
+    }
+
+    .foto-kepala {
+        width: 100%;
+        height: auto;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
+        position: center;
+        z-index: 2;
+        transition: all 0.4s ease;
+    }
+
+    .foto-kepala-wrapper:hover .foto-kepala {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(45, 106, 79, 0.25);
+    }
+
+    .name-badge {
+        position: absolute;
+        bottom: -30px;
+        left: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #16a34a, #40916c);
+        color: white;
+        padding: 20px 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(45, 106, 79, 0.3);
+        z-index: 3;
+    }
+
+    .name-badge h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .name-badge p {
+        font-size: 0.9rem;
+        margin: 0;
+        opacity: 0.95;
+    }
+
+    /* ============ SAMBUTAN CONTENT ============ */
+    .sambutan-content {
+        padding-left: 30px;
+    }
+
+    .section-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(116, 198, 157, 0.1));
+        border-left: 4px solid #16a34a;
+        padding: 8px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .badge-text {
+        color: #16a34a;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .sambutan-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #000000;
+        margin-bottom: 25px;
+        line-height: 1.2;
+    }
+
+    .text-highlight {
+        color: #16a34a;
+        position: relative;
+        display: inline-block;
+    }
+
+    .text-highlight::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #16a34a;
+        z-index: 5;
+    }
+
+    .text-highlight-warning {
+        color: #ffc415;
+        position: relative;
+        display: inline-block;
+    }
+
+    .text-highlight-warning::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #ffc415;
+        z-index: 5;
+    }
+
+    .quote-decoration {
+        font-size: 4rem;
+        color: #16a34a;
+        /* opacity: 0.2; */
+        line-height: 1;
+        margin-bottom: -20px;
+    }
+
+    .sambutan-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    .btn-selengkapnya {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #16a34a, #40916c);
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        box-shadow: 0 5px 20px rgba(22, 163, 74, 0.3);
+    }
+
+    .btn-selengkapnya:hover {
+        background: linear-gradient(135deg, #40916c, #52b788);
+        color: white;
+        transform: translateX(5px);
+        box-shadow: 0 8px 30px rgba(22, 163, 74, 0.4);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 991px) {
+        .kepala-dinas-section {
+            padding: 80px 0;
+        }
+
+        .sambutan-content {
+            padding-left: 0;
+            margin-top: 50px;
+        }
+
+        .sambutan-title {
+            font-size: 2.2rem;
+        }
+
+        .name-badge {
+            position: relative;
+            bottom: auto;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+        }
+
+        .foto-decoration {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .sambutan-title {
+            font-size: 1.8rem;
+        }
+
+        .sambutan-text {
+            font-size: 0.95rem;
+        }
+
+        .name-badge h4 {
+            font-size: 1rem;
+        }
+
+        .name-badge p {
+            font-size: 0.85rem;
+        }
+    }
+</style>
+
 <!-- Hero Carousel Section -->
 <section id="home" class="hero-section">
     <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -9,107 +238,51 @@
 
         <div class="carousel-inner">
             <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <img src="{{ asset('img/background/bg-2.jpg') }}" alt="Pertanian">
-                <div class="carousel-overlay">
-                    <div class="container">
-                        <div class="row align-items-center" style="min-height: 85vh;">
-                            <div class="col-lg-7">
-                                <div class="hero-content">
-                                    <span class="welcome-badge" data-aos="fade-down">
-                                        Selamat Datang di Website Resmi
-                                    </span>
-                                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
-                                        Dinas Ketahanan Pangan <span class="text-warning">dan Pertanian</span>
-                                    </h1>
-                                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-                                        Mewujudkan ketahanan pangan yang berkelanjutan dan pertanian modern untuk
-                                        kesejahteraan masyarakat.
-                                    </p>
-                                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
-                                        <a href="#about" class="btn btn-outline-light btn-lg px-4 py-3">
+            @foreach ($news as $item)
+                <div class="carousel-item active">
+                    <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
+                        alt="Pertanian">
+                    <div class="carousel-overlay">
+                        <div class="container">
+                            <div class="row align-items-center" style="min-height: 85vh;">
+                                <div class="col-lg-7">
+                                    <div class="hero-content">
+                                        <span class="welcome-badge" data-aos="fade-down">
+                                            Selamat Datang di Website Resmi
+                                        </span>
+                                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
+                                            Dinas Ketahanan Pangan <span class="text-warning">dan Pertanian</span>
+                                        </h1>
+                                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
+                                            {{ Str::limit($item->title, 40) }}
+                                        </p>
+                                        <p class="hero-subtitle-2" data-aos="fade-up" data-aos-delay="400">
+                                            {!! Str::limit(preg_replace('/<img[^>]*>/i', '', $item->content), 100) !!}
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="hero-buttons d-flex justify-content-end align-items-center"
+                                        data-aos="fade-up" data-aos-delay="600">
+
+                                        <a href="#agenda" class="btn btn-outline-light btn-lg px-4 py-3 me-3">
                                             <i class="bi bi-info-circle me-2"></i>
-                                            Selengkapnya
+                                            Agenda
                                         </a>
-                                        <a href="#contact" class="btn btn-warning btn-lg px-4 py-3 me-3">
+
+                                        <a href="#news" class="btn btn-warning btn-lg px-4 py-3">
                                             <i class="bi bi-file-earmark-text me-2"></i>
-                                            Kontak dan Saran
+                                            Berita
                                         </a>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1920&h=1080&fit=crop"
-                    alt="Pangan">
-                <div class="carousel-overlay">
-                    <div class="container">
-                        <div class="row align-items-center" style="min-height: 85vh;">
-                            <div class="col-lg-7">
-                                <div class="hero-content">
-                                    <span class="welcome-badge" data-aos="fade-down">
-                                        Agenda Resmi
-                                    </span>
-
-                                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
-                                        Agenda Strategis <span class="text-warning">Ketahanan Pangan</span>
-                                    </h1>
-
-                                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-                                        Komitmen bersama dalam membangun sistem pangan
-                                        yang tangguh dan berkelanjutan.
-                                    </p>
-                                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
-                                        <a href="#agenda" class="btn btn-warning btn-lg px-4 py-3 me-3">
-                                            <i class="bi bi-info-circle me-2"></i>
-                                            Selengkapnya
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?w=1920&h=1080&fit=crop"
-                    alt="Pertanian Modern">
-                <div class="carousel-overlay">
-                    <div class="container">
-                        <div class="row align-items-center" style="min-height: 85vh;">
-                            <div class="col-lg-7">
-                                <div class="hero-content">
-                                    <span class="welcome-badge" data-aos="fade-down">
-                                        Portal Pertanian Daerah
-                                    </span>
-
-                                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">
-                                        Pertanian Maju <span class="text-warning">& Pangan Berkelanjutan</span>
-                                    </h1>
-
-                                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">
-                                        Mendorong pertanian yang inovatif, produktif,
-                                        dan berdaya saing melalui informasi terpercaya.
-                                    </p>
-                                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
-                                        <a href="#news" class="btn btn-warning btn-lg px-4 py-3 me-3">
-                                            <i class="bi bi-arrow-right-circle me-2"></i>
-                                            Selengkapnya
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
@@ -180,8 +353,69 @@
     </div>
 </section>
 
+<section id="greeting" class="kepala-dinas-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <!-- FOTO KEPALA DINAS -->
+            <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
+                <div class="foto-kepala-wrapper">
+                    <div class="foto-decoration"></div>
+                    <img src="{{ asset('img/dinas/kadis.png') }}" alt="Dr. Wahyu Hidayah, M.Si" class="foto-kepala" >
+                    <div class="name-badge text-center">
+                        <h4 class="mb-1">Dr. Wahyu Hidayah, M.Si</h4>
+                        <p class="mb-0">Kepala Dinas Ketahanan Pangan dan Pertanian</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAMBUTAN TEXT -->
+            <div class="col-lg-8" data-aos="fade-left" data-aos-duration="1000">
+                <div class="sambutan-content">
+                    <div class="section-badge">
+                        <span class="badge-text">Sambutan</span>
+                    </div>
+
+                    <h2 class="sambutan-title">
+                        Sambutan <span class="text-highlight">Kepala Dinas</span>
+                    </h2>
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="quote-decoration">
+                                <i class="bi bi-quote"></i>
+                            </div>
+
+                        </div>
+                        <div class="col-11">
+                            <p class="sambutan-text">
+                                Selamat datang di website resmi Dinas Ketahanan Pangan dan Pertanian.
+                                Website ini merupakan wujud komitmen kami dalam memberikan pelayanan informasi
+                                yang transparan dan akuntabel kepada masyarakat.
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                    <p class="sambutan-text">
+                        Kami berkomitmen untuk terus meningkatkan ketahanan pangan daerah melalui
+                        berbagai program inovatif dan pemberdayaan petani. Bersama-sama, kita wujudkan
+                        pertanian yang maju dan berkelanjutan untuk kesejahteraan bersama.
+                    </p>
+
+                    <a href="{{ url('/visi-misi') }}" class="btn-selengkapnya">
+                        Selengkapnya
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <!-- About Section -->
-<section id="about" class="about-section">
+{{-- <section id="about" class="about-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
@@ -228,12 +462,14 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <!-- Agenda Section -->
 <section id="agenda" class="agenda-section">
     <div class="container">
-        <h2 class="section-title text-center mb-5" data-aos="fade-up">Agenda Kegiatan</h2>
+        <h2 class="sambutan-title">
+            <span class="text-white">Agenda</span> <span class="text-highlight-warning">Kegiatan</span>
+        </h2>
 
         <div class="row">
             @foreach ($agenda as $item)
@@ -275,7 +511,9 @@
 <!-- News Section -->
 <section id="news" class="news-section">
     <div class="container">
-        <h2 class="section-title text-center mb-5" data-aos="fade-up">Berita Terkini</h2>
+        <h2 class="sambutan-title">
+            Berita <span class="text-highlight">Terkini</span>
+        </h2>
 
         <div class="row">
             @foreach ($news as $item)
@@ -286,7 +524,7 @@
                         <div class="news-content">
                             <span class="news-badge">Berita</span>
                             <h4 class="news-title">{{ Str::limit($item->title, 40) }}</h4>
-                            <p class="news-excerpt">{!! Str::limit($item->content, 160) !!}</p>
+                            <p class="news-excerpt">{!! Str::limit(preg_replace('/<img[^>]*>/i', '', $item->content), 160) !!}</p>
                             <div class="news-meta">
                                 <span class="news-date"><i
                                         class="bi bi-calendar3 me-2"></i>{{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}</span>
@@ -301,134 +539,11 @@
     </div>
 </section>
 
-<!-- Stats & Survey Section -->
-<section id="stats" class="stats-survey-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
-                <div class="visitor-counter">
-                    <h3 class="counter-title">Total Pengunjung Website</h3>
-                    <span class="counter-number" id="">{{ $total }}</span>
-                    <p class="counter-label">Pengunjung sejak Januari 2026</p>
-                </div>
-            </div>
+@include('public.home.section.layanan')
 
-            <div class="col-lg-7" data-aos="fade-left" data-aos-duration="1000">
-                <div class="survey-box">
-                    <h3 class="survey-title">Survey Kepuasan Layanan</h3>
-                    <p style="color: #666; margin-bottom: 30px;">Bantu kami meningkatkan pelayanan dengan
-                        memberikan
-                        penilaian Anda</p>
+@include('public.home.section.program')
 
-                    <div class="rating-group">
-                        <label style="display: block; margin-bottom: 10px; font-weight: 600;">Bagaimana pengalaman
-                            Anda?</label>
-                        <div class="rating-stars" id="ratingStars">
-                            <input type="hidden" id="rating" value="0">
-                            <i class="bi bi-star-fill" data-rating="1"></i>
-                            <i class="bi bi-star-fill" data-rating="2"></i>
-                            <i class="bi bi-star-fill" data-rating="3"></i>
-                            <i class="bi bi-star-fill" data-rating="4"></i>
-                            <i class="bi bi-star-fill" data-rating="5"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-group mt-4">
-                        <label style="display: block; margin-bottom: 10px; font-weight: 600;">Saran & Masukan
-                            (Opsional)</label>
-                        <textarea class="form-control" id="suggestion" rows="3" placeholder="Tulis saran Anda di sini..."></textarea>
-                    </div>
-
-                    <button class="btn submit-btn mt-3" onclick="submitSurvey()">
-                        <i class="bi bi-send me-2"></i>Kirim Survey
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Contact Section -->
-<section id="contact" class="contact-section">
-    <div class="container">
-        <h2 class="section-title text-center mb-5" data-aos="fade-up">Hubungi Kami</h2>
-
-        <div class="row">
-            <div class="col-lg-7 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
-                <div class="contact-form">
-                    <h4 style="color: var(--primary-green); margin-bottom: 30px; font-weight: 700;">Kirim Pesan
-                        atau
-                        Saran</h4>
-
-                    <form id="contactForm">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" id="name" name="name" class="form-control"
-                                    placeholder="Nama Lengkap *" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" id="email" name="email" class="form-control"
-                                    placeholder="Email *" required>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="tel" id="phone" name="phone" class="form-control"
-                                    placeholder="No. Telepon *" required>
-                            </div>
-                            <div class="col-md-6">
-                                <select id="category" name="category" class="form-select" required>
-                                    <option value="">Pilih Kategori</option>
-                                    <option value="Pertanyaan Umum">Pertanyaan Umum</option>
-                                    <option value="Pengaduan">Pengaduan</option>
-                                    <option value="Saran & Kritik">Saran & Kritik</option>
-                                    <option value="Kerjasama">Kerjasama</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Pesan Anda *" required></textarea>
-
-                        <button type="submit" class="submit-btn">
-                            <i class="bi bi-send me-2"></i>Kirim Pesan
-                        </button>
-                    </form>
-
-                </div>
-            </div>
-
-            <div class="col-lg-5" data-aos="fade-left" data-aos-duration="1000">
-                <div class="contact-info-box">
-                    <div class="contact-info-item">
-                        <i class="bi bi-geo-alt-fill"></i>
-                        <h5>Alamat Kantor</h5>
-                        <p>Jl. Raya Syech Manglayang No. 3<br>Kecamatan Kadugede Kabupaten Kuningan Provinsi Jawa Barat
-                            Kode Pos 45561</p>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <i class="bi bi-telephone-fill"></i>
-                        <h5>Telepon</h5>
-                        <p>(0232) 877096</p>
-                    </div>
-
-                    {{-- <div class="contact-info-item">
-                        <i class="bi bi-envelope-fill"></i>
-                        <h5>Email</h5>
-                        <p>info@dinasperhutanan.go.id<br>humas@dinasperhutanan.go.id</p>
-                    </div> --}}
-
-                    <div class="contact-info-item">
-                        <i class="bi bi-clock-fill"></i>
-                        <h5>Jam Operasional</h5>
-                        <p>Senin - Jumat: 08:00 - 16:00 WIB<br>Sabtu - Minggu: Libur</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@include('public.home.section.maps')
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -446,96 +561,5 @@
                 document.querySelectorAll('#ratingStars i')[i].classList.add('active');
             }
         });
-    });
-
-    function submitSurvey() {
-        const rating = document.getElementById('rating').value;
-        const suggestionEl = document.getElementById('suggestion');
-
-        if (rating == 0) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Oops',
-                text: 'Silakan pilih rating terlebih dahulu'
-            });
-            return;
-        }
-
-        fetch("{{ route('survey.store') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    rating: rating,
-                    suggestion: suggestionEl.value
-                })
-            })
-            .then(res => res.json())
-            .then(res => {
-                if (res.status) {
-                    // reset form
-                    suggestionEl.value = '';
-                    document.getElementById('rating').value = 0;
-
-                    // reset star (kalau pake class active)
-                    document.querySelectorAll('#ratingStars i').forEach(star => {
-                        star.classList.remove('active');
-                    });
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Terima kasih atas penilaian Anda 🙏',
-                        text: res.message,
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                }
-            })
-            .catch(() => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal',
-                    text: 'Terjadi kesalahan, coba lagi'
-                });
-            });
-    }
-
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const form = this;
-        const formData = new FormData(form);
-
-        fetch("{{ route('contact.store') }}", {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: formData
-            })
-            .then(res => res.json())
-            .then(res => {
-                if (res.status) {
-                    form.reset();
-
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil',
-                        text: res.message,
-                        timer: 2500,
-                        showConfirmButton: false
-                    });
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Gagal',
-                    text: 'Pesan gagal dikirim'
-                });
-            });
     });
 </script>

@@ -104,7 +104,7 @@
 
     .menu-item {
         position: relative;
-        background: white;
+        /* background: rgba(255, 255, 255, 0); */
         border-radius: 18px;
         padding: 20px 15px;
         text-align: center;
@@ -246,11 +246,11 @@
 
     /* ============ MENU LABEL ============ */
     .menu-label {
-        color: white;
+        color: rgb(0, 0, 0);
         font-weight: 600;
         font-size: 0.85rem;
         margin: 0;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
         line-height: 1.3;
     }
 
@@ -605,7 +605,7 @@
         <div class="menu-grid">
 
             {{-- 1. Emonev Kementan --}}
-            <a href="https://emonev.pertanian.go.id" target="_blank" class="menu-item purple" data-aos="fade-up"
+            <a href="https://emonev.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="50">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/emonev.png') }}" alt="Emonev">
@@ -614,7 +614,7 @@
             </a>
 
             {{-- 2. Varietas Lokal --}}
-            <a href="https://ap-pvt.pertanian.go.id" target="_blank" class="menu-item cyan" data-aos="fade-up"
+            <a href="https://ap-pvt.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="100">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/emonev.png') }}"
@@ -624,7 +624,7 @@
             </a>
 
             {{-- 3. Model Pelaporan Online --}}
-            <a href="https://mpo.psp.pertanian.go.id" target="_blank" class="menu-item green" data-aos="fade-up"
+            <a href="https://mpo.psp.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="150">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=mpo.psp.pertanian.go.id"
@@ -634,7 +634,7 @@
             </a>
 
             {{-- 4. Omspan TKD --}}
-            <a href="https://spanint.kemenkeu.go.id/tkd" target="_blank" class="menu-item blue" data-aos="fade-up"
+            <a href="https://spanint.kemenkeu.go.id/tkd" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="200">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/Omspan.png') }}" alt="Omspan TKD">
@@ -644,7 +644,7 @@
             </a>
 
             {{-- 5. BASTBANPEM --}}
-            <a href="https://bastbanpem.pertanian.go.id/login/" target="_blank" class="menu-item orange"
+            <a href="https://bastbanpem.pertanian.go.id/login/" target="_blank" class="menu-item"
                 data-aos="fade-up" data-aos-delay="250">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/emonev.png') }}"
@@ -655,7 +655,7 @@
             </a>
 
             {{-- 6. AKSARA --}}
-            <a href="https://pprk.bappenas.go.id/aksara" target="_blank" class="menu-item lime" data-aos="fade-up"
+            <a href="https://pprk.bappenas.go.id/aksara" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="300">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/pprk.png') }}" alt="AKSARA">
@@ -665,7 +665,7 @@
             </a>
 
             {{-- 7. SRIKANDI --}}
-            <a href="https://srikandi.arsip.go.id" target="_blank" class="menu-item yellow" data-aos="fade-up"
+            <a href="https://srikandi.arsip.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="350">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/srikandi.png') }}" alt="SRIKANDI">
@@ -675,7 +675,7 @@
             </a>
 
             {{-- 8. SIJAPATI --}}
-            <a href="https://sijapati.kuningankab.go.id" target="_blank" class="menu-item teal" data-aos="fade-up"
+            <a href="https://sijapati.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="400">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/kuningan.png') }}"
@@ -686,7 +686,7 @@
             </a>
 
             {{-- 9. ASN DIGITAL --}}
-            <a href="https://asndigital.bkn.go.id/" target="_blank" class="menu-item pink" data-aos="fade-up"
+            <a href="https://asndigital.bkn.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="450">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=asndigital.bkn.go.id" alt="ASN Digital">
@@ -696,7 +696,7 @@
             </a>
 
             {{-- 10. SIAGA ASN --}}
-            <a href="https://siaga-asn.kuningankab.go.id" target="_blank" class="menu-item indigo" data-aos="fade-up"
+            <a href="https://siaga-asn.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="500">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=siaga-asn.kuningankab.go.id"
@@ -707,7 +707,7 @@
             </a>
 
             {{-- 11. SKPG --}}
-            <a href="https://skpg.badanpangan.go.id/" target="_blank" class="menu-item red" data-aos="fade-up"
+            <a href="https://skpg.badanpangan.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="550">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=skpg.badanpangan.go.id" alt="SKPG">
@@ -717,7 +717,7 @@
             </a>
 
             {{-- 12. LKPP --}}
-            <a href="https://www.lkpp.go.id/" target="_blank" class="menu-item emerald" data-aos="fade-up"
+            <a href="https://www.lkpp.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="600">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/lkpp.png') }}" alt="LKPP">
@@ -727,17 +727,17 @@
             </a>
 
             {{-- 13. BIMA --}}
-            <a href="https://bima.pertanian.go.id" target="_blank" class="menu-item violet" data-aos="fade-up"
+            <a href="https://bima.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="650">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/bima.png') }}" alt="BIMA">
 
                 </div>
-                <p class="menu-label text-danger">BIMA</p>
+                <p class="menu-label">BIMA</p>
             </a>
 
             {{-- 14. KRISNA --}}
-            <a href="https://kuningankab.krisna.systems" target="_blank" class="menu-item coral" data-aos="fade-up"
+            <a href="https://kuningankab.krisna.systems" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="700">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/krisna.png') }}"
@@ -748,7 +748,7 @@
             </a>
 
             {{-- 15. OSS --}}
-            <a href="https://oss.go.id" target="_blank" class="menu-item sky" data-aos="fade-up"
+            <a href="https://oss.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="750">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/oss.png') }}" alt="OSS">
@@ -758,7 +758,7 @@
             </a>
 
             {{-- 16. SADATA --}}
-            <a href="https://sadata.kuningankab.go.id" target="_blank" class="menu-item rose" data-aos="fade-up"
+            <a href="https://sadata.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="800">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=sadata.kuningankab.go.id"
@@ -769,7 +769,7 @@
             </a>
 
             {{-- 17. SiRUP --}}
-            <a href="https://sirup.inaproc.id" target="_blank" class="menu-item mint" data-aos="fade-up"
+            <a href="https://sirup.inaproc.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="850">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/sirup.png') }}" alt="SiRUP">
@@ -779,7 +779,7 @@
             </a>
 
             {{-- 18. SIPD --}}
-            <a href="https://sipd-ri.kemendagri.go.id" target="_blank" class="menu-item navy" data-aos="fade-up"
+            <a href="https://sipd-ri.kemendagri.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="900">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/sipd.png') }}"

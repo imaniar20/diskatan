@@ -1,7 +1,7 @@
 <style>
     :root {
         --primary-green: #16a34a;
-        --secondary-green: #40916c;
+        --secondary-green: #14532d;
         --light-green: #52b788;
         --accent-green: #74c69d;
         --cream: #f8f9fa;
@@ -252,13 +252,13 @@
     }
 
     .carousel-item {
-        height: 85vh;
+        height: 55vh;
         position: relative;
     }
 
     .carousel-item img {
         width: 100%;
-        height: 100%;
+        height: 155%;
         object-fit: cover;
         filter: brightness(0.7);
     }
@@ -284,17 +284,17 @@
         display: inline-block;
         background: rgba(255, 193, 7, 0.2);
         color: #ffc107;
-        padding: 10px 25px;
+        padding: 5px 15px;
         border-radius: 30px;
         font-size: 0.95rem;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         border: 2px solid rgba(255, 193, 7, 0.3);
     }
 
     .hero-title {
         font-family: 'Poppins', sans-serif;
-        font-size: 3.5rem;
+        font-size: 2.5rem;
         font-weight: 800;
         color: white;
         margin-bottom: 20px;
@@ -308,9 +308,20 @@
 
     .hero-subtitle {
         font-size: 1.2rem;
+        font-weight: bold;
         color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 35px;
+        margin-bottom: 0px;
         line-height: 1.8;
+        max-width: 600px;
+        font-weight: 300;
+        animation: fadeInUp 1.2s ease-out;
+    }
+
+    .hero-subtitle-2 {
+        font-size: 1.2rem;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 0px;
+        line-height: 1.5;
         max-width: 600px;
         font-weight: 300;
         animation: fadeInUp 1.2s ease-out;
@@ -535,7 +546,7 @@
     /* ============ AGENDA SECTION ============ */
     .agenda-section {
         padding: 100px 0;
-        background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         position: relative;
     }
 
@@ -970,13 +981,39 @@
     }
 
     /* ============ RESPONSIVE ============ */
+    @media (max-width: 1280px) {
+        .hero-title {
+            font-size: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .contact-form {
+            padding: 30px 20px;
+        }
+    }
+    
     @media (max-width: 768px) {
         .hero-title {
-            font-size: 2.5rem;
+            font-size: 1.4rem;
         }
 
         .hero-subtitle {
             font-size: 1.1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.8rem;
         }
 
         .section-title {

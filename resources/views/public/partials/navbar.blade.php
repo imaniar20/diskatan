@@ -10,10 +10,10 @@
                 <i class="bi bi-clock"></i>
                 <span id="current-time"></span>
                 <span> | </span>
-                <a href="#" class="social"><i class='bx bxl-facebook'></i></a>
-                <a href="#" class="social"><i class='bx bxl-instagram'></i></a>
-                <a href="#" class="social"><i class='bx bxl-twitter'></i></a>
-                <a href="#" class="social"><i class='bx bxl-youtube'></i></a>
+                <a href="https://www.facebook.com/diskatankuningan/" target="_blank" class="social"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.instagram.com/diskatankuningan/" target="_blank" class="social"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.tiktok.com/@diskatankuningan" target="_blank" class="social"><i class='bx bxl-tiktok'></i></a>
+                <a href="https://www.youtube.com/@diskatankuningan" target="_blank" class="social"><i class='bx bxl-youtube'></i></a>
             </div>
         </div>
     </div>
