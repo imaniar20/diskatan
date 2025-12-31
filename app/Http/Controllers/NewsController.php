@@ -317,9 +317,31 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $news = News::where('slug', $slug)->first();
+        // hapus thumbnail
+        if ($news->thumbnail && Storage::disk('public')->exists($news->thumbnail)) {
+            Storage::disk('public')->delete($news->thumbnail);
+        }
+
+        // hapus gambar konten
+        if ($news->content) {
+            preg_match_all('/<img[^>]+src="([^">]+)"/i', $news->content, $matches);
+            foreach ($matches[1] ?? [] as $src) {
+                $path = parse_url($src, PHP_URL_PATH);
+                if ($path && str_starts_with($path, '/storage/news/content/')) {
+                    $file = ltrim(str_replace('/storage/', '', $path), '/');
+                    Storage::disk('public')->delete($file);
+                }
+            }
+        }
+
+        $news->delete();
+
+        return response()->json([
+            'message' => 'Berita berhasil dihapus'
+        ]);
     }
 
     function generateUniqueSlugNews($title)

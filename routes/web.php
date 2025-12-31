@@ -10,6 +10,7 @@ use App\Http\Controllers\AgendasController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MessageController;
 
 use App\Models\Agendas;
@@ -71,6 +72,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin-agenda', AgendasController::class);
 
     Route::resource('/admin-berita', NewsController::class);
+
+    Route::resource('/admin-user', UserController::class);
+    Route::post('/cek-username', [UserController::class, 'cekUsername'])->name('cek.username');
 
     Route::post('/admin/upload-image', [ImageController::class, 'upload'])
         ->middleware('web')

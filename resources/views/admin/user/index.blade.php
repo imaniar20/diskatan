@@ -15,26 +15,25 @@
     <div class="card mb-4 order-0">
         <h5 class="card-header">Table Pengaduan</h5>
         <div class="card-body">
-            <a class="btn btn-success text-white" href="{{ route('admin-berita.create') }}"><i
-                    class='bx bx-plus-circle me-2'></i>Tambah Berita</a>
+            <a class="btn btn-success text-white" href="{{ route('admin-user.create') }}"><i
+                    class='bx bx-plus-circle me-2'></i>Tambah User</a>
             <div class="table-responsive p-2">
                 <table class="table table-striped datatable display nowrap">
                     <thead>
                         <tr>
                             <th style="width: 2%"></th>
                             <th class="text-center" style="width: 5%">No</th>
-                            <th>Foto</th>
-                            <th>Judul</th>
-                            {{-- <th>Konten</th> --}}
-                            <th>Status</th>
-                            <th>Tanggal</th>
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Bidang</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @php
                             $i = 1;
                         @endphp
-                        @foreach ($news as $data)
+                        @foreach ($user as $data)
                             <tr>
                                 <td>
                                     <div class="dropdown">
@@ -43,29 +42,20 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('admin-berita.edit', $data->slug) }}">
+                                            <a class="dropdown-item" href="{{ route('admin-user.edit', $data->id) }}">
                                                 <i class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <button type="button" class="dropdown-item text-danger"
-                                                onclick="deleteNews('{{ route('admin-berita.destroy', $data->slug) }}')">
+                                                onclick="deleteUser('{{ route('admin-user.destroy', $data->id) }}')">
                                                 <i class="bx bx-trash-alt me-1"></i> Hapus
                                             </button>
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-center">{{ $i++ }}</td>
-                                <td><img src="{{ asset('storage/' . $data['thumbnail']) }}" alt="gambar" width="100">
-                                </td>
-                                <td>{{ Str::limit($data['title'], 50) }}</td>
-                                {{-- <td>{!! Str::limit(preg_replace('/<img[^>]*>/i', '', $data['content']), 40) !!} </td> --}}
-
-                                <td>
-                                    @if ($data['status'] == 'published')
-                                        <span class="badge bg-label-info me-1">Publish</span>
-                                    @else
-                                        <span class="badge bg-label-warning me-1">Draft</span>
-                                    @endif
-                                </td>
-                                <td>{{ \Carbon\Carbon::parse($data['published_at'])->format('d M Y') }}</td>
+                                <td>{{ $data->name }}</td>
+                                <td>{{ $data->username }}</td>
+                                <td>{{ $data->email }}</td>
+                                <td>{{ $data->bidang }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -74,10 +64,10 @@
         </div>
     </div>
     <script>
-        function deleteNews(url) {
+        function deleteUser(url) {
             Swal.fire({
                 title: 'Yakin mau hapus?',
-                text: 'Data berita dan semua gambarnya akan dihapus permanen!',
+                text: 'Data user akan dihapus permanen!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -101,7 +91,7 @@
                         .then(data => {
                             Swal.fire(
                                 'Terhapus!',
-                                data.message ?? 'Berita berhasil dihapus.',
+                                data.message ?? 'User berhasil dihapus.',
                                 'success'
                             ).then(() => {
                                 location.reload();
