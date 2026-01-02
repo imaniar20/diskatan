@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\News;
 use App\Models\Agendas;
 use App\Models\Visitor;
+use App\Models\Kategori;
 
 class HomeController extends Controller
 {
@@ -282,5 +283,32 @@ class HomeController extends Controller
             'success' => true,
             'data' => view('public.ajax.news', compact('news'))->render(),
         ]);
+    }
+
+    public function program()
+    {
+        $kategori = Kategori::with(['programs.news' => function ($q) {
+            $q->latest()->limit(5);
+        }])->get();
+
+        $data = array(
+            'head' => "Program",
+            'title' => "Program",
+            'menu' => "Program",
+            'kategori' => $kategori,
+        );
+
+        return view('public.program.index')->with($data);
+    }
+
+    public function byKategori($id)
+    {
+        $news = News::whereHas('programs.kategori', function ($q) use ($id) {
+            $q->where('id', $id);
+        })
+        ->latest()
+        ->paginate(6);
+
+        return view('public.ajax.news', compact('news'));
     }
 }

@@ -25,6 +25,11 @@
                             name="name" aria-describedby="basic-addon11" />
                         <small class="text-danger" id="errName"></small>
 
+                        <label for="icon" class="form-label">Icon<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-3" placeholder="<i class='bx bxs-tree-alt' ></i>" aria-label="Icon" id="icon"
+                            name="icon" aria-describedby="basic-addon11" />
+                        <small class="text-danger" id="errIcon"></small>
+
                         <div class="mb-3">
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success">Tambah Kategori</button>
@@ -39,6 +44,7 @@
                                 <tr>
                                     <th class="text-center" style="width: 5%">No</th>
                                     <th>Nama</th>
+                                    <th>Icon</th>
                                     <th style="width: 20%">Aksi</th>
                                 </tr>
                             </thead>
@@ -50,10 +56,11 @@
                                     <tr>
                                         <td class="text-center">{{ $i++ }}</td>
                                         <td>{{ $data->nama }}</td>
+                                        <td>{!! $data->icon !!}</td>
                                         <td>
                                             <a class="btn btn-sm btn-warning text-white open-Edit" data-bs-toggle="modal"
                                                 data-bs-target="#edit" data-id="{{ $data->id }}"
-                                                data-nama="{{ $data->nama }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                data-nama="{{ $data->nama }}" data-icon="{{ $data->icon }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <button type="button" class="btn btn-sm btn-danger"
                                                 onclick="deleteUser('{{ route('admin-bidang.destroy', $data->id) }}')">
                                                 <i class="bx bx-trash-alt me-1"></i> Hapus
@@ -83,9 +90,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-lg-12 col-sm-12 mb-3">
-                            <label for="nama" class="form-label">Nama</label>
+                            <label for="nama_edit" class="form-label">Nama</label>
                             <input id="nama_edit" name="nama_edit" class="form-control">
                             <small class="text-danger" id="errNameEdit"></small>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 mb-3">
+                            <label for="icon_edit" class="form-label">Icon</label>
+                            <input id="icon_edit" name="icon_edit" class="form-control" placeholder="<i class='bx bxs-tree-alt' ></i>">
+                            <small class="text-danger" id="errIconEdit"></small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -97,17 +109,16 @@
                 </form>
         </div>
     </div>
-
     <script>
         const handlerName = (e) => {
             let name = $('#name').val().trim();
 
             if (!name) {
-                $('#errName').html('Nama Bidang Tidak Boleh Kosong');
+                $('#errName').html('Nama Kategori Tidak Boleh Kosong');
                 e.preventDefault();
                 return false;
             } else if (name.length < 3) {
-                $('#errName').html('Setidaknya Nama Bidang Minimal 3 Huruf');
+                $('#errName').html('Setidaknya Nama Kategori Minimal 3 Huruf');
                 e.preventDefault();
                 return false;
             } else {
@@ -116,8 +127,26 @@
             }
         };
 
+        const handlerIcon = (e) => {
+            let icon = $('#icon').val().trim();
+
+            if (!name) {
+                $('#errIcon').html('Tag Icon Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else if (name.length < 15) {
+                $('#errIcon').html('Setidaknya Tag Icon Minimal 15 karakter');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errIcon').html('');
+                return true;
+            }
+        };
+
         $('#addBidang').on('submit', function(e) {
             handlerName(e)
+            handlerIcon(e)
         });
 
         const handlerNameEdit = (e) => {
@@ -137,6 +166,23 @@
             }
         };
 
+        const handlerIconEdit = (e) => {
+            let icon = $('#icon_edit').val().trim();
+
+            if (!name) {
+                $('#errIconEdit').html('Tag Icon Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else if (name.length < 15) {
+                $('#errIconEdit').html('Setidaknya Tag Icon Minimal 15 karakter');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errIconEdit').html('');
+                return true;
+            }
+        };
+
         $('#edit').on('submit', function(e) {
             handlerNameEdit(e)
         });
@@ -145,9 +191,11 @@
         $(document).on("click", ".open-Edit", function() {
             var id = $(this).data('id');
             var nama = $(this).data('nama');
-            
+            var icon = $(this).data('icon');
+
             $(".modal-header #id").val(id);
             $(".modal-body #nama_edit").val(nama);
+            $(".modal-body #icon_edit").val(icon);
         });
 
         function deleteUser(url) {

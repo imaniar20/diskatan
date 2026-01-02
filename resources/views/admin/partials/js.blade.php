@@ -32,6 +32,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const selects = document.querySelectorAll('.select2');

@@ -68,7 +68,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Program' ? 'active' : '' }}" href="{{ url('/berita') }}">Program</a>
+                    <a class="nav-link {{ $menu == 'Program' ? 'active' : '' }}" href="{{ url('/program') }}">Program</a>
                 </li>
 
                 <li class="nav-item">

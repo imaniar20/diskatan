@@ -29,4 +29,9 @@ class Agendas extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function programs(): BelongsTo
+    {
+        return $this->belongsTo(Programs::class, 'program_id');
+    }
 }

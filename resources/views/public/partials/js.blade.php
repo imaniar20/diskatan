@@ -11,6 +11,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 @push('after-script')
     <script>
         // Initialize AOS

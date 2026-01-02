@@ -27,7 +27,8 @@ class KategoriController extends Controller
         $antiXss = new AntiXSS();
 
         Kategori::create([
-            'nama' => $antiXss->xss_clean($request->name)
+            'nama' => $antiXss->xss_clean($request->name),
+            'icon' => $antiXss->xss_clean($request->icon)
         ]);
 
         return redirect()
@@ -42,6 +43,7 @@ class KategoriController extends Controller
         
         $data = [
             'nama' => $antiXss->xss_clean($request->nama_edit),
+            'icon' => $antiXss->xss_clean($request->icon_edit)
         ];
 
         $kategori->update($data);

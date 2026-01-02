@@ -55,6 +55,10 @@ Route::get('/berita', [HomeController::class, 'berita']);
 Route::get('/berita/{slug}', [HomeController::class, 'beritaDetail'])->name('berita.detail');
 Route::post('/berita/cari', [HomeController::class, 'filterNews'])->name('berita.filter');
 
+//progaram
+Route::get('/program', [HomeController::class, 'program']);
+Route::get('/news/kategori/{id}', [HomeController::class, 'byKategori']);
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
