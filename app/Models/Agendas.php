@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Agendas extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
         'thumbnail',
@@ -21,4 +23,9 @@ class Agendas extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

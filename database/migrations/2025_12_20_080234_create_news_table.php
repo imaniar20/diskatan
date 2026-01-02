@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
 
+            $table->int('user_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
 

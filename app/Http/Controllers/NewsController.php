@@ -15,7 +15,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::orderByDesc('created_at')->get();
+        $news = News::with('user')->orderByDesc('created_at')->get();
 
         $data = array(
             'head' => "Berita",

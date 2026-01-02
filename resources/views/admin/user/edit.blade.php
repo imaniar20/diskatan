@@ -14,28 +14,29 @@
             <div class="col-md-12" style="border-bottom: 0px">
                 <div class="card mb-4">
                     <div class="card-body demo-vertical-spacing demo-only-element">
-                        <form class="mb-4" id="addUser" action="{{ route('admin-user.store') }}" method="post"
+                        <form class="mb-4" id="addUser" action="{{ route('admin-user.update', $user->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
+                            <input type="hidden" id="id_user" name="id_user" value="{{ $user->id }}">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="col-2 mb-3">
                                         <label for="bidang" class="form-label">Bidang <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" name="bidang" id="bidang">
-                                            <option value="" selected disabled>- Pilih Bidang -</option>
-                                            <option value="Ketahanan Pangan">Ketahanan Pangan</option>
-                                            <option value="Tanaman Pangan">Tanaman Pangan</option>
-                                            <option value="Hortikultura">Hortikultura</option>
-                                            <option value="Peternakan">Peternakan</option>
-                                            <option value="Penyuluhan">Penyuluhan</option>
+                                            <option value="Ketahanan Pangan" {{ $user->bidang == 'Ketahanan Pangan' ? 'selected' : ''  }}>Ketahanan Pangan</option>
+                                            <option value="Tanaman Pangan" {{ $user->bidang == 'Tanaman Pangan' ? 'selected' : ''  }}>Tanaman Pangan</option>
+                                            <option value="Hortikultura" {{ $user->bidang == 'Hortikultura' ? 'selected' : ''  }}>Hortikultura</option>
+                                            <option value="Peternakan" {{ $user->bidang == 'Peternakan' ? 'selected' : ''  }}>Peternakan</option>
+                                            <option value="Penyuluhan" {{ $user->bidang == 'Penyuluhan' ? 'selected' : ''  }}>Penyuluhan</option>
                                         </select>
                                         <small class="text-danger" id="errBidang"></small>
                                     </div>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" placeholder="Nama" aria-label="Nama"
+                                    <input type="text" class="form-control" placeholder="Nama" aria-label="Nama" value="{{ $user->name }}"
                                         id="name" name="name" aria-describedby="basic-addon11" />
                                     <small class="text-danger" id="errName"></small>
                                 </div>
@@ -44,7 +45,7 @@
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="......@google.com"
-                                            aria-label="Recipient's username" aria-describedby="basic-addon13"
+                                            aria-label="Recipient's username" aria-describedby="basic-addon13" value="{{ $user->email }}"
                                             id="email" name="email" />
                                     </div>
                                     <small class="text-danger" id="errEmail"></small>
@@ -54,7 +55,7 @@
                                             class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon11">@</span>
-                                        <input type="text" class="form-control" placeholder="Username"
+                                        <input type="text" class="form-control" placeholder="Username" value="{{ $user->username }}"
                                             aria-label="Username" id="username" name="username"
                                             aria-describedby="basic-addon11" />
                                     </div>
@@ -63,7 +64,7 @@
 
                                 <div class="col-6 mb-3">
                                     <div class="form-password-toggle">
-                                        <label for="password" class="form-label">Password <span
+                                        <label for="password" class="form-label">Ubah Password <span
                                                 class="text-danger">*</span></label>
                                         <div class="input-group">
                                             <input type="password" class="form-control"
@@ -100,7 +101,7 @@
             }
         }
 
-        const checkUsername = async (username) => {
+        const checkUsername = async (username, id) => {
             const response = await fetch('/cek-username', {
                 method: 'POST',
                 headers: {
@@ -109,7 +110,7 @@
                         .querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
                 body: JSON.stringify({
-                    username
+                    username, id
                 })
             });
 
@@ -163,14 +164,15 @@
         };
 
         const handlerUsername = async (e) => {
-            let title = $('#username').val().trim();
-            const result = await checkUsername(title);
-
-            if (!title) {
+            let id = $('#id_user').val().trim();
+            let username = $('#username').val().trim();
+            const result = await checkUsername(username, id);
+            
+            if (!username) {
                 $('#errUsername').html('Username Tidak Boleh Kosong');
                 e.preventDefault();
                 return false;
-            } else if (title.length < 3) {
+            } else if (username.length < 3) {
                 $('#errUsername').html('Setidaknya Username Minimal 3 Huruf');
                 e.preventDefault();
                 return false;
@@ -187,10 +189,7 @@
         const handlerPass = e => {
             let password = $('#password').val();
 
-            if (!password) {
-                $("#errPass").html("Password tidak boleh kosong");
-                e.preventDefault();
-            } else if (password.length < 8) {
+            if (password.length > 0 &&  password.length < 8 ) {
                 $('#errPass').html("Password Terdiri dari 8 Kata atau Huruf");
                 e.preventDefault();
             } else {

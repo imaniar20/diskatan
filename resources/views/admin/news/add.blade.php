@@ -17,6 +17,21 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="col-2 mb-3">
+                                        <label for="bidang" class="form-label">Bidang <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control" name="bidang" id="bidang">
+                                            <option value="" selected disabled>- Pilih Bidang -</option>
+                                            <option value="Ketahanan Pangan">Ketahanan Pangan</option>
+                                            <option value="Tanaman Pangan">Tanaman Pangan</option>
+                                            <option value="Hortikultura">Hortikultura</option>
+                                            <option value="Peternakan">Peternakan</option>
+                                            <option value="Penyuluhan">Penyuluhan</option>
+                                        </select>
+                                        <small class="text-danger" id="errBidang"></small>
+                                    </div>
+                                </div>
                                 <div class="col-6">
                                     <label for="title" class="form-label">Judul <span
                                             class="text-danger">*</span></label>

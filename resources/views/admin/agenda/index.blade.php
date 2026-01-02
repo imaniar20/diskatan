@@ -25,7 +25,6 @@
                             <th class="text-center" style="width: 5%">No</th>
                             <th>Foto</th>
                             <th>Judul</th>
-                            <th>Konten</th>
                             <th>Tanggal</th>
                             <th>Lokasi</th>
                         </tr>
@@ -55,8 +54,7 @@
                                 <td class="text-center">{{ $i++ }}</td>
                                 <td><img src="{{ asset('storage/' . $data['thumbnail']) }}" alt="gambar" width="100">
                                 </td>
-                                <td>{{ $data['title'] }}</td>
-                                <td>{!! $data['content'] !!}</td>
+                                <td>{{ Str::limit($data['title'], 30) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($data['date'])->format('d-M-Y') }}</td>
                                 <td>{{ $data['location'] }}</td>
                             </tr>

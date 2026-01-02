@@ -42,7 +42,7 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="{{ route('admin-user.edit', $data->id) }}">
+                                            <a class="dropdown-item" href="{{ route('admin-user.show', $data->id) }}">
                                                 <i class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <button type="button" class="dropdown-item text-danger"
                                                 onclick="deleteUser('{{ route('admin-user.destroy', $data->id) }}')">

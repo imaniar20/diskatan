@@ -15,7 +15,7 @@ class AgendasController extends Controller
      */
     public function index()
     {
-        $agenda = Agendas::orderByDesc('created_at')->get();
+        $agenda = Agendas::with('user')->orderByDesc('created_at')->get();
 
         $data = array(
             'head' => "Agenda",

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /**
@@ -43,12 +45,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $antiXss = new AntiXSS();
+
+        User::create([
+            'name' => $antiXss->xss_clean($request->name),
+            'email' => $antiXss->xss_clean($request->email),
+            'username' => $antiXss->xss_clean($request->username),
+            'password' => Hash::make($antiXss->xss_clean($request->password)),
+            'bidang' => $antiXss->xss_clean($request->bidang),
+        ]);
+
+        return redirect()
+            ->route('admin-user.index')
+            ->with('success', 'User berhasil ditambahkan');
     }
 
     public function cekUsername(Request $request)
     {
-        $exists = User::where('username', $request->username)->exists();
+        $id = $request->id;
+        $username = $request->username;
+
+        $exists = User::where('username', $username)
+            ->when($id, function ($q) use ($id) {
+                $q->where('id', '!=', $id);
+            })
+            ->exists();
 
         return response()->json([
             'exists' => $exists
@@ -60,7 +81,16 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $data = array(
+            'head' => "User",
+            'title' => "User",
+            'menu' => "Edit User",
+            'user' => $user
+        );
+
+        return view('admin.user.edit')->with($data);
     }
 
     /**
@@ -68,7 +98,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -76,14 +106,41 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $antiXss = new AntiXSS();
+        $user = User::findOrFail($id);
+        
+        $data = [
+            'name' => $antiXss->xss_clean($request->name),
+            'email' => $antiXss->xss_clean($request->email),
+            'username' => $antiXss->xss_clean($request->username),
+            'bidang' => $antiXss->xss_clean($request->bidang),
+        ];
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make(
+                $antiXss->xss_clean($request->password)
+            );
+        }
+
+        $user->update($data);
+
+        return redirect()
+            ->route('admin-user.index')
+            ->with('success', 'User berhasil dirubah');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $data = User::findOrFail($id);
+
+        $data->delete();
+
+        return response()->json([
+            'message' => 'User berhasil dihapus'
+        ]);
     }
 }
