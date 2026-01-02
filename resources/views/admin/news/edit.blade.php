@@ -18,6 +18,18 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="col-2 mb-3">
+                                        <label for="program" class="form-label">Program <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control" name="program" id="program">
+                                            @foreach ($program as $item)
+                                                <option value="{{ $item->id }}" {{ $news->program_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger" id="errProgram"></small>
+                                    </div>
+                                </div>
                                 <div class="col-6">
                                     <label for="title" class="form-label">Judul <span
                                             class="text-danger">*</span></label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
 use App\Models\Agendas;
+use App\Models\Programs;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,10 +33,13 @@ class AgendasController extends Controller
      */
     public function create()
     {
+        $program = Programs::orderByDesc('name')->get();
+
         $data = array(
             'head' => "Agenda",
             'title' => "Agenda",
             'menu' => "Tambah Agenda",
+            'program' => $program
         );
 
         return view('admin.agenda.add')->with($data);
@@ -50,6 +54,7 @@ class AgendasController extends Controller
 
         // 1. VALIDASI
         $validated = $request->validate([
+            'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'location' => 'required|string|min:3',
@@ -106,6 +111,7 @@ class AgendasController extends Controller
 
         // 3. SIMPAN DATA
         Agendas::create([
+            'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
@@ -147,12 +153,15 @@ class AgendasController extends Controller
         $news = Agendas::where('slug', $slug)->first();
         $fileExists = $news->thumbnail && Storage::disk('public')->exists('/' . $news->thumbnail);
 
+        $program = Programs::orderByDesc('name')->get();
+
         $data = array(
             'head' => "Agenda",
             'title' => "Agenda",
             'menu' => "Ubah Agenda",
             'news' => $news,
-            'fileExists' => $fileExists
+            'fileExists' => $fileExists,
+            'program' => $program
         );
         return view('admin/agenda/edit')->with($data);
     }
@@ -165,6 +174,7 @@ class AgendasController extends Controller
         $antiXss = new AntiXSS();
 
         $validated = $request->validate([
+            'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'location' => 'required|string|min:3',
@@ -257,6 +267,7 @@ class AgendasController extends Controller
             $slug = $this->generateUniqueSlugAgendas($title);
         }
         $news->update([
+            'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,

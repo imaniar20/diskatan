@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
 use App\Models\News;
+use App\Models\Programs;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,10 +33,13 @@ class NewsController extends Controller
      */
     public function create()
     {
+        $program = Programs::orderByDesc('name')->get();
+
         $data = array(
             'head' => "Berita",
             'title' => "Berita",
             'menu' => "Tambah Berita",
+            'program' => $program
         );
 
         return view('admin.news.add')->with($data);
@@ -50,6 +54,7 @@ class NewsController extends Controller
 
         // 1. VALIDASI
         $validated = $request->validate([
+            'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:published,draft',
@@ -114,6 +119,7 @@ class NewsController extends Controller
 
         // 3. SIMPAN DATA
         News::create([
+            'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
@@ -155,12 +161,15 @@ class NewsController extends Controller
         $news = News::where('slug', $slug)->first();
         $fileExists = $news->thumbnail && Storage::disk('public')->exists('/' . $news->thumbnail);
 
+        $program = Programs::orderByDesc('name')->get();
+
         $data = array(
             'head' => "Berita",
             'title' => "Berita",
             'menu' => "Ubah Berita",
             'news' => $news,
-            'fileExists' => $fileExists
+            'fileExists' => $fileExists,
+            'program' => $program
         );
         return view('admin/news/edit')->with($data);
     }
@@ -173,6 +182,7 @@ class NewsController extends Controller
         $antiXss = new AntiXSS();
 
         $validated = $request->validate([
+            'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:published,draft',
@@ -264,6 +274,7 @@ class NewsController extends Controller
             $slug = $this->generateUniqueSlugNews($title);
         }
         $news->update([
+            'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
