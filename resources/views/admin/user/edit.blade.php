@@ -25,11 +25,9 @@
                                         <label for="bidang" class="form-label">Bidang <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" name="bidang" id="bidang">
-                                            <option value="Ketahanan Pangan" {{ $user->bidang == 'Ketahanan Pangan' ? 'selected' : ''  }}>Ketahanan Pangan</option>
-                                            <option value="Tanaman Pangan" {{ $user->bidang == 'Tanaman Pangan' ? 'selected' : ''  }}>Tanaman Pangan</option>
-                                            <option value="Hortikultura" {{ $user->bidang == 'Hortikultura' ? 'selected' : ''  }}>Hortikultura</option>
-                                            <option value="Peternakan" {{ $user->bidang == 'Peternakan' ? 'selected' : ''  }}>Peternakan</option>
-                                            <option value="Penyuluhan" {{ $user->bidang == 'Penyuluhan' ? 'selected' : ''  }}>Penyuluhan</option>
+                                            @foreach ($bidang as $item)
+                                                <option value="{{ $item->id }}" {{ $item->id == $user->bidang_id ? 'selected' : ''  }}>{{ $item->nama }}</option>
+                                            @endforeach
                                         </select>
                                         <small class="text-danger" id="errBidang"></small>
                                     </div>

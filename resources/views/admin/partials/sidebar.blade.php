@@ -38,6 +38,28 @@
                 <div data-i18n="Analytics">Berita</div>
             </a>
         </li>
+        <li class="menu-item {{ $title == 'Program' ? 'active' : '' }}">
+            <a href="/admin-program" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Program</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Menu</span>
+        </li>
+        <li class="menu-item {{ $title == 'Kategori' ? 'active' : '' }}">
+            <a href="/admin-kategori" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                <div data-i18n="Analytics">Kategori</div>
+            </a>
+        </li>
+        <li class="menu-item {{ $title == 'Bidang' ? 'active' : '' }}">
+            <a href="/admin-bidang" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cabinet"></i>
+                <div data-i18n="Analytics">Bidang</div>
+            </a>
+        </li>
         <li class="menu-item {{ $title == 'User' ? 'active' : '' }}">
             <a href="/admin-user" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>

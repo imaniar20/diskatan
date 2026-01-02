@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -20,10 +21,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'bidang_id',
         'username',
         'email',
         'password',
-        'bidang',
     ];
 
     /**
@@ -54,5 +55,10 @@ class User extends Authenticatable
     public function news(): HasMany
     {
         return $this->hasMany(News::class, 'user_id');
+    }
+
+    public function bidangs(): BelongsTo
+    {
+        return $this->belongsTo(Bidangs::class, 'bidang_id');
     }
 }

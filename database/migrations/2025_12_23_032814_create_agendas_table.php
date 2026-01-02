@@ -10,7 +10,8 @@ return new class extends Migration {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
 
-            $table->int('user_id')->nullable( );
+            $table->int('user_id')->nullable();
+            $table->int('program_id')->nullable();
             $table->string('title');
             $table->string('thumbnail')->nullable();
             $table->longText('content')->nullable();

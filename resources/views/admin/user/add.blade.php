@@ -24,11 +24,10 @@
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" name="bidang" id="bidang">
                                             <option value="" selected disabled>- Pilih Bidang -</option>
-                                            <option value="Ketahanan Pangan">Ketahanan Pangan</option>
-                                            <option value="Tanaman Pangan">Tanaman Pangan</option>
-                                            <option value="Hortikultura">Hortikultura</option>
-                                            <option value="Peternakan">Peternakan</option>
-                                            <option value="Penyuluhan">Penyuluhan</option>
+                                            @foreach ($bidang as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                            
                                         </select>
                                         <small class="text-danger" id="errBidang"></small>
                                     </div>

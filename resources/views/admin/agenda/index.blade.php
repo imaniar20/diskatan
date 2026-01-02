@@ -13,7 +13,7 @@
         }
     </style>
     <div class="card mb-4 order-0">
-        <h5 class="card-header">Table Pengaduan</h5>
+        <h5 class="card-header">Table {{ $menu }}</h5>
         <div class="card-body">
             <a class="btn btn-warning text-white" href="{{ route('admin-agenda.create') }}"><i
                     class='bx bx-plus-circle me-2'></i>Tambah Agenda</a>

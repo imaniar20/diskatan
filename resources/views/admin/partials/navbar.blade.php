@@ -31,9 +31,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="/dashboard">
+                        <a class="dropdown-item" href="/">
                             <i class='bx bx-user-circle me-2'></i>
-                            <span class="align-middle">Dashboard Publik</span>
+                            <span class="align-middle">{{ session('user')->name }}</span>
                         </a>
                     </li>
                     <li>

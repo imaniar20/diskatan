@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
 use App\Models\User;
+use App\Models\Bidangs;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::orderByDesc('created_at')->get();
+        $user = User::with('bidangs')->orderByDesc('created_at')->get();
 
         $data = array(
             'head' => "User",
@@ -31,10 +32,12 @@ class UserController extends Controller
      */
     public function create()
     {
+        $bidang = Bidangs::all();
         $data = array(
             'head' => "User",
             'title' => "User",
-            'menu' => "Tambah User"
+            'menu' => "Tambah User",
+            'bidang'    => $bidang
         );
 
         return view('admin.user.add')->with($data);
@@ -82,12 +85,14 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
+        $bidang = Bidangs::all();
 
         $data = array(
             'head' => "User",
             'title' => "User",
             'menu' => "Edit User",
-            'user' => $user
+            'user' => $user,
+            'bidang' => $bidang
         );
 
         return view('admin.user.edit')->with($data);

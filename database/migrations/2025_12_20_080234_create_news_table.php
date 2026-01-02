@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
 
             $table->int('user_id')->nullable();
+            $table->int('program_id')->nullable();
             $table->string('title');
             $table->string('slug')->unique();
 
