@@ -16,8 +16,12 @@ class AgendasController extends Controller
      */
     public function index()
     {
-        $agenda = Agendas::with('user')->orderByDesc('created_at')->get();
-
+        if (session('user')->bidang_id == '1') {
+            $agenda = Agendas::with('user')->orderByDesc('date')->get();
+        } else {
+            $agenda = Agendas::where('user_id', session('user')->id)->with('user')->orderByDesc('date')->get();
+        }
+        
         $data = array(
             'head' => "Agenda",
             'title' => "Agenda",
@@ -111,6 +115,7 @@ class AgendasController extends Controller
 
         // 3. SIMPAN DATA
         Agendas::create([
+            'user_id' => session('user')->id,
             'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
@@ -151,6 +156,12 @@ class AgendasController extends Controller
     public function edit(string $slug)
     {
         $news = Agendas::where('slug', $slug)->first();
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $news->user_id) {
+            abort(403);
+        }
+
         $fileExists = $news->thumbnail && Storage::disk('public')->exists('/' . $news->thumbnail);
 
         $program = Programs::orderByDesc('name')->get();
@@ -183,6 +194,11 @@ class AgendasController extends Controller
         ]);
 
         $news = Agendas::findOrFail($id);
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $news->user_id) {
+            abort(403);
+        }
 
         $thumbnailPath = $news->thumbnail;
         if ($request->hasFile('thumbnail')) {
@@ -267,6 +283,7 @@ class AgendasController extends Controller
             $slug = $this->generateUniqueSlugAgendas($title);
         }
         $news->update([
+            'user_id' => session('user')->id,
             'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
@@ -324,6 +341,11 @@ class AgendasController extends Controller
     public function destroy(string $slug)
     {
         $agenda = Agendas::where('slug', $slug)->first();
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $agenda->user_id) {
+            abort(403);
+        }
         // hapus thumbnail
         if ($agenda->thumbnail && Storage::disk('public')->exists($agenda->thumbnail)) {
             Storage::disk('public')->delete($agenda->thumbnail);

@@ -72,11 +72,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Data' ? 'active' : '' }}" href="{{ url('/berita') }}">Data dan Informasi</a>
+                    <a class="nav-link {{ $menu == 'Data' ? 'active' : '' }}" href="javascript:void(0);">Data dan Informasi</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="{{ url('/berita') }}">Layanan</a>
+                    <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="javascript:void(0);">Layanan</a>
                 </li>
 
                 {{-- <li class="nav-item dropdown">

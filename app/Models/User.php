@@ -57,6 +57,11 @@ class User extends Authenticatable
         return $this->hasMany(News::class, 'user_id');
     }
 
+    public function programs(): HasMany
+    {
+        return $this->hasMany(Programs::class, 'user_id');
+    }
+
     public function bidangs(): BelongsTo
     {
         return $this->belongsTo(Bidangs::class, 'bidang_id');

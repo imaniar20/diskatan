@@ -55,7 +55,7 @@ class UserController extends Controller
             'email' => $antiXss->xss_clean($request->email),
             'username' => $antiXss->xss_clean($request->username),
             'password' => Hash::make($antiXss->xss_clean($request->password)),
-            'bidang' => $antiXss->xss_clean($request->bidang),
+            'bidang_id' => $antiXss->xss_clean($request->bidang),
         ]);
 
         return redirect()
@@ -118,7 +118,7 @@ class UserController extends Controller
             'name' => $antiXss->xss_clean($request->name),
             'email' => $antiXss->xss_clean($request->email),
             'username' => $antiXss->xss_clean($request->username),
-            'bidang' => $antiXss->xss_clean($request->bidang),
+            'bidang_id' => $antiXss->xss_clean($request->bidang),
         ];
 
         if ($request->filled('password')) {

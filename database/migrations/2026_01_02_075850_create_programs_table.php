@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
+            $table->int('user_id')->nullable();
             $table->string('name');
             $table->foreignId('kategori_id')
                   ->constrained('kategori')

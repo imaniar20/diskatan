@@ -14,7 +14,11 @@ class ProgramsController extends Controller
      */
     public function index()
     {
-        $program = Programs::orderByDesc('created_at')->get();
+        if (session('user')->bidang_id == '1') {
+            $program = Programs::orderByDesc('created_at')->get();
+        } else {
+            $program = Programs::where('user_id', session('user')->id)->orderByDesc('created_at')->get();
+        }
 
         $data = array(
             'head' => "Program",
@@ -51,6 +55,7 @@ class ProgramsController extends Controller
         $antiXss = new AntiXSS();
 
         Programs::create([
+            'user_id' => session('user')->id,
             'kategori_id' => $antiXss->xss_clean($request->kategori),
             'name' => $antiXss->xss_clean($request->name),
             'status' => $antiXss->xss_clean($request->status),
@@ -68,9 +73,15 @@ class ProgramsController extends Controller
     public function show(string $id)
     {
         $program = Programs::findOrFail($id);
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $program->user_id) {
+            abort(403);
+        }
+
         $kategori = Kategori::orderByDesc('created_at')->get();
         // dd($program);
-        $data = array( 
+        $data = array(
             'head' => "Program",
             'title' => "Program",
             'menu' => "Edit Program & Kegiatan",
@@ -83,10 +94,19 @@ class ProgramsController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $antiXss = new AntiXSS();
         $program = Programs::findOrFail($id);
+
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $program->user_id) {
+            abort(403);
+        }
+
+        $user_id = $program->user_id;
+        $antiXss = new AntiXSS();
         // dd('test');
         $data = [
+            'user_id' => $user_id,
             'kategori_id' => $antiXss->xss_clean($request->kategori),
             'name' => $antiXss->xss_clean($request->name),
             'status' => $antiXss->xss_clean($request->status),

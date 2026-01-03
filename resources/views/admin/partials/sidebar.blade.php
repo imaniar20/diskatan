@@ -23,7 +23,7 @@
             </a>
         </li>
         <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Pages</span>
+            <span class="menu-header-text">Public</span>
         </li>
         <!-- Layouts -->
         <li class="menu-item {{ $title == 'Agenda' ? 'active' : '' }}">
@@ -44,27 +44,28 @@
                 <div data-i18n="Analytics">Program</div>
             </a>
         </li>
-
-        <li class="menu-header small text-uppercase">
-            <span class="menu-header-text">Menu</span>
-        </li>
-        <li class="menu-item {{ $title == 'Kategori' ? 'active' : '' }}">
-            <a href="/admin-kategori" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-line-chart"></i>
-                <div data-i18n="Analytics">Kategori</div>
-            </a>
-        </li>
-        <li class="menu-item {{ $title == 'Bidang' ? 'active' : '' }}">
-            <a href="/admin-bidang" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cabinet"></i>
-                <div data-i18n="Analytics">Bidang</div>
-            </a>
-        </li>
-        <li class="menu-item {{ $title == 'User' ? 'active' : '' }}">
-            <a href="/admin-user" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">User</div>
-            </a>
-        </li>
+        @if(session('user')->username == 'admin')
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Menu</span>
+            </li>
+            <li class="menu-item {{ $title == 'Kategori' ? 'active' : '' }}">
+                <a href="/admin-kategori" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-line-chart"></i>
+                    <div data-i18n="Analytics">Kategori</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $title == 'Bidang' ? 'active' : '' }}">
+                <a href="/admin-bidang" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-cabinet"></i>
+                    <div data-i18n="Analytics">Bidang</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $title == 'User' ? 'active' : '' }}">
+                <a href="/admin-user" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Analytics">User</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>

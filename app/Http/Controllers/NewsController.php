@@ -16,7 +16,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::with('user')->orderByDesc('created_at')->get();
+        if (session('user')->bidang_id == '1') {
+            $news = News::with('user')->orderByDesc('published_at')->get();
+        } else {
+            $news = News::where('user_id', session('user')->id)->with('user')->orderByDesc('published_at')->get();
+        }
+        
 
         $data = array(
             'head' => "Berita",
@@ -119,6 +124,7 @@ class NewsController extends Controller
 
         // 3. SIMPAN DATA
         News::create([
+            'user_id' => session('user')->id,
             'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
@@ -159,6 +165,12 @@ class NewsController extends Controller
     public function edit(string $slug)
     {
         $news = News::where('slug', $slug)->first();
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $news->user_id) {
+            abort(403);
+        }
+
         $fileExists = $news->thumbnail && Storage::disk('public')->exists('/' . $news->thumbnail);
 
         $program = Programs::orderByDesc('name')->get();
@@ -191,6 +203,11 @@ class NewsController extends Controller
         ]);
 
         $news = News::findOrFail($id);
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $news->user_id) {
+            abort(403);
+        }
 
         $thumbnailPath = $news->thumbnail;
         if ($request->hasFile('thumbnail')) {
@@ -274,6 +291,7 @@ class NewsController extends Controller
             $slug = $this->generateUniqueSlugNews($title);
         }
         $news->update([
+            'user_id' => session('user')->id,
             'program_id' => $antiXss->xss_clean($request->program),
             'title' => $title,
             'slug' => $slug,
@@ -331,6 +349,11 @@ class NewsController extends Controller
     public function destroy(string $slug)
     {
         $news = News::where('slug', $slug)->first();
+        $user = session('user');
+
+        if ($user->bidang_id != 1 && $user->id != $news->user_id) {
+            abort(403);
+        }
         // hapus thumbnail
         if ($news->thumbnail && Storage::disk('public')->exists($news->thumbnail)) {
             Storage::disk('public')->delete($news->thumbnail);

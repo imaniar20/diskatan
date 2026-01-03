@@ -68,7 +68,7 @@
 
                             <div class="mb-3">
                                 <div class="justify-content-center">
-                                    <button type="submit" class="btn btn-success">Tambah</button>
+                                    <button type="submit" class="btn btn-warning">Ubah</button>
                                 </div>
                             </div>
                         </form>

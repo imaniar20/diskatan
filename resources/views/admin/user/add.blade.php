@@ -198,18 +198,11 @@
         }
 
         $('#addUser').on('submit', async function(e) {
-            e.preventDefault();
-            
-            const valid =
-                await handlerUsername(e);
-                handlerPass(e);
-                handlerBidang(e) &&
-                handlerName(e) &&
-                handlerEmail(e)
-
-            if (valid) {
-                this.submit();
-            }
+            handlerBidang(e) 
+            handlerName(e) 
+            handlerEmail(e)
+            await handlerUsername(e)
+            handlerPass(e)
         });
     </script>
 @endsection
