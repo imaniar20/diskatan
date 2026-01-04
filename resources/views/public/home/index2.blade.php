@@ -574,7 +574,7 @@
 <!-- Video Background -->
 <div class="video-background">
     <video autoplay muted loop playsinline>
-        <source src="{{ asset('videos/flash.mp4') }}" type="video/mp4">
+        <source src="https://siwawan.kuningankab.go.id/assets/other/video.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
