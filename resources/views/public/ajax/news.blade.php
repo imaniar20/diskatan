@@ -31,7 +31,7 @@
     <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
         <div class="card h-100 border-0 shadow-sm berita-card position-relative">
             <span class="badge kategori-badge">
-                {{ $item->program->name ?? 'Umum' }}
+                {{ $item->programs->name ?? 'Umum' }}
             </span>
 
             <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
