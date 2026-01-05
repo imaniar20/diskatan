@@ -29,6 +29,7 @@ class DashboardsController extends Controller
             'kelompok_tani' => 'required|integer|min:0',
             'indeks_ketahanan_pangan' => 'required|numeric|min:0',
 
+            'nama_kadis' => 'nullable|string',
             'ucapan' => 'nullable|string',
             'alamat' => 'nullable|string',
             'telphone' => 'nullable|string|max:20',

@@ -11,6 +11,7 @@ use App\Models\News;
 use App\Models\Agendas;
 use App\Models\Visitor;
 use App\Models\Kategori;
+use App\Models\Dashboards;
 
 class HomeController extends Controller
 {
@@ -52,7 +53,8 @@ class HomeController extends Controller
         $agenda = Agendas::orderByDesc('date')->take(4)->get();
         $news = News::orderByDesc('published_at')->take(3)->get();
 
-        //visitor ----------------------------------------------------------------------------------------------------------------------------------------------
+        $datas = Dashboards::first();
+
         $currentUrl = request()->fullUrl();
 
         $total = Visitor::where('url', $currentUrl)->count();
@@ -63,7 +65,8 @@ class HomeController extends Controller
             'menu' => "Home",
             'news' => $news,
             'agenda' => $agenda,
-            'total' => $total
+            'total' => $total,
+            'data' => $datas,
         );
 
         return view('public.home.main')->with($data);

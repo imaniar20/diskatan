@@ -305,7 +305,7 @@
                         <i class="bi bi-geo-alt"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-number">45,678</h3>
+                        <h3 class="stat-number">{{ $data->hektar_luas_tanam }}</h3>
                         <p class="stat-label">Hektar Luas Tanam</p>
                     </div>
                 </div>
@@ -318,7 +318,7 @@
                         <i class="bi bi-bag-check"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-number">123,456</h3>
+                        <h3 class="stat-number">{{ $data->ton_produksi }}</h3>
                         <p class="stat-label">Ton Produksi</p>
                     </div>
                 </div>
@@ -331,7 +331,7 @@
                         <i class="bi bi-people"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-number">2,345</h3>
+                        <h3 class="stat-number">{{ $data->kelompok_tani }}</h3>
                         <p class="stat-label">Kelompok Tani</p>
                     </div>
                 </div>
@@ -344,7 +344,7 @@
                         <i class="bi bi-graph-up-arrow"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 class="stat-number">98,5</h3>
+                        <h3 class="stat-number">{{ $data->indeks_ketahanan_pangan }}</h3>
                         <p class="stat-label">Indeks Ketahanan Pangan</p>
                     </div>
                 </div>
@@ -361,9 +361,9 @@
             <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
                 <div class="foto-kepala-wrapper">
                     <div class="foto-decoration"></div>
-                    <img src="{{ asset('img/dinas/kadis.png') }}" alt="Dr. Wahyu Hidayah, M.Si" class="foto-kepala" >
+                    <img src="{{ asset('img/dinas/kadis.png') }}" alt="{{ $data->nama_kadis }}" class="foto-kepala" >
                     <div class="name-badge text-center">
-                        <h4 class="mb-1">Dr. Wahyu Hidayah, M.Si</h4>
+                        <h4 class="mb-1">{{ $data->nama_kadis }}</h4>
                         <p class="mb-0">Kepala Dinas Ketahanan Pangan dan Pertanian</p>
                     </div>
                 </div>
@@ -388,9 +388,7 @@
                         </div>
                         <div class="col-11">
                             <p class="sambutan-text">
-                                Selamat datang di website resmi Dinas Ketahanan Pangan dan Pertanian.
-                                Website ini merupakan wujud komitmen kami dalam memberikan pelayanan informasi
-                                yang transparan dan akuntabel kepada masyarakat.
+                                {!! $data->ucapan !!}
                             </p>
 
                         </div>
@@ -398,9 +396,9 @@
 
 
                     <p class="sambutan-text">
-                        Kami berkomitmen untuk terus meningkatkan ketahanan pangan daerah melalui
+                        {{-- Kami berkomitmen untuk terus meningkatkan ketahanan pangan daerah melalui
                         berbagai program inovatif dan pemberdayaan petani. Bersama-sama, kita wujudkan
-                        pertanian yang maju dan berkelanjutan untuk kesejahteraan bersama.
+                        pertanian yang maju dan berkelanjutan untuk kesejahteraan bersama. --}}
                     </p>
 
                     <a href="{{ url('/visi-misi') }}" class="btn-selengkapnya">
