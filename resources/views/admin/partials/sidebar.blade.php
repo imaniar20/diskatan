@@ -26,6 +26,12 @@
             <span class="menu-header-text">Public</span>
         </li>
         <!-- Layouts -->
+        <li class="menu-item {{ $title == 'Data' ? 'active' : '' }}">
+            <a href="/admin-data" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-data"></i>
+                <div data-i18n="Analytics">Data</div>
+            </a>
+        </li>
         <li class="menu-item {{ $title == 'Agenda' ? 'active' : '' }}">
             <a href="/admin-agenda" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bookmarks"></i>

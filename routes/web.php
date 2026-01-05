@@ -10,6 +10,7 @@ use App\Http\Controllers\AgendasController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\DashboardsController;
 use App\Http\Controllers\ProgramsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\MessageController;
 
 use App\Models\Agendas;
 use App\Models\News;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 /*
@@ -75,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
             return view('admin.home.index')->with($data);
         });
     });
+
+    Route::resource('/admin-data', DashboardsController::class);
 
     Route::resource('/admin-agenda', AgendasController::class);
 
