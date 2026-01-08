@@ -17,6 +17,7 @@ class Dashboards extends Model
         'kelompok_tani',
         'indeks_ketahanan_pangan',
         'nama_kadis',
+        'foto_kadis',
         'ucapan',
         'alamat',
         'telphone',

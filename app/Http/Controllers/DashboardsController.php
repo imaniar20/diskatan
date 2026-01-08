@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dashboards;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
+use App\Models\Dashboards;
 class DashboardsController extends Controller
 {
     public function index()
@@ -30,7 +32,9 @@ class DashboardsController extends Controller
             'indeks_ketahanan_pangan' => 'required|numeric|min:0',
 
             'nama_kadis' => 'nullable|string',
+            'foto_kadis' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'ucapan' => 'nullable|string',
+            
             'alamat' => 'nullable|string',
             'telphone' => 'nullable|string|max:20',
             'jam_operasional' => 'nullable|string',
@@ -40,6 +44,12 @@ class DashboardsController extends Controller
             'tiktok' => 'nullable|string',
             'facebook' => 'nullable|string',
         ]);
+        
+
+        $file = $request->file('foto_kadis');
+        $name = 'foto_kadis-' . time() . '-' . Str::random(5) . '.' . $file->extension();
+
+        $path = $file->storeAs('tmp', $name, 'public');
 
         // karena dashboard cuma 1 row
         $dashboard = Dashboards::first();
