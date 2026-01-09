@@ -10,13 +10,11 @@ return new class extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->id();
-            $table->int('user_id')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('kategori_id')->constrained('kategori')->cascadeOnDelete();
             $table->string('name');
-            $table->foreignId('kategori_id')
-                  ->constrained('kategori')
-                  ->cascadeOnDelete();
-            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
-            $table->year('tahun');
+            $table->string('status')->nullable();
+            $table->integer('tahun')->nullable();
             $table->timestamps();
         });
     }
@@ -26,3 +24,4 @@ return new class extends Migration
         Schema::dropIfExists('programs');
     }
 };
+
