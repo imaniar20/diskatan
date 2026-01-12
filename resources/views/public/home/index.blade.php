@@ -37,8 +37,9 @@
     }
 
     .foto-kepala {
-        width: 100%;
-        height: auto;
+        /* width: 100%; */
+        height: 500px;
+        width: auto;
         border-radius: 30px;
         box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
         position: center;
@@ -361,7 +362,9 @@
             <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1000">
                 <div class="foto-kepala-wrapper">
                     <div class="foto-decoration"></div>
-                    <img src="{{ asset('img/dinas/kadis.png') }}" alt="{{ $data->nama_kadis }}" class="foto-kepala" >
+                    <div class="text-center">
+                        <img src="{{ asset('storage/' . $data->foto_kadis) }}" alt="{{ $data->nama_kadis }}" class="foto-kepala">
+                    </div>
                     <div class="name-badge text-center">
                         <h4 class="mb-1">{{ $data->nama_kadis }}</h4>
                         <p class="mb-0">Kepala Dinas Ketahanan Pangan dan Pertanian</p>

@@ -9,7 +9,7 @@
             </ol>
         </nav>
     </div>
-    <form action="{{ route('admin-data.update', $data->id) }}" method="POST">
+    <form action="{{ route('admin-data.update', $data->id) }}" id="updateData" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row g-3">
@@ -130,13 +130,30 @@
                 </div>
             </div>
 
-            <!-- Ucapan Kepala Dinas -->
-            <div class="col-12">
+            <!-- Kepala Dinas -->
+            <div class="col-4">
+                <div class="card">
+                    <h5 class="card-header">Data Kepala Dinas</h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="nama_kadis" class="form-label">Nama Kadis<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Nama Kadis" aria-label="nama_kadis"
+                                id="nama_kadis" name="nama_kadis" aria-describedby="basic-addon11"
+                                value="{{ $data->nama_kadis }}" required />
+                        </div>
+                        <label for="foto_kadis" class="form-label">Foto <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control dropify" name="foto_kadis" id="foto_kadis"
+                            data-default-file="{{ asset('/storage/' . $data->foto_kadis) }}" accept="image/*">
+                        <small>Batas 2mb. Jenis yang diizinkan : .png, .jpg, .jpeg</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
                 <div class="card">
                     <h5 class="card-header">Ucapan Kepala Dinas</h5>
                     <div class="card-body">
                         <div class="mb-0">
-                            <label for="ucapan" class="form-label">Ucapan<span class="text-danger">*</span></label>
+                            <label for="ucapan" class="form-label">Nama<span class="text-danger">*</span></label>
                             <textarea class="form-control" type="text" id="ucapan" name="ucapan" rows="10"
                                 placeholder="Ucapan Kepala Dinas" required>{!! $data->ucapan !!}</textarea>
                         </div>
@@ -147,7 +164,7 @@
             <!-- Button Submit -->
             <div class="col-12">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-success">Simpan Data</button>
+                    <button type="submit" class="btn w-100 btn-success">Simpan Data</button>
                 </div>
             </div>
         </div>
