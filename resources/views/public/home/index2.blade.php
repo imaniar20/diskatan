@@ -901,7 +901,7 @@
             <a href="https://spanint.kemenkeu.go.id/tkd" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="200">
                 <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/Omspan.png') }}" alt="Omspan TKD">
+                    <img src="{{ asset('img/logo/omspan.png') }}" alt="Omspan TKD">
 
                 </div>
                 <p class="menu-label">Omspan TKD</p>
