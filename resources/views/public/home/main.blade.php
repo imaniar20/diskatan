@@ -2,12 +2,12 @@
 
 @section('title', 'Home')
 
-@section('content')    
+@section('content')
     <style>
         :root {
             --primary-green: #16a34a;
-            --secondary-green: #40916c;
-            --light-green: #52b788;
+            --secondary-green: #138817;
+            --light-green: #18c938;
             --accent-green: #74c69d;
             --cream: #f8f9fa;
             --dark: #1b4332;
@@ -117,46 +117,46 @@
             const loader = document.getElementById('loading-screen');
             const index = document.getElementById('index');
             const index2 = document.getElementById('index2');
-    
+
             const header = document.getElementById('header-active');
             const top = document.getElementById('top-active');
             const footer = document.getElementById('footer-active');
-    
-    
+
+
             // saat loading selesai
             index.style.display = 'none';
             header.style.display = 'none';
             top.style.display = 'none';
             footer.style.display = 'none';
             index2.style.display = 'block';
-    
+
             // fade out loader
             loader.style.transition = 'opacity 0.4s ease';
             loader.style.opacity = '0';
-    
+
             setTimeout(() => {
                 loader.remove();
             }, 400);
         });
-    
+
         // tombol balik
         document.getElementById('btn-buka')?.addEventListener('click', () => {
             const curtain = document.getElementById('curtain');
             const index = document.getElementById('index');
             const index2 = document.getElementById('index2');
-    
+
             const header = document.getElementById('header-active');
             const top = document.getElementById('top-active');
             const footer = document.getElementById('footer-active');
-    
+
             // munculin curtain
             curtain.classList.add('active');
-    
+
             // fade gelap dulu
             setTimeout(() => {
                 curtain.classList.add('open');
             }, 400);
-    
+
             // ganti halaman pas tirai nutup
             setTimeout(() => {
                 index2.style.display = 'none';
@@ -165,7 +165,7 @@
                 top.style.display = 'block';
                 footer.style.display = 'block';
             }, 500);
-    
+
             // hapus curtain setelah animasi selesai
             setTimeout(() => {
                 curtain.classList.remove('active', 'open');

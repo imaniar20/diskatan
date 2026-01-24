@@ -1,23 +1,26 @@
 <style>
+    /* ============ ROOT VARIABLES ============ */
     :root {
         --primary-green: #16a34a;
-        --secondary-green: #14532d;
-        --light-green: #52b788;
+        --secondary-green: #138817;
+        --light-green: #18c938;
         --accent-green: #74c69d;
         --cream: #f8f9fa;
         --dark: #1b4332;
     }
 
+    /* ============ RESET & BASE STYLES ============ */
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
+    html,
     body {
         font-family: 'Poppins', sans-serif;
-        overflow-x: hidden;
         background: var(--cream);
+        width: 100%;
     }
 
     h1,
@@ -29,6 +32,11 @@
         font-family: 'Playfair Display', serif;
     }
 
+    .page-wrapper {
+        overflow-x: hidden;
+    }
+
+    /* ============ UTILITY CLASSES ============ */
     .hidden {
         opacity: 0;
         height: 0;
@@ -40,7 +48,6 @@
         opacity: 1;
         height: auto;
     }
-
 
     /* ============ TOP DATE TIME BAR ============ */
     .top-bar {
@@ -199,7 +206,7 @@
     }
 
     .dropdown-menu .dropdown-item.active {
-        background-color: var(--primary-green);;
+        background-color: var(--primary-green);
         color: #ffffff;
         /* opsional */
     }
@@ -254,11 +261,12 @@
     .carousel-item {
         height: 55vh;
         position: relative;
+        overflow: hidden !important;
     }
 
     .carousel-item img {
         width: 100%;
-        height: 155%;
+        height: 155% !important;
         object-fit: cover;
         filter: brightness(0.7);
     }
@@ -306,25 +314,19 @@
         color: #ffc107 !important;
     }
 
-    .hero-subtitle {
+    .hero-subtitle,
+    .hero-subtitle-2 {
         font-size: 1.2rem;
-        font-weight: bold;
+        font-weight: 300;
         color: rgba(255, 255, 255, 0.9);
         margin-bottom: 0px;
         line-height: 1.8;
-        max-width: 600px;
-        font-weight: 300;
+        max-width: 100% !important;
         animation: fadeInUp 1.2s ease-out;
     }
 
     .hero-subtitle-2 {
-        font-size: 1.2rem;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 0px;
         line-height: 1.5;
-        max-width: 600px;
-        font-weight: 300;
-        animation: fadeInUp 1.2s ease-out;
     }
 
     .hero-buttons .btn {
@@ -451,7 +453,6 @@
         font-weight: 500;
     }
 
-
     /* ============ ABOUT SECTION ============ */
     .about-section {
         padding: 100px 0;
@@ -532,20 +533,191 @@
         text-align: center;
     }
 
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        display: block;
+    /* ============ KEPALA DINAS SECTION ============ */
+    .kepala-dinas-section {
+        padding: 40px 0;
+        background: white;
+        position: relative;
+        overflow: hidden;
     }
 
-    .stat-label {
+    .kepala-dinas-section::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 0;
+        right: 0;
+        height: 100px;
+        background: white;
+        clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* Foto Kepala Dinas */
+    .foto-kepala-wrapper {
+        position: relative;
+        border-radius: 30px;
+        overflow: visible;
+    }
+
+    .foto-decoration {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: 20px;
+        bottom: 20px;
+        border-radius: 30px;
+        z-index: 1;
+    }
+
+    .foto-kepala {
+        max-height: 500px;
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(45, 106, 79, 0.2);
+        z-index: 2;
+        z transition: all 0.4s ease;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .foto-kepala-wrapper:hover .foto-kepala {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(45, 106, 79, 0.25);
+    }
+
+    .name-badge {
+        position: absolute;
+        bottom: -30px;
+        left: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+        color: white;
+        padding: 20px 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(45, 106, 79, 0.3);
+        z-index: 3;
+    }
+
+    .name-badge h4 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin: 0;
+        font-family: 'Playfair Display', serif;
+    }
+
+    .name-badge p {
         font-size: 0.9rem;
-        opacity: 0.9;
+        margin: 0;
+        opacity: 0.95;
+    }
+
+    /* Sambutan Content */
+    .sambutan-content {
+        padding-left: 30px;
+    }
+
+    .section-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(116, 198, 157, 0.1));
+        border-left: 4px solid #16a34a;
+        padding: 8px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .badge-text {
+        color: #16a34a;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .sambutan-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #000000;
+        margin-bottom: 25px;
+        line-height: 1.2;
+    }
+
+    .text-highlight {
+        color: #16a34a;
+        position: relative;
+        display: inline-block;
+    }
+
+    .text-highlight::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #16a34a;
+        z-index: 5;
+    }
+
+    .text-highlight-warning {
+        color: #ffc415;
+        position: relative;
+        display: inline-block;
+    }
+
+    .text-highlight-warning::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #ffc415;
+        z-index: 5;
+    }
+
+    .quote-decoration {
+        font-size: 4rem;
+        color: #16a34a;
+        line-height: 1;
+        margin-bottom: -20px;
+    }
+
+    .sambutan-text {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
+        text-align: justify;
+    }
+
+    .btn-selengkapnya {
+        display: inline-flex;
+        align-items: center;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+        box-shadow: 0 5px 20px rgba(22, 163, 74, 0.3);
+    }
+
+    .btn-selengkapnya:hover {
+        background: linear-gradient(135deg, #40916c, #52b788);
+        color: white;
+        transform: translateX(5px);
+        box-shadow: 0 8px 30px rgba(22, 163, 74, 0.4);
     }
 
     /* ============ AGENDA SECTION ============ */
     .agenda-section {
-        padding: 100px 0;
+        padding: 40px 0;
         background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         position: relative;
     }
@@ -655,7 +827,7 @@
 
     /* ============ NEWS SECTION ============ */
     .news-section {
-        padding: 100px 0;
+        padding: 40px 0;
         background: white;
     }
 
@@ -663,14 +835,14 @@
         background: white;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         transition: all 0.4s ease;
         height: 100%;
     }
 
     .news-card:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(45, 106, 79, 0.15);
+        box-shadow: 0 20px 60px rgba(45, 106, 79, 0.5);
     }
 
     .news-img {
@@ -684,7 +856,7 @@
     }
 
     .news-badge {
-        background: var(--accent-green);
+        background: var(--primary-green);
         color: white;
         padding: 5px 15px;
         border-radius: 20px;
@@ -904,13 +1076,13 @@
 
     .social-icons {
         display: flex;
-        gap: 15px;
+        gap: 12px;
         margin-top: 20px;
     }
 
-    .social-icon {
-        width: 45px;
-        height: 45px;
+    .social-btn {
+        width: 48px;
+        height: 48px;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
         display: flex;
@@ -920,9 +1092,14 @@
         font-size: 1.2rem;
         text-decoration: none;
         transition: all 0.3s ease;
+        padding: 0;
     }
 
-    .social-icon:hover {
+    .social-btn i {
+        font-size: 22px;
+    }
+
+    .social-btn:hover {
         background: var(--accent-green);
         transform: translateY(-3px);
     }
@@ -986,11 +1163,8 @@
             font-size: 1.5rem;
         }
 
-        .hero-subtitle {
-            font-size: 1.3rem;
-        }
-
-        .hero-subtitle {
+        .hero-subtitle,
+        .hero-subtitle-2 {
             font-size: 1rem;
         }
 
@@ -1002,17 +1176,51 @@
             padding: 30px 20px;
         }
     }
-    
+
+    @media (max-width: 992px) {
+        .kepala-dinas-section {
+            padding: 80px 0;
+        }
+
+        .sambutan-content {
+            padding-left: 0;
+            margin-top: 50px;
+        }
+
+        .sambutan-title {
+            font-size: 2.2rem;
+        }
+
+        .name-badge {
+            position: relative;
+            bottom: auto;
+            left: 0;
+            right: 0;
+            margin-top: 20px;
+        }
+
+        .foto-decoration {
+            display: none;
+        }
+
+        .hero-buttons .btn {
+            font-size: 0.85rem;
+            padding: 10px 16px !important;
+        }
+
+        .nav-link.active::after {
+            left: 0%;
+            transform: translateX(0%);
+        }
+    }
+
     @media (max-width: 768px) {
         .hero-title {
             font-size: 1.4rem;
         }
 
-        .hero-subtitle {
-            font-size: 1.1rem;
-        }
-
-        .hero-subtitle {
+        .hero-subtitle,
+        .hero-subtitle-2 {
             font-size: 0.8rem;
         }
 
@@ -1022,6 +1230,293 @@
 
         .contact-form {
             padding: 30px 20px;
+        }
+
+        .carousel-item {
+            height: 60vh !important;
+        }
+
+        /* HERO BUTTONS - Tetap Grid, Ukuran Mengecil */
+        .hero-buttons .btn {
+            font-size: 0.75rem;
+            padding: 8px 12px !important;
+        }
+
+        .hero-buttons .btn i {
+            font-size: 0.9rem;
+            margin-right: 4px !important;
+        }
+
+        .hero-buttons .btn-lg {
+            padding: 8px 12px !important;
+        }
+
+        .hero-buttons .me-3 {
+            margin-right: 0.5rem !important;
+        }
+
+        .hero-buttons .mb-3 {
+            margin-bottom: 0.75rem !important;
+        }
+
+        .container {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+
+        .sambutan-title {
+            font-size: 1.8rem;
+        }
+
+        .sambutan-text {
+            font-size: 0.95rem;
+        }
+
+        .name-badge h4 {
+            font-size: 1rem;
+        }
+
+        .name-badge p {
+            font-size: 0.85rem;
+        }
+
+        .quote-decoration {
+            font-size: 3rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .carousel-item {
+            height: 50vh !important;
+        }
+
+        .hero-title {
+            font-size: 1.2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 0.75rem;
+        }
+
+        .hero-subtitle-2 {
+            font-size: 0.7rem;
+        }
+
+        /* HERO BUTTONS - Lebih Kecil, Tetap Grid */
+        .hero-buttons .btn {
+            font-size: 0.7rem;
+            padding: 6px 10px !important;
+            margin: 0 2px !important;
+        }
+
+        .hero-buttons .btn i {
+            font-size: 0.85rem;
+            margin-right: 3px !important;
+        }
+
+        .hero-buttons .me-3 {
+            margin-right: 0.25rem !important;
+        }
+
+        /* Social Buttons */
+        .hero-buttons .btn-sm {
+            padding: 5px 8px !important;
+        }
+
+        .hero-buttons .btn-sm i {
+            font-size: 18px !important;
+        }
+    }
+
+    /* Extra Small Devices */
+    @media (max-width: 400px) {
+        .hero-title {
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons .btn {
+            font-size: 0.65rem;
+            padding: 5px 8px !important;
+        }
+
+        .hero-buttons .btn i {
+            font-size: 0.75rem;
+            margin-right: 2px !important;
+        }
+
+        .hero-buttons .btn-sm {
+            padding: 4px 6px !important;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .statistics-section .stat-card {
+            padding: 35px 25px;
+        }
+
+        .statistics-section .stat-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 2rem;
+        }
+
+        .statistics-section .stat-number {
+            font-size: 2.5rem;
+        }
+
+        .statistics-section .stat-label {
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Tablet Medium - 2 columns */
+    @media (max-width: 991px) and (min-width: 768px) {
+        .statistics-section .stat-card {
+            padding: 30px 20px;
+        }
+
+        .statistics-section .stat-icon {
+            width: 65px;
+            height: 65px;
+            font-size: 1.8rem;
+        }
+
+        .statistics-section .stat-number {
+            font-size: 2.2rem;
+        }
+
+        .statistics-section .stat-label {
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Mobile - 2 columns (col-6) */
+    @media (max-width: 767px) {
+        .statistics-section {
+            margin-top: -60px;
+            padding: 0 10px 80px 10px;
+        }
+
+        .statistics-section .stat-card {
+            padding: 20px 12px;
+            margin-bottom: 0;
+        }
+
+        .statistics-section .stat-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .statistics-section .stat-number {
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .statistics-section .stat-label {
+            font-size: 0.75rem;
+            line-height: 1.3;
+        }
+
+        /* Gap between cards */
+        .statistics-section .g-4 {
+            --bs-gutter-x: 0.75rem;
+            --bs-gutter-y: 0.75rem;
+        }
+    }
+
+    /* Mobile Small - 2 columns extra compact */
+    @media (max-width: 576px) {
+        .statistics-section {
+            margin-top: -50px;
+            padding: 0 8px 70px 8px;
+        }
+
+        .statistics-section .stat-card {
+            padding: 18px 10px;
+        }
+
+        .statistics-section .stat-icon {
+            width: 45px;
+            height: 45px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .statistics-section .stat-number {
+            font-size: 1.4rem;
+        }
+
+        .statistics-section .stat-label {
+            font-size: 0.7rem;
+        }
+
+        .statistics-section .g-4 {
+            --bs-gutter-x: 0.5rem;
+            --bs-gutter-y: 0.5rem;
+        }
+    }
+
+    /* Mobile Extra Small - 2 columns minimal */
+    @media (max-width: 400px) {
+        .statistics-section .stat-card {
+            padding: 15px 8px;
+        }
+
+        .statistics-section .stat-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+
+        .statistics-section .stat-number {
+            font-size: 1.2rem;
+        }
+
+        .statistics-section .stat-label {
+            font-size: 0.65rem;
+        }
+    }
+
+    .visitor-info {
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+        padding: 25px 30px;
+        border-radius: 20px;
+        color: white;
+        box-shadow: 0 15px 40px rgba(22, 163, 74, 0.35);
+        gap: 20px;
+    }
+
+    .visitor-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        letter-spacing: 0.5px;
+        margin-bottom: 5px;
+    }
+
+    .visitor-number {
+        font-size: 2.2rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .visitor-number i {
+        font-size: 2rem;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+        .visitor-box {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .btn-selengkapnya {
+            width: 100%;
+            justify-content: center;
         }
     }
 </style>

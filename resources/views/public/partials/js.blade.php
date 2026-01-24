@@ -86,27 +86,27 @@
             });
         });
 
-        observer.observe(document.querySelector('.stats-survey-section'));
+        // observer.observe(document.querySelector('.stats-survey-section'));
 
         // Rating Stars
-        const stars = document.querySelectorAll('#ratingStars i');
-        let selectedRating = 0;
+        // const stars = document.querySelectorAll('#ratingStars i');
+        // let selectedRating = 0;
 
-        stars.forEach(star => {
-            star.addEventListener('click', function() {
-                selectedRating = parseInt(this.dataset.rating);
-                updateStars(selectedRating);
-            });
+        // stars.forEach(star => {
+        //     star.addEventListener('click', function() {
+        //         selectedRating = parseInt(this.dataset.rating);
+        //         updateStars(selectedRating);
+        //     });
 
-            star.addEventListener('mouseenter', function() {
-                const rating = parseInt(this.dataset.rating);
-                updateStars(rating);
-            });
-        });
+        //     star.addEventListener('mouseenter', function() {
+        //         const rating = parseInt(this.dataset.rating);
+        //         updateStars(rating);
+        //     });
+        // });
 
-        document.getElementById('ratingStars').addEventListener('mouseleave', function() {
-            updateStars(selectedRating);
-        });
+        // document.getElementById('ratingStars').addEventListener('mouseleave', function() {
+        //     updateStars(selectedRating);
+        // });
 
         function updateStars(rating) {
             stars.forEach(star => {

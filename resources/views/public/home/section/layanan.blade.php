@@ -1,7 +1,10 @@
 <style>
     /* ============ LAYANAN ONLINE SECTION ============ */
+    .page-wrapper {
+        overflow-x: hidden;
+    }
     .layanan-section {
-        padding: 100px 0;
+        padding: 70px 0;
         background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         position: relative;
     }
@@ -20,64 +23,60 @@
     /* ============ SECTION HEADER ============ */
     .layanan-header {
         text-align: center;
-        margin-bottom: 60px;
+        margin-bottom: 50px;
     }
     
-    .layanan-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 15px;
-    }
-    
-    .badge-line {
-        width: 40px;
-        height: 3px;
-        background: linear-gradient(90deg, transparent, #16a34a);
-    }
-    
-    .badge-text {
-        color: #16a34a;
-        font-weight: 700;
-        font-size: 0.95rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    .layanan-title {
+    .sambutan-title {
         font-family: 'Poppins', sans-serif;
         font-size: 2.5rem;
         font-weight: 800;
-        color: #1b4332;
         margin-bottom: 15px;
     }
     
-    .layanan-title .text-highlight {
-        color: #16a34a;
+    .sambutan-title .text-white {
+        color: #ffffff;
     }
     
-    .layanan-subtitle {
-        font-size: 1.05rem;
-        color: #666;
-        max-width: 600px;
-        margin: 0 auto;
+    .sambutan-title .text-highlight-warning {
+        color: #ffc107;
     }
     
     /* ============ LAYANAN CARDS ============ */
     .layanan-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 30px;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
         margin-bottom: 50px;
+    }
+    
+    /* Center last 3 items when grid is 5 columns */
+    @media (min-width: 1401px) {
+        .layanan-card:nth-child(11) {
+            grid-column: 2;
+        }
+    }
+    
+    /* Center last 1 item when grid is 4 columns */
+    @media (max-width: 1400px) and (min-width: 1201px) {
+        .layanan-card:nth-child(13) {
+            grid-column: 2 / span 1;
+        }
+    }
+    
+    /* Center last 1 item when grid is 3 columns */
+    @media (max-width: 1200px) and (min-width: 993px) {
+        .layanan-card:nth-child(13) {
+            grid-column: 2 / span 1;
+        }
     }
     
     .layanan-card {
         background: white;
-        border-radius: 20px;
-        padding: 35px 25px;
+        border-radius: 16px;
+        padding: 25px 18px;
         text-align: center;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         border: 2px solid transparent;
         position: relative;
         overflow: hidden;
@@ -89,15 +88,15 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
+        height: 3px;
         background: linear-gradient(90deg, var(--card-color), transparent);
         transform: scaleX(0);
         transition: transform 0.4s ease;
     }
     
     .layanan-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
         border-color: var(--card-color);
     }
     
@@ -110,16 +109,25 @@
     .layanan-card.blue { --card-color: #2563eb; }
     .layanan-card.orange { --card-color: #f59e0b; }
     .layanan-card.purple { --card-color: #9333ea; }
+    .layanan-card.teal { --card-color: #14b8a6; }
+    .layanan-card.red { --card-color: #dc2626; }
+    .layanan-card.indigo { --card-color: #4f46e5; }
+    .layanan-card.pink { --card-color: #ec4899; }
+    .layanan-card.cyan { --card-color: #06b6d4; }
+    .layanan-card.lime { --card-color: #84cc16; }
+    .layanan-card.amber { --card-color: #f59e0b; }
+    .layanan-card.emerald { --card-color: #10b981; }
+    .layanan-card.violet { --card-color: #8b5cf6; }
     
     /* ============ CARD ICON ============ */
     .layanan-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 18px;
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 25px;
+        margin: 0 auto 18px;
         transition: all 0.4s ease;
         position: relative;
     }
@@ -140,48 +148,91 @@
         background: linear-gradient(135deg, #9333ea, #a855f7);
     }
     
+    .layanan-card.teal .layanan-icon {
+        background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    }
+    
+    .layanan-card.red .layanan-icon {
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+    }
+    
+    .layanan-card.indigo .layanan-icon {
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+    }
+    
+    .layanan-card.pink .layanan-icon {
+        background: linear-gradient(135deg, #ec4899, #f472b6);
+    }
+    
+    .layanan-card.cyan .layanan-icon {
+        background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    }
+    
+    .layanan-card.lime .layanan-icon {
+        background: linear-gradient(135deg, #84cc16, #a3e635);
+    }
+    
+    .layanan-card.amber .layanan-icon {
+        background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    }
+    
+    .layanan-card.emerald .layanan-icon {
+        background: linear-gradient(135deg, #10b981, #34d399);
+    }
+    
+    .layanan-card.violet .layanan-icon {
+        background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    }
+    
     .layanan-card:hover .layanan-icon {
         transform: rotateY(360deg) scale(1.1);
     }
     
     .layanan-icon i {
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         color: white;
     }
     
     /* ============ CARD CONTENT ============ */
     .layanan-card-title {
-        font-size: 1.2rem;
+        font-size: 0.95rem;
         font-weight: 700;
         color: #1b4332;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         font-family: 'Poppins', sans-serif;
+        line-height: 1.3;
+        min-height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .layanan-card-text {
-        font-size: 0.95rem;
+        font-size: 0.82rem;
         color: #666;
-        line-height: 1.6;
-        margin-bottom: 20px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        min-height: 40px;
     }
     
     .layanan-link {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         color: var(--card-color);
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
     }
     
     .layanan-link i {
         transition: transform 0.3s ease;
+        font-size: 0.85rem;
     }
     
     .layanan-link:hover {
-        gap: 12px;
+        gap: 10px;
     }
     
     .layanan-link:hover i {
@@ -221,41 +272,72 @@
     }
     
     /* ============ RESPONSIVE ============ */
+    @media (max-width: 1400px) {
+        .layanan-cards {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    
     @media (max-width: 1200px) {
         .layanan-cards {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    @media (max-width: 992px) {
+        .layanan-section {
+            padding: 60px 0;
+        }
+        
+        .sambutan-title {
+            font-size: 2.2rem;
+        }
+        
+        .layanan-cards {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        
+        .layanan-card {
+            padding: 22px 15px;
+        }
+        
+        .layanan-icon {
+            width: 55px;
+            height: 55px;
+        }
+        
+        .layanan-icon i {
+            font-size: 1.6rem;
         }
     }
     
     @media (max-width: 768px) {
         .layanan-section {
-            padding: 80px 0;
+            padding: 50px 0;
         }
         
-        .layanan-title {
+        .sambutan-title {
             font-size: 2rem;
-        }
-        
-        .layanan-subtitle {
-            font-size: 0.95rem;
         }
         
         .layanan-cards {
-            grid-template-columns: 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
         }
         
         .layanan-card {
-            padding: 30px 20px;
+            padding: 20px 12px;
         }
         
-        .layanan-icon {
-            width: 70px;
-            height: 70px;
+        .layanan-card-title {
+            font-size: 0.88rem;
+            min-height: 36px;
         }
         
-        .layanan-icon i {
-            font-size: 2rem;
+        .layanan-card-text {
+            font-size: 0.78rem;
+            min-height: 38px;
         }
         
         .btn-tracking {
@@ -266,27 +348,49 @@
     
     @media (max-width: 576px) {
         .layanan-header {
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
         
-        .layanan-title {
+        .sambutan-title {
+            font-size: 1.75rem;
+        }
+        
+        .layanan-card {
+            padding: 25px 20px;
+        }
+        
+        .layanan-icon {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .layanan-icon i {
             font-size: 1.8rem;
         }
         
         .layanan-card-title {
-            font-size: 1.1rem;
+            font-size: 1rem;
+            min-height: auto;
         }
         
         .layanan-card-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            min-height: auto;
+        }
+        
+        .btn-tracking {
+            width: 100%;
+            justify-content: center;
         }
     }
 </style>
+
 <section id="service" class="layanan-section">
     <div class="container">
         <h2 class="sambutan-title">
             <span class="text-white">Layanan</span> <span class="text-highlight-warning">Online</span>
         </h2>
+        
         <!-- Cards Grid -->
         <div class="layanan-cards">
             
@@ -306,7 +410,7 @@
             </div>
             
             {{-- Card 2: Pengaduan Masyarakat --}}
-            <div class="layanan-card blue" data-aos="fade-up" data-aos-delay="200">
+            <div class="layanan-card blue" data-aos="fade-up" data-aos-delay="150">
                 <div class="layanan-icon">
                     <i class="bi bi-chat-left-text"></i>
                 </div>
@@ -314,14 +418,14 @@
                 <p class="layanan-card-text">
                     Sampaikan keluhan atau pengaduan terkait layanan kami
                 </p>
-                <a href="#" class="layanan-link">
+                <a href="http://siwawan.kuningankab.go.id/" target="_blank" class="layanan-link">
                     Ajukan
                     <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
             
             {{-- Card 3: Konsultasi Pertanian --}}
-            <div class="layanan-card orange" data-aos="fade-up" data-aos-delay="300">
+            <div class="layanan-card orange" data-aos="fade-up" data-aos-delay="200">
                 <div class="layanan-icon">
                     <i class="bi bi-question-circle"></i>
                 </div>
@@ -336,7 +440,7 @@
             </div>
             
             {{-- Card 4: Permohonan Data --}}
-            <div class="layanan-card purple" data-aos="fade-up" data-aos-delay="400">
+            <div class="layanan-card purple" data-aos="fade-up" data-aos-delay="250">
                 <div class="layanan-icon">
                     <i class="bi bi-file-earmark-text"></i>
                 </div>
@@ -350,9 +454,145 @@
                 </a>
             </div>
             
+            {{-- Card 5: Perizinan --}}
+            <div class="layanan-card teal" data-aos="fade-up" data-aos-delay="300">
+                <div class="layanan-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h3 class="layanan-card-title">Perizinan</h3>
+                <p class="layanan-card-text">
+                    Layanan perizinan usaha dan kegiatan pertanian
+                </p>
+                <a href="https://perizinan.pertanian.go.id/app/" target="_blank" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 6: Perbenihan --}}
+            <div class="layanan-card emerald" data-aos="fade-up" data-aos-delay="350">
+                <div class="layanan-icon">
+                    <i class="bi bi-flower1"></i>
+                </div>
+                <h3 class="layanan-card-title">Perbenihan</h3>
+                <p class="layanan-card-text">
+                    Informasi dan layanan terkait benih unggul bersertifikat
+                </p>
+                <a href="#" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 7: Data Penerima Pupuk --}}
+            <div class="layanan-card lime" data-aos="fade-up" data-aos-delay="400">
+                <div class="layanan-icon">
+                    <i class="bi bi-database"></i>
+                </div>
+                <h3 class="layanan-card-title">Data Penerima Pupuk</h3>
+                <p class="layanan-card-text">
+                    Cek data dan informasi penerima pupuk bersubsidi
+                </p>
+                <a href="https://pupukbersubsidi.pertanian.go.id/ceksubsidi/search" target="_blank" class="layanan-link">
+                    Lihat
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 8: Informasi Harga Pangan --}}
+            <div class="layanan-card amber" data-aos="fade-up" data-aos-delay="450">
+                <div class="layanan-icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                <h3 class="layanan-card-title">Informasi Harga Pangan</h3>
+                <p class="layanan-card-text">
+                    Update harga komoditas pangan dan pertanian terkini
+                </p>
+                <a href="#" class="layanan-link">
+                    Lihat
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 9: Pengendalian OPT --}}
+            <div class="layanan-card red" data-aos="fade-up" data-aos-delay="500">
+                <div class="layanan-icon">
+                    <i class="bi bi-bug"></i>
+                </div>
+                <h3 class="layanan-card-title">Pengendalian OPT</h3>
+                <p class="layanan-card-text">
+                    Layanan pengendalian organisme pengganggu tanaman
+                </p>
+                <a href="#" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 10: Rekomendasi BBM Subsidi --}}
+            <div class="layanan-card indigo" data-aos="fade-up" data-aos-delay="550">
+                <div class="layanan-icon">
+                    <i class="bi bi-fuel-pump"></i>
+                </div>
+                <h3 class="layanan-card-title">Rekomendasi BBM Subsidi</h3>
+                <p class="layanan-card-text">
+                    Surat rekomendasi izin pembelian BBM bersubsidi
+                </p>
+                <a href="#" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 11: Distribusi Sarana Prasarana --}}
+            <div class="layanan-card cyan" data-aos="fade-up" data-aos-delay="600">
+                <div class="layanan-icon">
+                    <i class="bi bi-truck"></i>
+                </div>
+                <h3 class="layanan-card-title">Distribusi Sarana Prasarana</h3>
+                <p class="layanan-card-text">
+                    Layanan distribusi alat dan sarana prasarana pertanian
+                </p>
+                <a href="#" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 12: Rekomendasi Produk Pangan --}}
+            <div class="layanan-card pink" data-aos="fade-up" data-aos-delay="650">
+                <div class="layanan-icon">
+                    <i class="bi bi-clipboard2-check"></i>
+                </div>
+                <h3 class="layanan-card-title">Rekomendasi Produk Pangan</h3>
+                <p class="layanan-card-text">
+                    Surat rekomendasi izin produk pangan segar asal tumbuhan
+                </p>
+                <a href="#" class="layanan-link">
+                    Ajukan
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
+            {{-- Card 13: Penyebarluasan Informasi --}}
+            <div class="layanan-card violet" data-aos="fade-up" data-aos-delay="700">
+                <div class="layanan-icon">
+                    <i class="bi bi-megaphone"></i>
+                </div>
+                <h3 class="layanan-card-title">Penyebarluasan Informasi</h3>
+                <p class="layanan-card-text">
+                    Informasi ketahanan pangan dan pertanian terkini
+                </p>
+                <a href="#" class="layanan-link">
+                    Lihat
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+            
         </div>
-        <div class="tracking-wrapper" data-aos="fade-up" data-aos-delay="500">
-            <a href="http://siwawan.kuningankab.go.id/" target="_blank" class="btn-tracking">
+        
+        <div class="tracking-wrapper" data-aos="fade-up" data-aos-delay="750">
+            <a href="/layanan" target="" class="btn-tracking">
                 <i class="bi bi-search"></i>
                 Buka Layanan Online
             </a>

@@ -157,7 +157,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         font-weight: 800;
-        color: #2d6a4f;
+        color: #1a9828;
         margin-bottom: 15px;
         position: relative;
         display: inline-block;
@@ -171,7 +171,7 @@
         transform: translateX(-50%);
         width: 80px;
         height: 4px;
-        background: linear-gradient(90deg, #2d6a4f, #52b788);
+        background: linear-gradient(90deg, #1a9828, #52b788);
         border-radius: 10px;
     }
     
@@ -179,7 +179,7 @@
         font-family: 'Poppins', sans-serif;
         font-size: 1.3rem;
         font-weight: 600;
-        color: #40916c;
+        color: #1a9828;
         margin-bottom: 40px;
     }
     
@@ -187,7 +187,7 @@
     .history-card p {
         font-size: 1.05rem;
         line-height: 1.9;
-        color: #333;
+        color: #000000;
         margin-bottom: 25px;
         text-align: justify;
         position: relative;
@@ -201,7 +201,7 @@
         top: 8px;
         width: 8px;
         height: 8px;
-        background: linear-gradient(135deg, #52b788, #74c69d);
+        background: linear-gradient(135deg, #1a9828, #74c69d);
         border-radius: 50%;
         opacity: 0.6;
     }
@@ -212,12 +212,12 @@
     
     /* ============ HIGHLIGHT TEXT ============ */
     .history-card i {
-        color: #40916c;
+        color: #1a9828;
         font-weight: 500;
     }
     
     .history-card b {
-        color: #2d6a4f;
+        color: #1a9828;
         font-weight: 700;
         background: linear-gradient(135deg, rgba(82, 183, 136, 0.1), rgba(116, 198, 157, 0.1));
         padding: 2px 8px;
@@ -232,7 +232,7 @@
         transform: translateY(-50%);
         width: 60px;
         height: 60px;
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         border-radius: 50%;
         display: flex;
         align-items: center;

@@ -25,6 +25,11 @@
                             name="name" aria-describedby="basic-addon11" />
                         <small class="text-danger" id="errName"></small>
 
+                        <label for="deskripsi" class="form-label">Deskripsi<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-3" placeholder="Deskripsi" aria-label="deskripsi" id="deskripsi"
+                            name="deskripsi" aria-describedby="basic-addon11" />
+                        <small class="text-danger" id="errDeskripsi"></small>
+
                         <label for="icon" class="form-label">Icon<span class="text-danger">*</span></label>
                         <input type="text" class="form-control mb-3" placeholder="<i class='bx bxs-tree-alt' ></i>" aria-label="Icon" id="icon"
                             name="icon" aria-describedby="basic-addon11" />
@@ -60,7 +65,7 @@
                                         <td>
                                             <a class="btn btn-sm btn-warning text-white open-Edit" data-bs-toggle="modal"
                                                 data-bs-target="#edit" data-id="{{ $data->id }}"
-                                                data-nama="{{ $data->nama }}" data-icon="{{ $data->icon }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                data-nama="{{ $data->nama }}" data-deskripsi="{{ $data->description }}" data-icon="{{ $data->icon }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <button type="button" class="btn btn-sm btn-danger"
                                                 onclick="deleteUser('{{ route('admin-bidang.destroy', $data->id) }}')">
                                                 <i class="bx bx-trash-alt me-1"></i> Hapus
@@ -95,6 +100,11 @@
                             <small class="text-danger" id="errNameEdit"></small>
                         </div>
                         <div class="col-lg-12 col-sm-12 mb-3">
+                            <label for="deskripsi_edit" class="form-label">Deskripsi</label>
+                            <input id="deskripsi_edit" name="deskripsi_edit" class="form-control">
+                            <small class="text-danger" id="errDeskripsiEdit"></small>
+                        </div>
+                        <div class="col-lg-12 col-sm-12 mb-3">
                             <label for="icon_edit" class="form-label">Icon</label>
                             <input id="icon_edit" name="icon_edit" class="form-control" placeholder="<i class='bx bxs-tree-alt' ></i>">
                             <small class="text-danger" id="errIconEdit"></small>
@@ -127,6 +137,23 @@
             }
         };
 
+        const handlerDeskripsi = (e) => {
+            let deskripsi = $('#deskripsi').val().trim();
+
+            if (!deskripsi) {
+                $('#errDeskripsi').html('Deskripsi Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else if (deskripsi.length < 3) {
+                $('#errDeskripsi').html('Setidaknya Deskripsi Minimal 3 Huruf');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errDeskripsi').html('');
+                return true;
+            }
+        };
+
         const handlerIcon = (e) => {
             let icon = $('#icon').val().trim();
 
@@ -146,6 +173,7 @@
 
         $('#addBidang').on('submit', function(e) {
             handlerName(e)
+            handlerDeskripsi(e)
             handlerIcon(e)
         });
 
@@ -166,14 +194,31 @@
             }
         };
 
+        const handlerDeskripsiEdit = (e) => {
+            let deskripsi = $('#deskripsi_edit').val().trim();
+
+            if (!deskripsi) {
+                $('#errDeskripsiEdit').html('Deskripsi Tidak Boleh Kosong');
+                e.preventDefault();
+                return false;
+            } else if (deskripsi.length < 3) {
+                $('#errDeskripsiEdit').html('Setidaknya Deskripsi Minimal 3 Huruf');
+                e.preventDefault();
+                return false;
+            } else {
+                $('#errDeskripsiEdit').html('');
+                return true;
+            }
+        };
+
         const handlerIconEdit = (e) => {
             let icon = $('#icon_edit').val().trim();
 
-            if (!name) {
+            if (!icon) {
                 $('#errIconEdit').html('Tag Icon Tidak Boleh Kosong');
                 e.preventDefault();
                 return false;
-            } else if (name.length < 15) {
+            } else if (icon.length < 15) {
                 $('#errIconEdit').html('Setidaknya Tag Icon Minimal 15 karakter');
                 e.preventDefault();
                 return false;
@@ -185,16 +230,20 @@
 
         $('#edit').on('submit', function(e) {
             handlerNameEdit(e)
+            handlerDeskripsiEdit(e)
+            handlerIconEdit(e)
         });
 
 
         $(document).on("click", ".open-Edit", function() {
             var id = $(this).data('id');
             var nama = $(this).data('nama');
+            var deskripsi = $(this).data('deskripsi');
             var icon = $(this).data('icon');
 
             $(".modal-header #id").val(id);
             $(".modal-body #nama_edit").val(nama);
+            $(".modal-body #deskripsi_edit").val(deskripsi);
             $(".modal-body #icon_edit").val(icon);
         });
 

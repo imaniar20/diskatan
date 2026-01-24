@@ -1,7 +1,10 @@
 <style>
     /* ============ PROGRAM SECTION ============ */
+    .page-wrapper {
+        overflow-x: hidden;
+    }
     .program-section {
-        padding: 100px 0;
+        padding: 40px 0;
         background: linear-gradient(135deg, #f8f9fa, #e8f5e9);
         position: relative;
     }
@@ -34,7 +37,7 @@
         text-align: center;
         margin-bottom: 60px;
         position: relative;
-        z-index: 2;
+        z-index: 0;
     }
 
     .program-badge {
@@ -81,7 +84,7 @@
         gap: 25px;
         margin-bottom: 50px;
         position: relative;
-        z-index: 2;
+        z-index: 0;
     }
 
     .program-card {
@@ -186,6 +189,8 @@
         text-decoration: none;
         transition: all 0.3s ease;
         font-size: 0.95rem;
+        position: relative;
+        z-index: 5;
     }
 
     .program-link i {
@@ -205,7 +210,7 @@
     .program-footer {
         text-align: center;
         position: relative;
-        z-index: 2;
+        z-index: 0;
     }
 
     .btn-view-all {
@@ -317,86 +322,27 @@
         <!-- Cards Grid -->
         <div class="program-cards">
 
-            {{-- Card 1: Ketahanan Pangan --}}
-            <div class="program-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="program-icon">
-                    <i class="bi bi-basket3"></i>
+            @foreach ($kategori as $item)
+                <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="program-icon">
+                        {!! $item->icon !!}
+                    </div>
+                    <h3 class="program-card-title">{{ $item->nama }}</h3>
+                    <p class="program-card-text">
+                        {{ $item->description }}
+                    </p>
+                    <a href="/program/{{ $item->slug }}" class="program-link">
+                        Selengkapnya
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
                 </div>
-                <h3 class="program-card-title">Ketahanan Pangan</h3>
-                <p class="program-card-text">
-                    Program penguatan ketahanan pangan daerah dan penanganan kerawanan pangan
-                </p>
-                <a href="#" class="program-link">
-                    Selengkapnya
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
-
-            {{-- Card 2: Tanaman Pangan --}}
-            <div class="program-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="program-icon">
-                    <i class="bi bi-flower3"></i>
-                </div>
-                <h3 class="program-card-title">Tanaman Pangan</h3>
-                <p class="program-card-text">
-                    Peningkatan produksi dan produktivitas tanaman pangan strategis
-                </p>
-                <a href="#" class="program-link">
-                    Selengkapnya
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
-
-            {{-- Card 3: Hortikultura --}}
-            <div class="program-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="program-icon">
-                    <i class="bi bi-apple"></i>
-                </div>
-                <h3 class="program-card-title">Hortikultura</h3>
-                <p class="program-card-text">
-                    Pengembangan budidaya sayuran, buah-buahan, dan tanaman hias
-                </p>
-                <a href="#" class="program-link">
-                    Selengkapnya
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
-
-            {{-- Card 4: Peternakan --}}
-            <div class="program-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="program-icon">
-                    <i class="bi bi-emoji-smile"></i>
-                </div>
-                <h3 class="program-card-title">Peternakan</h3>
-                <p class="program-card-text">
-                    Pembinaan dan pengembangan usaha peternakan rakyat
-                </p>
-                <a href="#" class="program-link">
-                    Selengkapnya
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
-
-            {{-- Card 5: Penyuluhan --}}
-            <div class="program-card" data-aos="fade-up" data-aos-delay="500">
-                <div class="program-icon">
-                    <i class="bi bi-people"></i>
-                </div>
-                <h3 class="program-card-title">Penyuluhan</h3>
-                <p class="program-card-text">
-                    Pendampingan dan pemberdayaan petani melalui penyuluhan
-                </p>
-                <a href="#" class="program-link">
-                    Selengkapnya
-                    <i class="bi bi-arrow-right"></i>
-                </a>
-            </div>
+            @endforeach
 
         </div>
 
         <!-- View All Button -->
         <div class="program-footer" data-aos="fade-up" data-aos-delay="600">
-            <a href="#" class="btn-view-all">
+            <a href="/program" class="btn-view-all text-white">
                 Lihat Semua Program
                 <i class="bi bi-arrow-right"></i>
             </a>

@@ -446,7 +446,7 @@
                 <div class="col-lg-4">
 
                     <!-- SEARCH -->
-                    <div class="card border-0 shadow-sm mb-4 sidebar-card search-card" data-aos="fade-left"
+                    <div class="card border-0 shadow-sm mb-4 sidebar-card search-card" data-aos="fade-up"
                         data-aos-delay="200">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
@@ -466,7 +466,7 @@
                     </div>
 
                     <!-- BERITA TERBARU -->
-                    <div class="card border-0 shadow-sm mb-4 sidebar-card" data-aos="fade-left" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm mb-4 sidebar-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-newspaper me-2"></i>Berita Terbaru
@@ -491,7 +491,7 @@
                     </div>
 
                     <!-- PALING BANYAK DILIHAT -->
-                    <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-left" data-aos-delay="400">
+                    <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-fire me-2"></i>Paling Banyak Dilihat

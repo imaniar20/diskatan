@@ -18,7 +18,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -2;
+    z-index: 0;
 }
 
 .video-background video {
@@ -40,7 +40,7 @@
 .logo-container {
     text-align: center;
     /* margin-top: -100px; */
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 .logo-wrapper {
@@ -174,7 +174,8 @@
 /* ============ HOME BUTTON ============ */
 .home-button-wrapper {
     text-align: center;
-    margin-top: 30px; 
+    margin-top: 20px;
+    margin-bottom: 50px;
     padding: 0 20px;
 }
 
@@ -183,7 +184,7 @@
     align-items: center;
     gap: 10px;
     padding: 15px 35px;
-    background: linear-gradient(135deg, #16a34a, #40916c);
+    background: linear-gradient(135deg, #16a34a, #1aa013);
     color: white;
     border-radius: 50px;
     text-decoration: none;
@@ -196,7 +197,7 @@
 }
 
 .home-button:hover {
-    background: linear-gradient(135deg, #40916c, #52b788);
+    background: linear-gradient(135deg, #32ac5b, #1aa013);
     color: white;
     transform: translateY(-3px);
     box-shadow: 0 15px 40px rgba(45, 106, 79, 0.4);
@@ -806,10 +807,18 @@
                 <img src="{{ asset('img/logo/kuningan.png') }}" alt="Logo Kabupaten Kuningan">
                 <div class="header-text">
                     <h2 class="text-white floating-text">WEBSITE RESMI</h2>
-                    <h4 class="text-white floating-subtext">DINAS KETAHANAN PANGAN DAN PERTANIAN</h4>
-                    <h4 class="text-white floating-subtext">KABUPATEN KUNINGAN</h4>
+                    <h4 class="text-white floating-text">DINAS KETAHANAN PANGAN DAN PERTANIAN</h4>
+                    <h4 class="text-white floating-text">KABUPATEN KUNINGAN</h4>
                 </div>
             </div>
+        </div>
+
+        <!-- Home Button -->
+        <div class="home-button-wrapper mb-4">
+            <button id="btn-buka" class="home-button">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Halaman Beranda</span>
+            </button>
         </div>
 
         <!-- Menu Grid - 18 Systems -->
@@ -941,7 +950,7 @@
             <a href="https://siaga-asn.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="500">
                 <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=siaga-asn.kuningankab.go.id"
+                    <img src="{{ asset('img/logo/siaga.png') }}"
                         alt="SIAGA ASN">
 
                 </div>
@@ -1051,14 +1060,5 @@
             </a>
 
         </div>
-
-        <!-- Home Button -->
-        <div class="home-button-wrapper">
-            <button id="btn-buka" class="home-button">
-                <i class="bi bi-house-door-fill"></i>
-                <span>Halaman Beranda</span>
-            </button>
-        </div>
-
     </div>
 </section>

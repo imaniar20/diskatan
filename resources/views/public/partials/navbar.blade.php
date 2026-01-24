@@ -76,49 +76,8 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="javascript:void(0);">Layanan</a>
+                    <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="/layanan">Layanan</a>
                 </li>
-
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Informasi' ? 'active' : '' }}"
-                        href="#" id="informasiDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Informasi
-                        <i class="bi bi-chevron-down dropdown-icon"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="informasiDropdown">
-                        <li><a class="dropdown-item {{ $menu == 'Komoditas Pertanian' ? 'active' : '' }}"
-                                href="#struktur">Komoditas Pertanian</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Harga Komoditas Pertanian' ? 'active' : '' }}"
-                                href="#struktur">Harga Komoditas Pertanian</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Ruang Lingkup Pertanian' ? 'active' : '' }}"
-                                href="#struktur">Ruang Lingkup Pertanian</a></li>
-                    </ul>
-                </li> --}}
-
-                {{-- <li class="nav-item dropdown">
-                    <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $menu == 'Direktori' ? 'active' : '' }}"
-                        href="#" id="direktoriDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Direktori
-                        <i class="bi bi-chevron-down dropdown-icon"></i>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="direktoriDropdown">
-                        <li><a class="dropdown-item {{ $menu == 'Sekretariat' ? 'active' : '' }}"
-                                href="#profil">Sekretariat</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Bidang Tanaman Pangan' ? 'active' : '' }}"
-                                href="#struktur">Bidang Tanaman Pangan</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Bidang Hortikulatura dan Perkebunan' ? 'active' : '' }}"
-                                href="#struktur">Bidang Hortikultura dan Perkebunan</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Bidang Pengolajan Hasil dan Konsumsi Pangan' ? 'active' : '' }}"
-                                href="#struktur">Bidang Pengolahan Hasil dan Konsumsi Pangan</a>
-                        </li>
-                        <li><a class="dropdown-item {{ $menu == 'Bidang Cadangan dan Distribusi Pangan' ? 'active' : '' }}"
-                                href="#struktur">Bidang Cadangan dan Distribusi Pangan</a></li>
-                        <li><a class="dropdown-item {{ $menu == 'Bidang Penyuluhan' ? 'active' : '' }}"
-                                href="#struktur">Bidang Penyuluhan</a></li>
-                    </ul>
-                </li> --}}
             </ul>
         </div>
     </div>

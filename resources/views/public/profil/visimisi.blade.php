@@ -156,7 +156,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         font-weight: 800;
-        color: #2d6a4f;
+        color: #1a9828;
         margin-bottom: 25px;
         display: flex;
         align-items: center;
@@ -223,7 +223,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         font-weight: 800;
-        color: #2d6a4f;
+        color: #1a9828;
         margin-bottom: 35px;
         display: flex;
         align-items: center;
@@ -272,7 +272,7 @@
         transform: translateY(-50%);
         width: 50px;
         height: 50px;
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         color: white;
         border-radius: 50%;
         display: flex;

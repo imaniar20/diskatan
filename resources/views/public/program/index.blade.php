@@ -6,8 +6,8 @@
     <style>
         :root {
             --primary-green: #16a34a;
-            --secondary-green: #14532d;
-            --light-green: #52b788;
+            --secondary-green: #138817;
+            --light-green: #18c938;
             --accent-green: #74c69d;
             --cream: #f8f9fa;
             --dark: #1b4332;
@@ -471,12 +471,19 @@
                 <ul class="nav nav-pills mb-3 justify-content-center">
                     @foreach ($kategori as $i => $kat)
                         <li class="nav-item">
-                            <button class="nav-link {{ $i === 0 ? 'active' : '' }}" data-id="{{ $kat->id }}">
-                                <div class="text-pils">{!! $kat->icon !!}<span
-                                        class="ms-2">{{ $kat->nama }}</span></div>
+                            <button
+                                class="nav-link
+                                    {{ $select == $kat->slug || ($select == 0 && $i == 0) ? 'active' : '' }}"
+                                data-id="{{ $kat->id }}">
+
+                                <div class="text-pils">
+                                    {!! $kat->icon !!}
+                                    <span class="ms-2">{{ $kat->nama }}</span>
+                                </div>
                             </button>
                         </li>
                     @endforeach
+
                 </ul>
                 <div class="row g-4 mt-3" id="news_body"></div>
             </div>

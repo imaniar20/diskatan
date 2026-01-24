@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use voku\helper\AntiXSS;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 use App\Models\News;
 use App\Models\Agendas;
@@ -59,14 +60,60 @@ class HomeController extends Controller
 
         $total = Visitor::where('url', $currentUrl)->count();
 
+        $currentUrl = request()->fullUrl();
+        $visitor = Visitor::where('url', $currentUrl)->count();
+
+        $kategori = Kategori::all();
+
+        $response = Http::get('https://www.googleapis.com/youtube/v3/search', [
+            'part' => 'snippet',
+            'channelId' => env('YOUTUBE_CHANNEL_ID'),
+            'maxResults' => 3,
+            'order' => 'date',
+            'type' => 'video',
+            'key' => env('YOUTUBE_API_KEY'),
+        ]);
+        $videos = $response->json('items') ?? [];
+        $videoIds = collect($videos)
+            ->pluck('id.videoId')
+            ->implode(',');
+
+        $detailsResponse = Http::get('https://www.googleapis.com/youtube/v3/videos', [
+            'part' => 'statistics,contentDetails',
+            'id' => $videoIds,
+            'key' => env('YOUTUBE_API_KEY'),
+        ]);
+
+        $details = collect($detailsResponse->json('items'))
+            ->keyBy('id');
+
+        $videos = collect($videos)->map(function ($video) use ($details) {
+            $id = $video['id']['videoId'];
+
+            return [
+                'id' => $id,
+                'title' => $video['snippet']['title'],
+                'thumbnail' => $video['snippet']['thumbnails']['medium']['url'],
+                'published_at' => $video['snippet']['publishedAt'],
+                'views' => $details[$id]['statistics']['viewCount'] ?? 0,
+                'likes' => $details[$id]['statistics']['likeCount'] ?? 0,
+                'duration' => $details[$id]['contentDetails']['duration'] ?? 'PT0S',
+            ];
+        });
+
+        // dd($videos);
+
         $data = array(
             'head' => "Home",
             'title' => "Home",
             'menu' => "Home",
+            'visitor' => $visitor,
             'news' => $news,
             'agenda' => $agenda,
+            'kategori' => $kategori,
             'total' => $total,
             'data' => $datas,
+            'videos' => $videos
         );
 
         return view('public.home.main')->with($data);
@@ -290,18 +337,50 @@ class HomeController extends Controller
 
     public function program()
     {
-        $kategori = Kategori::with(['programs.news' => function ($q) {
-            $q->latest()->limit(5);
-        }])->get();
+        $kategori = Kategori::with([
+            'programs.news' => function ($q) {
+                $q->latest()->limit(5);
+            }
+        ])->get();
+        
+        $data = array(
+            'head' => "Program",
+            'title' => "Program",
+            'menu' => "Program",
+            'select' => 0,
+            'kategori' => $kategori,
+        );
+
+        return view('public.program.index')->with($data);
+    }
+
+    public function program_selection($select){
+        $kategori = Kategori::with([
+            'programs.news' => function ($q) {
+                $q->latest()->limit(5);
+            }
+        ])->get();
 
         $data = array(
             'head' => "Program",
             'title' => "Program",
             'menu' => "Program",
+            'select' => $select,
             'kategori' => $kategori,
         );
 
         return view('public.program.index')->with($data);
+    }
+
+    public function layanan()
+    {
+        $data = array(
+            'head' => "Layanan",
+            'title' => "Layanan",
+            'menu' => "Layanan",
+        );
+
+        return view('public.layanan.index')->with($data);
     }
 
     public function byKategori($id)
@@ -309,8 +388,8 @@ class HomeController extends Controller
         $news = News::whereHas('programs.kategori', function ($q) use ($id) {
             $q->where('id', $id);
         })
-        ->latest()
-        ->paginate(6);
+            ->latest()
+            ->paginate(6);
 
         return view('public.ajax.news', compact('news'));
     }

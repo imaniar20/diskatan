@@ -140,7 +140,7 @@
         left: 0;
         width: 5px;
         height: 100%;
-        background: linear-gradient(180deg, #2d6a4f, #40916c, #52b788);
+        background: linear-gradient(180deg, #16a34a, #40916c, #52b788);
     }
     
     .tupoksi-card:hover {
@@ -157,7 +157,7 @@
         font-family: 'Playfair Display', serif;
         font-size: 2rem;
         font-weight: 800;
-        color: #2d6a4f;
+        color: #16a34a;
         margin-bottom: 15px;
         position: relative;
         display: inline-block;
@@ -171,7 +171,7 @@
         transform: translateX(-50%);
         width: 80px;
         height: 4px;
-        background: linear-gradient(90deg, #2d6a4f, #52b788);
+        background: linear-gradient(90deg, #16a34a, #52b788);
         border-radius: 10px;
     }
     
@@ -208,7 +208,7 @@
     
     /* ============ QUOTE/MAIN TASK BOX ============ */
     .main-task-box {
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         color: white;
         padding: 30px 40px;
         border-radius: 20px;
@@ -224,7 +224,7 @@
         top: -20px;
         left: 20px;
         font-size: 8rem;
-        color: rgba(255,255,255,0.1);
+        color: rgba(255, 255, 255, 0.1);
         font-family: Georgia, serif;
         line-height: 1;
     }
@@ -235,6 +235,7 @@
         line-height: 1.8;
         font-weight: 500;
         position: relative;
+        color: #ffffff;
         z-index: 2;
         padding-left: 0;
         text-align: center;
@@ -254,7 +255,7 @@
     }
     
     .function-section h6 {
-        color: #2d6a4f;
+        color: #179a22;
         font-size: 1.2rem;
         font-weight: 700;
         margin-bottom: 25px;
@@ -306,7 +307,7 @@
         transform: translateY(-50%);
         width: 40px;
         height: 40px;
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
         color: white;
         border-radius: 50%;
         display: flex;

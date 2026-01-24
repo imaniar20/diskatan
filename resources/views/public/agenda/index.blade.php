@@ -460,7 +460,7 @@
                 <div class="col-lg-4">
 
                     <!-- SEARCH -->
-                    <div class="card border-0 shadow-sm mb-4 sidebar-card search-card" data-aos="fade-left" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm mb-4 sidebar-card search-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-search me-2"></i>Cari Agenda
@@ -479,7 +479,7 @@
                     </div>
 
                     <!-- AGENDA TERDEKAT -->
-                    <div class="card border-0 shadow-sm mb-4 sidebar-card" data-aos="fade-left" data-aos-delay="300">
+                    <div class="card border-0 shadow-sm mb-4 sidebar-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-clock-history me-2"></i>Agenda Terdekat
@@ -505,7 +505,7 @@
                     </div>
 
                     <!-- AGENDA PALING BANYAK DILIHAT -->
-                    <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-left" data-aos-delay="400">
+                    <div class="card border-0 shadow-sm sidebar-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="card-body">
                             <h6 class="fw-semibold mb-3">
                                 <i class="bi bi-fire me-2"></i>Agenda Populer

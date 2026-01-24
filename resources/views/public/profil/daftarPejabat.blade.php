@@ -167,7 +167,7 @@
 
         /* Table Header */
         .table thead th {
-            background: linear-gradient(135deg, #2d6a4f, #40916c) !important;
+            background: linear-gradient(135deg, #16a34a, #138817) !important;
             color: white !important;
             font-weight: 600;
             text-transform: uppercase;
@@ -312,7 +312,7 @@
 
         /* Badge Styling for Specific Columns */
         .badge-golongan {
-            background: linear-gradient(135deg, #2d6a4f, #40916c);
+            background: linear-gradient(135deg, var(--secondary-green), var(--primary-green));
             color: white;
             padding: 6px 12px;
             border-radius: 20px;

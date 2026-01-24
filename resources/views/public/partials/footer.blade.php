@@ -71,14 +71,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://www.lkpp.go.id/" target="_blank">
-                            <img src="/img/logo/lkpp.png"
-                                style="width: 20px; filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.48));"
-                                alt="">
-                            LKPP
-                        </a>
-                    </li>
-                    <li>
                         <a href="https://emonev.pertanian.go.id/" target="_blank">
                             <img src="/img/logo/emonev.png"
                                 style="width: 20px; filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.48));"

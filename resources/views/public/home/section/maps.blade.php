@@ -1,7 +1,10 @@
 <style>
     /* ============ MAPS SECTION ============ */
+    .page-wrapper {
+        overflow-x: hidden;
+    }
     .maps-section {
-        padding: 100px 0;
+        padding: 40px 0;
         background: white;
         position: relative;
     }

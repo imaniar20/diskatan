@@ -65,6 +65,11 @@ Route::post('/berita/cari', [HomeController::class, 'filterNews'])->name('berita
 
 //progaram
 Route::get('/program', [HomeController::class, 'program']);
+Route::get('/program/{slug}', [HomeController::class, 'program_selection']);
+
+//layanan
+Route::get('/layanan', [HomeController::class, 'layanan']);
+
 Route::get('/news/kategori/{id}', [HomeController::class, 'byKategori']);
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

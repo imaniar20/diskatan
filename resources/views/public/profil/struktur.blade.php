@@ -168,21 +168,21 @@
         transition: transform 0.4s ease;
     }
     
-    .org-card:hover::before {
+    /* .org-card:hover::before {
         transform: scaleX(1);
     }
-    
-    .org-card:hover {
+     */
+    /* .org-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 15px 40px rgba(45, 106, 79, 0.15);
         border-color: #52b788;
         background: white;
-    }
+    } */
     
     /* ============ LEADER CARD (Kepala Dinas) ============ */
     .org-leader {
         max-width: 400px;
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         color: white;
         border: none;
         box-shadow: 0 10px 40px rgba(45, 106, 79, 0.3);
@@ -216,7 +216,7 @@
     /* ============ SECRETARY CARD ============ */
     .org-secretary {
         max-width: 500px;
-        background: linear-gradient(135deg, #40916c, #52b788);
+        background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
         color: white;
         border: none;
         box-shadow: 0 10px 35px rgba(64, 145, 108, 0.3);
