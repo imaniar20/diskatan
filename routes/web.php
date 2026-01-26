@@ -67,6 +67,9 @@ Route::post('/berita/cari', [HomeController::class, 'filterNews'])->name('berita
 Route::get('/program', [HomeController::class, 'program']);
 Route::get('/program/{slug}', [HomeController::class, 'program_selection']);
 
+//data dan informasi
+Route::get('/datadaninformasi', [HomeController::class, 'dataDanInformasi']);
+
 //layanan
 Route::get('/layanan', [HomeController::class, 'layanan']);
 

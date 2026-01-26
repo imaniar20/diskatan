@@ -72,7 +72,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Data' ? 'active' : '' }}" href="javascript:void(0);">Data dan Informasi</a>
+                    <a class="nav-link {{ $menu == 'Data dan Informasi' ? 'active' : '' }}" href="/datadaninformasi">Data dan Informasi</a>
                 </li>
 
                 <li class="nav-item">

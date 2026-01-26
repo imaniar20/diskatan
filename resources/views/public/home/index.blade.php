@@ -135,7 +135,7 @@
                             <i class="bi bi-people"></i>
                         </div>
                         <div class="stat-content">
-                            <h3 class="stat-number">{{ $data->kelompok_tani }}</h3>
+                            <h3 class="stat-number">{{ number_format($kelompok_tani) }}</h3>
                             <p class="stat-label">Kelompok Tani</p>
                         </div>
                     </div>

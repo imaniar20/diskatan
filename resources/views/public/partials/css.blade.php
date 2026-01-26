@@ -1260,8 +1260,9 @@
         }
 
         .container {
-            padding-left: 15px !important;
-            padding-right: 15px !important;
+            /* min-width: 150% !important; */
+            padding-left: 0 !important;
+            padding-right: 0 !important;
         }
 
         .sambutan-title {
@@ -1284,6 +1285,19 @@
             font-size: 3rem;
         }
     }
+
+    @media (min-width: 1400px) {
+
+        .container,
+        .container-lg,
+        .container-md,
+        .container-sm,
+        .container-xl,
+        .container-xxl {
+            max-width: 80%;
+        }
+    }
+
 
     @media (max-width: 576px) {
         .carousel-item {
@@ -1520,3 +1534,4 @@
         }
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
