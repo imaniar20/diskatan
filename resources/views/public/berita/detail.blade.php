@@ -41,7 +41,7 @@
     }
     
     .page-title {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 3.5rem;
         font-weight: 900;
         color: white;
@@ -163,7 +163,7 @@
     
     /* ============ TITLE SECTION ============ */
     .detail-title {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 2.8rem;
         font-weight: 900;
         color: #2d6a4f;
@@ -234,7 +234,7 @@
         line-height: 0.8;
         margin: 10px 15px 0 0;
         color: #2d6a4f;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Poppins', sans-serif;
     }
     
     .detail-content h5 {
@@ -242,7 +242,7 @@
         font-weight: 700;
         margin-top: 35px;
         margin-bottom: 20px;
-        font-family: 'Playfair Display', serif;
+        font-family: 'Poppins', sans-serif;
         font-size: 1.5rem;
     }
     

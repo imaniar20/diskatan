@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Playfair+Display:wght@700&amp;family=Cinzel:wght@600&amp;display=swap" rel="stylesheet">
 <style>
     /* ============ CONTENT SECTION ============ */
 .menu-section {
@@ -44,7 +45,8 @@
 }
 
 .logo-wrapper {
-    display: inline-block;
+    display: grid;
+    place-items: center;
 }
 
 .logo-wrapper img {
@@ -60,7 +62,8 @@
 }
 
 .floating-text {
-    font-size: 2rem;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
     font-weight: 700;
     color: white;
     text-shadow:
@@ -74,11 +77,14 @@
 }
 
 .floating-subtext {
-    font-size: 1.3rem;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
     color: white;
     text-shadow:
-        0 2px 3px rgba(0, 0, 0, 0.3),
-        0 4px 7px rgba(0, 0, 0, 0.2);
+        0 1px 0 #ccc,
+        0 2px 0 #c9c9c9,
+        0 3px 0 #bbb,
+        0 4px 5px rgba(0, 0, 0, 0.3);
     margin: 5px 0;
     letter-spacing: 0.5px;
     font-weight: 500;
@@ -786,7 +792,7 @@
 <!-- Video Background -->
 <div class="video-background">
     <video autoplay muted loop playsinline>
-        <source src="https://siwawan.kuningankab.go.id/assets/other/video.mp4" type="video/mp4">
+        <source src="https://diskatan.kuningankab.go.id/assets/video_padi.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
@@ -803,12 +809,12 @@
 
         <!-- Logo -->
         <div class="logo-container" data-aos="zoom-in" data-aos-duration="800">
-            <div class="logo-wrapper">
-                <img src="{{ asset('img/logo/kuningan.png') }}" alt="Logo Kabupaten Kuningan">
+            <div class="logo-wrapper flex justify-center items-center">
+                <img class="w-[100px] h-[100px] object-contain drop-shadow-lg" src="{{ asset('img/logo/kuningan.png') }}" alt="Logo Kabupaten Kuningan">
                 <div class="header-text">
-                    <h2 class="text-white floating-text">WEBSITE RESMI</h2>
-                    <h4 class="text-white floating-text">DINAS KETAHANAN PANGAN DAN PERTANIAN</h4>
-                    <h4 class="text-white floating-text">KABUPATEN KUNINGAN</h4>
+                    <h2 class="text-black floating-text">Website Resmi</h2>
+                    <h4 class="text-black floating-text">Dinas Ketahanan Pangan dan Pertanian</h4>
+                    <h4 class="text-black floating-text">Kabupaten Kuningan</h4>
                 </div>
             </div>
         </div>
@@ -831,7 +837,7 @@
                         alt="KUNINGAN">
 
                 </div>
-                <p class="menu-label">PEMKABKUININGAN</p>
+                <p class="menu-label">PEMKABKUNINGAN</p>
             </a>
             
             {{-- 1. Emonev Kementan --}}
@@ -967,14 +973,14 @@
                 <p class="menu-label">SKPG</p>
             </a>
 
-            {{-- 12. LKPP --}}
-            <a href="https://simluh.pertanian.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
+            {{-- 12. Coretax --}}
+            <a href="https://coretaxdjp.pajak.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="600">
                 <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}" alt="LKPP">
+                    <img src="{{ asset('img/logo/qtx.png') }}" alt="LKPP">
 
                 </div>
-                <p class="menu-label">SIMLUHTAN</p>
+                <p class="menu-label">Coretax</p>
             </a>
 
             {{-- 13. BIMA --}}
