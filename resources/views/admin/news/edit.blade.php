@@ -10,7 +10,8 @@
         </nav>
     </div>
     <div class="section">
-        <form id="editBerita" action="{{ route('admin-berita.update', $news->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="editBerita" action="{{ route('admin-berita.update', $news->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
@@ -20,11 +21,15 @@
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <div class="col-2 mb-3">
-                                        <label for="program" class="form-label">Program <span
-                                                class="text-danger">*</span></label>
+                                        <label for="program" class="form-label">Program
+                                            {{-- <span class="text-danger">*</span> --}}
+                                        </label>
                                         <select class="form-control" name="program" id="program">
+                                            <option value="" selected disabled>- Pilih Program -</option>
                                             @foreach ($program as $item)
-                                                <option value="{{ $item->id }}" {{ $news->program_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                                <option value="{{ $item->id }}"
+                                                    {{ $news->program_id == $item->id ? 'selected' : '' }}>
+                                                    {{ $item->name }}</option>
                                             @endforeach
                                         </select>
                                         <small class="text-danger" id="errProgram"></small>
@@ -86,7 +91,42 @@
                                 <small class="text-danger" id="errContent"></small>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="row">
+                                @foreach ($news->contents as $i => $konten)
+                                    <div class="col-3 mb-3">
+                                        <label class="form-label">Foto Konten {{ $i + 1 }}</label>
+
+                                        <input type="file" class="dropify"
+                                            data-default-file="{{ asset('storage/' . $konten->file) }}" disabled>
+
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="checkbox" name="hapus_konten[]"
+                                                value="{{ $konten->id }}">
+                                            <label class="form-check-label">Hapus</label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <div id="konten" class="row">
+                                <div class="col-3 mb-3 konten-item">
+                                    <label class="form-label">Foto Konten Baru</label>
+
+                                    <input type="file" class="form-control dropify" name="foto_konten[]"
+                                        accept="image/*">
+
+                                    <button type="button" class="btn btn-sm btn-danger mt-2 btn-hapus d-none">
+                                        Hapus
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="button" id="tambahKonten" class="btn btn-warning">
+                                <i class='bx bx-plus-circle'></i> Tambah Konten
+                            </button>
+                            <hr>
+
+                            <div class="row mb-3">
                                 <div class="justify-content-center">
                                     <button type="submit" class="btn btn-warning">Ubah</button>
                                 </div>
@@ -100,6 +140,49 @@
     </div>
 
     <script>
+        let index = 1;
+
+        $('.dropify').dropify();
+
+        $('#tambahKonten').on('click', function() {
+            index++;
+
+            let item = $('.konten-item:first').clone();
+
+            // Destroy dropify pada clone
+            // item.find('.dropify').dropify('destroy');
+
+            // Hapus wrapper dropify yang ikut ke-clone
+            item.find('.dropify-wrapper').replaceWith(function() {
+                return $(this).find('input');
+            });
+
+            // Reset value
+            item.find('input').val('');
+
+            // Update label
+            item.find('label').html(`Foto Konten ${index} <span class="text-danger">*</span>`);
+
+            // Tampilkan tombol hapus
+            item.find('.btn-hapus').removeClass('d-none');
+
+            // Append ke container
+            $('#konten').append(item);
+
+            // HANYA init dropify pada item yang baru ditambahkan
+            item.find('.dropify').dropify();
+        });
+
+        $('#konten').on('click', '.btn-hapus', function() {
+            let itemToRemove = $(this).closest('.konten-item');
+
+            itemToRemove.find('.dropify').dropify('destroy');
+
+            itemToRemove.remove();
+
+            index--;
+        });
+        
         const handlerTitle = (e) => {
             let title = $('#title').val().trim();
 

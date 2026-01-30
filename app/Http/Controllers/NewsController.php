@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use voku\helper\AntiXSS;
 use App\Models\News;
 use App\Models\Programs;
+use App\Models\News_Contents;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,7 @@ class NewsController extends Controller
         } else {
             $news = News::where('user_id', session('user')->id)->with('user')->orderByDesc('published_at')->get();
         }
-        
+
 
         $data = array(
             'head' => "Berita",
@@ -59,7 +60,7 @@ class NewsController extends Controller
 
         // 1. VALIDASI
         $validated = $request->validate([
-            'program' => 'required',
+            // 'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:published,draft',
@@ -116,16 +117,17 @@ class NewsController extends Controller
                 }
             }
         }
-
         $this->cleanupTempDirectory();
+
 
         $title = $antiXss->xss_clean($request->title);
         $slug = $this->generateUniqueSlugNews($title);
 
         // 3. SIMPAN DATA
-        News::create([
+        $news = News::create([
             'user_id' => session('user')->id,
-            'program_id' => $antiXss->xss_clean($request->program),
+            // 'program_id' => $antiXss->xss_clean($request->program),
+            'program_id' => null,
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
@@ -133,6 +135,29 @@ class NewsController extends Controller
             'status' => $antiXss->xss_clean($request->status),
             'published_at' => $antiXss->xss_clean($request->published_at)
         ]);
+
+        $files = $request->file('foto_konten');
+        $dataKonten = [];
+
+        foreach ($files as $index => $file) {
+
+            $filename = Str::slug($request->title)
+                . '-' . ($index + 1)
+                . '-' . time()
+                . '.' . $file->getClientOriginalExtension();
+
+            $path = $file->storeAs('news/content', $filename, 'public');
+
+            $dataKonten[] = [
+                'news_id' => $news->id,
+                'file' => $path,
+                'urutan' => $index + 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        News_Contents::insert($dataKonten);
 
         // 4. REDIRECT
         return redirect()
@@ -164,7 +189,7 @@ class NewsController extends Controller
      */
     public function edit(string $slug)
     {
-        $news = News::where('slug', $slug)->first();
+        $news = News::where('slug', $slug)->with('contents')->firstOrFail();
         $user = session('user');
 
         if ($user->bidang_id != 1 && $user->id != $news->user_id) {
@@ -194,7 +219,7 @@ class NewsController extends Controller
         $antiXss = new AntiXSS();
 
         $validated = $request->validate([
-            'program' => 'required',
+            // 'program' => 'required',
             'title' => 'required|string|min:3',
             'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'status' => 'required|in:published,draft',
@@ -290,9 +315,11 @@ class NewsController extends Controller
         if (strtolower($news->title) !== strtolower($title)) {
             $slug = $this->generateUniqueSlugNews($title);
         }
+
         $news->update([
             'user_id' => session('user')->id,
-            'program_id' => $antiXss->xss_clean($request->program),
+            // 'program_id' => $antiXss->xss_clean($request->program),
+            'program_id' => null,
             'title' => $title,
             'slug' => $slug,
             'thumbnail' => $thumbnailPath,
@@ -301,6 +328,45 @@ class NewsController extends Controller
             'published_at' => $antiXss->xss_clean($request->published_at),
             'updated_at' => now()
         ]);
+
+        if ($request->filled('hapus_konten')) {
+
+            $kontens = News_Contents::whereIn('id', $request->hapus_konten)
+                ->where('news_id', $news->id)
+                ->get();
+
+            foreach ($kontens as $konten) {
+                Storage::disk('public')->delete($konten->file);
+                $konten->delete();
+            }
+        }
+
+        // 3️⃣ TAMBAH konten baru (kalau ada)
+        if ($request->hasFile('foto_konten')) {
+
+            $urutanTerakhir = $news->contents()->max('urutan') ?? 0;
+            $dataKonten = [];
+
+            foreach ($request->file('foto_konten') as $index => $file) {
+
+                $filename = Str::slug($request->title)
+                    . '-' . ($urutanTerakhir + $index + 1)
+                    . '-' . time()
+                    . '.' . $file->getClientOriginalExtension();
+
+                $path = $file->storeAs('news/content', $filename, 'public');
+
+                $dataKonten[] = [
+                    'news_id' => $news->id,
+                    'file' => $path,
+                    'urutan' => $urutanTerakhir + $index + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+
+            News_Contents::insert($dataKonten);
+        }
 
         return redirect()
             ->route('admin-berita.index')
@@ -348,7 +414,7 @@ class NewsController extends Controller
      */
     public function destroy(string $slug)
     {
-        $news = News::where('slug', $slug)->first();
+        $news = News::where('slug', $slug)->with('contents')->firstOrFail();
         $user = session('user');
 
         if ($user->bidang_id != 1 && $user->id != $news->user_id) {
@@ -369,6 +435,10 @@ class NewsController extends Controller
                     Storage::disk('public')->delete($file);
                 }
             }
+        }
+
+        foreach ($news->contents as $konten) {
+            Storage::disk('public')->delete($konten->file);
         }
 
         $news->delete();
