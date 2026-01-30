@@ -282,6 +282,7 @@
     
     .detail-content img {
         width: 100%;
+        height: 100%;
         border-radius: 15px;
         margin: 30px 0;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -601,7 +602,9 @@
                                 <p>
                                     {!! $news->content !!}
                                 </p>
-                                
+                                @foreach ($news->contents as $item)
+                                    <img class="alignnone size-full wp-image-9331" src="../../storage/{{ $item->file }}" sizes="(max-width: 1280px) 100vw, 1280px" alt="" width="1280" loading="lazy">
+                                @endforeach
                             </div>
 
                             <!-- Tags -->

@@ -295,7 +295,7 @@ class HomeController extends Controller
     {
         $this->visitor();
 
-        $news = News::where('slug', $slug)->firstOrFail();
+        $news = News::where('slug', $slug)->with('contents')->firstOrFail();
 
         $lastest = News::orderByDesc('published_at')->take(5)->get();
 
