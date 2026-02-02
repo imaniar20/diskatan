@@ -57,7 +57,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $antiXss = new AntiXSS();
-
+        
         // 1. VALIDASI
         $validated = $request->validate([
             // 'program' => 'required',
@@ -122,7 +122,7 @@ class NewsController extends Controller
 
         $title = $antiXss->xss_clean($request->title);
         $slug = $this->generateUniqueSlugNews($title);
-
+        
         // 3. SIMPAN DATA
         $news = News::create([
             'user_id' => session('user')->id,
@@ -138,26 +138,27 @@ class NewsController extends Controller
 
         $files = $request->file('foto_konten');
         $dataKonten = [];
+        if($files){
+            foreach ($files as $index => $file) {
 
-        foreach ($files as $index => $file) {
-
-            $filename = Str::slug($request->title)
-                . '-' . ($index + 1)
-                . '-' . time()
-                . '.' . $file->getClientOriginalExtension();
-
-            $path = $file->storeAs('news/content', $filename, 'public');
-
-            $dataKonten[] = [
-                'news_id' => $news->id,
-                'file' => $path,
-                'urutan' => $index + 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+                $filename = Str::slug($request->title)
+                    . '-' . ($index + 1)
+                    . '-' . time()
+                    . '.' . $file->getClientOriginalExtension();
+    
+                $path = $file->storeAs('news/content', $filename, 'public');
+    
+                $dataKonten[] = [
+                    'news_id' => $news->id,
+                    'file' => $path,
+                    'urutan' => $index + 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+    
+            News_Contents::insert($dataKonten);
         }
-
-        News_Contents::insert($dataKonten);
 
         // 4. REDIRECT
         return redirect()
