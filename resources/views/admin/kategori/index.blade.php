@@ -67,7 +67,7 @@
                                                 data-bs-target="#edit" data-id="{{ $data->id }}"
                                                 data-nama="{{ $data->nama }}" data-deskripsi="{{ $data->description }}" data-icon="{{ $data->icon }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                             <button type="button" class="btn btn-sm btn-danger"
-                                                onclick="deleteUser('{{ route('admin-bidang.destroy', $data->id) }}')">
+                                                onclick="deleteUser('{{ route('admin-kategori.destroy', $data->id) }}')">
                                                 <i class="bx bx-trash-alt me-1"></i> Hapus
                                             </button>
                                         </td>
@@ -250,7 +250,7 @@
         function deleteUser(url) {
             Swal.fire({
                 title: 'Yakin mau hapus?',
-                text: 'Data Bidang akan dihapus permanen!',
+                text: 'Data akan dihapus permanen!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -274,7 +274,7 @@
                         .then(data => {
                             Swal.fire(
                                 'Terhapus!',
-                                data.message ?? 'User berhasil dihapus.',
+                                data.message ?? 'Data berhasil dihapus.',
                                 'success'
                             ).then(() => {
                                 location.reload();

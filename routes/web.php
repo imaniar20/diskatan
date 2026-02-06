@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BidangsController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProductionsController;
 
 use App\Models\Agendas;
 use App\Models\News;
@@ -186,6 +187,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin-berita', NewsController::class);
 
     Route::resource('/admin-program', ProgramsController::class);
+
+    Route::resource('/admin-produksi', ProductionsController::class);
 
     Route::resource('/admin-kategori', KategoriController::class);
 

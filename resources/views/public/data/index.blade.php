@@ -404,6 +404,106 @@
                 font-size: 0.95rem;
             }
         }
+
+        .pills-wrapper {
+            margin-left: 5vw;
+            margin-right: 5vw;
+        }
+
+        .nav-pills {
+            border-radius: 50px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, var(--cream), var(--secondary-cream));
+        }
+
+        .nav-pills .nav-link .text-pils {
+            color: #16a34a;
+        }
+
+        .nav-pills .nav-link.active .text-pils {
+            color: rgb(255, 255, 255);
+        }
+
+        .nav-pills .nav-link:hover {
+            color: #16a34a;
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-pills .nav-link.active {
+            background: #16a34a;
+            color: white;
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.2);
+        }
+
+        .item-produksi {
+            display: flex;
+            align-items: center;
+            padding: 14px 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .item-produksi:hover {
+            background-color: #f8f9fa;
+        }
+
+        .item-number {
+            width: 32px;
+            height: 32px;
+            background-color: #d4f4dd;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #1a1a1a;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .item-content {
+            flex: 1;
+            margin-left: 16px;
+        }
+
+        .item-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .item-year {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .item-value {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .value-number {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 2px;
+        }
+
+        .value-unit {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        #donutChart {
+            margin-top: -20px;
+        }
+
+        .apexcharts-legend-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+        }
     </style>
 @endpush
 
@@ -425,63 +525,170 @@
     </section>
     <section class="content-section">
         <div class="container">
-            <div class="row g-4">
-                <!-- Stat 1 -->
-                <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-success">
-                            <i class="bi bi-geo-alt"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 class="stat-number">{{ $data->hektar_luas_tanam }}</h3>
-                            <p class="stat-label">Hektar Luas Tanam</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="pills-wrapper">
+                <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#statistik" type="button">
+                            <i class='bx bx-objects-vertical-bottom text-pils'></i>
+                            <span class="ms-2 text-pils">Statistik</span>
+                        </button>
+                    </li>
 
-                <!-- Stat 2 -->
-                <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-warning">
-                            <i class="bi bi-bag-check"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 class="stat-number">{{ $data->ton_produksi }}</h3>
-                            <p class="stat-label">Ton Produksi</p>
-                        </div>
-                    </div>
-                </div>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#produksi" type="button">
+                            <i class='bx bx-stats text-pils'></i>
+                            <span class="ms-2 text-pils">Produksi</span>
+                        </button>
+                    </li>
 
-                <!-- Stat 3 -->
-                <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-primary">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 class="stat-number">{{ number_format($kelompok_tani) }}</h3>
-                            <p class="stat-label">Kelompok Tani</p>
-                        </div>
-                    </div>
-                </div>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#ketahanan" type="button">
+                            <i class='bx bx-map-alt text-pils'></i>
+                            <span class="ms-2 text-pils">Ketahanan Pangan</span>
+                        </button>
+                    </li>
 
-                <!-- Stat 4 -->
-                <div class="col-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="stat-card">
-                        <div class="stat-icon bg-info">
-                            <i class="bi bi-graph-up-arrow"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 class="stat-number">{{ $data->indeks_ketahanan_pangan }}</h3>
-                            <p class="stat-label">Indeks Ketahanan Pangan</p>
+                    {{-- <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#dokumen" type="button">
+                            <i class='bx bxs-book-content text-pils'></i>
+                            <span class="ms-2 text-pils">Dokumen</span>
+                        </button>
+                    </li> --}}
+                </ul>
+                <div class="tab-content mt-4" id="pills-tabContent">
+
+                    <div class="tab-pane fade show active" id="statistik">
+                        <div class="row g-4">
+                            <!-- Stat 1 -->
+                            <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-success">
+                                        <i class="bi bi-geo-alt"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 class="stat-number">{{ $data->hektar_luas_tanam }}</h3>
+                                        <p class="stat-label">Hektar Luas Tanam</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stat 2 -->
+                            <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-warning">
+                                        <i class="bi bi-bag-check"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 class="stat-number">{{ $data->ton_produksi }}</h3>
+                                        <p class="stat-label">Ton Produksi</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stat 3 -->
+                            <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-primary">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 class="stat-number">{{ number_format($kelompok_tani) }}</h3>
+                                        <p class="stat-label">Kelompok Tani</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Stat 4 -->
+                            <div class="col-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="400">
+                                <div class="stat-card">
+                                    <div class="stat-icon bg-info">
+                                        <i class="bi bi-graph-up-arrow"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <h3 class="stat-number">{{ $data->indeks_ketahanan_pangan }}</h3>
+                                        <p class="stat-label">Indeks Ketahanan Pangan</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="col-12">
+                                <div id="chart" class="px-2"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div id="chart" class="px-2"></div>
+
+                    <div class="tab-pane fade" id="produksi">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <p class="card-header stat-label">Produksi Pertanian {{ date('Y') }}</p>
+                                    <div class="card-body">
+                                        <div id="chart2" class="px-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <p class="card-header stat-label">Data Produksi {{ date('Y') }}</p>
+                                    <div class="card-body">
+                                        @php
+                                            $i = 1;
+                                        @endphp
+                                        @foreach ($produksi as $item)
+                                            <div class="item-produksi">
+                                                <div class="item-number">{{ $i++ }}</div>
+                                                <div class="item-content">
+                                                    <div class="item-name">{{ $item->name }}</div>
+                                                    <div class="item-year">Produksi {{ $item->year }}</div>
+                                                </div>
+                                                <div class="item-value">
+                                                    <div class="value-number">{{ number_format($item->value) }}</div>
+                                                    <div class="value-unit">{{ $item->unit }}</div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ketahanan">
+                        <div class="row g-4">
+                            <!-- Donut Chart -->
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <p class="card-header stat-label">Status Ketahanan Pangan per Desa</p>
+                                    <div class="card-body">
+                                        <div id="donutChart"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bar Chart -->
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <p class="card-header stat-label">Indikator Ketahanan Pangan</p>
+                                    <div class="card-body">
+                                        <div id="barChart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="tab-pane fade" id="dokumen">
+                        <div class="row g-4">
+                            <div class="col-md-4">Konten Dokumen</div>
+                        </div>
+                    </div> --}}
                 </div>
             </div>
+        </div>
+    </section>
+    <section class="content-section">
+        <div class="container">
+
         </div>
     </section>
     <script>
@@ -501,16 +708,16 @@
 
 
         function renderChart(categories, values) {
-
             var options = {
                 series: [{
                     name: 'Jumlah Kelompok Tani',
                     data: values
                 }],
                 chart: {
-                    height: 350,
+                    height: 400,
                     type: 'bar'
                 },
+                colors: ['#16a34a'],
                 plotOptions: {
                     bar: {
                         borderRadius: 6,
@@ -552,6 +759,220 @@
             var chart = new ApexCharts(document.querySelector("#chart"), options);
             chart.render();
         }
+
+        var options = {
+            series: [{
+                name: 'Produksi',
+                data: [
+                    <?php
+                    foreach ($produksi as $item) {
+                        echo $item->value . ',';
+                    }
+                    ?>
+                ]
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            colors: ['#16a34a'],
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + ' ton';
+                    }
+                }
+            },
+            xaxis: {
+                categories: [
+                    <?php
+                    foreach ($produksi as $item) {
+                        echo "'" . $item->name . "',";
+                    }
+                    ?>
+                ],
+            }
+        };
+
+        let chartProduksi = null;
+
+        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
+            el.addEventListener('shown.bs.tab', function(e) {
+                const target = e.target.getAttribute('data-bs-target');
+
+                if (target === '#produksi' && chartProduksi === null) {
+                    chartProduksi = new ApexCharts(
+                        document.querySelector("#chart2"),
+                        options
+                    );
+                    chartProduksi.render();
+                }
+            });
+        });
+
+        var donutOptions = {
+            series: [35, 40, 15, 8, 2],
+            chart: {
+                type: 'donut',
+                height: 320,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+            },
+            labels: ['Sangat Tahan', 'Tahan', 'Agak Rawan', 'Rawan', 'Sangat Rawan'],
+            colors: ['#10b981', '#84cc16', '#fbbf24', '#f97316', '#ef4444'],
+            dataLabels: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    donut: {
+                        size: '70%',
+                        labels: {
+                            show: false
+                        }
+                    }
+                }
+            },
+            legend: {
+                position: 'right',
+                offsetY: 40,
+                fontSize: '13px',
+                fontWeight: 500,
+                markers: {
+                    width: 10,
+                    height: 10,
+                    radius: 2
+                },
+                itemMargin: {
+                    vertical: 8
+                },
+                formatter: function(seriesName, opts) {
+                    return seriesName + ": " + opts.w.globals.series[opts.seriesIndex] + "%"
+                }
+            },
+            stroke: {
+                width: 0
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + "%"
+                    }
+                }
+            }
+        };
+
+        var barOptions = {
+            series: [{
+                name: 'Persentase',
+                data: [35, 40, 15, 8, 2]
+            }],
+            chart: {
+                type: 'bar',
+                height: 320,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    borderRadius: 6,
+                    barHeight: '50%',
+                    distributed: true
+                }
+            },
+            colors: ['#10b981', '#84cc16', '#fbbf24', '#f97316', '#ef4444'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val) {
+                    return val + "%"
+                },
+                offsetX: 30,
+                style: {
+                    fontSize: '13px',
+                    fontWeight: 600,
+                    colors: ['#1a1a1a']
+                }
+            },
+            xaxis: {
+                categories: ['Sangat Tahan', 'Tahan', 'Agak Rawan', 'Rawan', 'Sangat Rawan'],
+                labels: {
+                    show: false
+                },
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        fontSize: '13px',
+                        fontWeight: 500,
+                        colors: ['#1a1a1a']
+                    }
+                }
+            },
+            grid: {
+                show: false,
+                padding: {
+                    left: 0,
+                    right: 20
+                }
+            },
+            legend: {
+                show: false
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + "%"
+                    }
+                }
+            }
+        };
+
+        let donutChart = null;
+        let barChart = null;
+
+        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
+            el.addEventListener('shown.bs.tab', function(e) {
+                const target = e.target.getAttribute('data-bs-target');
+
+                if (target === '#ketahanan') {
+
+                    if (!donutChart) {
+                        donutChart = new ApexCharts(
+                            document.querySelector("#donutChart"),
+                            donutOptions
+                        );
+                        donutChart.render();
+                    }
+
+                    if (!barChart) {
+                        barChart = new ApexCharts(
+                            document.querySelector("#barChart"),
+                            barOptions
+                        );
+                        barChart.render();
+                    }
+
+                }
+            });
+        });
     </script>
 
 @endsection

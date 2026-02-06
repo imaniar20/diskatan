@@ -29,7 +29,7 @@
         <li class="menu-item {{ $title == 'Data' ? 'active' : '' }}">
             <a href="/admin-data" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-data"></i>
-                <div data-i18n="Analytics">Data</div>
+                <div data-i18n="Analytics">Data Dashboard</div>
             </a>
         </li>
         <li class="menu-item {{ $title == 'Agenda' ? 'active' : '' }}">
@@ -50,7 +50,13 @@
                 <div data-i18n="Analytics">Program</div>
             </a>
         </li>
-        @if(session('user')->username == 'admin')
+        @if (session('user')->username == 'admin')
+            <li class="menu-item {{ $title == 'Produksi' ? 'active' : '' }}">
+                <a href="/admin-produksi" class="menu-link">
+                    <i class='menu-icon bx bx-stats' ></i>
+                    <div data-i18n="Analytics">Produksi</div>
+                </a>
+            </li>
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Menu</span>
             </li>

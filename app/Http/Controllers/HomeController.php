@@ -13,6 +13,7 @@ use App\Models\Agendas;
 use App\Models\Visitor;
 use App\Models\Kategori;
 use App\Models\Dashboards;
+use App\Models\Productions;
 
 class HomeController extends Controller
 {
@@ -409,8 +410,10 @@ class HomeController extends Controller
             ], 500);
         }
         $datas = Dashboards::first();
+
+        //produksi
+        $produksi = Productions::all();
         
-        // dd($response->json());
         $data = array(
             'head' => "Data dan Informasi",
             'title' => "Data dan Informasi",
@@ -418,7 +421,8 @@ class HomeController extends Controller
             'data_tani' => $response->json()['data'],
             'kelompok_tani' => $response->json()['total'],
             'data' => $datas,
-        );
+            'produksi' => $produksi,
+         );
 
         return view('public.data.index')->with($data);
     }
