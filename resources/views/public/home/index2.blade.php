@@ -69,21 +69,22 @@
     text-shadow:
         0 1px 0 #ccc,
         0 2px 0 #c9c9c9,
-        0 3px 0 #bbb,
-        0 4px 5px rgba(0, 0, 0, 0.3);
+        0 3px 0 #ffffff,
+        0 4px 5px rgb(255, 255, 255);
     letter-spacing: 1px;
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
 
 .floating-subtext {
-    font-family: 'Great Vibes', cursive;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 2.5rem;
+    font-weight: 700;
     color: white;
     text-shadow:
-        0 1px 0 #ccc,
-        0 2px 0 #c9c9c9,
-        0 3px 0 #bbb,
+        0 1px 0 #ffffff,
+        0 2px 0 #000000,
+        0 3px 0 #000000,
         0 4px 5px rgba(0, 0, 0, 0.3);
     margin: 5px 0;
     letter-spacing: 0.5px;
@@ -296,7 +297,7 @@
     }
 
     .floating-subtext {
-        font-size: 1.1rem;
+        font-size: 1.6rem;
     }
 
     .menu-grid {
@@ -345,7 +346,7 @@
     }
 
     .floating-subtext {
-        font-size: 0.95rem;
+        font-size: 1.4rem;
     }
 
     .menu-grid {
@@ -407,8 +408,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.9rem;
-        margin: 3px 0;
+        font-size: 1.3rem;
+        margin: 5px 0;
     }
 
     .menu-grid {
@@ -474,8 +475,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.85rem;
-        margin: 3px 0;
+        font-size: 1.2rem;
+        margin: 5px 0;
     }
 
     .menu-grid {
@@ -544,8 +545,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.8rem;
-        margin: 2px 0;
+        font-size: 1.1rem;
+        margin: 4px 0;
     }
 
     .menu-grid {
@@ -613,8 +614,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.75rem;
-        margin: 2px 0;
+        font-size: 1rem;
+        margin: 3px 0;
     }
 
     .menu-grid {
@@ -683,8 +684,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.7rem;
-        margin: 2px 0;
+        font-size: 0.95rem;
+        margin: 3px 0;
     }
 
     .menu-grid {
@@ -750,8 +751,8 @@
     }
 
     .floating-subtext {
-        font-size: 0.65rem;
-        margin: 1px 0;
+        font-size: 0.85rem;
+        margin: 2px 0;
     }
 
     .menu-grid {
@@ -813,8 +814,8 @@
                 <img class="w-[100px] h-[100px] object-contain drop-shadow-lg" src="{{ asset('img/logo/kuningan.png') }}" alt="Logo Kabupaten Kuningan">
                 <div class="header-text">
                     <h2 class="text-black floating-text">Website Resmi</h2>
-                    <h4 class="text-black floating-text">Dinas Ketahanan Pangan dan Pertanian</h4>
-                    <h4 class="text-black floating-text">Kabupaten Kuningan</h4>
+                    <h4 class="text floating-subtext">Dinas Ketahanan Pangan dan Pertanian</h4>
+                    <h4 class="text floating-subtext">Kabupaten Kuningan</h4>
                 </div>
             </div>
         </div>

@@ -560,13 +560,27 @@
                     <div class="tab-pane fade show active" id="statistik">
                         <div class="row g-4">
                             <!-- Stat 1 -->
+                            <style>
+                                .date-label {
+                                    position: absolute;
+                                    top: 10px;
+                                    right: 15px;
+                                    font-size: 11px;
+                                    background: rgba(0,0,0,0.05);
+                                    padding: 3px 8px;
+                                    border-radius: 6px;
+                                }
+                            </style>
                             <div class="col-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                                 <div class="stat-card">
+                                    {{-- <div class="stat-card position-relative"> --}}
+                                        <p class="date-label stat-label">Jan - {{ date('M') }} {{ date('Y') }}</p>
+                                    {{-- </div> --}}
                                     <div class="stat-icon bg-success">
                                         <i class="bi bi-geo-alt"></i>
                                     </div>
                                     <div class="stat-content">
-                                        <h3 class="stat-number">{{ $data->hektar_luas_tanam }}</h3>
+                                        <h3 class="stat-number">{{ number_format($data->hektar_luas_tanam) }}</h3>
                                         <p class="stat-label">Hektar Luas Tanam</p>
                                     </div>
                                 </div>
