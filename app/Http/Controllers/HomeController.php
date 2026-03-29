@@ -53,7 +53,7 @@ class HomeController extends Controller
         $this->visitor();
 
         $agenda = Agendas::orderByDesc('date')->take(4)->get();
-        $news = News::orderByDesc('published_at')->take(3)->get();
+        $news = News::orderByDesc('published_at')->take(4)->get();
 
         $datas = Dashboards::first();
 

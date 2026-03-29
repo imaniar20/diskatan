@@ -273,7 +273,7 @@
     </section>
 
     <!-- News Section -->
-    <section id="news" class="news-section">
+    {{-- <section id="news" class="news-section">
         <div class="container">
             <h2 class="sambutan-title">
                 Berita <span class="text-highlight">Terkini</span>
@@ -301,7 +301,9 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> --}}
+
+    @include('public.home.section.news')
 
     @include('public.home.section.layanan')
 

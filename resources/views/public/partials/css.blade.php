@@ -845,12 +845,6 @@
         box-shadow: 0 20px 60px rgba(45, 106, 79, 0.5);
     }
 
-    .news-img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-
     .news-content {
         padding: 25px;
     }
