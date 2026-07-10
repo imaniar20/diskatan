@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 
-<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<!--<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>-->
 
 @push('after-script')
     <script>
@@ -77,14 +77,14 @@
         }
 
         // Trigger counter animation when section is visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // animateCounter();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
+        // const observer = new IntersectionObserver((entries) => {
+        //     entries.forEach(entry => {
+        //         if (entry.isIntersecting) {
+        //             // animateCounter();
+        //             observer.unobserve(entry.target);
+        //         }
+        //     });
+        // });
 
         // observer.observe(document.querySelector('.stats-survey-section'));
 

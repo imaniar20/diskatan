@@ -98,7 +98,7 @@
             transform: translateX(100%);
         }
     </style>
-    <div id="loading-screen">
+    <div id="loading-screens">
         <div class="spinner"></div>
     </div>
     <div id="curtain">
@@ -114,7 +114,7 @@
 
     <script>
         window.addEventListener('load', () => {
-            const loader = document.getElementById('loading-screen');
+            const loader = document.getElementById('loading-screens');
             const index = document.getElementById('index');
             const index2 = document.getElementById('index2');
 

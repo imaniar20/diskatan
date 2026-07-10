@@ -1,3 +1,4 @@
+<!--<script src="https://cdn.tailwindcss.com"></script>-->
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&amp;family=Playfair+Display:wght@700&amp;family=Cinzel:wght@600&amp;display=swap" rel="stylesheet">
 <style>
     /* ============ CONTENT SECTION ============ */
@@ -831,7 +832,7 @@
         <!-- Menu Grid - 18 Systems -->
         <div class="menu-grid">
 
-            <a href="https://kuningan.go.id" target="_blank" class="menu-item" data-aos="fade-up"
+            <a href="https://kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="900">
                 <div class="icon-wrapper">
                     <img src="{{ asset('img/logo/kuningan.png') }}"
@@ -841,67 +842,7 @@
                 <p class="menu-label">PEMKABKUNINGAN</p>
             </a>
             
-            {{-- 1. Emonev Kementan --}}
-            <a href="https://emonev.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="50">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}" alt="Emonev">
-                </div>
-                <p class="menu-label">Emonev Kementan</p>
-            </a>
-
-            {{-- 2. Varietas Lokal --}}
-            <a href="https://ap-pvt.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="100">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}"
-                        alt="Varietas Lokal">
-                </div>
-                <p class="menu-label">Varietas Lokal</p>
-            </a>
-
-            {{-- 3. Model Pelaporan Online --}}
-            <a href="https://simluh.pertanian.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="600">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}" alt="LKPP">
-
-                </div>
-                <p class="menu-label">SIMLUHTAN</p>
-            </a>
-
-            {{-- 5. BASTBANPEM --}}
-            <a href="https://bastbanpem.pertanian.go.id/login/" target="_blank" class="menu-item"
-                data-aos="fade-up" data-aos-delay="250">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}"
-                        alt="BASTBANPEM">
-
-                </div>
-                <p class="menu-label">BASTBANPEM</p>
-            </a>
-
-            {{-- 6. AKSARA --}}
-            <a href="https://pupukbersubsidi.pertanian.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="300">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/emonev.png') }}" alt="AKSARA">
-
-                </div>
-                <p class="menu-label">IPUBERS</p>
-            </a>
-
-            {{-- 16. SADATA --}}
-            <a href="https://sadata.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="800">
-                <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=sadata.kuningankab.go.id"
-                        alt="SADATA" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
-
-                </div>
-                <p class="menu-label">SADATA</p>
-            </a>
-
+            
             {{-- 8. SIJAPATI --}}
             <a href="https://sijapati.kuningankab.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="400">
@@ -913,25 +854,7 @@
                 <p class="menu-label">SIJAPATI</p>
             </a>
 
-            {{-- 4. Omspan TKD --}}
-            <a href="https://spanint.kemenkeu.go.id/tkd" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="200">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/omspan.png') }}" alt="Omspan TKD">
-
-                </div>
-                <p class="menu-label">Omspan TKD</p>
-            </a>
-
-            <a href="https://mpo.psp.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="150">
-                <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=mpo.psp.pertanian.go.id"
-                        alt="Model Pelaporan Online" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
-                </div>
-                <p class="menu-label">Pelaporan Online</p>
-            </a>
-
+           
             {{-- 7. SRIKANDI --}}
             <a href="https://srikandi.arsip.go.id" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="350">
@@ -947,7 +870,7 @@
             <a href="https://asndigital.bkn.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="450">
                 <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=asndigital.bkn.go.id" alt="ASN Digital" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
+                    <img src="{{ asset('img/logo/logo.png') }}" alt="ASN Digital">
 
                 </div>
                 <p class="menu-label">ASN DIGITAL</p>
@@ -964,16 +887,7 @@
                 <p class="menu-label">SIAGA ASN</p>
             </a>
 
-            {{-- 11. SKPG --}}
-            <a href="https://skpg.badanpangan.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="550">
-                <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=skpg.badanpangan.go.id" alt="SKPG" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
-
-                </div>
-                <p class="menu-label">SKPG</p>
-            </a>
-
+          
             {{-- 12. Coretax --}}
             <a href="https://coretaxdjp.pajak.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="600">
@@ -982,88 +896,6 @@
 
                 </div>
                 <p class="menu-label">Coretax</p>
-            </a>
-
-            {{-- 13. BIMA --}}
-            <a href="https://bima.pertanian.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="650">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/bima.png') }}" alt="BIMA">
-
-                </div>
-                <p class="menu-label">BIMA</p>
-            </a>
-
-            {{-- 14. KRISNA --}}
-            <a href="https://kuningankab.krisna.systems" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="700">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/krisna.png') }}"
-                        alt="KRISNA">
-
-                </div>
-                <p class="menu-label">KRISNA</p>
-            </a>
-
-            {{-- 15. OSS --}}
-            <a href="https://oss.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="750">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/oss.png') }}" alt="OSS">
-
-                </div>
-                <p class="menu-label">OSS</p>
-            </a>
-
-            {{-- 17. SiRUP --}}
-            <a href="https://sirup.inaproc.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="850">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/sirup.png') }}" alt="SiRUP">
-
-                </div>
-                <p class="menu-label">SiRUP</p>
-            </a>
-
-            {{-- 18. SIPD --}}
-            <a href="https://sipd-ri.kemendagri.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="900">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/sipd.png') }}"
-                        alt="SIPD">
-
-                </div>
-                <p class="menu-label">SIPD</p>
-            </a>
-
-            {{-- <a href="https://sipd-ri.kemendagri.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="900">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/sipd.png') }}"
-                        alt="SIPD">
-
-                </div>
-                <p class="menu-label">EPUSLUH</p>
-            </a>
-
-            <a href="https://sipd-ri.kemendagri.go.id" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="900">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/sipd.png') }}"
-                        alt="SIPD">
-
-                </div>
-                <p class="menu-label">SIPDRI</p>
-            </a> --}}
-
-            <a href="https://xstar.bphmigas.go.id/login" target="_blank" class="menu-item" data-aos="fade-up"
-                data-aos-delay="900">
-                <div class="icon-wrapper">
-                    <img src="{{ asset('img/logo/bbm.png') }}"
-                        alt="SIPD">
-
-                </div>
-                <p class="menu-label">BBM</p>
             </a>
 
         </div>
