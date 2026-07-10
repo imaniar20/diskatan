@@ -317,7 +317,7 @@ class HomeController extends Controller
         return view('public.berita.detail', [
             'head' => 'Berita',
             'title' => 'Berita',
-            'menu' => 'Berita',
+            'menu' => 'Detail',
             'news' => $news,
             'lastest' => $lastest,
             'popular' => $popular

@@ -896,7 +896,7 @@
                 data-aos-delay="800">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=sadata.kuningankab.go.id"
-                        alt="SADATA">
+                        alt="SADATA" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
 
                 </div>
                 <p class="menu-label">SADATA</p>
@@ -927,7 +927,7 @@
                 data-aos-delay="150">
                 <div class="icon-wrapper">
                     <img src="https://www.google.com/s2/favicons?sz=64&domain=mpo.psp.pertanian.go.id"
-                        alt="Model Pelaporan Online">
+                        alt="Model Pelaporan Online" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
                 </div>
                 <p class="menu-label">Pelaporan Online</p>
             </a>
@@ -947,7 +947,7 @@
             <a href="https://asndigital.bkn.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="450">
                 <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=asndigital.bkn.go.id" alt="ASN Digital">
+                    <img src="https://www.google.com/s2/favicons?sz=64&domain=asndigital.bkn.go.id" alt="ASN Digital" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
 
                 </div>
                 <p class="menu-label">ASN DIGITAL</p>
@@ -968,7 +968,7 @@
             <a href="https://skpg.badanpangan.go.id/" target="_blank" class="menu-item" data-aos="fade-up"
                 data-aos-delay="550">
                 <div class="icon-wrapper">
-                    <img src="https://www.google.com/s2/favicons?sz=64&domain=skpg.badanpangan.go.id" alt="SKPG">
+                    <img src="https://www.google.com/s2/favicons?sz=64&domain=skpg.badanpangan.go.id" alt="SKPG" onerror="this.onerror=null; this.src='{{ asset('img/logo/logo.png') }}';">
 
                 </div>
                 <p class="menu-label">SKPG</p>
