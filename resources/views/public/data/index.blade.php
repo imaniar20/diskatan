@@ -606,7 +606,7 @@
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="stat-content">
-                                        <h3 class="stat-number">{{ number_format($kelompok_tani) }}</h3>
+                                        <h3 class="stat-number">{{ $kelompok_tani !== null ? number_format($kelompok_tani) : '-' }}</h3>
                                         <p class="stat-label">Kelompok Tani</p>
                                     </div>
                                 </div>
@@ -706,14 +706,16 @@
         </div>
     </section>
     <script>
-        const kelompok = @json($data_tani);
+        const kelompok = @json($data_tani ?? []);
 
         // Hitung jumlah kelompok per kecamatan
         const mapKecamatan = {};
-        kelompok.forEach(item => {
-            const kec = item.kecamatan;
-            mapKecamatan[kec] = (mapKecamatan[kec] || 0) + 1;
-        });
+        if (Array.isArray(kelompok)) {
+            kelompok.forEach(item => {
+                const kec = item.kecamatan;
+                mapKecamatan[kec] = (mapKecamatan[kec] || 0) + 1;
+            });
+        }
 
         const categories = Object.keys(mapKecamatan);
         const values = Object.values(mapKecamatan);

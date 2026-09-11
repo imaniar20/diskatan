@@ -102,17 +102,8 @@ class HomeController extends Controller
             ];
         });
 
-        $response = Http::withHeaders([
-            'X-API-KEY' => 'Ozd9LIoM+jeU3A53NCfLAz9sWgxJoib/gwv9CfQk8qs=',
-        ])->get('https://siwawan.kuningankab.go.id/Controller/api.php');
-
-        if ($response->failed()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'API gagal dipanggil',
-                'error' => $response->body(),
-            ], 500);
-        }
+        // API siwawan dinonaktifkan sementara karena service sudah tidak tersedia
+        $kelompokTani = null;
 
         $data = array(
             'head' => "Home",
@@ -124,7 +115,7 @@ class HomeController extends Controller
             'kategori' => $kategori,
             'total' => $total,
             'data' => $datas,
-            'kelompok_tani' => $response->json()['total'],
+            'kelompok_tani' => $kelompokTani,
             'videos' => $videos
         );
 
@@ -398,31 +389,21 @@ class HomeController extends Controller
 
     public function dataDanInformasi()
     {
-        $response = Http::withHeaders([
-            'X-API-KEY' => 'Ozd9LIoM+jeU3A53NCfLAz9sWgxJoib/gwv9CfQk8qs=',
-        ])->get('https://siwawan.kuningankab.go.id/Controller/api.php');
-
-        if ($response->failed()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'API gagal dipanggil',
-                'error' => $response->body(),
-            ], 500);
-        }
+        // API siwawan dinonaktifkan sementara karena service sudah tidak tersedia
         $datas = Dashboards::first();
 
         //produksi
         $produksi = Productions::all();
-        
+
         $data = array(
             'head' => "Data dan Informasi",
             'title' => "Data dan Informasi",
             'menu' => "Data dan Informasi",
-            'data_tani' => $response->json()['data'],
-            'kelompok_tani' => $response->json()['total'],
+            'data_tani' => null,
+            'kelompok_tani' => null,
             'data' => $datas,
             'produksi' => $produksi,
-         );
+        );
 
         return view('public.data.index')->with($data);
     }
