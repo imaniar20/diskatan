@@ -612,13 +612,13 @@
                                 </div>
                                 <div class="meta-item">
                                     <i class="bi bi-eye"></i>
-                                    <span>{{ $news->visitor_count }} Views</span>
+                                    <span>{{ $news->visitor_count ?? $news->views ?? 0 }} Views</span>
                                 </div>
                             </div>
 
                             <!-- Featured Image -->
-                            <img src="{{ asset('storage/' . $news->thumbnail) }}" alt="Program Reboisasi"
-                                class="featured-image" data-aos="zoom-in" data-aos-delay="400">
+                            <img src="{{ asset('storage/' . $news->thumbnail) }}" alt="{{ $news->title }}"
+                                class="featured-image" data-aos="zoom-in" data-aos-delay="400" loading="lazy">
 
                             <!-- Content -->
                             <div class="detail-content" data-aos="fade-up" data-aos-delay="500">
@@ -627,8 +627,7 @@
                                 </p>
                                 @foreach ($news->contents as $item)
                                     <img class="alignnone size-full wp-image-9331" src="../../storage/{{ $item->file }}"
-                                        sizes="(max-width: 1280px) 100vw, 1280px" alt="" width="1280"
-                                        loading="lazy">
+                                        sizes="(max-width: 1280px) 100vw, 1280px" alt="" width="1280" loading="lazy">
                                 @endforeach
                             </div>
 
@@ -669,8 +668,8 @@
                                 </a>
 
                                 <!-- Telegram -->
-                                <a href="https://t.me/share/url?url={{ $shareUrl }}&text={{ $shareTitle }}"
-                                    target="_blank" class="share-btn telegram">
+                                <a href="https://t.me/share/url?url={{ $shareUrl }}&text={{ $shareTitle }}" target="_blank"
+                                    class="share-btn telegram">
                                     <i class="bi bi-telegram"></i>
                                 </a>
 
@@ -681,8 +680,7 @@
                                 </a>
 
                                 <!-- Email -->
-                                <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareUrl }}"
-                                    class="share-btn email">
+                                <a href="mailto:?subject={{ $shareTitle }}&body={{ $shareUrl }}" class="share-btn email">
                                     <i class="bi bi-envelope"></i>
                                 </a>
                             </div>
@@ -706,7 +704,7 @@
                                     class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        alt="Berita" class="sidebar-news-img">
+                                        alt="Berita" class="sidebar-news-img" loading="lazy">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
@@ -734,14 +732,14 @@
                                     class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        alt="Berita" class="sidebar-news-img">
+                                        alt="Berita" class="sidebar-news-img" loading="lazy">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
                                             {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count ?? $item->views ?? 0 }} dilihat
                                         </div>
                                     </div>
                                 </a>

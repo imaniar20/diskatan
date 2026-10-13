@@ -35,7 +35,7 @@
             </span>
 
             <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                class="card-img-top" alt="Berita {{ $i }}">
+                class="card-img-top" alt="Berita {{ $i }}" loading="lazy">
 
             <div class="card-body d-flex flex-column">
                 <small class="text-muted mb-2">

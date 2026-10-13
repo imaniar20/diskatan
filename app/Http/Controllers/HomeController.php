@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use voku\helper\AntiXSS;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 use App\Models\News;
 use App\Models\Agendas;
@@ -172,21 +173,18 @@ class HomeController extends Controller
     {
         $agenda = Agendas::orderByDesc('date')->paginate(10);
         $lastest = Agendas::orderByDesc('date')->take(5)->get();
-        foreach ($agenda as $new) {
-            $new->visitor_count = \DB::table('visitors')
-                ->where('url', 'like', '%' . $new->slug)
-                ->count();
-        }
 
-        $popular = Agendas::select('agendas.*')
-            ->selectSub(function ($q) {
-                $q->from('visitors')
-                    ->selectRaw('COUNT(*)')
-                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
-            }, 'visitor_count')
-            ->orderByDesc('visitor_count')
-            ->limit(5)
-            ->get();
+        $popular = Cache::remember('popular_agendas', 3600, function () {
+            return Agendas::select('agendas.*')
+                ->selectSub(function ($q) {
+                    $q->from('visitors')
+                        ->selectRaw('COUNT(*)')
+                        ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
+                }, 'visitor_count')
+                ->orderByDesc('visitor_count')
+                ->limit(5)
+                ->get();
+        });
 
         return view('public.agenda.index', [
             'head' => 'Agenda',
@@ -205,19 +203,23 @@ class HomeController extends Controller
         $agenda = Agendas::where('slug', $slug)->firstOrFail();
         $lastest = Agendas::orderByDesc('date')->take(5)->get();
 
-        $agenda->visitor_count = \DB::table('visitors')
-            ->where('url', 'like', '%' . $agenda->slug)
-            ->count();
+        $agenda->visitor_count = Cache::remember('agenda_visitor_count_' . $agenda->id, 300, function () use ($agenda) {
+            return \DB::table('visitors')
+                ->where('url', 'like', '%' . $agenda->slug)
+                ->count();
+        });
 
-        $popular = Agendas::select('agendas.*')
-            ->selectSub(function ($q) {
-                $q->from('visitors')
-                    ->selectRaw('COUNT(*)')
-                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
-            }, 'visitor_count')
-            ->orderByDesc('visitor_count')
-            ->limit(5)
-            ->get();
+        $popular = Cache::remember('popular_agendas', 3600, function () {
+            return Agendas::select('agendas.*')
+                ->selectSub(function ($q) {
+                    $q->from('visitors')
+                        ->selectRaw('COUNT(*)')
+                        ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', agendas.slug)"));
+                }, 'visitor_count')
+                ->orderByDesc('visitor_count')
+                ->limit(5)
+                ->get();
+        });
 
         return view('public.agenda.detail', [
             'head' => 'Agenda',
@@ -255,23 +257,16 @@ class HomeController extends Controller
     // ================= BERITA =================
     public function berita()
     {
-        $news = News::orderByDesc('published_at')->paginate(9);
+        $news = News::with('programs')->orderByDesc('published_at')->paginate(9);
         $lastest = News::orderByDesc('published_at')->take(5)->get();
-        foreach ($news as $new) {
-            $new->visitor_count = \DB::table('visitors')
-                ->where('url', 'like', '%' . $new->slug)
-                ->count();
-        }
 
-        $popular = News::select('news.*')
-            ->selectSub(function ($q) {
-                $q->from('visitors')
-                    ->selectRaw('COUNT(*)')
-                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', news.slug)"));
-            }, 'visitor_count')
-            ->orderByDesc('visitor_count')
-            ->limit(5)
+        $popular = News::orderByDesc('views')
+            ->take(5)
             ->get();
+
+        foreach ($popular as $item) {
+            $item->visitor_count = $item->views;
+        }
 
         return view('public.berita.index', [
             'head' => 'Berita',
@@ -288,22 +283,18 @@ class HomeController extends Controller
         $this->visitor();
 
         $news = News::where('slug', $slug)->with('contents')->firstOrFail();
+        $news->increment('views');
+        $news->visitor_count = $news->views;
 
         $lastest = News::orderByDesc('published_at')->take(5)->get();
 
-        $news->visitor_count = \DB::table('visitors')
-            ->where('url', 'like', '%' . $news->slug)
-            ->count();
-
-        $popular = News::select('news.*')
-            ->selectSub(function ($q) {
-                $q->from('visitors')
-                    ->selectRaw('COUNT(*)')
-                    ->whereColumn('visitors.url', 'like', DB::raw("CONCAT('%', news.slug)"));
-            }, 'visitor_count')
-            ->orderByDesc('visitor_count')
-            ->limit(5)
+        $popular = News::orderByDesc('views')
+            ->take(5)
             ->get();
+
+        foreach ($popular as $item) {
+            $item->visitor_count = $item->views;
+        }
 
         return view('public.berita.detail', [
             'head' => 'Berita',
@@ -329,7 +320,7 @@ class HomeController extends Controller
             });
         }
 
-        $news = $query->orderBy('published_at', 'asc')->paginate(9)->appends(request()->query());
+        $news = $query->with('programs')->orderBy('published_at', 'desc')->paginate(9)->appends(request()->query());
 
 
         return response()->json([

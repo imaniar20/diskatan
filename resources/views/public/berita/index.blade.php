@@ -472,17 +472,19 @@
                                 <i class="bi bi-newspaper me-2"></i>Berita Terbaru
                             </h6>
                             @foreach ($lastest as $item)
-                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                <a href="{{ route('berita.detail', $item->slug) }}"
+                                    class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        alt="Berita" class="sidebar-news-img">
+                                        alt="Berita" class="sidebar-news-img" loading="lazy">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
                                             {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-calendar3"></i> {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
+                                            <i class="bi bi-calendar3"></i>
+                                            {{ \Carbon\Carbon::parse($item->published_at)->format('d M Y') }}
                                         </div>
                                     </div>
                                 </a>
@@ -498,17 +500,18 @@
                             </h6>
 
                             @foreach ($popular as $item)
-                                <a href="{{ route('berita.detail', $item->slug) }}" class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
+                                <a href="{{ route('berita.detail', $item->slug) }}"
+                                    class="sidebar-news-item d-flex gap-3 mb-3 text-decoration-none">
                                     <!-- IMAGE -->
                                     <img src="{{ asset($item->thumbnail ? 'storage/' . $item->thumbnail : 'images/img_not_found.png') }}"
-                                        alt="Berita" class="sidebar-news-img">
+                                        alt="Berita" class="sidebar-news-img" loading="lazy">
                                     <!-- TEXT -->
                                     <div class="flex-grow-1">
                                         <div class="fw-semibold small text-dark">
                                             {{ Str::limit($item->title, 40) }}
                                         </div>
                                         <div class="text-muted small">
-                                            <i class="bi bi-eye"></i> {{ $item->visitor_count }} dilihat
+                                            <i class="bi bi-eye"></i> {{ $item->visitor_count ?? $item->views ?? 0 }} dilihat
                                         </div>
                                     </div>
                                 </a>
@@ -522,11 +525,9 @@
         </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
-        $(document).ready(function() {
-            $('#filter-news').on('submit', function(e) {
+        $(document).ready(function () {
+            $('#filter-news').on('submit', function (e) {
                 e.preventDefault();
 
                 let formData = $(this).serialize();
@@ -535,12 +536,12 @@
                     url: "{{ route('berita.filter') }}",
                     method: "POST",
                     data: formData,
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             $('#news_body').html(response.data);
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.error(xhr.responseText);
                     }
                 });
