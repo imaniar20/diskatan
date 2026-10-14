@@ -16,6 +16,8 @@ use App\Models\Kategori;
 use App\Models\Dashboards;
 use App\Models\Productions;
 use App\Models\PadiPalawija;
+use App\Models\Sayuran;
+use App\Models\TanamanPangan;
 
 class HomeController extends Controller
 {
@@ -462,6 +464,69 @@ class HomeController extends Controller
             'persentase' => $overallTotalTarget > 0 ? round(($overallTotalRealisasi / $overallTotalTarget) * 100, 2) : 0,
         ];
 
+        // Data Sayuran & Hortikultura
+        $sayuranKomoditasList = [
+            'Bawang Merah',
+            'Bawang Daun',
+            'Cabe Besar',
+            'Cabe Rawit',
+            'Tomat',
+            'Wortel',
+            'Kubis',
+            'Petsai / Sawi',
+            'Rambutan',
+            'Mangga',
+            'Durian',
+            'Jahe',
+            'Kapulaga',
+        ];
+
+        $sayuranData = Sayuran::orderBy('tahun', 'asc')
+            ->get()
+            ->groupBy('komoditas');
+
+        $sayuranSummary = Sayuran::selectRaw('
+            komoditas,
+            kategori,
+            satuan_luas,
+            satuan_produksi,
+            COUNT(*) as total_tahun,
+            SUM(luas_tanam) as total_tanam,
+            SUM(luas_panen) as total_panen,
+            AVG(produktivitas) as avg_produktivitas,
+            SUM(produksi) as total_produksi
+        ')
+        ->groupBy('komoditas', 'kategori', 'satuan_luas', 'satuan_produksi')
+        ->get()
+        ->keyBy('komoditas');
+
+        // Data Tanaman Pangan (Historis 13 Tahun)
+        $tanamanPanganKomoditasList = [
+            'Padi',
+            'Jagung',
+            'Kedelai',
+            'Kacang Tanah',
+            'Kacang Hijau',
+            'Ubi Kayu',
+            'Ubi Jalar',
+        ];
+
+        $tanamanPanganData = TanamanPangan::orderBy('tahun', 'asc')
+            ->get()
+            ->groupBy('komoditas');
+
+        $tanamanPanganSummary = TanamanPangan::selectRaw('
+            komoditas,
+            COUNT(*) as total_tahun,
+            SUM(luas_tanam) as total_tanam,
+            SUM(luas_panen) as total_panen,
+            AVG(produktivitas) as avg_produktivitas,
+            SUM(produksi) as total_produksi
+        ')
+        ->groupBy('komoditas')
+        ->get()
+        ->keyBy('komoditas');
+
         $data = array(
             'head' => "Data dan Informasi",
             'title' => "Data dan Informasi",
@@ -476,6 +541,12 @@ class HomeController extends Controller
             'padiPalawijaData' => $padiPalawijaData,
             'padiPalawijaSummary' => $padiPalawijaSummary,
             'padiOverallStats' => $padiOverallStats,
+            'sayuranKomoditasList' => $sayuranKomoditasList,
+            'sayuranData' => $sayuranData,
+            'sayuranSummary' => $sayuranSummary,
+            'tanamanPanganKomoditasList' => $tanamanPanganKomoditasList,
+            'tanamanPanganData' => $tanamanPanganData,
+            'tanamanPanganSummary' => $tanamanPanganSummary,
         );
 
         return view('public.data.index')->with($data);

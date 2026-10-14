@@ -63,6 +63,18 @@
                     <div data-i18n="Analytics">Padi & Palawija</div>
                 </a>
             </li>
+            <li class="menu-item {{ $title == 'Sayuran & Hortikultura' ? 'active' : '' }}">
+                <a href="/admin-sayuran" class="menu-link">
+                    <i class='menu-icon bx bx-leaf'></i>
+                    <div data-i18n="Analytics">Sayuran & Hortikultura</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $title == 'Tanaman Pangan' ? 'active' : '' }}">
+                <a href="/admin-tanaman-pangan" class="menu-link">
+                    <i class='menu-icon bx bx-sun'></i>
+                    <div data-i18n="Analytics">Tanaman Pangan</div>
+                </a>
+            </li>
             <li class="menu-header small text-uppercase">
                 <span class="menu-header-text">Menu</span>
             </li>

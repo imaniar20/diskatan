@@ -600,6 +600,20 @@
                         </button>
                     </li>
 
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#sayuran" type="button">
+                            <i class='bx bx-leaf text-pils'></i>
+                            <span class="ms-2 text-pils">Sayuran & Hortikultura</span>
+                        </button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tanaman-pangan" type="button">
+                            <i class='bx bx-sun text-pils'></i>
+                            <span class="ms-2 text-pils">Tanaman Pangan</span>
+                        </button>
+                    </li>
+
                     {{-- <li class="nav-item" role="presentation">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#dokumen" type="button">
                             <i class='bx bxs-book-content text-pils'></i>
@@ -767,7 +781,7 @@
                         <!-- Sub Pills Komoditas -->
                         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                             @foreach ($komoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
                                     <i class="bx bx-leaf"></i> {{ $kmd }}
                                 </button>
                             @endforeach
@@ -839,6 +853,174 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tbodyPadiPalawija">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB PANE SAYURAN & HORTIKULTURA -->
+                    <div class="tab-pane fade" id="sayuran">
+                        <!-- Sub Pills Komoditas Sayuran & Hortikultura -->
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                            @foreach ($sayuranKomoditasList as $idx => $kmd)
+                                <button type="button" class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                    <i class="bx bx-spa"></i> {{ $kmd }}
+                                </button>
+                            @endforeach
+                        </div>
+
+                        <!-- 4 KPI Stat Cards -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                    <span class="text-muted small">Total Luas Tanam</span>
+                                    <h4 class="mt-1 mb-0 text-warning fw-bold" id="kpiSayuranTanam">0</h4>
+                                    <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                    <span class="text-muted small">Total Luas Panen</span>
+                                    <h4 class="mt-1 mb-0 text-primary fw-bold" id="kpiSayuranPanen">0</h4>
+                                    <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                    <span class="text-muted small">Rata-rata Produktivitas</span>
+                                    <h4 class="mt-1 mb-0 text-info fw-bold" id="kpiSayuranProdv">0</h4>
+                                    <small class="text-secondary">Produktivitas Rata-rata</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                    <span class="text-muted small">Total Produksi</span>
+                                    <h4 class="mt-1 mb-0 text-success fw-bold" id="kpiSayuranProduksi">0</h4>
+                                    <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grafik Tren Tahunan ApexCharts -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 fw-bold text-success">
+                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartSayuranKomoditasTitle">Bawang Merah</span>
+                                </h6>
+                                <span class="badge bg-success" id="chartSayuranBadge">Sayuran</span>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartSayuranPublic"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Detail Per Tahun -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 fw-bold text-success">
+                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tableSayuranTitle">Bawang Merah</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover align-middle w-100" id="tableSayuranPublic">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="text-center" style="width: 5%">No</th>
+                                                <th class="text-center">Tahun</th>
+                                                <th class="text-end" id="thSayuranTanam">Luas Tanam</th>
+                                                <th class="text-end" id="thSayuranPanen">Luas Panen</th>
+                                                <th class="text-end">Produktivitas</th>
+                                                <th class="text-end" id="thSayuranProduksi">Total Produksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodySayuranPublic">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB PANE TANAMAN PANGAN (13 TAHUN) -->
+                    <div class="tab-pane fade" id="tanaman-pangan">
+                        <!-- Sub Pills Komoditas Tanaman Pangan -->
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                            @foreach ($tanamanPanganKomoditasList as $idx => $kmd)
+                                <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                    <i class="bx bx-spa"></i> {{ $kmd }}
+                                </button>
+                            @endforeach
+                        </div>
+
+                        <!-- 4 KPI Stat Cards -->
+                        <div class="row g-3 mb-4">
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                    <span class="text-muted small">Total Luas Tanam</span>
+                                    <h4 class="mt-1 mb-0 text-warning fw-bold" id="kpiPanganTanam">0 Ha</h4>
+                                    <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                    <span class="text-muted small">Total Luas Panen</span>
+                                    <h4 class="mt-1 mb-0 text-primary fw-bold" id="kpiPanganPanen">0 Ha</h4>
+                                    <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                    <span class="text-muted small">Rata-rata Produktivitas</span>
+                                    <h4 class="mt-1 mb-0 text-info fw-bold" id="kpiPanganProdv">0 Kw/Ha</h4>
+                                    <small class="text-secondary">Satuan: Kw/Ha</small>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                    <span class="text-muted small">Total Produksi</span>
+                                    <h4 class="mt-1 mb-0 text-success fw-bold" id="kpiPanganProduksi">0 Ton</h4>
+                                    <small class="text-secondary">Satuan: Ton</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grafik Tren Tahunan ApexCharts -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 fw-bold text-success">
+                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPanganKomoditasTitle">Padi</span>
+                                </h6>
+                                <span class="badge bg-warning text-dark">Tanaman Pangan</span>
+                            </div>
+                            <div class="card-body">
+                                <div id="chartPanganPublic"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tabel Detail Per Tahun -->
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 fw-bold text-success">
+                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePanganTitle">Padi</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover align-middle w-100" id="tablePanganPublic">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th class="text-center" style="width: 5%">No</th>
+                                                <th class="text-center">Tahun</th>
+                                                <th class="text-end">Luas Tanam (Ha)</th>
+                                                <th class="text-end">Luas Panen (Ha)</th>
+                                                <th class="text-end">Produktivitas (Kw/Ha)</th>
+                                                <th class="text-end">Total Produksi (Ton)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyPanganPublic">
                                         </tbody>
                                     </table>
                                 </div>
@@ -1145,17 +1327,53 @@
                         updatePadiView(currentKomoditas);
                     }, 60);
                 }
+
+                if (target === '#sayuran') {
+                    setTimeout(() => {
+                        if (!chartSayuran) {
+                            initSayuranChart();
+                        }
+                        updateSayuranView(currentSayuran);
+                    }, 60);
+                }
+
+                if (target === '#tanaman-pangan') {
+                    setTimeout(() => {
+                        if (!chartPangan) {
+                            initPanganChart();
+                        }
+                        updateTanamanPanganView(currentPangan);
+                    }, 60);
+                }
             });
         });
 
         document.addEventListener('DOMContentLoaded', function() {
             updatePadiView('Padi');
+            updateSayuranView('Bawang Merah');
+            updateTanamanPanganView('Padi');
 
             // Auto activate tab Padi & Palawija jika hash #padi-palawija atau ada query string tahun
             if (window.location.hash === '#padi-palawija' || new URLSearchParams(window.location.search).has('tahun')) {
                 const btnTabPadi = document.querySelector('[data-bs-target="#padi-palawija"]');
                 if (btnTabPadi) {
                     const tabTrigger = new bootstrap.Tab(btnTabPadi);
+                    tabTrigger.show();
+                }
+            }
+
+            if (window.location.hash === '#sayuran') {
+                const btnTabSayuran = document.querySelector('[data-bs-target="#sayuran"]');
+                if (btnTabSayuran) {
+                    const tabTrigger = new bootstrap.Tab(btnTabSayuran);
+                    tabTrigger.show();
+                }
+            }
+
+            if (window.location.hash === '#tanaman-pangan') {
+                const btnTabPangan = document.querySelector('[data-bs-target="#tanaman-pangan"]');
+                if (btnTabPangan) {
+                    const tabTrigger = new bootstrap.Tab(btnTabPangan);
                     tabTrigger.show();
                 }
             }
@@ -1295,13 +1513,320 @@
             }
         }
 
-        // Sub-pills listener
-        document.querySelectorAll('.btn-komoditas-pill').forEach(btn => {
+        // Sub-pills listener Padi
+        document.querySelectorAll('.btn-padi-pill').forEach(btn => {
             btn.addEventListener('click', function () {
-                document.querySelectorAll('.btn-komoditas-pill').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.btn-padi-pill').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 const komoditas = this.getAttribute('data-komoditas');
                 updatePadiView(komoditas);
+            });
+        });
+
+        // ================= SAYURAN & HORTIKULTURA LOGIC =================
+        const sayuranData = @json($sayuranData ?? []);
+        const sayuranSummary = @json($sayuranSummary ?? []);
+        let currentSayuran = 'Bawang Merah';
+        let chartSayuran = null;
+
+        function updateSayuranView(komoditas) {
+            currentSayuran = komoditas;
+            const summary = sayuranSummary[komoditas] || {
+                total_tanam: 0,
+                total_panen: 0,
+                avg_produktivitas: 0,
+                total_produksi: 0,
+                satuan_luas: 'Ha',
+                satuan_produksi: 'Kuintal',
+                kategori: 'Sayuran'
+            };
+
+            const sLuas = summary.satuan_luas || 'Ha';
+            const sProd = summary.satuan_produksi || 'Kuintal';
+
+            // KPI Update
+            const elTanam = document.getElementById('kpiSayuranTanam');
+            const elPanen = document.getElementById('kpiSayuranPanen');
+            const elProdv = document.getElementById('kpiSayuranProdv');
+            const elProduksi = document.getElementById('kpiSayuranProduksi');
+            const elBadge = document.getElementById('chartSayuranBadge');
+            const elChartTitle = document.getElementById('chartSayuranKomoditasTitle');
+            const elTableTitle = document.getElementById('tableSayuranTitle');
+
+            if (elTanam) elTanam.textContent = Number(summary.total_tanam || 0).toLocaleString('id-ID') + ' ' + sLuas;
+            if (elPanen) elPanen.textContent = Number(summary.total_panen || 0).toLocaleString('id-ID') + ' ' + sLuas;
+            if (elProdv) elProdv.textContent = Number(summary.avg_produktivitas || 0).toFixed(2);
+            if (elProduksi) elProduksi.textContent = Number(summary.total_produksi || 0).toLocaleString('id-ID') + ' ' + sProd;
+            if (elBadge) elBadge.textContent = summary.kategori || 'Sayuran';
+            if (elChartTitle) elChartTitle.textContent = komoditas;
+            if (elTableTitle) elTableTitle.textContent = komoditas;
+
+            const elSatTanam = document.getElementById('kpiSayuranSatuanTanam');
+            const elSatPanen = document.getElementById('kpiSayuranSatuanPanen');
+            const elSatProd = document.getElementById('kpiSayuranSatuanProduksi');
+            if (elSatTanam) elSatTanam.textContent = `Satuan: ${sLuas}`;
+            if (elSatPanen) elSatPanen.textContent = `Satuan: ${sLuas}`;
+            if (elSatProd) elSatProd.textContent = `Satuan: ${sProd}`;
+
+            // Update Header Tabel
+            const thTanam = document.getElementById('thSayuranTanam');
+            const thPanen = document.getElementById('thSayuranPanen');
+            const thProduksi = document.getElementById('thSayuranProduksi');
+            if (thTanam) thTanam.textContent = `Luas Tanam (${sLuas})`;
+            if (thPanen) thPanen.textContent = `Luas Panen (${sLuas})`;
+            if (thProduksi) thProduksi.textContent = `Total Produksi (${sProd})`;
+
+            // Render Table Rows
+            const rows = sayuranData[komoditas] || [];
+            const tbody = document.getElementById('tbodySayuranPublic');
+            if (tbody) {
+                tbody.innerHTML = '';
+                const categories = [];
+                const tanamSeries = [];
+                const panenSeries = [];
+                const produksiSeries = [];
+
+                rows.forEach((row, idx) => {
+                    categories.push(row.tahun);
+                    tanamSeries.push(Number(row.luas_tanam || 0));
+                    panenSeries.push(Number(row.luas_panen || 0));
+                    produksiSeries.push(Number(row.produksi || 0));
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="text-center">${idx + 1}</td>
+                        <td class="text-center fw-bold text-success">${row.tahun}</td>
+                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
+                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                // Update Chart
+                if (chartSayuran) {
+                    chartSayuran.updateOptions({
+                        xaxis: { categories: categories },
+                        yaxis: [
+                            { title: { text: `Luas (${sLuas})` } },
+                            { opposite: true, title: { text: `Produksi (${sProd})` } }
+                        ]
+                    });
+                    chartSayuran.updateSeries([
+                        { name: `Luas Tanam (${sLuas})`, type: 'column', data: tanamSeries },
+                        { name: `Luas Panen (${sLuas})`, type: 'column', data: panenSeries },
+                        { name: `Produksi (${sProd})`, type: 'line', data: produksiSeries }
+                    ]);
+                }
+            }
+        }
+
+        function initSayuranChart() {
+            if (chartSayuran) return;
+            const rows = sayuranData[currentSayuran] || [];
+            const categories = rows.map(r => r.tahun);
+            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
+            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
+            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+
+            const summary = sayuranSummary[currentSayuran] || {};
+            const sLuas = summary.satuan_luas || 'Ha';
+            const sProd = summary.satuan_produksi || 'Kuintal';
+
+            const options = {
+                series: [
+                    { name: `Luas Tanam (${sLuas})`, type: 'column', data: tanamSeries },
+                    { name: `Luas Panen (${sLuas})`, type: 'column', data: panenSeries },
+                    { name: `Produksi (${sProd})`, type: 'line', data: produksiSeries }
+                ],
+                chart: {
+                    height: 380,
+                    type: 'line',
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: { show: true }
+                },
+                stroke: {
+                    width: [0, 0, 3],
+                    curve: 'smooth'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '50%',
+                        borderRadius: 3
+                    }
+                },
+                colors: ['#f59e0b', '#3b82f6', '#10b981'],
+                xaxis: {
+                    categories: categories,
+                    labels: { style: { fontSize: '12px' } }
+                },
+                yaxis: [
+                    { title: { text: `Luas (${sLuas})` } },
+                    { opposite: true, title: { text: `Produksi (${sProd})` } }
+                ],
+                tooltip: {
+                    shared: true,
+                    intersect: false
+                },
+                legend: {
+                    position: 'top'
+                }
+            };
+
+            const chartEl = document.querySelector("#chartSayuranPublic");
+            if (chartEl) {
+                chartSayuran = new ApexCharts(chartEl, options);
+                chartSayuran.render();
+            }
+        }
+
+        // Sub-pills listener Sayuran
+        document.querySelectorAll('.btn-sayuran-pill').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.btn-sayuran-pill').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const komoditas = this.getAttribute('data-komoditas');
+                updateSayuranView(komoditas);
+            });
+        });
+
+        // ================= TANAMAN PANGAN (13 TAHUN) LOGIC =================
+        const tanamanPanganData = @json($tanamanPanganData ?? []);
+        const tanamanPanganSummary = @json($tanamanPanganSummary ?? []);
+        let currentPangan = 'Padi';
+        let chartPangan = null;
+
+        function updateTanamanPanganView(komoditas) {
+            currentPangan = komoditas;
+            const summary = tanamanPanganSummary[komoditas] || {
+                total_tanam: 0,
+                total_panen: 0,
+                avg_produktivitas: 0,
+                total_produksi: 0,
+                latest_year: 2025
+            };
+
+            const elTanam = document.getElementById('kpiPanganTanam');
+            const elPanen = document.getElementById('kpiPanganPanen');
+            const elProdv = document.getElementById('kpiPanganProdv');
+            const elProduksi = document.getElementById('kpiPanganProduksi');
+            const elChartTitle = document.getElementById('chartPanganKomoditasTitle');
+            const elTableTitle = document.getElementById('tablePanganTitle');
+
+            if (elTanam) elTanam.innerText = Number(summary.total_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ha';
+            if (elPanen) elPanen.innerText = Number(summary.total_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ha';
+            if (elProdv) elProdv.innerText = Number(summary.avg_produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+            if (elProduksi) elProduksi.innerText = Number(summary.total_produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ton';
+
+            if (elChartTitle) elChartTitle.innerText = komoditas;
+            if (elTableTitle) elTableTitle.innerText = komoditas;
+
+            // Render table
+            const tbody = document.getElementById('tbodyPanganPublic');
+            if (tbody) {
+                const rows = tanamanPanganData[komoditas] || [];
+                if (rows.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada data untuk komoditas ini.</td></tr>`;
+                } else {
+                    let html = '';
+                    rows.forEach((r, idx) => {
+                        html += `
+                            <tr>
+                                <td class="text-center">${idx + 1}</td>
+                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                                <td class="text-end">${Number(r.produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                }
+            }
+
+            // Update chart
+            if (chartPangan) {
+                const rows = tanamanPanganData[komoditas] || [];
+                const categories = rows.map(r => r.tahun);
+                const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
+                const panenSeries = rows.map(r => Number(r.luas_panen || 0));
+                const produksiSeries = rows.map(r => Number(r.produksi || 0));
+
+                chartPangan.updateOptions({
+                    xaxis: { categories: categories }
+                });
+                chartPangan.updateSeries([
+                    { name: 'Luas Tanam (Ha)', type: 'column', data: tanamSeries },
+                    { name: 'Luas Panen (Ha)', type: 'column', data: panenSeries },
+                    { name: 'Produksi (Ton)', type: 'line', data: produksiSeries }
+                ]);
+            }
+        }
+
+        function initPanganChart() {
+            if (chartPangan) return;
+            const rows = tanamanPanganData[currentPangan] || [];
+            const categories = rows.map(r => r.tahun);
+            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
+            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
+            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+
+            const options = {
+                series: [
+                    { name: 'Luas Tanam (Ha)', type: 'column', data: tanamSeries },
+                    { name: 'Luas Panen (Ha)', type: 'column', data: panenSeries },
+                    { name: 'Produksi (Ton)', type: 'line', data: produksiSeries }
+                ],
+                chart: {
+                    height: 380,
+                    type: 'line',
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: { show: true }
+                },
+                stroke: {
+                    width: [0, 0, 3],
+                    curve: 'smooth'
+                },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '50%',
+                        borderRadius: 3
+                    }
+                },
+                colors: ['#f59e0b', '#3b82f6', '#10b981'],
+                xaxis: {
+                    categories: categories,
+                    labels: { style: { fontSize: '12px' } }
+                },
+                yaxis: [
+                    { title: { text: 'Luas (Ha)' } },
+                    { opposite: true, title: { text: 'Produksi (Ton)' } }
+                ],
+                tooltip: {
+                    shared: true,
+                    intersect: false
+                },
+                legend: {
+                    position: 'top'
+                }
+            };
+
+            const chartEl = document.querySelector("#chartPanganPublic");
+            if (chartEl) {
+                chartPangan = new ApexCharts(chartEl, options);
+                chartPangan.render();
+            }
+        }
+
+        // Sub-pills listener Tanaman Pangan
+        document.querySelectorAll('.btn-pangan-pill').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.btn-pangan-pill').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const komoditas = this.getAttribute('data-komoditas');
+                updateTanamanPanganView(komoditas);
             });
         });
     </script>

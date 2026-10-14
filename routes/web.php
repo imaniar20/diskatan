@@ -19,6 +19,8 @@ use App\Http\Controllers\BidangsController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductionsController;
 use App\Http\Controllers\AdminPadiPalawijaController;
+use App\Http\Controllers\AdminSayuranController;
+use App\Http\Controllers\AdminTanamanPanganController;
 
 use App\Models\Agendas;
 use App\Models\News;
@@ -193,6 +195,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin-padi-palawija/import', [AdminPadiPalawijaController::class, 'import'])->name('admin-padi-palawija.import');
     Route::get('/admin-padi-palawija/export', [AdminPadiPalawijaController::class, 'export'])->name('admin-padi-palawija.export');
     Route::resource('/admin-padi-palawija', AdminPadiPalawijaController::class);
+    Route::post('/admin-sayuran/import', [AdminSayuranController::class, 'import'])->name('admin-sayuran.import');
+    Route::get('/admin-sayuran/export', [AdminSayuranController::class, 'export'])->name('admin-sayuran.export');
+    Route::resource('/admin-sayuran', AdminSayuranController::class);
+    Route::post('/admin-tanaman-pangan/import', [AdminTanamanPanganController::class, 'import'])->name('admin-tanaman-pangan.import');
+    Route::get('/admin-tanaman-pangan/export', [AdminTanamanPanganController::class, 'export'])->name('admin-tanaman-pangan.export');
+    Route::resource('/admin-tanaman-pangan', AdminTanamanPanganController::class);
 
     Route::resource('/admin-kategori', KategoriController::class);
 
