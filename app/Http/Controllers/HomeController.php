@@ -15,6 +15,7 @@ use App\Models\Visitor;
 use App\Models\Kategori;
 use App\Models\Dashboards;
 use App\Models\Productions;
+use App\Models\PadiPalawija;
 
 class HomeController extends Controller
 {
@@ -400,11 +401,66 @@ class HomeController extends Controller
 
     public function dataDanInformasi()
     {
-        // API siwawan dinonaktifkan sementara karena service sudah tidak tersedia
         $datas = Dashboards::first();
 
-        //produksi
-        $produksi = Productions::all();
+        // Produksi fallback
+        $produksi = collect([]);
+
+        // Data Padi & Palawija
+        $komoditasList = [
+            'Padi',
+            'Jagung',
+            'Kedelai',
+            'Kacang Tanah',
+            'Kacang Hijau',
+            'Ubi Kayu',
+            'Ubi Jalar'
+        ];
+
+        $availableYears = PadiPalawija::select('tahun')
+            ->distinct()
+            ->orderBy('tahun', 'desc')
+            ->pluck('tahun')
+            ->toArray();
+
+        if (empty($availableYears)) {
+            $availableYears = ['2026'];
+        }
+
+        $selectedTahun = (string) request()->query('tahun', $availableYears[0] ?? '2026');
+        if (!in_array($selectedTahun, $availableYears)) {
+            $selectedTahun = $availableYears[0] ?? '2026';
+        }
+
+        $padiPalawijaData = PadiPalawija::where('tahun', $selectedTahun)
+            ->orderBy('no_urut', 'asc')
+            ->get()
+            ->groupBy('komoditas');
+
+        $padiPalawijaSummary = PadiPalawija::selectRaw('
+            komoditas,
+            COUNT(*) as total_kecamatan,
+            SUM(luas_sawah) as total_sawah,
+            SUM(target_okmar) as target_okmar,
+            SUM(target_asep) as target_asep,
+            SUM(target_total) as target_total,
+            SUM(jumlah_mh) as realisasi_mh,
+            SUM(jumlah_mk) as realisasi_mk,
+            SUM(total_realisasi) as total_realisasi
+        ')
+        ->where('tahun', $selectedTahun)
+        ->groupBy('komoditas')
+        ->get()
+        ->keyBy('komoditas');
+
+        $overallTotalTarget = $padiPalawijaSummary->sum('target_total');
+        $overallTotalRealisasi = $padiPalawijaSummary->sum('total_realisasi');
+        $padiOverallStats = [
+            'total_sawah' => PadiPalawija::where('komoditas', 'Padi')->where('tahun', $selectedTahun)->sum('luas_sawah'),
+            'total_target' => $overallTotalTarget,
+            'total_realisasi' => $overallTotalRealisasi,
+            'persentase' => $overallTotalTarget > 0 ? round(($overallTotalRealisasi / $overallTotalTarget) * 100, 2) : 0,
+        ];
 
         $data = array(
             'head' => "Data dan Informasi",
@@ -414,6 +470,12 @@ class HomeController extends Controller
             'kelompok_tani' => null,
             'data' => $datas,
             'produksi' => $produksi,
+            'komoditasList' => $komoditasList,
+            'availableYears' => $availableYears,
+            'selectedTahun' => $selectedTahun,
+            'padiPalawijaData' => $padiPalawijaData,
+            'padiPalawijaSummary' => $padiPalawijaSummary,
+            'padiOverallStats' => $padiOverallStats,
         );
 
         return view('public.data.index')->with($data);

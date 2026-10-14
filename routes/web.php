@@ -18,6 +18,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BidangsController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductionsController;
+use App\Http\Controllers\AdminPadiPalawijaController;
 
 use App\Models\Agendas;
 use App\Models\News;
@@ -189,6 +190,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin-program', ProgramsController::class);
 
     Route::resource('/admin-produksi', ProductionsController::class);
+    Route::post('/admin-padi-palawija/import', [AdminPadiPalawijaController::class, 'import'])->name('admin-padi-palawija.import');
+    Route::get('/admin-padi-palawija/export', [AdminPadiPalawijaController::class, 'export'])->name('admin-padi-palawija.export');
+    Route::resource('/admin-padi-palawija', AdminPadiPalawijaController::class);
 
     Route::resource('/admin-kategori', KategoriController::class);
 

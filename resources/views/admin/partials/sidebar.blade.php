@@ -53,8 +53,14 @@
         @if (session('user')->username == 'admin')
             <li class="menu-item {{ $title == 'Produksi' ? 'active' : '' }}">
                 <a href="/admin-produksi" class="menu-link">
-                    <i class='menu-icon bx bx-stats' ></i>
+                    <i class='menu-icon bx bx-stats'></i>
                     <div data-i18n="Analytics">Produksi</div>
+                </a>
+            </li>
+            <li class="menu-item {{ $title == 'Padi & Palawija' ? 'active' : '' }}">
+                <a href="/admin-padi-palawija" class="menu-link">
+                    <i class='menu-icon bx bx-spa'></i>
+                    <div data-i18n="Analytics">Padi & Palawija</div>
                 </a>
             </li>
             <li class="menu-header small text-uppercase">
