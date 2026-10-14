@@ -2,7 +2,7 @@
 
 @section('title', 'Home')
 
-@section('content')
+@push('styles')
     <style>
         :root {
             --primary-green: #16a34a;
@@ -13,42 +13,69 @@
             --dark: #1b4332;
         }
 
-        #loading-screen {
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999 !important;
+        /* 
+           KONDISI DEFAULT (SEBELUM TOMBOL BERANDA DITEKAN):
+           - Tampilan sambutan (#index2) TAMPIL LANGSUNG sejak awal tanpa flicker.
+           - Website utama (#index), Top bar (#top-active), Navbar (#header-active),
+             Footer (#footer-active), serta ornamen daun (.leaf-decoration)
+             DISEMBUNYIKAN SECARA TOTAL DI LEVEL CSS SEJAK AWAL PARSING.
+        */
+        body:not(.main-active) #index,
+        body:not(.main-active) #header-active,
+        body:not(.main-active) #top-active,
+        body:not(.main-active) #footer-active,
+        body:not(.main-active) .leaf-decoration {
+            display: none !important;
         }
 
-        /* Spinner */
-        .spinner {
-            width: 56px;
-            height: 56px;
-            border: 6px solid #e5e7eb;
-            border-top-color: #16a34a;
-            /* hijau */
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        body:not(.main-active) #index2 {
+            display: block !important;
         }
 
-        @keyframes spin {
+        /* 
+           KONDISI SETELAH TOMBOL BERANDA DITEKAN (.main-active ditambahkan ke <body>):
+           - Sambutan (#index2) disembunyikan.
+           - Website utama (#index), Header, Top Bar, dan Footer ditampilkan dengan animasi halus.
+        */
+        body.main-active #index2 {
+            display: none !important;
+        }
+
+        body.main-active #index {
+            display: block !important;
+            animation: fadeInMainContent 0.5s ease-out forwards;
+        }
+
+        body.main-active #header-active,
+        body.main-active #top-active,
+        body.main-active #footer-active {
+            display: block !important;
+        }
+
+        body.main-active .leaf-decoration {
+            display: block !important;
+        }
+
+        @keyframes fadeInMainContent {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
             to {
-                transform: rotate(360deg);
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
+        /* ============ CURTAIN ANIMATION ============ */
         #curtain {
             position: fixed;
             inset: 0;
-            z-index: 99999;
+            z-index: 999999;
             pointer-events: none;
             display: none;
         }
 
-        /* tirai */
         .curtain {
             position: absolute;
             top: 0;
@@ -61,9 +88,7 @@
                     #52b788 75%,
                     #74c69d 100%);
             opacity: 1;
-            transition:
-                transform 1s cubic-bezier(.4, 0, .2, 1),
-                opacity 1s ease;
+            transition: transform 0.8s cubic-bezier(.4, 0, .2, 1), opacity 0.8s ease;
         }
 
         .curtain.left {
@@ -76,20 +101,14 @@
             transform: translateX(0);
         }
 
-        /* aktif */
         #curtain.active {
             display: block;
-        }
-
-        #curtain.active .curtain-overlay {
-            opacity: 1;
         }
 
         #curtain.open .curtain {
             opacity: 0;
         }
 
-        /* kebuka */
         #curtain.open .left {
             transform: translateX(-100%);
         }
@@ -98,79 +117,127 @@
             transform: translateX(100%);
         }
     </style>
-    <div id="loading-screens">
-        <div class="spinner"></div>
-    </div>
+@endpush
+
+@section('content')
+    <!-- Tirai Animasi Pembuka -->
     <div id="curtain">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
     </div>
-    <div id="index">
-        @include('public.home.index')
-    </div>
-    <div id="index2" style="display: none">
+
+    <!-- TAMPILAN SAMBUTAN / PORTAL (SELALU DI DEPAN SECARA DEFAULT) -->
+    <div id="index2">
         @include('public.home.index2')
     </div>
 
+    <!-- TAMPILAN WEBSITE UTAMA (TERKUNCI / DISEMBUNYIKAN SEBELUM TOMBOL DITEKAN) -->
+    <div id="index" style="display: none;">
+        @include('public.home.index')
+    </div>
+@endsection
+
+@push('scripts')
     <script>
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loading-screens');
-            const index = document.getElementById('index');
-            const index2 = document.getElementById('index2');
-
-            const header = document.getElementById('header-active');
-            const top = document.getElementById('top-active');
-            const footer = document.getElementById('footer-active');
-
-
-            // saat loading selesai
-            index.style.display = 'none';
-            header.style.display = 'none';
-            top.style.display = 'none';
-            footer.style.display = 'none';
-            index2.style.display = 'block';
-
-            // fade out loader
-            loader.style.transition = 'opacity 0.4s ease';
-            loader.style.opacity = '0';
-
-            setTimeout(() => {
-                loader.remove();
-            }, 400);
-        });
-
-        // tombol balik
-        document.getElementById('btn-buka')?.addEventListener('click', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnBuka = document.getElementById('btn-buka');
             const curtain = document.getElementById('curtain');
             const index = document.getElementById('index');
             const index2 = document.getElementById('index2');
 
-            const header = document.getElementById('header-active');
-            const top = document.getElementById('top-active');
-            const footer = document.getElementById('footer-active');
+            // Fungsi untuk membuka website utama dengan efek tirai
+            function bukaWebsiteUtama() {
+                if (!curtain) {
+                    document.body.classList.add('main-active');
+                    if (index) index.style.display = 'block';
+                    if (index2) index2.style.display = 'none';
+                    return;
+                }
 
-            // munculin curtain
-            curtain.classList.add('active');
+                // Munculkan tirai
+                curtain.classList.remove('open');
+                curtain.classList.add('active');
 
-            // fade gelap dulu
-            setTimeout(() => {
-                curtain.classList.add('open');
-            }, 400);
+                // Buka tirai ke kiri dan kanan
+                setTimeout(() => {
+                    curtain.classList.add('open');
+                }, 300);
 
-            // ganti halaman pas tirai nutup
-            setTimeout(() => {
-                index2.style.display = 'none';
-                index.style.display = 'block';
-                header.style.display = 'block';
-                top.style.display = 'block';
-                footer.style.display = 'block';
-            }, 500);
+                // Ganti tampilan saat tirai mulai terbuka
+                setTimeout(() => {
+                    document.body.classList.add('main-active');
+                    if (index2) index2.style.display = 'none';
+                    if (index) index.style.display = 'block';
 
-            // hapus curtain setelah animasi selesai
-            setTimeout(() => {
-                curtain.classList.remove('active', 'open');
-                curtain.style.display = 'none';
-            }, 1600);
+                    // Scroll ke atas website utama
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+
+                    // Refresh animasi AOS dan layout carousel/swiper/peta
+                    if (typeof AOS !== 'undefined') {
+                        AOS.refresh();
+                    }
+                    window.dispatchEvent(new Event('resize'));
+                }, 450);
+
+                // Sembunyikan tirai setelah animasi selesai
+                setTimeout(() => {
+                    curtain.classList.remove('active', 'open');
+                }, 1200);
+            }
+
+            // Pasang event listener ke tombol Halaman Beranda
+            if (btnBuka) {
+                btnBuka.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    bukaWebsiteUtama();
+                });
+            }
+
+            // Jika pengguna sudah berada di website utama dan mengklik menu Home di navbar,
+            // scroll halus ke atas halaman utama tanpa reload/kembali ke sambutan
+            const homeNavLink = document.querySelector('.navbar-nav .nav-link[href="{{ url('/') }}"]');
+            if (homeNavLink) {
+                homeNavLink.addEventListener('click', (e) => {
+                    if (document.body.classList.contains('main-active')) {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            }
+
+            // Jika pengguna mengklik tombol Portal di navbar, kembali ke tampilan sambutan dengan efek tirai
+            const btnKembaliPortal = document.getElementById('btn-kembali-portal');
+            if (btnKembaliPortal) {
+                btnKembaliPortal.addEventListener('click', (e) => {
+                    if (document.body.classList.contains('main-active')) {
+                        e.preventDefault();
+                        if (!curtain) {
+                            document.body.classList.remove('main-active');
+                            if (index) index.style.display = 'none';
+                            if (index2) index2.style.display = 'block';
+                            return;
+                        }
+
+                        curtain.classList.remove('open');
+                        curtain.classList.add('active');
+
+                        setTimeout(() => {
+                            curtain.classList.add('open');
+                        }, 300);
+
+                        setTimeout(() => {
+                            document.body.classList.remove('main-active');
+                            if (index) index.style.display = 'none';
+                            if (index2) index2.style.display = 'block';
+                            window.scrollTo({ top: 0, behavior: 'instant' });
+                        }, 450);
+
+                        setTimeout(() => {
+                            curtain.classList.remove('active', 'open');
+                        }, 1200);
+                    }
+                });
+            }
         });
     </script>
-@endsection
+@endpush

@@ -21,6 +21,7 @@
     height: 100%;
     overflow: hidden;
     z-index: 0;
+    background: radial-gradient(circle at center, #1b4332 0%, #0d2818 100%);
 }
 
 .video-background video {
@@ -35,7 +36,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    /* background: rgba(10, 30, 18, 0.45);
+    z-index: 1;
+    pointer-events: none; */
 }
 
 /* ============ LOGO SECTION ============ */
@@ -793,7 +796,9 @@
 </style>
 <!-- Video Background -->
 <div class="video-background">
-    <video autoplay muted loop playsinline>
+    <video autoplay muted loop playsinline preload="auto">
+        <source src="{{ asset('assets/video_padi.mp4') }}" type="video/mp4">
+        <!-- <source src="{{ asset('videos/flash.mp4') }}" type="video/mp4"> -->
         <source src="https://diskatan.kuningankab.go.id/assets/video_padi.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>

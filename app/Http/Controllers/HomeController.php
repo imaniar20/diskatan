@@ -59,48 +59,68 @@ class HomeController extends Controller
         $datas = Dashboards::first();
 
         $currentUrl = request()->fullUrl();
-
         $total = Visitor::where('url', $currentUrl)->count();
-
-        $currentUrl = request()->fullUrl();
-        $visitor = Visitor::where('url', $currentUrl)->count();
+        $visitor = $total;
 
         $kategori = Kategori::all();
 
-        $response = Http::get('https://www.googleapis.com/youtube/v3/search', [
-            'part' => 'snippet',
-            'channelId' => env('YOUTUBE_CHANNEL_ID'),
-            'maxResults' => 3,
-            'order' => 'date',
-            'type' => 'video',
-            'key' => env('YOUTUBE_API_KEY'),
-        ]);
-        $videos = $response->json('items') ?? [];
-        $videoIds = collect($videos)
-            ->pluck('id.videoId')
-            ->implode(',');
+        $videos = Cache::remember('youtube_home_videos', 3600, function () {
+            $apiKey = env('YOUTUBE_API_KEY');
+            $channelId = env('YOUTUBE_CHANNEL_ID');
 
-        $detailsResponse = Http::get('https://www.googleapis.com/youtube/v3/videos', [
-            'part' => 'statistics,contentDetails',
-            'id' => $videoIds,
-            'key' => env('YOUTUBE_API_KEY'),
-        ]);
+            if (!$apiKey || !$channelId) {
+                return [];
+            }
 
-        $details = collect($detailsResponse->json('items'))
-            ->keyBy('id');
+            try {
+                $response = Http::timeout(3)->get('https://www.googleapis.com/youtube/v3/search', [
+                    'part' => 'snippet',
+                    'channelId' => $channelId,
+                    'maxResults' => 3,
+                    'order' => 'date',
+                    'type' => 'video',
+                    'key' => $apiKey,
+                ]);
 
-        $videos = collect($videos)->map(function ($video) use ($details) {
-            $id = $video['id']['videoId'];
+                $items = $response->json('items') ?? [];
+                if (empty($items)) {
+                    return [];
+                }
 
-            return [
-                'id' => $id,
-                'title' => $video['snippet']['title'],
-                'thumbnail' => $video['snippet']['thumbnails']['medium']['url'],
-                'published_at' => $video['snippet']['publishedAt'],
-                'views' => $details[$id]['statistics']['viewCount'] ?? 0,
-                'likes' => $details[$id]['statistics']['likeCount'] ?? 0,
-                'duration' => $details[$id]['contentDetails']['duration'] ?? 'PT0S',
-            ];
+                $videoIds = collect($items)
+                    ->pluck('id.videoId')
+                    ->filter()
+                    ->implode(',');
+
+                if (!$videoIds) {
+                    return [];
+                }
+
+                $detailsResponse = Http::timeout(3)->get('https://www.googleapis.com/youtube/v3/videos', [
+                    'part' => 'statistics,contentDetails',
+                    'id' => $videoIds,
+                    'key' => $apiKey,
+                ]);
+
+                $details = collect($detailsResponse->json('items'))
+                    ->keyBy('id');
+
+                return collect($items)->map(function ($video) use ($details) {
+                    $id = $video['id']['videoId'] ?? '';
+
+                    return [
+                        'id' => $id,
+                        'title' => $video['snippet']['title'] ?? '',
+                        'thumbnail' => $video['snippet']['thumbnails']['medium']['url'] ?? '',
+                        'published_at' => $video['snippet']['publishedAt'] ?? now(),
+                        'views' => $details[$id]['statistics']['viewCount'] ?? 0,
+                        'likes' => $details[$id]['statistics']['likeCount'] ?? 0,
+                        'duration' => $details[$id]['contentDetails']['duration'] ?? 'PT0S',
+                    ];
+                })->all();
+            } catch (\Throwable $e) {
+                return [];
+            }
         });
 
         // API siwawan dinonaktifkan sementara karena service sudah tidak tersedia

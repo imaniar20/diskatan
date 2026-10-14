@@ -78,6 +78,13 @@
                 <li class="nav-item">
                     <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="/layanan">Layanan</a>
                 </li>
+
+                <li class="nav-item ms-lg-2">
+                    <a class="nav-link btn-portal-nav d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill" href="{{ url('/') }}" id="btn-kembali-portal" title="Buka Portal & Sambutan">
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Portal</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

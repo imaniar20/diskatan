@@ -1527,5 +1527,21 @@
             justify-content: center;
         }
     }
+    .btn-portal-nav {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff !important;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        transition: all 0.3s ease;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
+    .btn-portal-nav:hover {
+        background: var(--primary-green, #16a34a);
+        border-color: var(--primary-green, #16a34a);
+        color: #fff !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
