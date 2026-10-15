@@ -15,9 +15,9 @@ class ProgramsController extends Controller
     public function index()
     {
         if (session('user')->bidang_id == '1') {
-            $program = Programs::orderByDesc('created_at')->get();
+            $program = Programs::with('kategori')->orderByDesc('created_at')->get();
         } else {
-            $program = Programs::where('user_id', session('user')->id)->orderByDesc('created_at')->get();
+            $program = Programs::where('user_id', session('user')->id)->with('kategori')->orderByDesc('created_at')->get();
         }
 
         $data = array(

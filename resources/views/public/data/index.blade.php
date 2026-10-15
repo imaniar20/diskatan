@@ -520,30 +520,35 @@
             align-items: center;
             gap: 6px;
         }
+
         .btn-komoditas-pill.active,
         .btn-komoditas-pill:hover {
             background: #16a34a;
             color: #fff !important;
             box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
         }
+
         .stat-card-padi {
             background: #ffffff;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             border-left: 4px solid #16a34a;
             height: 100%;
         }
+
         .badge-capaian-high {
             background-color: #d1fae5;
             color: #065f46;
             font-weight: 600;
         }
+
         .badge-capaian-medium {
             background-color: #fef3c7;
             color: #92400e;
             font-weight: 600;
         }
+
         .badge-capaian-low {
             background-color: #fee2e2;
             color: #991b1b;
@@ -632,7 +637,7 @@
                                     top: 10px;
                                     right: 15px;
                                     font-size: 11px;
-                                    background: rgba(0,0,0,0.05);
+                                    background: rgba(0, 0, 0, 0.05);
                                     padding: 3px 8px;
                                     border-radius: 6px;
                                 }
@@ -641,7 +646,8 @@
                                 <div class="stat-card">
                                     {{-- <div class="stat-card position-relative"> --}}
                                         <p class="date-label stat-label">Jan - {{ date('M') }} {{ date('Y') }}</p>
-                                    {{-- </div> --}}
+                                        {{--
+                                    </div> --}}
                                     <div class="stat-icon bg-success">
                                         <i class="bi bi-geo-alt"></i>
                                     </div>
@@ -672,7 +678,9 @@
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="stat-content">
-                                        <h3 class="stat-number">{{ $kelompok_tani !== null ? number_format($kelompok_tani) : '-' }}</h3>
+                                        <h3 class="stat-number">
+                                            {{ $kelompok_tani !== null ? number_format($kelompok_tani) : '-' }}
+                                        </h3>
                                         <p class="stat-label">Kelompok Tani</p>
                                     </div>
                                 </div>
@@ -760,12 +768,16 @@
                     <!-- TAB PANE PADI & PALAWIJA -->
                     <div class="tab-pane fade" id="padi-palawija">
                         <!-- Selector Tahun Bar -->
-                        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                        <div
+                            class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
                             <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
                                 <label for="publicSelectTahun" class="fw-bold text-success mb-0 text-nowrap">
                                     <i class="bx bx-calendar me-1"></i> Pilih Tahun:
                                 </label>
-                                <select id="publicSelectTahun" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;" onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#padi-palawija'">
+                                <select id="publicSelectTahun"
+                                    class="form-select form-select-sm fw-bold border-success text-success"
+                                    style="width: 120px;"
+                                    onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#padi-palawija'">
                                     @foreach ($availableYears as $yr)
                                         <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
                                     @endforeach
@@ -773,7 +785,8 @@
                             </div>
                             <div>
                                 <span class="badge bg-light text-success border border-success px-3 py-2">
-                                    <i class="bx bx-check-shield me-1"></i> Target & Realisasi Tanam Tahun {{ $selectedTahun }}
+                                    <i class="bx bx-check-shield me-1"></i> Target & Realisasi Tanam Tahun
+                                    {{ $selectedTahun }}
                                 </span>
                             </div>
                         </div>
@@ -781,7 +794,8 @@
                         <!-- Sub Pills Komoditas -->
                         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                             @foreach ($komoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}"
+                                    data-komoditas="{{ $kmd }}">
                                     <i class="bx bx-leaf"></i> {{ $kmd }}
                                 </button>
                             @endforeach
@@ -792,28 +806,28 @@
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi">
                                     <span class="text-muted small">Luas Sawah</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold" id="kpiSawah">0 Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSawah">0 Ha</h4>
                                     <small class="text-secondary" id="kpiSawahSub">Kabupaten Kuningan</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                     <span class="text-muted small">Target Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold" id="kpiTarget">0 Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiTarget">0 Ha</h4>
                                     <small class="text-secondary">Musim Hujan + Kemarau</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #10b981;">
                                     <span class="text-muted small">Realisasi Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold" id="kpiRealisasi">0 Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha</h4>
                                     <small class="text-secondary">Total MH + MK</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                     <span class="text-muted small">Capaian Target</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold" id="kpiPersen">0%</h4>
+                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPersen">0%</h4>
                                     <small class="text-secondary">Persentase Target</small>
                                 </div>
                             </div>
@@ -821,8 +835,10 @@
 
                         <!-- Chart Target vs Realisasi per Kecamatan -->
                         <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success"><i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam per Kecamatan (Ha)</h6>
+                            <div
+                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0 fw-bold text-success"><i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik
+                                    Target vs Realisasi Luas Tanam per Kecamatan (Ha)</h6>
                                 <span class="badge bg-success" id="chartKomoditasBadge">Padi</span>
                             </div>
                             <div class="card-body">
@@ -833,11 +849,13 @@
                         <!-- Tabel Detail Per Kecamatan -->
                         <div class="card shadow-sm">
                             <div class="card-header bg-white py-3">
-                                <h6 class="mb-0 fw-bold text-success"><i class="bx bx-table me-1"></i> Data Rincian Target & Realisasi Tanam per Kecamatan (Tahun {{ $selectedTahun }})</h6>
+                                <h6 class="mb-0 fw-bold text-success"><i class="bx bx-table me-1"></i> Data Rincian Target &
+                                    Realisasi Tanam per Kecamatan (Tahun {{ $selectedTahun }})</h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100" id="tablePadiPalawija">
+                                    <table class="table table-striped table-hover align-middle w-100"
+                                        id="tablePadiPalawija">
                                         <thead class="table-light">
                                             <tr>
                                                 <th class="text-center" style="width: 4%">No</th>
@@ -865,7 +883,9 @@
                         <!-- Sub Pills Komoditas Sayuran & Hortikultura -->
                         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                             @foreach ($sayuranKomoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                <button type="button"
+                                    class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}"
+                                    data-komoditas="{{ $kmd }}">
                                     <i class="bx bx-spa"></i> {{ $kmd }}
                                 </button>
                             @endforeach
@@ -876,28 +896,28 @@
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                     <span class="text-muted small">Total Luas Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold" id="kpiSayuranTanam">0</h4>
+                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0</h4>
                                     <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #3b82f6;">
                                     <span class="text-muted small">Total Luas Panen</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold" id="kpiSayuranPanen">0</h4>
+                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0</h4>
                                     <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                     <span class="text-muted small">Rata-rata Produktivitas</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold" id="kpiSayuranProdv">0</h4>
+                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiSayuranProdv">0</h4>
                                     <small class="text-secondary">Produktivitas Rata-rata</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #10b981;">
                                     <span class="text-muted small">Total Produksi</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold" id="kpiSayuranProduksi">0</h4>
+                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0</h4>
                                     <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan</small>
                                 </div>
                             </div>
@@ -905,9 +925,11 @@
 
                         <!-- Grafik Tren Tahunan ApexCharts -->
                         <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                            <div
+                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartSayuranKomoditasTitle">Bawang Merah</span>
+                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
+                                        id="chartSayuranKomoditasTitle">Bawang Merah</span>
                                 </h6>
                                 <span class="badge bg-success" id="chartSayuranBadge">Sayuran</span>
                             </div>
@@ -918,14 +940,17 @@
 
                         <!-- Tabel Detail Per Tahun -->
                         <div class="card shadow-sm">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                            <div
+                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tableSayuranTitle">Bawang Merah</span>
+                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
+                                        id="tableSayuranTitle">Bawang Merah</span>
                                 </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100" id="tableSayuranPublic">
+                                    <table class="table table-striped table-hover align-middle w-100"
+                                        id="tableSayuranPublic">
                                         <thead class="table-light">
                                             <tr>
                                                 <th class="text-center" style="width: 5%">No</th>
@@ -949,7 +974,8 @@
                         <!-- Sub Pills Komoditas Tanaman Pangan -->
                         <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                             @foreach ($tanamanPanganKomoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}"
+                                    data-komoditas="{{ $kmd }}">
                                     <i class="bx bx-spa"></i> {{ $kmd }}
                                 </button>
                             @endforeach
@@ -960,28 +986,28 @@
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                     <span class="text-muted small">Total Luas Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold" id="kpiPanganTanam">0 Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha</h4>
                                     <small class="text-secondary">Satuan: Hektar (Ha)</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #3b82f6;">
                                     <span class="text-muted small">Total Luas Panen</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold" id="kpiPanganPanen">0 Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha</h4>
                                     <small class="text-secondary">Satuan: Hektar (Ha)</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                     <span class="text-muted small">Rata-rata Produktivitas</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold" id="kpiPanganProdv">0 Kw/Ha</h4>
+                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha</h4>
                                     <small class="text-secondary">Satuan: Kw/Ha</small>
                                 </div>
                             </div>
                             <div class="col-6 col-md-3">
                                 <div class="stat-card-padi" style="border-left-color: #10b981;">
                                     <span class="text-muted small">Total Produksi</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold" id="kpiPanganProduksi">0 Ton</h4>
+                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0 Ton</h4>
                                     <small class="text-secondary">Satuan: Ton</small>
                                 </div>
                             </div>
@@ -989,9 +1015,11 @@
 
                         <!-- Grafik Tren Tahunan ApexCharts -->
                         <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                            <div
+                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPanganKomoditasTitle">Padi</span>
+                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
+                                        id="chartPanganKomoditasTitle">Padi</span>
                                 </h6>
                                 <span class="badge bg-warning text-dark">Tanaman Pangan</span>
                             </div>
@@ -1002,14 +1030,17 @@
 
                         <!-- Tabel Detail Per Tahun -->
                         <div class="card shadow-sm">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                            <div
+                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePanganTitle">Padi</span>
+                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
+                                        id="tablePanganTitle">Padi</span>
                                 </h6>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100" id="tablePanganPublic">
+                                    <table class="table table-striped table-hover align-middle w-100"
+                                        id="tablePanganPublic">
                                         <thead class="table-light">
                                             <tr>
                                                 <th class="text-center" style="width: 5%">No</th>
@@ -1075,7 +1106,7 @@
                 },
                 dataLabels: {
                     enabled: true,
-                    formatter: function(val) {
+                    formatter: function (val) {
                         return val;
                     },
                     offsetY: -20,
@@ -1092,7 +1123,7 @@
                 },
                 yaxis: {
                     labels: {
-                        formatter: function(val) {
+                        formatter: function (val) {
                             return Math.floor(val);
                         }
                     }
@@ -1112,10 +1143,10 @@
                 name: 'Produksi',
                 data: [
                     <?php
-                    foreach ($produksi as $item) {
-                        echo $item->value . ',';
-                    }
-                    ?>
+    foreach ($produksi as $item) {
+        echo $item->value . ',';
+    }
+                                        ?>
                 ]
             }],
             chart: {
@@ -1135,7 +1166,7 @@
             },
             tooltip: {
                 y: {
-                    formatter: function(val) {
+                    formatter: function (val) {
                         return val + ' ton';
                     }
                 }
@@ -1143,10 +1174,10 @@
             xaxis: {
                 categories: [
                     <?php
-                    foreach ($produksi as $item) {
-                        echo "'" . $item->name . "',";
-                    }
-                    ?>
+    foreach ($produksi as $item) {
+        echo "'" . $item->name . "',";
+    }
+                                        ?>
                 ],
             }
         };
@@ -1154,7 +1185,7 @@
         let chartProduksi = null;
 
         document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
-            el.addEventListener('shown.bs.tab', function(e) {
+            el.addEventListener('shown.bs.tab', function (e) {
                 const target = e.target.getAttribute('data-bs-target');
 
                 if (target === '#produksi' && chartProduksi === null) {
@@ -1202,7 +1233,7 @@
                 itemMargin: {
                     vertical: 8
                 },
-                formatter: function(seriesName, opts) {
+                formatter: function (seriesName, opts) {
                     return seriesName + ": " + opts.w.globals.series[opts.seriesIndex] + "%"
                 }
             },
@@ -1211,7 +1242,7 @@
             },
             tooltip: {
                 y: {
-                    formatter: function(val) {
+                    formatter: function (val) {
                         return val + "%"
                     }
                 }
@@ -1242,7 +1273,7 @@
             colors: ['#10b981', '#84cc16', '#fbbf24', '#f97316', '#ef4444'],
             dataLabels: {
                 enabled: true,
-                formatter: function(val) {
+                formatter: function (val) {
                     return val + "%"
                 },
                 offsetX: 30,
@@ -1285,7 +1316,7 @@
             },
             tooltip: {
                 y: {
-                    formatter: function(val) {
+                    formatter: function (val) {
                         return val + "%"
                     }
                 }
@@ -1296,7 +1327,7 @@
         let barChart = null;
 
         document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
-            el.addEventListener('shown.bs.tab', function(e) {
+            el.addEventListener('shown.bs.tab', function (e) {
                 const target = e.target.getAttribute('data-bs-target');
 
                 if (target === '#ketahanan') {
@@ -1348,7 +1379,7 @@
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             updatePadiView('Padi');
             updateSayuranView('Bawang Merah');
             updateTanamanPanganView('Padi');
@@ -1431,17 +1462,17 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="text-center">${row.no_urut || idx + 1}</td>
-                        <td><strong>${row.kecamatan}</strong></td>
-                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-muted">${Number(row.target_okmar || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-muted">${Number(row.target_asep || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-primary fw-semibold">${Number(row.target_total || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-success fw-bold">${Number(row.total_realisasi || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                    `;
+                                            <td class="text-center">${row.no_urut || idx + 1}</td>
+                                            <td><strong>${row.kecamatan}</strong></td>
+                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-muted">${Number(row.target_okmar || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-muted">${Number(row.target_asep || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-primary fw-semibold">${Number(row.target_total || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-success fw-bold">${Number(row.total_realisasi || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                        `;
                     tbody.appendChild(tr);
                 });
 
@@ -1594,13 +1625,13 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="text-center">${idx + 1}</td>
-                        <td class="text-center fw-bold text-success">${row.tahun}</td>
-                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
-                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
-                    `;
+                                            <td class="text-center">${idx + 1}</td>
+                                            <td class="text-center fw-bold text-success">${row.tahun}</td>
+                                            <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
+                                            <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
+                                        `;
                     tbody.appendChild(tr);
                 });
 
@@ -1732,15 +1763,15 @@
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                            <tr>
-                                <td class="text-center">${idx + 1}</td>
-                                <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                                <td class="text-end">${Number(r.produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                            </tr>
-                        `;
+                                                <tr>
+                                                    <td class="text-center">${idx + 1}</td>
+                                                    <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                                    <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                                                    <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                                                    <td class="text-end">${Number(r.produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                                    <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
+                                                </tr>
+                                            `;
                     });
                     tbody.innerHTML = html;
                 }

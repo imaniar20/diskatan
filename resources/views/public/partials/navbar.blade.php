@@ -10,10 +10,14 @@
                 <i class="bi bi-clock"></i>
                 <span id="current-time"></span>
                 <span> | </span>
-                <a href="https://www.facebook.com/diskatankuningan/" target="_blank" class="social"><i class='bx bxl-facebook'></i></a>
-                <a href="https://www.instagram.com/diskatankuningan/" target="_blank" class="social"><i class='bx bxl-instagram'></i></a>
-                <a href="https://www.tiktok.com/@diskatankuningan" target="_blank" class="social"><i class='bx bxl-tiktok'></i></a>
-                <a href="https://www.youtube.com/@diskatankuningan" target="_blank" class="social"><i class='bx bxl-youtube'></i></a>
+                <a href="https://www.facebook.com/diskatankuningan/" target="_blank" class="social"><i
+                        class='bx bxl-facebook'></i></a>
+                <a href="https://www.instagram.com/diskatankuningan/" target="_blank" class="social"><i
+                        class='bx bxl-instagram'></i></a>
+                <a href="https://www.tiktok.com/@diskatankuningan" target="_blank" class="social"><i
+                        class='bx bxl-tiktok'></i></a>
+                <a href="https://www.youtube.com/@diskatankuningan" target="_blank" class="social"><i
+                        class='bx bxl-youtube'></i></a>
             </div>
         </div>
     </div>
@@ -40,8 +44,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link d-flex align-items-center gap-1 dropdown-toggle-custom {{ $title == 'Profil' ? 'active' : '' }}"
-                        href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                        href="#" id="profilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Profil
                         <i class="bi bi-chevron-down dropdown-icon"></i>
                     </a>
@@ -68,23 +71,25 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Program' ? 'active' : '' }}" href="{{ url('/program') }}">Program</a>
+                    <a class="nav-link {{ $menu == 'Program' ? 'active' : '' }}"
+                        href="{{ url('/program') }}">Program</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $menu == 'Data dan Informasi' ? 'active' : '' }}" href="/datadaninformasi">Data dan Informasi</a>
+                    <a class="nav-link {{ $menu == 'Data dan Informasi' ? 'active' : '' }}"
+                        href="/datadaninformasi">Data dan Informasi</a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ $menu == 'Layanan' ? 'active' : '' }}" href="/layanan">Layanan</a>
                 </li>
 
-                <li class="nav-item ms-lg-2">
+                <!-- <li class="nav-item ms-lg-2">
                     <a class="nav-link btn-portal-nav d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill" href="{{ url('/') }}" id="btn-kembali-portal" title="Buka Portal & Sambutan">
                         <i class="bi bi-grid-fill"></i>
                         <span>Portal</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

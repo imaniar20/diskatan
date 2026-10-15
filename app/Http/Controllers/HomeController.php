@@ -354,11 +354,7 @@ class HomeController extends Controller
 
     public function program()
     {
-        $kategori = Kategori::with([
-            'programs.news' => function ($q) {
-                $q->latest()->limit(5);
-            }
-        ])->get();
+        $kategori = Kategori::all();
 
         $data = array(
             'head' => "Program",
@@ -373,11 +369,7 @@ class HomeController extends Controller
 
     public function program_selection($select)
     {
-        $kategori = Kategori::with([
-            'programs.news' => function ($q) {
-                $q->latest()->limit(5);
-            }
-        ])->get();
+        $kategori = Kategori::all();
 
         $data = array(
             'head' => "Program",
@@ -554,9 +546,10 @@ class HomeController extends Controller
 
     public function byKategori($id)
     {
-        $news = News::whereHas('programs.kategori', function ($q) use ($id) {
-            $q->where('id', $id);
-        })
+        $news = News::with('programs')
+            ->whereHas('programs.kategori', function ($q) use ($id) {
+                $q->where('id', $id);
+            })
             ->latest()
             ->paginate(6);
 
