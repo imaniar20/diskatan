@@ -426,12 +426,84 @@ class HomeController extends Controller
             $selectedTahun = $availableYears[0] ?? '2026';
         }
 
-        $padiPalawijaData = PadiPalawija::where('tahun', $selectedTahun)
-            ->orderBy('no_urut', 'asc')
-            ->get()
-            ->groupBy('komoditas');
+        $padiKategoriList = [
+            'tanam' => [
+                'key' => 'tanam',
+                'label' => 'Luas Tanam',
+                'satuan' => 'Ha',
+                'icon' => 'bx-spa',
+                'target_sub1_label' => 'Target Okmar (MH)',
+                'target_sub2_label' => 'Target Asep (MK)',
+                'realisasi_sub1_label' => 'Realisasi MH',
+                'realisasi_sub2_label' => 'Realisasi MK',
+                'months_sub1' => ['Okt', 'Nop', 'Des', 'Jan', 'Feb', 'Mar'],
+                'months_sub2' => ['Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep'],
+            ],
+            'panen' => [
+                'key' => 'panen',
+                'label' => 'Luas Panen',
+                'satuan' => 'Ha',
+                'icon' => 'bx-cut',
+                'target_sub1_label' => 'Target Jan-Jun',
+                'target_sub2_label' => 'Target Jul-Des',
+                'realisasi_sub1_label' => 'Realisasi Jan-Jun',
+                'realisasi_sub2_label' => 'Realisasi Jul-Des',
+                'months_sub1' => ['Jan', 'Peb', 'Maret', 'April', 'Mei', 'Juni'],
+                'months_sub2' => ['Juli', 'Agst', 'Sept', 'Okt', 'Nov', 'Des'],
+            ],
+            'produksi' => [
+                'key' => 'produksi',
+                'label' => 'Produksi',
+                'satuan' => 'Ton',
+                'icon' => 'bx-package',
+                'target_sub1_label' => 'Target Jan-Jun',
+                'target_sub2_label' => 'Target Jul-Des',
+                'realisasi_sub1_label' => 'Realisasi Jan-Jun',
+                'realisasi_sub2_label' => 'Realisasi Jul-Des',
+                'months_sub1' => ['Jan', 'Peb', 'Maret', 'April', 'Mei', 'Juni'],
+                'months_sub2' => ['Juli', 'Agst', 'Sept', 'Okt', 'Nov', 'Des'],
+            ],
+            'produktivitas' => [
+                'key' => 'produktivitas',
+                'label' => 'Produktivitas',
+                'satuan' => 'Kw/Ha',
+                'icon' => 'bx-line-chart',
+                'target_sub1_label' => 'Target Jan-Jun',
+                'target_sub2_label' => 'Target Jul-Des',
+                'realisasi_sub1_label' => 'Rata-rata Jan-Jun',
+                'realisasi_sub2_label' => 'Rata-rata Jul-Des',
+                'months_sub1' => ['Jan', 'Peb', 'Maret', 'April', 'Mei', 'Juni'],
+                'months_sub2' => ['Juli', 'Agst', 'Sept', 'Okt', 'Nov', 'Des'],
+            ],
+            'puso' => [
+                'key' => 'puso',
+                'label' => 'Puso (Gagal Panen)',
+                'satuan' => 'Ha',
+                'icon' => 'bx-error-circle',
+                'target_sub1_label' => 'Target Jan-Jun',
+                'target_sub2_label' => 'Target Jul-Des',
+                'realisasi_sub1_label' => 'Realisasi Jan-Jun',
+                'realisasi_sub2_label' => 'Realisasi Jul-Des',
+                'months_sub1' => ['Jan', 'Peb', 'Maret', 'April', 'Mei', 'Juni'],
+                'months_sub2' => ['Juli', 'Agst', 'Sept', 'Okt', 'Nov', 'Des'],
+            ],
+        ];
 
-        $padiPalawijaSummary = PadiPalawija::selectRaw('
+        // Ambil semua data tahun terpilih (semua kategori & komoditas)
+        $allPadiPalawija = PadiPalawija::where('tahun', $selectedTahun)
+            ->orderBy('no_urut', 'asc')
+            ->get();
+
+        $padiPalawijaGrouped = [];
+        foreach ($allPadiPalawija as $it) {
+            $kat = $it->kategori ?: 'tanam';
+            $padiPalawijaGrouped[$kat][$it->komoditas][] = $it;
+        }
+
+        // Summary per [kategori][komoditas]
+        $padiPalawijaSummaryGrouped = [];
+        $summaryRows = PadiPalawija::selectRaw('
+            kategori,
             komoditas,
             COUNT(*) as total_kecamatan,
             SUM(luas_sawah) as total_sawah,
@@ -440,20 +512,40 @@ class HomeController extends Controller
             SUM(target_total) as target_total,
             SUM(jumlah_mh) as realisasi_mh,
             SUM(jumlah_mk) as realisasi_mk,
-            SUM(total_realisasi) as total_realisasi
+            SUM(total_realisasi) as total_realisasi,
+            AVG(total_realisasi) as avg_realisasi,
+            AVG(target_total) as avg_target
         ')
         ->where('tahun', $selectedTahun)
-        ->groupBy('komoditas')
-        ->get()
-        ->keyBy('komoditas');
+        ->groupBy('kategori', 'komoditas')
+        ->get();
 
-        $overallTotalTarget = $padiPalawijaSummary->sum('target_total');
-        $overallTotalRealisasi = $padiPalawijaSummary->sum('total_realisasi');
+        foreach ($summaryRows as $sr) {
+            $kat = $sr->kategori ?: 'tanam';
+            $padiPalawijaSummaryGrouped[$kat][$sr->komoditas] = [
+                'total_sawah' => (float)$sr->total_sawah,
+                'target_sub1' => (float)$sr->target_okmar,
+                'target_sub2' => (float)$sr->target_asep,
+                'target_total' => (float)$sr->target_total,
+                'realisasi_sub1' => (float)$sr->realisasi_mh,
+                'realisasi_sub2' => (float)$sr->realisasi_mk,
+                'total_realisasi' => (float)$sr->total_realisasi,
+                'avg_target' => round((float)$sr->avg_target, 2),
+                'avg_realisasi' => round((float)$sr->avg_realisasi, 2),
+                'persentase' => (float)$sr->target_total > 0 ? round(((float)$sr->total_realisasi / (float)$sr->target_total) * 100, 2) : 0,
+            ];
+        }
+
+        $padiPalawijaData = $padiPalawijaGrouped['tanam'] ?? [];
+        $padiPalawijaSummary = $padiPalawijaSummaryGrouped['tanam'] ?? [];
+
+        $totalTanamTarget = collect($padiPalawijaSummary)->sum('target_total');
+        $totalTanamRealisasi = collect($padiPalawijaSummary)->sum('total_realisasi');
         $padiOverallStats = [
-            'total_sawah' => PadiPalawija::where('komoditas', 'Padi')->where('tahun', $selectedTahun)->sum('luas_sawah'),
-            'total_target' => $overallTotalTarget,
-            'total_realisasi' => $overallTotalRealisasi,
-            'persentase' => $overallTotalTarget > 0 ? round(($overallTotalRealisasi / $overallTotalTarget) * 100, 2) : 0,
+            'total_sawah' => PadiPalawija::where('komoditas', 'Padi')->where('tahun', $selectedTahun)->where('kategori', 'tanam')->sum('luas_sawah'),
+            'total_target' => $totalTanamTarget,
+            'total_realisasi' => $totalTanamRealisasi,
+            'persentase' => $totalTanamTarget > 0 ? round(($totalTanamRealisasi / $totalTanamTarget) * 100, 2) : 0,
         ];
 
         // Data Sayuran & Hortikultura
@@ -530,6 +622,9 @@ class HomeController extends Controller
             'komoditasList' => $komoditasList,
             'availableYears' => $availableYears,
             'selectedTahun' => $selectedTahun,
+            'padiKategoriList' => $padiKategoriList,
+            'padiPalawijaGrouped' => $padiPalawijaGrouped,
+            'padiPalawijaSummaryGrouped' => $padiPalawijaSummaryGrouped,
             'padiPalawijaData' => $padiPalawijaData,
             'padiPalawijaSummary' => $padiPalawijaSummary,
             'padiOverallStats' => $padiOverallStats,

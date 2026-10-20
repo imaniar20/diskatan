@@ -13,6 +13,8 @@ class PadiPalawija extends Model
 
     protected $fillable = [
         'komoditas',
+        'kategori',
+        'satuan',
         'tahun',
         'musim_tanam',
         'no_urut',
@@ -36,6 +38,7 @@ class PadiPalawija extends Model
         'realisasi_sep',
         'jumlah_mk',
         'total_realisasi',
+        'persentase_sub',
         'persentase_capaian',
     ];
 
@@ -59,6 +62,33 @@ class PadiPalawija extends Model
         'realisasi_sep' => 'float',
         'jumlah_mk' => 'float',
         'total_realisasi' => 'float',
+        'persentase_sub' => 'float',
         'persentase_capaian' => 'float',
     ];
+
+    public function getKategoriLabelAttribute(): string
+    {
+        return match ($this->kategori) {
+            'tanam' => 'Luas Tanam',
+            'panen' => 'Luas Panen',
+            'produksi' => 'Produksi',
+            'produktivitas' => 'Produktivitas',
+            'puso' => 'Luas Puso',
+            default => ucfirst($this->kategori ?? 'Tanam'),
+        };
+    }
+
+    public function getSatuanLabelAttribute(): string
+    {
+        if (!empty($this->satuan)) {
+            return $this->satuan;
+        }
+
+        return match ($this->kategori) {
+            'tanam', 'panen', 'puso' => 'Ha',
+            'produksi' => 'Ton',
+            'produktivitas' => 'Kw/Ha',
+            default => 'Ha',
+        };
+    }
 }
