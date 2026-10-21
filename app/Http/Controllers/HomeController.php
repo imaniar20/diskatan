@@ -18,6 +18,10 @@ use App\Models\Productions;
 use App\Models\PadiPalawija;
 use App\Models\Sayuran;
 use App\Models\TanamanPangan;
+use App\Models\HortikulturaUtama;
+use App\Models\PerkebunanUtama;
+use App\Models\Perkebunan;
+use App\Models\Komoditas;
 
 class HomeController extends Controller
 {
@@ -401,15 +405,7 @@ class HomeController extends Controller
         $produksi = collect([]);
 
         // Data Padi & Palawija
-        $komoditasList = [
-            'Padi',
-            'Jagung',
-            'Kedelai',
-            'Kacang Tanah',
-            'Kacang Hijau',
-            'Ubi Kayu',
-            'Ubi Jalar'
-        ];
+        $komoditasList = Komoditas::getListBySektor('tanaman_pangan');
 
         $availableYears = PadiPalawija::select('tahun')
             ->distinct()
@@ -516,23 +512,23 @@ class HomeController extends Controller
             AVG(total_realisasi) as avg_realisasi,
             AVG(target_total) as avg_target
         ')
-        ->where('tahun', $selectedTahun)
-        ->groupBy('kategori', 'komoditas')
-        ->get();
+            ->where('tahun', $selectedTahun)
+            ->groupBy('kategori', 'komoditas')
+            ->get();
 
         foreach ($summaryRows as $sr) {
             $kat = $sr->kategori ?: 'tanam';
             $padiPalawijaSummaryGrouped[$kat][$sr->komoditas] = [
-                'total_sawah' => (float)$sr->total_sawah,
-                'target_sub1' => (float)$sr->target_okmar,
-                'target_sub2' => (float)$sr->target_asep,
-                'target_total' => (float)$sr->target_total,
-                'realisasi_sub1' => (float)$sr->realisasi_mh,
-                'realisasi_sub2' => (float)$sr->realisasi_mk,
-                'total_realisasi' => (float)$sr->total_realisasi,
-                'avg_target' => round((float)$sr->avg_target, 2),
-                'avg_realisasi' => round((float)$sr->avg_realisasi, 2),
-                'persentase' => (float)$sr->target_total > 0 ? round(((float)$sr->total_realisasi / (float)$sr->target_total) * 100, 2) : 0,
+                'total_sawah' => (float) $sr->total_sawah,
+                'target_sub1' => (float) $sr->target_okmar,
+                'target_sub2' => (float) $sr->target_asep,
+                'target_total' => (float) $sr->target_total,
+                'realisasi_sub1' => (float) $sr->realisasi_mh,
+                'realisasi_sub2' => (float) $sr->realisasi_mk,
+                'total_realisasi' => (float) $sr->total_realisasi,
+                'avg_target' => round((float) $sr->avg_target, 2),
+                'avg_realisasi' => round((float) $sr->avg_realisasi, 2),
+                'persentase' => (float) $sr->target_total > 0 ? round(((float) $sr->total_realisasi / (float) $sr->target_total) * 100, 2) : 0,
             ];
         }
 
@@ -549,21 +545,7 @@ class HomeController extends Controller
         ];
 
         // Data Sayuran & Hortikultura
-        $sayuranKomoditasList = [
-            'Bawang Merah',
-            'Bawang Daun',
-            'Cabe Besar',
-            'Cabe Rawit',
-            'Tomat',
-            'Wortel',
-            'Kubis',
-            'Petsai / Sawi',
-            'Rambutan',
-            'Mangga',
-            'Durian',
-            'Jahe',
-            'Kapulaga',
-        ];
+        $sayuranKomoditasList = Komoditas::getListBySektor('hortikultura');
 
         $sayuranData = Sayuran::orderBy('tahun', 'asc')
             ->get()
@@ -580,20 +562,12 @@ class HomeController extends Controller
             AVG(produktivitas) as avg_produktivitas,
             SUM(produksi) as total_produksi
         ')
-        ->groupBy('komoditas', 'kategori', 'satuan_luas', 'satuan_produksi')
-        ->get()
-        ->keyBy('komoditas');
+            ->groupBy('komoditas', 'kategori', 'satuan_luas', 'satuan_produksi')
+            ->get()
+            ->keyBy('komoditas');
 
-        // Data Tanaman Pangan (Historis 13 Tahun)
-        $tanamanPanganKomoditasList = [
-            'Padi',
-            'Jagung',
-            'Kedelai',
-            'Kacang Tanah',
-            'Kacang Hijau',
-            'Ubi Kayu',
-            'Ubi Jalar',
-        ];
+        // Data Tanaman Pangan (Historis)
+        $tanamanPanganKomoditasList = Komoditas::getListBySektor('tanaman_pangan');
 
         $tanamanPanganData = TanamanPangan::orderBy('tahun', 'asc')
             ->get()
@@ -607,9 +581,133 @@ class HomeController extends Controller
             AVG(produktivitas) as avg_produktivitas,
             SUM(produksi) as total_produksi
         ')
-        ->groupBy('komoditas')
-        ->get()
-        ->keyBy('komoditas');
+            ->groupBy('komoditas')
+            ->get()
+            ->keyBy('komoditas');
+
+        // Hitung jumlah tahun dinamis untuk data tahunan
+        $tanamanPanganTahunCount = TanamanPangan::distinct()->count('tahun') ?: 13;
+        $sayuranTahunCount = Sayuran::distinct()->count('tahun') ?: 13;
+        $perkebunanTahunCount = Perkebunan::distinct()->count('tahun') ?: 10;
+
+        // Data Utama Hortikultura
+        $allHortikulturaUtama = HortikulturaUtama::where('tahun', $selectedTahun)
+            ->orderBy('no_urut', 'asc')
+            ->get();
+
+        $hortikulturaGrouped = [];
+        foreach ($allHortikulturaUtama as $it) {
+            $kat = $it->kategori ?: 'tanam';
+            $hortikulturaGrouped[$kat][$it->komoditas][] = $it;
+        }
+
+        $hortikulturaSummaryGrouped = [];
+        $hortiSummaryRows = HortikulturaUtama::selectRaw('
+            kategori,
+            komoditas,
+            COUNT(*) as total_kecamatan,
+            SUM(luas_sawah) as total_sawah,
+            SUM(target_okmar) as target_okmar,
+            SUM(target_asep) as target_asep,
+            SUM(target_total) as target_total,
+            SUM(jumlah_mh) as realisasi_mh,
+            SUM(jumlah_mk) as realisasi_mk,
+            SUM(total_realisasi) as total_realisasi,
+            AVG(total_realisasi) as avg_realisasi,
+            AVG(target_total) as avg_target
+        ')
+            ->where('tahun', $selectedTahun)
+            ->groupBy('kategori', 'komoditas')
+            ->get();
+
+        foreach ($hortiSummaryRows as $sr) {
+            $kat = $sr->kategori ?: 'tanam';
+            $hortikulturaSummaryGrouped[$kat][$sr->komoditas] = [
+                'total_sawah' => (float) $sr->total_sawah,
+                'target_sub1' => (float) $sr->target_okmar,
+                'target_sub2' => (float) $sr->target_asep,
+                'target_total' => (float) $sr->target_total,
+                'realisasi_sub1' => (float) $sr->realisasi_mh,
+                'realisasi_sub2' => (float) $sr->realisasi_mk,
+                'total_realisasi' => (float) $sr->total_realisasi,
+                'avg_target' => round((float) $sr->avg_target, 2),
+                'avg_realisasi' => round((float) $sr->avg_realisasi, 2),
+                'persentase' => (float) $sr->target_total > 0 ? round(((float) $sr->total_realisasi / (float) $sr->target_total) * 100, 2) : 0,
+            ];
+        }
+
+        $hortikulturaUtamaData = $hortikulturaGrouped['tanam'] ?? [];
+        $hortikulturaUtamaSummary = $hortikulturaSummaryGrouped['tanam'] ?? [];
+
+        // Data Utama Perkebunan
+        $allPerkebunanUtama = PerkebunanUtama::where('tahun', $selectedTahun)
+            ->orderBy('no_urut', 'asc')
+            ->get();
+
+        $perkebunanGrouped = [];
+        foreach ($allPerkebunanUtama as $it) {
+            $kat = $it->kategori ?: 'tanam';
+            $perkebunanGrouped[$kat][$it->komoditas][] = $it;
+        }
+
+        $perkebunanSummaryGrouped = [];
+        $perkebunanSummaryRows = PerkebunanUtama::selectRaw('
+            kategori,
+            komoditas,
+            COUNT(*) as total_kecamatan,
+            SUM(luas_sawah) as total_sawah,
+            SUM(target_okmar) as target_okmar,
+            SUM(target_asep) as target_asep,
+            SUM(target_total) as target_total,
+            SUM(jumlah_mh) as realisasi_mh,
+            SUM(jumlah_mk) as realisasi_mk,
+            SUM(total_realisasi) as total_realisasi,
+            AVG(total_realisasi) as avg_realisasi,
+            AVG(target_total) as avg_target
+        ')
+            ->where('tahun', $selectedTahun)
+            ->groupBy('kategori', 'komoditas')
+            ->get();
+
+        foreach ($perkebunanSummaryRows as $sr) {
+            $kat = $sr->kategori ?: 'tanam';
+            $perkebunanSummaryGrouped[$kat][$sr->komoditas] = [
+                'total_sawah' => (float) $sr->total_sawah,
+                'target_sub1' => (float) $sr->target_okmar,
+                'target_sub2' => (float) $sr->target_asep,
+                'target_total' => (float) $sr->target_total,
+                'realisasi_sub1' => (float) $sr->realisasi_mh,
+                'realisasi_sub2' => (float) $sr->realisasi_mk,
+                'total_realisasi' => (float) $sr->total_realisasi,
+                'avg_target' => round((float) $sr->avg_target, 2),
+                'avg_realisasi' => round((float) $sr->avg_realisasi, 2),
+                'persentase' => (float) $sr->target_total > 0 ? round(((float) $sr->total_realisasi / (float) $sr->target_total) * 100, 2) : 0,
+            ];
+        }
+
+        $perkebunanUtamaData = $perkebunanGrouped['tanam'] ?? [];
+        $perkebunanUtamaSummary = $perkebunanSummaryGrouped['tanam'] ?? [];
+
+        // Data Tahunan Perkebunan (Historis Dinamis)
+        $perkebunanKomoditasList = Komoditas::getListBySektor('perkebunan');
+
+        $perkebunanTahunanData = Perkebunan::orderBy('tahun', 'asc')
+            ->get()
+            ->groupBy('komoditas');
+
+        $perkebunanTahunanSummary = Perkebunan::selectRaw('
+            komoditas,
+            satuan_luas,
+            satuan_produksi,
+            COUNT(*) as total_tahun,
+            SUM(luas_tanam) as total_tanam,
+            SUM(luas_panen) as total_panen,
+            AVG(produktivitas) as avg_produktivitas,
+            SUM(produksi) as total_produksi
+        ')
+            ->groupBy('komoditas', 'satuan_luas', 'satuan_produksi')
+            ->get()
+            ->keyBy('komoditas');
 
         $data = array(
             'head' => "Data dan Informasi",
@@ -628,16 +726,36 @@ class HomeController extends Controller
             'padiPalawijaData' => $padiPalawijaData,
             'padiPalawijaSummary' => $padiPalawijaSummary,
             'padiOverallStats' => $padiOverallStats,
+
             'sayuranKomoditasList' => $sayuranKomoditasList,
             'sayuranData' => $sayuranData,
             'sayuranSummary' => $sayuranSummary,
+            'sayuranTahunCount' => $sayuranTahunCount,
+
             'tanamanPanganKomoditasList' => $tanamanPanganKomoditasList,
             'tanamanPanganData' => $tanamanPanganData,
             'tanamanPanganSummary' => $tanamanPanganSummary,
+            'tanamanPanganTahunCount' => $tanamanPanganTahunCount,
+
+            'hortikulturaKomoditasList' => $sayuranKomoditasList,
+            'hortikulturaGrouped' => $hortikulturaGrouped,
+            'hortikulturaSummaryGrouped' => $hortikulturaSummaryGrouped,
+            'hortikulturaUtamaData' => $hortikulturaUtamaData,
+            'hortikulturaUtamaSummary' => $hortikulturaUtamaSummary,
+
+            'perkebunanKomoditasList' => $perkebunanKomoditasList,
+            'perkebunanGrouped' => $perkebunanGrouped,
+            'perkebunanSummaryGrouped' => $perkebunanSummaryGrouped,
+            'perkebunanUtamaData' => $perkebunanUtamaData,
+            'perkebunanUtamaSummary' => $perkebunanUtamaSummary,
+            'perkebunanTahunanData' => $perkebunanTahunanData,
+            'perkebunanTahunanSummary' => $perkebunanTahunanSummary,
+            'perkebunanTahunCount' => $perkebunanTahunCount,
         );
 
         return view('public.data.index')->with($data);
     }
+
 
     public function byKategori($id)
     {

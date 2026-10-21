@@ -4,7 +4,7 @@
             <span class="app-brand-logo demo pl-2">
                 <img src="{{ asset('img/logo/logo.png') }}" style="width: 50px;" alt="">
             </span>
-            <h4 class=" menu-text fw-bolder ms-2 mt-3"> Kabupaten Kuningan</h4>
+            <h4 class="menu-text fw-bolder ms-2 mt-3"> Kabupaten Kuningan</h4>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -22,6 +22,7 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
+
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Public</span>
         </li>
@@ -50,33 +51,92 @@
                 <div data-i18n="Analytics">Program</div>
             </a>
         </li>
+
         @if (session('user')->username == 'admin')
-            <li class="menu-item {{ $title == 'Produksi' ? 'active' : '' }}">
-                <a href="/admin-produksi" class="menu-link">
-                    <i class='menu-icon bx bx-stats'></i>
-                    <div data-i18n="Analytics">Produksi</div>
-                </a>
-            </li>
-            <li class="menu-item {{ $title == 'Padi & Palawija' ? 'active' : '' }}">
-                <a href="/admin-padi-palawija" class="menu-link">
-                    <i class='menu-icon bx bx-spa'></i>
-                    <div data-i18n="Analytics">Padi & Palawija</div>
-                </a>
-            </li>
-            <li class="menu-item {{ $title == 'Sayuran & Hortikultura' ? 'active' : '' }}">
-                <a href="/admin-sayuran" class="menu-link">
-                    <i class='menu-icon bx bx-leaf'></i>
-                    <div data-i18n="Analytics">Sayuran & Hortikultura</div>
-                </a>
-            </li>
-            <li class="menu-item {{ $title == 'Tanaman Pangan' ? 'active' : '' }}">
-                <a href="/admin-tanaman-pangan" class="menu-link">
-                    <i class='menu-icon bx bx-sun'></i>
-                    <div data-i18n="Analytics">Tanaman Pangan</div>
-                </a>
-            </li>
+            <!-- DATA PERTANIAN SECTION -->
             <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Menu</span>
+                <span class="menu-header-text">Data Pertanian</span>
+            </li>
+
+            <!-- Tanaman Pangan -->
+            @php
+                $isTanamanPangan = in_array($title, ['Padi & Palawija', 'Tanaman Pangan']);
+                $isHortikultura = in_array($title, ['Hortikultura Utama', 'Sayuran & Hortikultura', 'Sayuran']);
+                $isPerkebunan = in_array($title, ['Perkebunan Utama', 'Perkebunan Tahunan', 'Perkebunan']);
+            @endphp
+            <li class="menu-item {{ $isTanamanPangan ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-sun"></i>
+                    <div data-i18n="Tanaman Pangan">Tanaman Pangan</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ $title == 'Padi & Palawija' ? 'active' : '' }}">
+                        <a href="/admin-padi-palawija" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Utama">Data Utama (Padi & Palawija)</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ $title == 'Tanaman Pangan' ? 'active' : '' }}">
+                        <a href="/admin-tanaman-pangan" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Tahunan">Data Tahunan</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Hortikultura -->
+            <li class="menu-item {{ $isHortikultura ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-leaf"></i>
+                    <div data-i18n="Hortikultura">Hortikultura</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ $title == 'Hortikultura Utama' ? 'active' : '' }}">
+                        <a href="/admin-hortikultura-utama" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Utama">Data Utama</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ in_array($title, ['Sayuran & Hortikultura', 'Sayuran']) ? 'active' : '' }}">
+                        <a href="/admin-sayuran" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Tahunan">Data Tahunan (Sayuran)</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- Perkebunan -->
+            <li class="menu-item {{ $isPerkebunan ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-spa"></i>
+                    <div data-i18n="Perkebunan">Perkebunan</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ $title == 'Perkebunan Utama' ? 'active' : '' }}">
+                        <a href="/admin-perkebunan-utama" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Utama">Data Utama</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ in_array($title, ['Perkebunan Tahunan', 'Perkebunan']) ? 'active' : '' }}">
+                        <a href="/admin-perkebunan-tahunan" class="menu-link">
+                            <i class="bx bx-radio-circle me-1"></i>
+                            <div data-i18n="Data Tahunan">Data Tahunan</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">Pengaturan</span>
+            </li>
+            <li class="menu-item {{ Request::is('admin-komoditas*') ? 'active' : '' }}">
+                <a href="/admin-komoditas" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-list-check"></i>
+                    <div data-i18n="Analytics">Master Komoditas</div>
+                </a>
             </li>
             <li class="menu-item {{ $title == 'Kategori' ? 'active' : '' }}">
                 <a href="/admin-kategori" class="menu-link">

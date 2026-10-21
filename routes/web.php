@@ -21,6 +21,10 @@ use App\Http\Controllers\ProductionsController;
 use App\Http\Controllers\AdminPadiPalawijaController;
 use App\Http\Controllers\AdminSayuranController;
 use App\Http\Controllers\AdminTanamanPanganController;
+use App\Http\Controllers\AdminHortikulturaUtamaController;
+use App\Http\Controllers\AdminPerkebunanUtamaController;
+use App\Http\Controllers\AdminPerkebunanController;
+use App\Http\Controllers\AdminKomoditasController;
 
 use App\Models\Agendas;
 use App\Models\News;
@@ -145,11 +149,11 @@ Route::group(['middleware' => 'auth'], function () {
                 $newsGrowth = 0;
             }
             $newsGrowth = round($newsGrowth, 0) + 100;
-            
-            
+
+
             //Bidang -------------------------------------------------------------------------------------------
             $bidang = Bidangs::with('user')->get();
-            
+
             $agenda = Agendas::count();
             $news = News::count();
             $user = User::count();
@@ -192,15 +196,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/admin-program', ProgramsController::class);
 
     Route::resource('/admin-produksi', ProductionsController::class);
+
+    // Tanaman Pangan
     Route::post('/admin-padi-palawija/import', [AdminPadiPalawijaController::class, 'import'])->name('admin-padi-palawija.import');
     Route::get('/admin-padi-palawija/export', [AdminPadiPalawijaController::class, 'export'])->name('admin-padi-palawija.export');
     Route::resource('/admin-padi-palawija', AdminPadiPalawijaController::class);
-    Route::post('/admin-sayuran/import', [AdminSayuranController::class, 'import'])->name('admin-sayuran.import');
-    Route::get('/admin-sayuran/export', [AdminSayuranController::class, 'export'])->name('admin-sayuran.export');
-    Route::resource('/admin-sayuran', AdminSayuranController::class);
     Route::post('/admin-tanaman-pangan/import', [AdminTanamanPanganController::class, 'import'])->name('admin-tanaman-pangan.import');
     Route::get('/admin-tanaman-pangan/export', [AdminTanamanPanganController::class, 'export'])->name('admin-tanaman-pangan.export');
     Route::resource('/admin-tanaman-pangan', AdminTanamanPanganController::class);
+
+    // Hortikultura
+    Route::post('/admin-hortikultura-utama/import', [AdminHortikulturaUtamaController::class, 'import'])->name('admin-hortikultura-utama.import');
+    Route::get('/admin-hortikultura-utama/export', [AdminHortikulturaUtamaController::class, 'export'])->name('admin-hortikultura-utama.export');
+    Route::resource('/admin-hortikultura-utama', AdminHortikulturaUtamaController::class);
+    Route::post('/admin-sayuran/import', [AdminSayuranController::class, 'import'])->name('admin-sayuran.import');
+    Route::get('/admin-sayuran/export', [AdminSayuranController::class, 'export'])->name('admin-sayuran.export');
+    Route::resource('/admin-sayuran', AdminSayuranController::class);
+
+    // Perkebunan
+    Route::post('/admin-perkebunan-utama/import', [AdminPerkebunanUtamaController::class, 'import'])->name('admin-perkebunan-utama.import');
+    Route::get('/admin-perkebunan-utama/export', [AdminPerkebunanUtamaController::class, 'export'])->name('admin-perkebunan-utama.export');
+    Route::resource('/admin-perkebunan-utama', AdminPerkebunanUtamaController::class);
+    Route::post('/admin-perkebunan-tahunan/import', [AdminPerkebunanController::class, 'import'])->name('admin-perkebunan-tahunan.import');
+    Route::get('/admin-perkebunan-tahunan/export', [AdminPerkebunanController::class, 'export'])->name('admin-perkebunan-tahunan.export');
+    Route::resource('/admin-perkebunan-tahunan', AdminPerkebunanController::class);
 
     Route::resource('/admin-kategori', KategoriController::class);
 
@@ -208,6 +227,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('/admin-user', UserController::class);
     Route::post('/cek-username', [UserController::class, 'cekUsername'])->name('cek.username');
+
+    // Master Komoditas
+    Route::patch('/admin-komoditas/{id}/toggle', [AdminKomoditasController::class, 'toggleStatus'])->name('admin.komoditas.toggle');
+    Route::resource('/admin-komoditas', AdminKomoditasController::class)->names('admin.komoditas');
 
     Route::post('/admin/upload-image', [ImageController::class, 'upload'])
         ->middleware('web')

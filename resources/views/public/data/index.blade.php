@@ -582,8 +582,105 @@
             color: #991b1b;
             font-weight: 600;
         }
+
+        /* ============ SUB-SEKTOR NAVIGATION (Pertanian) ============ */
+        .subsector-nav {
+            background: #e2e8f0;
+            padding: 6px;
+            border-radius: 50px;
+            display: inline-flex;
+            gap: 6px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+            border: 1px solid #cbd5e1;
+        }
+        .btn-subsector {
+            border-radius: 40px;
+            font-weight: 600;
+            padding: 10px 24px;
+            color: #1e293b !important;
+            transition: all 0.25s ease;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.95rem;
+            outline: none !important;
+            text-decoration: none;
+        }
+        .btn-subsector i {
+            color: #16a34a !important;
+            font-size: 1.15rem;
+            transition: color 0.25s ease;
+        }
+        .btn-subsector:hover:not(.active) {
+            color: #15803d !important;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .btn-subsector:hover:not(.active) i {
+            color: #15803d !important;
+        }
+        .btn-subsector.active {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+        }
+        .btn-subsector.active i {
+            color: #ffffff !important;
+        }
+
+        /* ============ SEGMENTED MODE SWITCHER ============ */
+        .segmented-mode-switcher {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            padding: 5px;
+            display: inline-flex;
+            gap: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .btn-mode-switch {
+            border: 1px solid transparent;
+            outline: none !important;
+            background: transparent;
+            padding: 9px 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 40px;
+            color: #475569 !important;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-mode-switch i {
+            color: #16a34a !important;
+            font-size: 1.1rem;
+            transition: color 0.25s ease;
+        }
+        .btn-mode-switch:hover:not(.active) {
+            background: #ffffff;
+            color: #0f172a !important;
+            border-color: #e2e8f0;
+        }
+        .btn-mode-switch:hover:not(.active) i {
+            color: #15803d !important;
+        }
+        .btn-mode-switch.active {
+            background: #16a34a !important;
+            color: #ffffff !important;
+            border-color: #16a34a !important;
+            box-shadow: 0 3px 10px rgba(22, 163, 74, 0.28);
+        }
+        .btn-mode-switch.active i {
+            color: #ffffff !important;
+        }
     </style>
 @endpush
+
 
 @section('content')
     <!-- Pattern Overlay -->
@@ -613,13 +710,6 @@
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#produksi" type="button">
-                            <i class='bx bx-stats text-pils'></i>
-                            <span class="ms-2 text-pils">Produksi</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#ketahanan" type="button">
                             <i class='bx bx-map-alt text-pils'></i>
                             <span class="ms-2 text-pils">Ketahanan Pangan</span>
@@ -627,33 +717,13 @@
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#padi-palawija" type="button">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pertanian" type="button" id="tab-pertanian-btn">
                             <i class='bx bx-spa text-pils'></i>
-                            <span class="ms-2 text-pils">Padi & Palawija</span>
+                            <span class="ms-2 text-pils">Pertanian</span>
                         </button>
                     </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#sayuran" type="button">
-                            <i class='bx bx-leaf text-pils'></i>
-                            <span class="ms-2 text-pils">Sayuran & Hortikultura</span>
-                        </button>
-                    </li>
-
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tanaman-pangan" type="button">
-                            <i class='bx bx-sun text-pils'></i>
-                            <span class="ms-2 text-pils">Tanaman Pangan</span>
-                        </button>
-                    </li>
-
-                    {{-- <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#dokumen" type="button">
-                            <i class='bx bxs-book-content text-pils'></i>
-                            <span class="ms-2 text-pils">Dokumen</span>
-                        </button>
-                    </li> --}}
                 </ul>
+
                 <div class="tab-content mt-4" id="pills-tabContent">
 
                     <div class="tab-pane fade show active" id="statistik">
@@ -733,42 +803,6 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane fade" id="produksi">
-                        <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <p class="card-header stat-label">Produksi Pertanian {{ date('Y') }}</p>
-                                    <div class="card-body">
-                                        <div id="chart2" class="px-2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <p class="card-header stat-label">Data Produksi {{ date('Y') }}</p>
-                                    <div class="card-body">
-                                        @php
-                                            $i = 1;
-                                        @endphp
-                                        @foreach ($produksi as $item)
-                                            <div class="item-produksi">
-                                                <div class="item-number">{{ $i++ }}</div>
-                                                <div class="item-content">
-                                                    <div class="item-name">{{ $item->name }}</div>
-                                                    <div class="item-year">Produksi {{ $item->year }}</div>
-                                                </div>
-                                                <div class="item-value">
-                                                    <div class="value-number">{{ number_format($item->value) }}</div>
-                                                    <div class="value-unit">{{ $item->unit }}</div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="tab-pane fade" id="ketahanan">
                         <div class="row g-4">
                             <!-- Donut Chart -->
@@ -793,139 +827,700 @@
                         </div>
                     </div>
 
-                    <!-- TAB PANE PADI & PALAWIJA -->
-                    <div class="tab-pane fade" id="padi-palawija">
-                        <!-- Selector Tahun Bar -->
-                        <div
-                            class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
-                            <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
-                                <label for="publicSelectTahun" class="fw-bold text-success mb-0 text-nowrap">
-                                    <i class="bx bx-calendar me-1"></i> Pilih Tahun:
-                                </label>
-                                <select id="publicSelectTahun"
-                                    class="form-select form-select-sm fw-bold border-success text-success"
-                                    style="width: 120px;"
-                                    onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#padi-palawija'">
-                                    @foreach ($availableYears as $yr)
-                                        <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div>
-                                <span class="badge bg-light text-success border border-success px-3 py-2" id="padiActiveBadge">
-                                    <i class="bx bx-check-shield me-1"></i> Luas Tanam - Padi Tahun {{ $selectedTahun }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <!-- Sub Pills Kategori / Indikator Data -->
-                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-                            <button type="button" class="btn-padi-kat-pill active" data-kategori="tanam">
-                                <i class="bx bx-spa"></i> Luas Tanam (Ha)
-                            </button>
-                            <button type="button" class="btn-padi-kat-pill" data-kategori="panen">
-                                <i class="bx bx-cut"></i> Luas Panen (Ha)
-                            </button>
-                            <button type="button" class="btn-padi-kat-pill" data-kategori="produksi">
-                                <i class="bx bx-package"></i> Produksi (Ton)
-                            </button>
-                            <button type="button" class="btn-padi-kat-pill" data-kategori="produktivitas">
-                                <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
-                            </button>
-                            <button type="button" class="btn-padi-kat-pill" data-kategori="puso">
-                                <i class="bx bx-error-circle"></i> Puso (Ha)
-                            </button>
-                        </div>
-
-                        <!-- Sub Pills Komoditas -->
-                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-                            @foreach ($komoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}"
-                                    data-komoditas="{{ $kmd }}">
-                                    <i class="bx bx-leaf"></i> {{ $kmd }}
+                    <!-- TAB PANE PERTANIAN TERPADU -->
+                    <div class="tab-pane fade" id="pertanian">
+                        <!-- Sub-Sektor Pill Navigation -->
+                        <div class="d-flex justify-content-center mb-4">
+                            <div class="subsector-nav">
+                                <button type="button" class="btn-subsector active" data-subsector="tanaman-pangan">
+                                    <i class="bx bx-sun me-1"></i> Tanaman Pangan
                                 </button>
-                            @endforeach
-                        </div>
-
-                        <!-- 4 KPI Stat Cards -->
-                        <div class="row g-3 mb-4">
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" id="kpiCard1Border">
-                                    <span class="text-muted small" id="kpiCard1Title">Luas Sawah</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSawah">0 Ha</h4>
-                                    <small class="text-secondary" id="kpiSawahSub">Kabupaten Kuningan</small>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" id="kpiCard2Border" style="border-left-color: #f59e0b;">
-                                    <span class="text-muted small" id="kpiCard2Title">Target Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiTarget">0 Ha</h4>
-                                    <small class="text-secondary" id="kpiCard2Sub">Musim Hujan + Kemarau</small>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" id="kpiCard3Border" style="border-left-color: #10b981;">
-                                    <span class="text-muted small" id="kpiCard3Title">Realisasi Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha</h4>
-                                    <small class="text-secondary" id="kpiCard3Sub">Total MH + MK</small>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" id="kpiCard4Border" style="border-left-color: #06b6d4;">
-                                    <span class="text-muted small" id="kpiCard4Title">Capaian Target</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPersen">0%</h4>
-                                    <small class="text-secondary" id="kpiCard4Sub">Persentase Target</small>
-                                </div>
+                                <button type="button" class="btn-subsector" data-subsector="hortikultura">
+                                    <i class="bx bx-leaf me-1"></i> Hortikultura
+                                </button>
+                                <button type="button" class="btn-subsector" data-subsector="perkebunan">
+                                    <i class="bx bx-spa me-1"></i> Perkebunan
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Chart Target vs Realisasi per Kecamatan -->
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success" id="chartPadiTitle">
-                                    <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam per Kecamatan (Ha)
-                                </h6>
-                                <span class="badge bg-success" id="chartKomoditasBadge">Padi</span>
+                        <!-- ================= SUB-SEKTOR 1: TANAMAN PANGAN ================= -->
+                        <div class="subsector-pane" id="pane-tanaman-pangan">
+                            <!-- Segmented Switcher Data Utama vs Data Tahunan -->
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="segmented-mode-switcher">
+                                    <button type="button" class="btn-mode-switch active" data-sub="tanaman-pangan" data-mode="utama">
+                                        <i class="bx bx-bar-chart-alt-2"></i> Data Utama (Padi & Palawija)
+                                    </button>
+                                    <button type="button" class="btn-mode-switch" data-sub="tanaman-pangan" data-mode="tahunan">
+                                        <i class="bx bx-line-chart"></i> Tanaman Pangan {{ $tanamanPanganTahunCount }} Tahun
+                                    </button>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div id="chartPadiPalawija"></div>
+
+                            <!-- Mode Utama: Padi & Palawija (Kecamatan & Bulanan) -->
+                            <div class="mode-container" id="pangan-mode-utama">
+                                <!-- Selector Tahun Bar -->
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                    <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
+                                        <label for="publicSelectTahun" class="fw-bold text-success mb-0 text-nowrap">
+                                            <i class="bx bx-calendar me-1"></i> Pilih Tahun:
+                                        </label>
+                                        <select id="publicSelectTahun" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                            onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
+                                            @foreach ($availableYears as $yr)
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="padiActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Padi Tahun {{ $selectedTahun }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Sub Pills Kategori / Indikator Data -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                                    <button type="button" class="btn-padi-kat-pill active" data-kategori="tanam">
+                                        <i class="bx bx-spa"></i> Luas Tanam (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill" data-kategori="panen">
+                                        <i class="bx bx-cut"></i> Luas Panen (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill" data-kategori="produksi">
+                                        <i class="bx bx-package"></i> Produksi (Ton)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill" data-kategori="produktivitas">
+                                        <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill" data-kategori="puso">
+                                        <i class="bx bx-error-circle"></i> Puso (Ha)
+                                    </button>
+                                </div>
+
+                                <!-- Sub Pills Komoditas -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($komoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-leaf"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" id="kpiCard1Border">
+                                            <span class="text-muted small" id="kpiCard1Title">Luas Sawah</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSawah">0 Ha</h4>
+                                            <small class="text-secondary" id="kpiSawahSub">Kabupaten Kuningan</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" id="kpiCard2Border" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small" id="kpiCard2Title">Target Tanam</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiTarget">0 Ha</h4>
+                                            <small class="text-secondary" id="kpiCard2Sub">Musim Hujan + Kemarau</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" id="kpiCard3Border" style="border-left-color: #10b981;">
+                                            <span class="text-muted small" id="kpiCard3Title">Realisasi Tanam</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha</h4>
+                                            <small class="text-secondary" id="kpiCard3Sub">Total MH + MK</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" id="kpiCard4Border" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small" id="kpiCard4Title">Capaian Target</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPersen">0%</h4>
+                                            <small class="text-secondary" id="kpiCard4Sub">Persentase Target</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Chart Target vs Realisasi per Kecamatan -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success" id="chartPadiTitle">
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam per Kecamatan (Ha)
+                                        </h6>
+                                        <span class="badge bg-success" id="chartKomoditasBadge">Padi</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartPadiPalawija"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Kecamatan -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3">
+                                        <h6 class="mb-0 fw-bold text-success" id="tablePadiTitle">
+                                            <i class="bx bx-table me-1"></i> Data Rincian Luas Tanam per Kecamatan (Tahun {{ $selectedTahun }})
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tablePadiPalawija">
+                                                <thead class="table-light" id="theadPadiPalawija">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 4%">No</th>
+                                                        <th>Kecamatan</th>
+                                                        <th class="text-end">Luas Sawah (Ha)</th>
+                                                        <th class="text-end">Target MH (Ha)</th>
+                                                        <th class="text-end">Target MK (Ha)</th>
+                                                        <th class="text-end">Target Total (Ha)</th>
+                                                        <th class="text-end">Realisasi MH (Ha)</th>
+                                                        <th class="text-end">Realisasi MK (Ha)</th>
+                                                        <th class="text-end">Total Realisasi (Ha)</th>
+                                                        <th class="text-center">Capaian</th>
+                                                        <th class="text-center" style="width: 8%">Rincian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPadiPalawija"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mode Tahunan: Tanaman Pangan Multi-Tahun -->
+                            <div class="mode-container d-none" id="pangan-mode-tahunan">
+                                <!-- Sub Pills Komoditas Tanaman Pangan -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($tanamanPanganKomoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-spa"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small">Total Luas Tanam</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha</h4>
+                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                            <span class="text-muted small">Total Luas Panen</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha</h4>
+                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small">Rata-rata Produktivitas</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha</h4>
+                                            <small class="text-secondary">Satuan: Kw/Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                            <span class="text-muted small">Total Produksi</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0 Ton</h4>
+                                            <small class="text-secondary">Satuan: Ton</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Grafik Tren Tahunan ApexCharts -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPanganKomoditasTitle">Padi</span>
+                                        </h6>
+                                        <span class="badge bg-warning text-dark">Tanaman Pangan {{ $tanamanPanganTahunCount }} Tahun</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartPanganPublic"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Tahun -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePanganTitle">Padi</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tablePanganPublic">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 5%">No</th>
+                                                        <th class="text-center">Tahun</th>
+                                                        <th class="text-end">Luas Tanam (Ha)</th>
+                                                        <th class="text-end">Luas Panen (Ha)</th>
+                                                        <th class="text-end">Produktivitas (Kw/Ha)</th>
+                                                        <th class="text-end">Total Produksi (Ton)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPanganPublic"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Tabel Detail Per Kecamatan -->
-                        <div class="card shadow-sm">
-                            <div class="card-header bg-white py-3">
-                                <h6 class="mb-0 fw-bold text-success" id="tablePadiTitle">
-                                    <i class="bx bx-table me-1"></i> Data Rincian Luas Tanam per Kecamatan (Tahun {{ $selectedTahun }})
-                                </h6>
+                        <!-- ================= SUB-SEKTOR 2: HORTIKULTURA ================= -->
+                        <div class="subsector-pane d-none" id="pane-hortikultura">
+                            <!-- Segmented Switcher Data Utama vs Data Tahunan -->
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="segmented-mode-switcher">
+                                    <button type="button" class="btn-mode-switch active" data-sub="hortikultura" data-mode="utama">
+                                        <i class="bx bx-bar-chart-alt-2"></i> Data Utama Hortikultura
+                                    </button>
+                                    <button type="button" class="btn-mode-switch" data-sub="hortikultura" data-mode="tahunan">
+                                        <i class="bx bx-line-chart"></i> Hortikultura {{ $sayuranTahunCount }} Tahun
+                                    </button>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100" id="tablePadiPalawija">
-                                        <thead class="table-light" id="theadPadiPalawija">
-                                            <tr>
-                                                <th class="text-center" style="width: 4%">No</th>
-                                                <th>Kecamatan</th>
-                                                <th class="text-end">Luas Sawah (Ha)</th>
-                                                <th class="text-end">Target MH (Ha)</th>
-                                                <th class="text-end">Target MK (Ha)</th>
-                                                <th class="text-end">Target Total (Ha)</th>
-                                                <th class="text-end">Realisasi MH (Ha)</th>
-                                                <th class="text-end">Realisasi MK (Ha)</th>
-                                                <th class="text-end">Total Realisasi (Ha)</th>
-                                                <th class="text-center">Capaian</th>
-                                                <th class="text-center" style="width: 8%">Rincian</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbodyPadiPalawija">
-                                        </tbody>
-                                    </table>
+
+                            <!-- Mode Utama Hortikultura (Kecamatan & Bulanan) -->
+                            <div class="mode-container" id="hortikultura-mode-utama">
+                                <!-- Selector Tahun Bar -->
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                    <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
+                                        <label for="publicSelectTahunHorti" class="fw-bold text-success mb-0 text-nowrap">
+                                            <i class="bx bx-calendar me-1"></i> Pilih Tahun:
+                                        </label>
+                                        <select id="publicSelectTahunHorti" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                            onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
+                                            @foreach ($availableYears as $yr)
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="hortiActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Bawang Merah Tahun {{ $selectedTahun }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Sub Pills Kategori / Indikator Data -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                                    <button type="button" class="btn-padi-kat-pill active btn-horti-kat-pill" data-kategori="tanam">
+                                        <i class="bx bx-spa"></i> Luas Tanam (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="panen">
+                                        <i class="bx bx-cut"></i> Luas Panen (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produksi">
+                                        <i class="bx bx-package"></i> Produksi (Ton)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produktivitas">
+                                        <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="puso">
+                                        <i class="bx bx-error-circle"></i> Puso (Ha)
+                                    </button>
+                                </div>
+
+                                <!-- Sub Pills Komoditas Hortikultura -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($sayuranKomoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-horti-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-leaf"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi">
+                                            <span class="text-muted small" id="kpiHortiCard1Title">Luas Baku Lahan</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiHortiSawah">0 Ha</h4>
+                                            <small class="text-secondary">Kabupaten Kuningan</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small" id="kpiHortiCard2Title">Target</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiHortiTarget">0 Ha</h4>
+                                            <small class="text-secondary">Musim Hujan + Kemarau</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                            <span class="text-muted small" id="kpiHortiCard3Title">Realisasi</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiHortiRealisasi">0 Ha</h4>
+                                            <small class="text-secondary">Total Realisasi</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small">Capaian Target</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiHortiPersen">0%</h4>
+                                            <small class="text-secondary">Persentase Target</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Chart Target vs Realisasi Hortikultura -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success" id="chartHortiTitle">
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Hortikultura per Kecamatan
+                                        </h6>
+                                        <span class="badge bg-success" id="chartHortiKomoditasBadge">Bawang Merah</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartHortikulturaUtama"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Kecamatan -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3">
+                                        <h6 class="mb-0 fw-bold text-success" id="tableHortiTitle">
+                                            <i class="bx bx-table me-1"></i> Data Rincian Hortikultura per Kecamatan (Tahun {{ $selectedTahun }})
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tableHortikulturaUtama">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 4%">No</th>
+                                                        <th>Kecamatan</th>
+                                                        <th class="text-end">Luas Baku (Ha)</th>
+                                                        <th class="text-end">Target MH</th>
+                                                        <th class="text-end">Target MK</th>
+                                                        <th class="text-end">Target Total</th>
+                                                        <th class="text-end">Realisasi MH</th>
+                                                        <th class="text-end">Realisasi MK</th>
+                                                        <th class="text-end">Total Realisasi</th>
+                                                        <th class="text-center">Capaian</th>
+                                                        <th class="text-center" style="width: 8%">Rincian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyHortikulturaUtama"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mode Tahunan: Hortikultura Multi-Tahun -->
+                            <div class="mode-container d-none" id="hortikultura-mode-tahunan">
+                                <!-- Sub Pills Komoditas Sayuran & Hortikultura -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($sayuranKomoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-spa"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small">Total Luas Tanam</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0</h4>
+                                            <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan: Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                            <span class="text-muted small">Total Luas Panen</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0</h4>
+                                            <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan: Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small">Rata-rata Produktivitas</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiSayuranProdv">0</h4>
+                                            <small class="text-secondary">Produktivitas Rata-rata</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                            <span class="text-muted small">Total Produksi</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0</h4>
+                                            <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan: Kuintal</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Grafik Tren Tahunan ApexCharts -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartSayuranKomoditasTitle">Bawang Merah</span>
+                                        </h6>
+                                        <span class="badge bg-success" id="chartSayuranBadge">Sayuran</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartSayuranPublic"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Tahun -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tableSayuranTitle">Bawang Merah</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tableSayuranPublic">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 5%">No</th>
+                                                        <th class="text-center">Tahun</th>
+                                                        <th class="text-end" id="thSayuranTanam">Luas Tanam</th>
+                                                        <th class="text-end" id="thSayuranPanen">Luas Panen</th>
+                                                        <th class="text-end">Produktivitas</th>
+                                                        <th class="text-end" id="thSayuranProduksi">Total Produksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodySayuranPublic"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= SUB-SEKTOR 3: PERKEBUNAN ================= -->
+                        <div class="subsector-pane d-none" id="pane-perkebunan">
+                            <!-- Segmented Switcher Data Utama vs Data Tahunan -->
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="segmented-mode-switcher">
+                                    <button type="button" class="btn-mode-switch active" data-sub="perkebunan" data-mode="utama">
+                                        <i class="bx bx-bar-chart-alt-2"></i> Data Utama Perkebunan
+                                    </button>
+                                    <button type="button" class="btn-mode-switch" data-sub="perkebunan" data-mode="tahunan">
+                                        <i class="bx bx-line-chart"></i> Perkebunan {{ $perkebunanTahunCount }} Tahun
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Mode Utama Perkebunan (Kecamatan & Bulanan) -->
+                            <div class="mode-container" id="perkebunan-mode-utama">
+                                <!-- Selector Tahun Bar -->
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                    <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
+                                        <label for="publicSelectTahunPerkebunan" class="fw-bold text-success mb-0 text-nowrap">
+                                            <i class="bx bx-calendar me-1"></i> Pilih Tahun:
+                                        </label>
+                                        <select id="publicSelectTahunPerkebunan" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                            onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
+                                            @foreach ($availableYears as $yr)
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="perkebunanActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Kopi Tahun {{ $selectedTahun }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Sub Pills Kategori / Indikator Data -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+                                    <button type="button" class="btn-padi-kat-pill active btn-perkebunan-kat-pill" data-kategori="tanam">
+                                        <i class="bx bx-spa"></i> Luas Tanam (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="panen">
+                                        <i class="bx bx-cut"></i> Luas Panen (Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="produksi">
+                                        <i class="bx bx-package"></i> Produksi (Ton)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="produktivitas">
+                                        <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
+                                    </button>
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="puso">
+                                        <i class="bx bx-error-circle"></i> Puso (Ha)
+                                    </button>
+                                </div>
+
+                                <!-- Sub Pills Komoditas Perkebunan -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($perkebunanKomoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-perkebunan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-spa"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi">
+                                            <span class="text-muted small" id="kpiPerkebunanCard1Title">Luas Baku Lahan</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPerkebunanSawah">0 Ha</h4>
+                                            <small class="text-secondary">Kabupaten Kuningan</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small" id="kpiPerkebunanCard2Title">Target</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPerkebunanTarget">0 Ha</h4>
+                                            <small class="text-secondary">Musim Hujan + Kemarau</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                            <span class="text-muted small" id="kpiPerkebunanCard3Title">Realisasi</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPerkebunanRealisasi">0 Ha</h4>
+                                            <small class="text-secondary">Total Realisasi</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small">Capaian Target</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPerkebunanPersen">0%</h4>
+                                            <small class="text-secondary">Persentase Target</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Chart Target vs Realisasi Perkebunan -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success" id="chartPerkebunanTitle">
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Perkebunan per Kecamatan
+                                        </h6>
+                                        <span class="badge bg-success" id="chartPerkebunanKomoditasBadge">Kopi</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartPerkebunanUtama"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Kecamatan -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3">
+                                        <h6 class="mb-0 fw-bold text-success" id="tablePerkebunanTitle">
+                                            <i class="bx bx-table me-1"></i> Data Rincian Perkebunan per Kecamatan (Tahun {{ $selectedTahun }})
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tablePerkebunanUtama">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 4%">No</th>
+                                                        <th>Kecamatan</th>
+                                                        <th class="text-end">Luas Baku (Ha)</th>
+                                                        <th class="text-end">Target MH</th>
+                                                        <th class="text-end">Target MK</th>
+                                                        <th class="text-end">Target Total</th>
+                                                        <th class="text-end">Realisasi MH</th>
+                                                        <th class="text-end">Realisasi MK</th>
+                                                        <th class="text-end">Total Realisasi</th>
+                                                        <th class="text-center">Capaian</th>
+                                                        <th class="text-center" style="width: 8%">Rincian</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPerkebunanUtama"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Mode Tahunan: Perkebunan Multi-Tahun -->
+                            <div class="mode-container d-none" id="perkebunan-mode-tahunan">
+                                <!-- Sub Pills Komoditas Perkebunan Tahunan -->
+                                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+                                    @foreach ($perkebunanKomoditasList as $idx => $kmd)
+                                        <button type="button" class="btn-komoditas-pill btn-perkebunan-th-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                            <i class="bx bx-spa"></i> {{ $kmd }}
+                                        </button>
+                                    @endforeach
+                                </div>
+
+                                <!-- 4 KPI Stat Cards -->
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                            <span class="text-muted small">Total Luas Tanam</span>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPerkebunanTahunanTanam">0 Ha</h4>
+                                            <small class="text-secondary">Satuan: Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                            <span class="text-muted small">Total Luas Panen</span>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPerkebunanTahunanPanen">0 Ha</h4>
+                                            <small class="text-secondary">Satuan: Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                            <span class="text-muted small">Rata-rata Produktivitas</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPerkebunanTahunanProdv">0 Kw/Ha</h4>
+                                            <small class="text-secondary">Satuan: Kw/Ha</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                            <span class="text-muted small">Total Produksi</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPerkebunanTahunanProduksi">0 Ton</h4>
+                                            <small class="text-secondary">Satuan: Ton</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Grafik Tren Tahunan ApexCharts -->
+                                <div class="card shadow-sm mb-4">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPerkebunanTahunanKomoditasTitle">Kopi</span>
+                                        </h6>
+                                        <span class="badge bg-success">Perkebunan {{ $perkebunanTahunCount }} Tahun</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="chartPerkebunanTahunanPublic"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Tabel Detail Per Tahun -->
+                                <div class="card shadow-sm">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                        <h6 class="mb-0 fw-bold text-success">
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePerkebunanTahunanTitle">Kopi</span>
+                                        </h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover align-middle w-100" id="tablePerkebunanTahunanPublic">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th class="text-center" style="width: 5%">No</th>
+                                                        <th class="text-center">Tahun</th>
+                                                        <th class="text-end">Luas Tanam (Ha)</th>
+                                                        <th class="text-end">Luas Panen (Ha)</th>
+                                                        <th class="text-end">Produktivitas (Kw/Ha)</th>
+                                                        <th class="text-end">Total Produksi (Ton)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPerkebunanTahunanPublic"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Modal Detail Bulanan Publik -->
+                    <!-- Modal Detail Bulanan Publik (Tanaman Pangan) -->
                     <div class="modal fade" id="modalDetailBulananPublik" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -940,8 +1535,6 @@
                                         <span class="badge bg-success fs-6" id="pub_detail_badge"></span>
                                         <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
                                     </div>
-
-                                    <!-- Semester 1 / MH -->
                                     <div class="card mb-3 border">
                                         <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
                                             <span id="pub_label_sem1"><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
@@ -951,8 +1544,6 @@
                                             <div class="row g-2 text-center" id="pub_cards_sem1"></div>
                                         </div>
                                     </div>
-
-                                    <!-- Semester 2 / MK -->
                                     <div class="card mb-3 border">
                                         <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
                                             <span id="pub_label_sem2"><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
@@ -962,7 +1553,6 @@
                                             <div class="row g-2 text-center" id="pub_cards_sem2"></div>
                                         </div>
                                     </div>
-
                                     <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
                                         <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
                                         <strong class="fs-5 text-success" id="pub_detail_total">0</strong>
@@ -975,186 +1565,96 @@
                         </div>
                     </div>
 
-                    <!-- TAB PANE SAYURAN & HORTIKULTURA -->
-                    <div class="tab-pane fade" id="sayuran">
-                        <!-- Sub Pills Komoditas Sayuran & Hortikultura -->
-                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-                            @foreach ($sayuranKomoditasList as $idx => $kmd)
-                                <button type="button"
-                                    class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}"
-                                    data-komoditas="{{ $kmd }}">
-                                    <i class="bx bx-spa"></i> {{ $kmd }}
-                                </button>
-                            @endforeach
-                        </div>
-
-                        <!-- 4 KPI Stat Cards -->
-                        <div class="row g-3 mb-4">
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                    <span class="text-muted small">Total Luas Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0</h4>
-                                    <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan</small>
+                    <!-- Modal Detail Bulanan Hortikultura -->
+                    <div class="modal fade" id="modalDetailBulananHorti" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title fw-bold text-dark">
+                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Hortikultura: <span id="horti_pub_detail_kecamatan" class="text-success"></span>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #3b82f6;">
-                                    <span class="text-muted small">Total Luas Panen</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0</h4>
-                                    <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan</small>
+                                <div class="modal-body">
+                                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success fs-6" id="horti_pub_detail_badge"></span>
+                                        <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
+                                    </div>
+                                    <div class="card mb-3 border">
+                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
+                                            <span class="text-primary fw-bold">Subtotal: <span id="horti_pub_detail_sub1">0</span></span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="row g-2 text-center" id="horti_pub_cards_sem1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3 border">
+                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
+                                            <span class="text-warning fw-bold">Subtotal: <span id="horti_pub_detail_sub2">0</span></span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="row g-2 text-center" id="horti_pub_cards_sem2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
+                                        <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
+                                        <strong class="fs-5 text-success" id="horti_pub_detail_total">0</strong>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                    <span class="text-muted small">Rata-rata Produktivitas</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiSayuranProdv">0</h4>
-                                    <small class="text-secondary">Produktivitas Rata-rata</small>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                    <span class="text-muted small">Total Produksi</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0</h4>
-                                    <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Grafik Tren Tahunan ApexCharts -->
-                        <div class="card shadow-sm mb-4">
-                            <div
-                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
-                                        id="chartSayuranKomoditasTitle">Bawang Merah</span>
-                                </h6>
-                                <span class="badge bg-success" id="chartSayuranBadge">Sayuran</span>
-                            </div>
-                            <div class="card-body">
-                                <div id="chartSayuranPublic"></div>
-                            </div>
-                        </div>
-
-                        <!-- Tabel Detail Per Tahun -->
-                        <div class="card shadow-sm">
-                            <div
-                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
-                                        id="tableSayuranTitle">Bawang Merah</span>
-                                </h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100"
-                                        id="tableSayuranPublic">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th class="text-center" style="width: 5%">No</th>
-                                                <th class="text-center">Tahun</th>
-                                                <th class="text-end" id="thSayuranTanam">Luas Tanam</th>
-                                                <th class="text-end" id="thSayuranPanen">Luas Panen</th>
-                                                <th class="text-end">Produktivitas</th>
-                                                <th class="text-end" id="thSayuranProduksi">Total Produksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbodySayuranPublic">
-                                        </tbody>
-                                    </table>
+                                <div class="modal-footer py-2">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- TAB PANE TANAMAN PANGAN (13 TAHUN) -->
-                    <div class="tab-pane fade" id="tanaman-pangan">
-                        <!-- Sub Pills Komoditas Tanaman Pangan -->
-                        <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
-                            @foreach ($tanamanPanganKomoditasList as $idx => $kmd)
-                                <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}"
-                                    data-komoditas="{{ $kmd }}">
-                                    <i class="bx bx-spa"></i> {{ $kmd }}
-                                </button>
-                            @endforeach
-                        </div>
-
-                        <!-- 4 KPI Stat Cards -->
-                        <div class="row g-3 mb-4">
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                    <span class="text-muted small">Total Luas Tanam</span>
-                                    <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha</h4>
-                                    <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                    <!-- Modal Detail Bulanan Perkebunan -->
+                    <div class="modal fade" id="modalDetailBulananPerkebunan" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-light">
+                                    <h5 class="modal-title fw-bold text-dark">
+                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Perkebunan: <span id="perkebunan_pub_detail_kecamatan" class="text-success"></span>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #3b82f6;">
-                                    <span class="text-muted small">Total Luas Panen</span>
-                                    <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha</h4>
-                                    <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                <div class="modal-body">
+                                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-success fs-6" id="perkebunan_pub_detail_badge"></span>
+                                        <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
+                                    </div>
+                                    <div class="card mb-3 border">
+                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
+                                            <span class="text-primary fw-bold">Subtotal: <span id="perkebunan_pub_detail_sub1">0</span></span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="row g-2 text-center" id="perkebunan_pub_cards_sem1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-3 border">
+                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
+                                            <span class="text-warning fw-bold">Subtotal: <span id="perkebunan_pub_detail_sub2">0</span></span>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <div class="row g-2 text-center" id="perkebunan_pub_cards_sem2"></div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
+                                        <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
+                                        <strong class="fs-5 text-success" id="perkebunan_pub_detail_total">0</strong>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                    <span class="text-muted small">Rata-rata Produktivitas</span>
-                                    <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha</h4>
-                                    <small class="text-secondary">Satuan: Kw/Ha</small>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                    <span class="text-muted small">Total Produksi</span>
-                                    <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0 Ton</h4>
-                                    <small class="text-secondary">Satuan: Ton</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Grafik Tren Tahunan ApexCharts -->
-                        <div class="card shadow-sm mb-4">
-                            <div
-                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
-                                        id="chartPanganKomoditasTitle">Padi</span>
-                                </h6>
-                                <span class="badge bg-warning text-dark">Tanaman Pangan</span>
-                            </div>
-                            <div class="card-body">
-                                <div id="chartPanganPublic"></div>
-                            </div>
-                        </div>
-
-                        <!-- Tabel Detail Per Tahun -->
-                        <div class="card shadow-sm">
-                            <div
-                                class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0 fw-bold text-success">
-                                    <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
-                                        id="tablePanganTitle">Padi</span>
-                                </h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle w-100"
-                                        id="tablePanganPublic">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th class="text-center" style="width: 5%">No</th>
-                                                <th class="text-center">Tahun</th>
-                                                <th class="text-end">Luas Tanam (Ha)</th>
-                                                <th class="text-end">Luas Panen (Ha)</th>
-                                                <th class="text-end">Produktivitas (Kw/Ha)</th>
-                                                <th class="text-end">Total Produksi (Ton)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tbodyPanganPublic">
-                                        </tbody>
-                                    </table>
+                                <div class="modal-footer py-2">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -1235,66 +1735,7 @@
             chart.render();
         }
 
-        var options = {
-            series: [{
-                name: 'Produksi',
-                data: [
-                    <?php
-    foreach ($produksi as $item) {
-        echo $item->value . ',';
-    }
-                                        ?>
-                ]
-            }],
-            chart: {
-                type: 'bar',
-                height: 350
-            },
-            colors: ['#16a34a'],
-            plotOptions: {
-                bar: {
-                    borderRadius: 4,
-                    borderRadiusApplication: 'end',
-                    horizontal: true,
-                }
-            },
-            dataLabels: {
-                enabled: false
-            },
-            tooltip: {
-                y: {
-                    formatter: function (val) {
-                        return val + ' ton';
-                    }
-                }
-            },
-            xaxis: {
-                categories: [
-                    <?php
-    foreach ($produksi as $item) {
-        echo "'" . $item->name . "',";
-    }
-                                        ?>
-                ],
-            }
-        };
-
-        let chartProduksi = null;
-
-        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
-            el.addEventListener('shown.bs.tab', function (e) {
-                const target = e.target.getAttribute('data-bs-target');
-
-                if (target === '#produksi' && chartProduksi === null) {
-                    chartProduksi = new ApexCharts(
-                        document.querySelector("#chart2"),
-                        options
-                    );
-                    chartProduksi.render();
-                }
-            });
-        });
-
+        // ================= KETAHANAN PANGAN CHARTS =================
         var donutOptions = {
             series: [35, 40, 15, 8, 2],
             chart: {
@@ -1304,16 +1745,12 @@
             },
             labels: ['Sangat Tahan', 'Tahan', 'Agak Rawan', 'Rawan', 'Sangat Rawan'],
             colors: ['#10b981', '#84cc16', '#fbbf24', '#f97316', '#ef4444'],
-            dataLabels: {
-                enabled: false
-            },
+            dataLabels: { enabled: false },
             plotOptions: {
                 pie: {
                     donut: {
                         size: '70%',
-                        labels: {
-                            show: false
-                        }
+                        labels: { show: false }
                     }
                 }
             },
@@ -1322,26 +1759,16 @@
                 offsetY: 40,
                 fontSize: '13px',
                 fontWeight: 500,
-                markers: {
-                    width: 10,
-                    height: 10,
-                    radius: 2
-                },
-                itemMargin: {
-                    vertical: 8
-                },
+                markers: { width: 10, height: 10, radius: 2 },
+                itemMargin: { vertical: 8 },
                 formatter: function (seriesName, opts) {
                     return seriesName + ": " + opts.w.globals.series[opts.seriesIndex] + "%"
                 }
             },
-            stroke: {
-                width: 0
-            },
+            stroke: { width: 0 },
             tooltip: {
                 y: {
-                    formatter: function (val) {
-                        return val + "%"
-                    }
+                    formatter: function (val) { return val + "%"; }
                 }
             }
         };
@@ -1355,9 +1782,7 @@
                 type: 'bar',
                 height: 320,
                 fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                toolbar: {
-                    show: false
-                }
+                toolbar: { show: false }
             },
             plotOptions: {
                 bar: {
@@ -1370,9 +1795,7 @@
             colors: ['#10b981', '#84cc16', '#fbbf24', '#f97316', '#ef4444'],
             dataLabels: {
                 enabled: true,
-                formatter: function (val) {
-                    return val + "%"
-                },
+                formatter: function (val) { return val + "%"; },
                 offsetX: 30,
                 style: {
                     fontSize: '13px',
@@ -1382,15 +1805,9 @@
             },
             xaxis: {
                 categories: ['Sangat Tahan', 'Tahan', 'Agak Rawan', 'Rawan', 'Sangat Rawan'],
-                labels: {
-                    show: false
-                },
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                }
+                labels: { show: false },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
             },
             yaxis: {
                 labels: {
@@ -1403,19 +1820,12 @@
             },
             grid: {
                 show: false,
-                padding: {
-                    left: 0,
-                    right: 20
-                }
+                padding: { left: 0, right: 20 }
             },
-            legend: {
-                show: false
-            },
+            legend: { show: false },
             tooltip: {
                 y: {
-                    formatter: function (val) {
-                        return val + "%"
-                    }
+                    formatter: function (val) { return val + "%"; }
                 }
             }
         };
@@ -1423,96 +1833,110 @@
         let donutChart = null;
         let barChart = null;
 
-        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
-            el.addEventListener('shown.bs.tab', function (e) {
-                const target = e.target.getAttribute('data-bs-target');
+        // ================= SUB-SEKTOR & MODE NAVIGATION =================
+        let activeSubsector = 'tanaman-pangan';
+        let subModes = {
+            'tanaman-pangan': 'utama',
+            'hortikultura': 'utama',
+            'perkebunan': 'utama'
+        };
 
-                if (target === '#ketahanan') {
-
-                    if (!donutChart) {
-                        donutChart = new ApexCharts(
-                            document.querySelector("#donutChart"),
-                            donutOptions
-                        );
-                        donutChart.render();
-                    }
-
-                    if (!barChart) {
-                        barChart = new ApexCharts(
-                            document.querySelector("#barChart"),
-                            barOptions
-                        );
-                        barChart.render();
-                    }
-
-                }
-
-                if (target === '#padi-palawija') {
-                    setTimeout(() => {
-                        if (!chartPadi) {
-                            initPadiChart();
-                        }
-                        updatePadiView(currentKomoditas);
-                    }, 60);
-                }
-
-                if (target === '#sayuran') {
-                    setTimeout(() => {
-                        if (!chartSayuran) {
-                            initSayuranChart();
-                        }
-                        updateSayuranView(currentSayuran);
-                    }, 60);
-                }
-
-                if (target === '#tanaman-pangan') {
-                    setTimeout(() => {
-                        if (!chartPangan) {
-                            initPanganChart();
-                        }
-                        updateTanamanPanganView(currentPangan);
-                    }, 60);
-                }
+        function switchSubsector(sub) {
+            activeSubsector = sub;
+            document.querySelectorAll('.btn-subsector').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-subsector') === sub);
             });
-        });
 
-        document.addEventListener('DOMContentLoaded', function () {
-            updatePadiView('Padi');
-            updateSayuranView('Bawang Merah');
-            updateTanamanPanganView('Padi');
+            document.querySelectorAll('.subsector-pane').forEach(p => {
+                p.classList.add('d-none');
+            });
+            const targetPane = document.getElementById(`pane-${sub}`);
+            if (targetPane) {
+                targetPane.classList.remove('d-none');
+            }
 
-            // Auto activate tab Padi & Palawija jika hash #padi-palawija atau ada query string tahun
-            if (window.location.hash === '#padi-palawija' || new URLSearchParams(window.location.search).has('tahun')) {
-                const btnTabPadi = document.querySelector('[data-bs-target="#padi-palawija"]');
-                if (btnTabPadi) {
-                    const tabTrigger = new bootstrap.Tab(btnTabPadi);
-                    tabTrigger.show();
+            refreshCurrentSubsectorChart();
+        }
+
+        function switchMode(sub, mode) {
+            subModes[sub] = mode;
+            document.querySelectorAll(`.btn-mode-switch[data-sub="${sub}"]`).forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-mode') === mode);
+            });
+
+            if (sub === 'tanaman-pangan') {
+                const u = document.getElementById('pangan-mode-utama');
+                const t = document.getElementById('pangan-mode-tahunan');
+                if (mode === 'utama') {
+                    u.classList.remove('d-none');
+                    t.classList.add('d-none');
+                } else {
+                    u.classList.add('d-none');
+                    t.classList.remove('d-none');
+                }
+            } else if (sub === 'hortikultura') {
+                const u = document.getElementById('hortikultura-mode-utama');
+                const t = document.getElementById('hortikultura-mode-tahunan');
+                if (mode === 'utama') {
+                    u.classList.remove('d-none');
+                    t.classList.add('d-none');
+                } else {
+                    u.classList.add('d-none');
+                    t.classList.remove('d-none');
+                }
+            } else if (sub === 'perkebunan') {
+                const u = document.getElementById('perkebunan-mode-utama');
+                const t = document.getElementById('perkebunan-mode-tahunan');
+                if (mode === 'utama') {
+                    u.classList.remove('d-none');
+                    t.classList.add('d-none');
+                } else {
+                    u.classList.add('d-none');
+                    t.classList.remove('d-none');
                 }
             }
 
-            if (window.location.hash === '#sayuran') {
-                const btnTabSayuran = document.querySelector('[data-bs-target="#sayuran"]');
-                if (btnTabSayuran) {
-                    const tabTrigger = new bootstrap.Tab(btnTabSayuran);
-                    tabTrigger.show();
-                }
-            }
+            refreshCurrentSubsectorChart();
+        }
 
-            if (window.location.hash === '#tanaman-pangan') {
-                const btnTabPangan = document.querySelector('[data-bs-target="#tanaman-pangan"]');
-                if (btnTabPangan) {
-                    const tabTrigger = new bootstrap.Tab(btnTabPangan);
-                    tabTrigger.show();
+        function refreshCurrentSubsectorChart() {
+            setTimeout(() => {
+                const mode = subModes[activeSubsector];
+                if (activeSubsector === 'tanaman-pangan') {
+                    if (mode === 'utama') {
+                        if (!chartPadi) initPadiChart();
+                        updatePadiView();
+                    } else {
+                        if (!chartPangan) initPanganChart();
+                        updateTanamanPanganView(currentPangan);
+                    }
+                } else if (activeSubsector === 'hortikultura') {
+                    if (mode === 'utama') {
+                        if (!chartHorti) initHortikulturaUtamaChart();
+                        updateHortikulturaUtamaView();
+                    } else {
+                        if (!chartSayuran) initSayuranChart();
+                        updateSayuranView(currentSayuran);
+                    }
+                } else if (activeSubsector === 'perkebunan') {
+                    if (mode === 'utama') {
+                        if (!chartPerkebunan) initPerkebunanUtamaChart();
+                        updatePerkebunanUtamaView();
+                    } else {
+                        if (!chartPerkebunanTahunan) initPerkebunanTahunanChart();
+                        updatePerkebunanTahunanView(currentPerkebunanTahunan);
+                    }
                 }
-            }
-        });
+                window.dispatchEvent(new Event('resize'));
+            }, 80);
+        }
 
-        // ================= PADI & PALAWIJA LOGIC =================
+        // ================= 1. TANAMAN PANGAN (DATA UTAMA - PADI & PALAWIJA) =================
         const padiPalawijaGrouped = @json($padiPalawijaGrouped ?? []);
         const padiPalawijaSummaryGrouped = @json($padiPalawijaSummaryGrouped ?? []);
         const padiKategoriList = @json($padiKategoriList ?? []);
         let currentKategori = 'tanam';
-        let currentKomoditas = 'Padi';
+        let currentKomoditas = '{{ $komoditasList[0] ?? "Padi" }}';
         let chartPadi = null;
 
         function updatePadiView() {
@@ -1543,7 +1967,6 @@
             const unit = katConfig.satuan;
             const rows = katData[currentKomoditas] || [];
 
-            // Update Badge & Header Titles
             const elActiveBadge = document.getElementById('padiActiveBadge');
             if (elActiveBadge) {
                 elActiveBadge.innerHTML = `<i class="bx bx-check-shield me-1"></i> ${katConfig.label} - ${currentKomoditas} Tahun {{ $selectedTahun }}`;
@@ -1564,7 +1987,6 @@
                 tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
             }
 
-            // Update 4 KPI Cards
             const c1Title = document.getElementById('kpiCard1Title');
             const c1Val = document.getElementById('kpiSawah');
             const c1Sub = document.getElementById('kpiSawahSub');
@@ -1604,13 +2026,13 @@
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
                 if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
 
-                if (c2Title) c2Title.textContent = 'Puso Semester 1';
+                if (c2Title) c2Title.textContent = 'Puso Musim Hujan';
                 if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
-                if (c2Sub) c2Sub.textContent = 'Januari - Juni';
+                if (c2Sub) c2Sub.textContent = 'Oktober - Maret';
 
-                if (c3Title) c3Title.textContent = 'Puso Semester 2';
+                if (c3Title) c3Title.textContent = 'Puso Musim Kemarau';
                 if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
-                if (c3Sub) c3Sub.textContent = 'Juli - Desember';
+                if (c3Sub) c3Sub.textContent = 'April - September';
 
                 if (c4Title) c4Title.textContent = 'Total Puso';
                 if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
@@ -1633,7 +2055,6 @@
                 if (c4Sub) c4Sub.textContent = 'Persentase Capaian';
             }
 
-            // Update Table Header
             const thead = document.getElementById('theadPadiPalawija');
             if (thead) {
                 if (currentKategori === 'puso') {
@@ -1642,8 +2063,8 @@
                             <th class="text-center" style="width: 4%">No</th>
                             <th>Kecamatan</th>
                             <th class="text-end">Baku Lahan (Ha)</th>
-                            <th class="text-end">Puso Jan-Jun (Ha)</th>
-                            <th class="text-end">Puso Jul-Des (Ha)</th>
+                            <th class="text-end">Puso MH (Ha)</th>
+                            <th class="text-end">Puso MK (Ha)</th>
                             <th class="text-end">Total Puso (Ha)</th>
                             <th class="text-center">Status</th>
                             <th class="text-center" style="width: 8%">Rincian</th>
@@ -1668,7 +2089,6 @@
                 }
             }
 
-            // Update Table Body & Chart
             const tbody = document.getElementById('tbodyPadiPalawija');
             if (tbody) {
                 tbody.innerHTML = '';
@@ -1734,7 +2154,6 @@
                     tbody.appendChild(tr);
                 });
 
-                // Attach modal detail listener
                 document.querySelectorAll('.btn-pub-detail').forEach(b => {
                     b.addEventListener('click', function () {
                         const r = JSON.parse(this.getAttribute('data-row'));
@@ -1742,13 +2161,10 @@
                     });
                 });
 
-                // Update Chart
                 if (chartPadi) {
                     chartPadi.updateOptions({
                         xaxis: { categories: categories },
-                        yaxis: {
-                            title: { text: `${katConfig.label} (${unit})` }
-                        },
+                        yaxis: { title: { text: `${katConfig.label} (${unit})` } },
                         tooltip: {
                             y: {
                                 formatter: function (val) {
@@ -1895,9 +2311,7 @@
                         style: { fontSize: '11px' }
                     }
                 },
-                yaxis: {
-                    title: { text: 'Luas (Hektar)' }
-                },
+                yaxis: { title: { text: 'Luas (Hektar)' } },
                 fill: { opacity: 1 },
                 tooltip: {
                     y: {
@@ -1915,30 +2329,383 @@
             }
         }
 
-        // Sub-pills listener Komoditas Padi
-        document.querySelectorAll('.btn-padi-pill').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.btn-padi-pill').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentKomoditas = this.getAttribute('data-komoditas');
-                updatePadiView();
-            });
-        });
+        // ================= 2. TANAMAN PANGAN (DATA TAHUNAN DINAMIS) =================
+        const tanamanPanganData = @json($tanamanPanganData ?? []);
+        const tanamanPanganSummary = @json($tanamanPanganSummary ?? []);
+        let currentPangan = '{{ $tanamanPanganKomoditasList[0] ?? "Padi" }}';
+        let chartPangan = null;
 
-        // Sub-pills listener Kategori Padi
-        document.querySelectorAll('.btn-padi-kat-pill').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.btn-padi-kat-pill').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentKategori = this.getAttribute('data-kategori');
-                updatePadiView();
-            });
-        });
+        function updateTanamanPanganView(komoditas) {
+            currentPangan = komoditas;
+            const summary = tanamanPanganSummary[komoditas] || {
+                total_tanam: 0,
+                total_panen: 0,
+                avg_produktivitas: 0,
+                total_produksi: 0
+            };
 
-        // ================= SAYURAN & HORTIKULTURA LOGIC =================
+            const elTanam = document.getElementById('kpiPanganTanam');
+            const elPanen = document.getElementById('kpiPanganPanen');
+            const elProdv = document.getElementById('kpiPanganProdv');
+            const elProduksi = document.getElementById('kpiPanganProduksi');
+            const elChartTitle = document.getElementById('chartPanganKomoditasTitle');
+            const elTableTitle = document.getElementById('tablePanganTitle');
+
+            if (elTanam) elTanam.innerText = Number(summary.total_tanam || 0).toLocaleString('id-ID') + ' Ha';
+            if (elPanen) elPanen.innerText = Number(summary.total_panen || 0).toLocaleString('id-ID') + ' Ha';
+            if (elProdv) elProdv.innerText = Number(summary.avg_produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+            if (elProduksi) elProduksi.innerText = Number(summary.total_produksi || 0).toLocaleString('id-ID') + ' Ton';
+
+            if (elChartTitle) elChartTitle.innerText = komoditas;
+            if (elTableTitle) elTableTitle.innerText = komoditas;
+
+            const tbody = document.getElementById('tbodyPanganPublic');
+            if (tbody) {
+                const rows = tanamanPanganData[komoditas] || [];
+                if (rows.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada data untuk komoditas ini.</td></tr>`;
+                } else {
+                    let html = '';
+                    rows.forEach((r, idx) => {
+                        html += `
+                            <tr>
+                                <td class="text-center">${idx + 1}</td>
+                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                }
+            }
+
+            if (chartPangan) {
+                const rows = tanamanPanganData[komoditas] || [];
+                const categories = rows.map(r => r.tahun);
+                const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
+                const panenSeries = rows.map(r => Number(r.luas_panen || 0));
+                const produksiSeries = rows.map(r => Number(r.produksi || 0));
+
+                chartPangan.updateOptions({ xaxis: { categories: categories } });
+                chartPangan.updateSeries([
+                    { name: 'Luas Tanam (Ha)', type: 'column', data: tanamSeries },
+                    { name: 'Luas Panen (Ha)', type: 'column', data: panenSeries },
+                    { name: 'Produksi (Ton)', type: 'line', data: produksiSeries }
+                ]);
+            }
+        }
+
+        function initPanganChart() {
+            if (chartPangan) return;
+            const rows = tanamanPanganData[currentPangan] || [];
+            const categories = rows.map(r => r.tahun);
+            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
+            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
+            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+
+            const options = {
+                series: [
+                    { name: 'Luas Tanam (Ha)', type: 'column', data: tanamSeries },
+                    { name: 'Luas Panen (Ha)', type: 'column', data: panenSeries },
+                    { name: 'Produksi (Ton)', type: 'line', data: produksiSeries }
+                ],
+                chart: {
+                    height: 380,
+                    type: 'line',
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: { show: true }
+                },
+                stroke: { width: [0, 0, 3], curve: 'smooth' },
+                plotOptions: { bar: { columnWidth: '50%', borderRadius: 3 } },
+                colors: ['#f59e0b', '#3b82f6', '#10b981'],
+                xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
+                yaxis: [
+                    { title: { text: 'Luas (Ha)' } },
+                    { opposite: true, title: { text: 'Produksi (Ton)' } }
+                ],
+                tooltip: { shared: true, intersect: false },
+                legend: { position: 'top' }
+            };
+
+            const chartEl = document.querySelector("#chartPanganPublic");
+            if (chartEl) {
+                chartPangan = new ApexCharts(chartEl, options);
+                chartPangan.render();
+            }
+        }
+
+        // ================= 3. HORTIKULTURA (DATA UTAMA) =================
+        const hortikulturaGrouped = @json($hortikulturaGrouped ?? []);
+        const hortikulturaSummaryGrouped = @json($hortikulturaSummaryGrouped ?? []);
+        let currentHortiKategori = 'tanam';
+        let currentHortiKomoditas = '{{ $sayuranKomoditasList[0] ?? "Bawang Merah" }}';
+        let chartHorti = null;
+
+        function updateHortikulturaUtamaView() {
+            const katConfig = padiKategoriList[currentHortiKategori] || {
+                label: 'Luas Tanam',
+                satuan: 'Ha',
+                target_sub1_label: 'Target Semester 1',
+                target_sub2_label: 'Target Semester 2',
+                realisasi_sub1_label: 'Realisasi Semester 1',
+                realisasi_sub2_label: 'Realisasi Semester 2'
+            };
+
+            const katData = hortikulturaGrouped[currentHortiKategori] || {};
+            const katSummary = hortikulturaSummaryGrouped[currentHortiKategori] || {};
+            const summary = katSummary[currentHortiKomoditas] || {
+                total_sawah: 0,
+                target_sub1: 0,
+                target_sub2: 0,
+                target_total: 0,
+                realisasi_sub1: 0,
+                realisasi_sub2: 0,
+                total_realisasi: 0,
+                avg_target: 0,
+                avg_realisasi: 0,
+                persentase: 0
+            };
+
+            const unit = katConfig.satuan;
+            const rows = katData[currentHortiKomoditas] || [];
+
+            const elBadge = document.getElementById('hortiActiveBadge');
+            if (elBadge) {
+                elBadge.innerHTML = `<i class="bx bx-check-shield me-1"></i> ${katConfig.label} - ${currentHortiKomoditas} Tahun {{ $selectedTahun }}`;
+            }
+
+            const chartBadge = document.getElementById('chartHortiKomoditasBadge');
+            if (chartBadge) {
+                chartBadge.textContent = `${currentHortiKomoditas} (${katConfig.label})`;
+            }
+
+            const chartTitle = document.getElementById('chartHortiTitle');
+            if (chartTitle) {
+                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (${unit})`;
+            }
+
+            const tableTitle = document.getElementById('tableHortiTitle');
+            if (tableTitle) {
+                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
+            }
+
+            const c1Title = document.getElementById('kpiHortiCard1Title');
+            const c1Val = document.getElementById('kpiHortiSawah');
+            const c2Title = document.getElementById('kpiHortiCard2Title');
+            const c2Val = document.getElementById('kpiHortiTarget');
+            const c3Title = document.getElementById('kpiHortiCard3Title');
+            const c3Val = document.getElementById('kpiHortiRealisasi');
+            const c4Val = document.getElementById('kpiHortiPersen');
+
+            if (currentHortiKategori === 'produktivitas') {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = 'Target Rata-rata';
+                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+
+                if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
+                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+
+                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+            } else if (currentHortiKategori === 'puso') {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = 'Puso Semester 1';
+                if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c3Title) c3Title.textContent = 'Puso Semester 2';
+                if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
+            } else {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
+                if (c2Val) c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
+
+                if (c3Title) c3Title.textContent = `Realisasi ${katConfig.label}`;
+                if (c3Val) c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
+
+                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+            }
+
+            const tbody = document.getElementById('tbodyHortikulturaUtama');
+            if (tbody) {
+                tbody.innerHTML = '';
+                const categories = [];
+                const targetData = [];
+                const realisasiData = [];
+
+                rows.forEach((row, idx) => {
+                    categories.push(row.kecamatan);
+                    targetData.push(Number(row.target_total || 0));
+                    realisasiData.push(Number(row.total_realisasi || 0));
+
+                    const p = Number(row.persentase_capaian || 0);
+                    let badgeClass = 'badge-capaian-low';
+                    if (p >= 100) badgeClass = 'badge-capaian-high';
+                    else if (p >= 50) badgeClass = 'badge-capaian-medium';
+
+                    const tr = document.createElement('tr');
+                    const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
+
+                    const isDec = currentHortiKategori === 'produktivitas';
+                    const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
+
+                    tr.innerHTML = `
+                        <td class="text-center">${row.no_urut || idx + 1}</td>
+                        <td><strong>${row.kecamatan}</strong></td>
+                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}'>
+                                <i class="bx bx-calendar"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.querySelectorAll('.btn-horti-pub-detail').forEach(b => {
+                    b.addEventListener('click', function () {
+                        const r = JSON.parse(this.getAttribute('data-row'));
+                        openHortiPubDetailModal(r, katConfig);
+                    });
+                });
+
+                if (chartHorti) {
+                    chartHorti.updateOptions({
+                        xaxis: { categories: categories },
+                        yaxis: { title: { text: `${katConfig.label} (${unit})` } }
+                    });
+                    chartHorti.updateSeries([
+                        { name: `Target (${unit})`, data: targetData },
+                        { name: `Realisasi (${unit})`, data: realisasiData }
+                    ]);
+                }
+            }
+        }
+
+        function openHortiPubDetailModal(row, katConfig) {
+            const sat = katConfig.satuan;
+            document.getElementById('horti_pub_detail_kecamatan').textContent = row.kecamatan;
+            document.getElementById('horti_pub_detail_badge').textContent = `${katConfig.label} - ${currentHortiKomoditas} (${sat})`;
+
+            const formatNum = (n) => (parseFloat(n) || 0).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+
+            document.getElementById('horti_pub_detail_sub1').textContent = formatNum(row.jumlah_mh) + ' ' + sat;
+            document.getElementById('horti_pub_detail_sub2').textContent = formatNum(row.jumlah_mk) + ' ' + sat;
+            document.getElementById('horti_pub_detail_total').textContent = formatNum(row.total_realisasi) + ' ' + sat;
+
+            const mSem1 = [
+                { label: 'Jan', val: row.realisasi_jan },
+                { label: 'Feb', val: row.realisasi_feb },
+                { label: 'Mar', val: row.realisasi_mar },
+                { label: 'Apr', val: row.realisasi_apr },
+                { label: 'Mei', val: row.realisasi_mei },
+                { label: 'Jun', val: row.realisasi_jun },
+            ];
+            const mSem2 = [
+                { label: 'Jul', val: row.realisasi_jul },
+                { label: 'Ags', val: row.realisasi_ags },
+                { label: 'Sep', val: row.realisasi_sep },
+                { label: 'Okt', val: row.realisasi_okt },
+                { label: 'Nov', val: row.realisasi_nop },
+                { label: 'Des', val: row.realisasi_des },
+            ];
+
+            document.getElementById('horti_pub_cards_sem1').innerHTML = mSem1.map(m => `
+                <div class="col-4 col-sm-2">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">${m.label}</div>
+                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('horti_pub_cards_sem2').innerHTML = mSem2.map(m => `
+                <div class="col-4 col-sm-2">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">${m.label}</div>
+                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const modalEl = document.getElementById('modalDetailBulananHorti');
+            if (modalEl) {
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+        }
+
+        function initHortikulturaUtamaChart() {
+            if (chartHorti) return;
+            const katData = hortikulturaGrouped[currentHortiKategori] || {};
+            const rows = katData[currentHortiKomoditas] || [];
+            const categories = rows.map(r => r.kecamatan);
+            const targetData = rows.map(r => Number(r.target_total || 0));
+            const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
+
+            const options = {
+                series: [
+                    { name: 'Target (Ha)', data: targetData },
+                    { name: 'Realisasi (Ha)', data: realisasiData }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: { show: true }
+                },
+                colors: ['#f59e0b', '#10b981'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        borderRadius: 3
+                    }
+                },
+                dataLabels: { enabled: false },
+                stroke: { show: true, width: 2, colors: ['transparent'] },
+                xaxis: {
+                    categories: categories,
+                    labels: { rotate: -45, style: { fontSize: '11px' } }
+                },
+                yaxis: { title: { text: 'Luas (Ha)' } },
+                fill: { opacity: 1 },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return Number(val).toLocaleString('id-ID') + ' Ha';
+                        }
+                    }
+                }
+            };
+
+            const chartEl = document.querySelector("#chartHortikulturaUtama");
+            if (chartEl) {
+                chartHorti = new ApexCharts(chartEl, options);
+                chartHorti.render();
+            }
+        }
+
+        // ================= 4. HORTIKULTURA (DATA TAHUNAN - SAYURAN) =================
         const sayuranData = @json($sayuranData ?? []);
         const sayuranSummary = @json($sayuranSummary ?? []);
-        let currentSayuran = 'Bawang Merah';
+        let currentSayuran = '{{ $sayuranKomoditasList[0] ?? "Bawang Merah" }}';
         let chartSayuran = null;
 
         function updateSayuranView(komoditas) {
@@ -1956,7 +2723,6 @@
             const sLuas = summary.satuan_luas || 'Ha';
             const sProd = summary.satuan_produksi || 'Kuintal';
 
-            // KPI Update
             const elTanam = document.getElementById('kpiSayuranTanam');
             const elPanen = document.getElementById('kpiSayuranPanen');
             const elProdv = document.getElementById('kpiSayuranProdv');
@@ -1980,7 +2746,6 @@
             if (elSatPanen) elSatPanen.textContent = `Satuan: ${sLuas}`;
             if (elSatProd) elSatProd.textContent = `Satuan: ${sProd}`;
 
-            // Update Header Tabel
             const thTanam = document.getElementById('thSayuranTanam');
             const thPanen = document.getElementById('thSayuranPanen');
             const thProduksi = document.getElementById('thSayuranProduksi');
@@ -1988,7 +2753,6 @@
             if (thPanen) thPanen.textContent = `Luas Panen (${sLuas})`;
             if (thProduksi) thProduksi.textContent = `Total Produksi (${sProd})`;
 
-            // Render Table Rows
             const rows = sayuranData[komoditas] || [];
             const tbody = document.getElementById('tbodySayuranPublic');
             if (tbody) {
@@ -2006,17 +2770,16 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                                            <td class="text-center">${idx + 1}</td>
-                                            <td class="text-center fw-bold text-success">${row.tahun}</td>
-                                            <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
-                                            <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
-                                        `;
+                        <td class="text-center">${idx + 1}</td>
+                        <td class="text-center fw-bold text-success">${row.tahun}</td>
+                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
+                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
+                    `;
                     tbody.appendChild(tr);
                 });
 
-                // Update Chart
                 if (chartSayuran) {
                     chartSayuran.updateOptions({
                         xaxis: { categories: categories },
@@ -2058,32 +2821,16 @@
                     fontFamily: 'Poppins, sans-serif',
                     toolbar: { show: true }
                 },
-                stroke: {
-                    width: [0, 0, 3],
-                    curve: 'smooth'
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '50%',
-                        borderRadius: 3
-                    }
-                },
+                stroke: { width: [0, 0, 3], curve: 'smooth' },
+                plotOptions: { bar: { columnWidth: '50%', borderRadius: 3 } },
                 colors: ['#f59e0b', '#3b82f6', '#10b981'],
-                xaxis: {
-                    categories: categories,
-                    labels: { style: { fontSize: '12px' } }
-                },
+                xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
                 yaxis: [
                     { title: { text: `Luas (${sLuas})` } },
                     { opposite: true, title: { text: `Produksi (${sProd})` } }
                 ],
-                tooltip: {
-                    shared: true,
-                    intersect: false
-                },
-                legend: {
-                    position: 'top'
-                }
+                tooltip: { shared: true, intersect: false },
+                legend: { position: 'top' }
             };
 
             const chartEl = document.querySelector("#chartSayuranPublic");
@@ -2093,83 +2840,333 @@
             }
         }
 
-        // Sub-pills listener Sayuran
-        document.querySelectorAll('.btn-sayuran-pill').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.btn-sayuran-pill').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const komoditas = this.getAttribute('data-komoditas');
-                updateSayuranView(komoditas);
-            });
-        });
+        // ================= 5. PERKEBUNAN (DATA UTAMA) =================
+        const perkebunanGrouped = @json($perkebunanGrouped ?? []);
+        const perkebunanSummaryGrouped = @json($perkebunanSummaryGrouped ?? []);
+        let currentPerkebunanKategori = 'tanam';
+        let currentPerkebunanKomoditas = '{{ $perkebunanKomoditasList[0] ?? "Kopi" }}';
+        let chartPerkebunan = null;
 
-        // ================= TANAMAN PANGAN (13 TAHUN) LOGIC =================
-        const tanamanPanganData = @json($tanamanPanganData ?? []);
-        const tanamanPanganSummary = @json($tanamanPanganSummary ?? []);
-        let currentPangan = 'Padi';
-        let chartPangan = null;
+        function updatePerkebunanUtamaView() {
+            const katConfig = padiKategoriList[currentPerkebunanKategori] || {
+                label: 'Luas Tanam',
+                satuan: 'Ha',
+                target_sub1_label: 'Target Semester 1',
+                target_sub2_label: 'Target Semester 2',
+                realisasi_sub1_label: 'Realisasi Semester 1',
+                realisasi_sub2_label: 'Realisasi Semester 2'
+            };
 
-        function updateTanamanPanganView(komoditas) {
-            currentPangan = komoditas;
-            const summary = tanamanPanganSummary[komoditas] || {
+            const katData = perkebunanGrouped[currentPerkebunanKategori] || {};
+            const katSummary = perkebunanSummaryGrouped[currentPerkebunanKategori] || {};
+            const summary = katSummary[currentPerkebunanKomoditas] || {
+                total_sawah: 0,
+                target_sub1: 0,
+                target_sub2: 0,
+                target_total: 0,
+                realisasi_sub1: 0,
+                realisasi_sub2: 0,
+                total_realisasi: 0,
+                avg_target: 0,
+                avg_realisasi: 0,
+                persentase: 0
+            };
+
+            const unit = katConfig.satuan;
+            const rows = katData[currentPerkebunanKomoditas] || [];
+
+            const elBadge = document.getElementById('perkebunanActiveBadge');
+            if (elBadge) {
+                elBadge.innerHTML = `<i class="bx bx-check-shield me-1"></i> ${katConfig.label} - ${currentPerkebunanKomoditas} Tahun {{ $selectedTahun }}`;
+            }
+
+            const chartBadge = document.getElementById('chartPerkebunanKomoditasBadge');
+            if (chartBadge) {
+                chartBadge.textContent = `${currentPerkebunanKomoditas} (${katConfig.label})`;
+            }
+
+            const chartTitle = document.getElementById('chartPerkebunanTitle');
+            if (chartTitle) {
+                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi ${katConfig.label} ${currentPerkebunanKomoditas} per Kecamatan (${unit})`;
+            }
+
+            const tableTitle = document.getElementById('tablePerkebunanTitle');
+            if (tableTitle) {
+                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentPerkebunanKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
+            }
+
+            const c1Title = document.getElementById('kpiPerkebunanCard1Title');
+            const c1Val = document.getElementById('kpiPerkebunanSawah');
+            const c2Title = document.getElementById('kpiPerkebunanCard2Title');
+            const c2Val = document.getElementById('kpiPerkebunanTarget');
+            const c3Title = document.getElementById('kpiPerkebunanCard3Title');
+            const c3Val = document.getElementById('kpiPerkebunanRealisasi');
+            const c4Val = document.getElementById('kpiPerkebunanPersen');
+
+            if (currentPerkebunanKategori === 'produktivitas') {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = 'Target Rata-rata';
+                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+
+                if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
+                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+
+                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+            } else if (currentPerkebunanKategori === 'puso') {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = 'Puso Semester 1';
+                if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c3Title) c3Title.textContent = 'Puso Semester 2';
+                if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
+            } else {
+                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+
+                if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
+                if (c2Val) c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
+
+                if (c3Title) c3Title.textContent = `Realisasi ${katConfig.label}`;
+                if (c3Val) c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
+
+                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+            }
+
+            const tbody = document.getElementById('tbodyPerkebunanUtama');
+            if (tbody) {
+                tbody.innerHTML = '';
+                const categories = [];
+                const targetData = [];
+                const realisasiData = [];
+
+                rows.forEach((row, idx) => {
+                    categories.push(row.kecamatan);
+                    targetData.push(Number(row.target_total || 0));
+                    realisasiData.push(Number(row.total_realisasi || 0));
+
+                    const p = Number(row.persentase_capaian || 0);
+                    let badgeClass = 'badge-capaian-low';
+                    if (p >= 100) badgeClass = 'badge-capaian-high';
+                    else if (p >= 50) badgeClass = 'badge-capaian-medium';
+
+                    const tr = document.createElement('tr');
+                    const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
+
+                    const isDec = currentPerkebunanKategori === 'produktivitas';
+                    const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
+
+                    tr.innerHTML = `
+                        <td class="text-center">${row.no_urut || idx + 1}</td>
+                        <td><strong>${row.kecamatan}</strong></td>
+                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-outline-success btn-perkebunan-pub-detail" data-row='${rowJson}'>
+                                <i class="bx bx-calendar"></i>
+                            </button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.querySelectorAll('.btn-perkebunan-pub-detail').forEach(b => {
+                    b.addEventListener('click', function () {
+                        const r = JSON.parse(this.getAttribute('data-row'));
+                        openPerkebunanPubDetailModal(r, katConfig);
+                    });
+                });
+
+                if (chartPerkebunan) {
+                    chartPerkebunan.updateOptions({
+                        xaxis: { categories: categories },
+                        yaxis: { title: { text: `${katConfig.label} (${unit})` } }
+                    });
+                    chartPerkebunan.updateSeries([
+                        { name: `Target (${unit})`, data: targetData },
+                        { name: `Realisasi (${unit})`, data: realisasiData }
+                    ]);
+                }
+            }
+        }
+
+        function openPerkebunanPubDetailModal(row, katConfig) {
+            const sat = katConfig.satuan;
+            document.getElementById('perkebunan_pub_detail_kecamatan').textContent = row.kecamatan;
+            document.getElementById('perkebunan_pub_detail_badge').textContent = `${katConfig.label} - ${currentPerkebunanKomoditas} (${sat})`;
+
+            const formatNum = (n) => (parseFloat(n) || 0).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+
+            document.getElementById('perkebunan_pub_detail_sub1').textContent = formatNum(row.jumlah_mh) + ' ' + sat;
+            document.getElementById('perkebunan_pub_detail_sub2').textContent = formatNum(row.jumlah_mk) + ' ' + sat;
+            document.getElementById('perkebunan_pub_detail_total').textContent = formatNum(row.total_realisasi) + ' ' + sat;
+
+            const mSem1 = [
+                { label: 'Jan', val: row.realisasi_jan },
+                { label: 'Feb', val: row.realisasi_feb },
+                { label: 'Mar', val: row.realisasi_mar },
+                { label: 'Apr', val: row.realisasi_apr },
+                { label: 'Mei', val: row.realisasi_mei },
+                { label: 'Jun', val: row.realisasi_jun },
+            ];
+            const mSem2 = [
+                { label: 'Jul', val: row.realisasi_jul },
+                { label: 'Ags', val: row.realisasi_ags },
+                { label: 'Sep', val: row.realisasi_sep },
+                { label: 'Okt', val: row.realisasi_okt },
+                { label: 'Nov', val: row.realisasi_nop },
+                { label: 'Des', val: row.realisasi_des },
+            ];
+
+            document.getElementById('perkebunan_pub_cards_sem1').innerHTML = mSem1.map(m => `
+                <div class="col-4 col-sm-2">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">${m.label}</div>
+                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('perkebunan_pub_cards_sem2').innerHTML = mSem2.map(m => `
+                <div class="col-4 col-sm-2">
+                    <div class="p-2 border rounded bg-white">
+                        <div class="text-muted small">${m.label}</div>
+                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            const modalEl = document.getElementById('modalDetailBulananPerkebunan');
+            if (modalEl) {
+                const modal = new bootstrap.Modal(modalEl);
+                modal.show();
+            }
+        }
+
+        function initPerkebunanUtamaChart() {
+            if (chartPerkebunan) return;
+            const katData = perkebunanGrouped[currentPerkebunanKategori] || {};
+            const rows = katData[currentPerkebunanKomoditas] || [];
+            const categories = rows.map(r => r.kecamatan);
+            const targetData = rows.map(r => Number(r.target_total || 0));
+            const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
+
+            const options = {
+                series: [
+                    { name: 'Target (Ha)', data: targetData },
+                    { name: 'Realisasi (Ha)', data: realisasiData }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 400,
+                    fontFamily: 'Poppins, sans-serif',
+                    toolbar: { show: true }
+                },
+                colors: ['#f59e0b', '#059669'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        borderRadius: 3
+                    }
+                },
+                dataLabels: { enabled: false },
+                stroke: { show: true, width: 2, colors: ['transparent'] },
+                xaxis: {
+                    categories: categories,
+                    labels: { rotate: -45, style: { fontSize: '11px' } }
+                },
+                yaxis: { title: { text: 'Luas (Ha)' } },
+                fill: { opacity: 1 },
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return Number(val).toLocaleString('id-ID') + ' Ha';
+                        }
+                    }
+                }
+            };
+
+            const chartEl = document.querySelector("#chartPerkebunanUtama");
+            if (chartEl) {
+                chartPerkebunan = new ApexCharts(chartEl, options);
+                chartPerkebunan.render();
+            }
+        }
+
+        // ================= 6. PERKEBUNAN (DATA TAHUNAN DINAMIS) =================
+        const perkebunanTahunanData = @json($perkebunanTahunanData ?? []);
+        const perkebunanTahunanSummary = @json($perkebunanTahunanSummary ?? []);
+        let currentPerkebunanTahunan = '{{ $perkebunanKomoditasList[0] ?? "Kopi" }}';
+        let chartPerkebunanTahunan = null;
+
+        function updatePerkebunanTahunanView(komoditas) {
+            currentPerkebunanTahunan = komoditas;
+            const summary = perkebunanTahunanSummary[komoditas] || {
                 total_tanam: 0,
                 total_panen: 0,
                 avg_produktivitas: 0,
-                total_produksi: 0,
-                latest_year: 2025
+                total_produksi: 0
             };
 
-            const elTanam = document.getElementById('kpiPanganTanam');
-            const elPanen = document.getElementById('kpiPanganPanen');
-            const elProdv = document.getElementById('kpiPanganProdv');
-            const elProduksi = document.getElementById('kpiPanganProduksi');
-            const elChartTitle = document.getElementById('chartPanganKomoditasTitle');
-            const elTableTitle = document.getElementById('tablePanganTitle');
+            const elTanam = document.getElementById('kpiPerkebunanTahunanTanam');
+            const elPanen = document.getElementById('kpiPerkebunanTahunanPanen');
+            const elProdv = document.getElementById('kpiPerkebunanTahunanProdv');
+            const elProduksi = document.getElementById('kpiPerkebunanTahunanProduksi');
+            const elChartTitle = document.getElementById('chartPerkebunanTahunanKomoditasTitle');
+            const elTableTitle = document.getElementById('tablePerkebunanTahunanTitle');
 
-            if (elTanam) elTanam.innerText = Number(summary.total_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ha';
-            if (elPanen) elPanen.innerText = Number(summary.total_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ha';
+            if (elTanam) elTanam.innerText = Number(summary.total_tanam || 0).toLocaleString('id-ID') + ' Ha';
+            if (elPanen) elPanen.innerText = Number(summary.total_panen || 0).toLocaleString('id-ID') + ' Ha';
             if (elProdv) elProdv.innerText = Number(summary.avg_produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
-            if (elProduksi) elProduksi.innerText = Number(summary.total_produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + ' Ton';
+            if (elProduksi) elProduksi.innerText = Number(summary.total_produksi || 0).toLocaleString('id-ID') + ' Ton';
 
             if (elChartTitle) elChartTitle.innerText = komoditas;
             if (elTableTitle) elTableTitle.innerText = komoditas;
 
-            // Render table
-            const tbody = document.getElementById('tbodyPanganPublic');
+            const tbody = document.getElementById('tbodyPerkebunanTahunanPublic');
             if (tbody) {
-                const rows = tanamanPanganData[komoditas] || [];
+                const rows = perkebunanTahunanData[komoditas] || [];
                 if (rows.length === 0) {
                     tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada data untuk komoditas ini.</td></tr>`;
                 } else {
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                                                <tr>
-                                                    <td class="text-center">${idx + 1}</td>
-                                                    <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                                    <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                                                    <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                                                    <td class="text-end">${Number(r.produktivitas || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                                                    <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID', { minimumFractionDigits: 0, maximumFractionDigits: 2 })}</td>
-                                                </tr>
-                                            `;
+                            <tr>
+                                <td class="text-center">${idx + 1}</td>
+                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                            </tr>
+                        `;
                     });
                     tbody.innerHTML = html;
                 }
             }
 
-            // Update chart
-            if (chartPangan) {
-                const rows = tanamanPanganData[komoditas] || [];
+            if (chartPerkebunanTahunan) {
+                const rows = perkebunanTahunanData[komoditas] || [];
                 const categories = rows.map(r => r.tahun);
                 const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
                 const panenSeries = rows.map(r => Number(r.luas_panen || 0));
                 const produksiSeries = rows.map(r => Number(r.produksi || 0));
 
-                chartPangan.updateOptions({
-                    xaxis: { categories: categories }
-                });
-                chartPangan.updateSeries([
+                chartPerkebunanTahunan.updateOptions({ xaxis: { categories: categories } });
+                chartPerkebunanTahunan.updateSeries([
                     { name: 'Luas Tanam (Ha)', type: 'column', data: tanamSeries },
                     { name: 'Luas Panen (Ha)', type: 'column', data: panenSeries },
                     { name: 'Produksi (Ton)', type: 'line', data: produksiSeries }
@@ -2177,9 +3174,9 @@
             }
         }
 
-        function initPanganChart() {
-            if (chartPangan) return;
-            const rows = tanamanPanganData[currentPangan] || [];
+        function initPerkebunanTahunanChart() {
+            if (chartPerkebunanTahunan) return;
+            const rows = perkebunanTahunanData[currentPerkebunanTahunan] || [];
             const categories = rows.map(r => r.tahun);
             const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
             const panenSeries = rows.map(r => Number(r.luas_panen || 0));
@@ -2197,49 +3194,176 @@
                     fontFamily: 'Poppins, sans-serif',
                     toolbar: { show: true }
                 },
-                stroke: {
-                    width: [0, 0, 3],
-                    curve: 'smooth'
-                },
-                plotOptions: {
-                    bar: {
-                        columnWidth: '50%',
-                        borderRadius: 3
-                    }
-                },
+                stroke: { width: [0, 0, 3], curve: 'smooth' },
+                plotOptions: { bar: { columnWidth: '50%', borderRadius: 3 } },
                 colors: ['#f59e0b', '#3b82f6', '#10b981'],
-                xaxis: {
-                    categories: categories,
-                    labels: { style: { fontSize: '12px' } }
-                },
+                xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
                 yaxis: [
                     { title: { text: 'Luas (Ha)' } },
                     { opposite: true, title: { text: 'Produksi (Ton)' } }
                 ],
-                tooltip: {
-                    shared: true,
-                    intersect: false
-                },
-                legend: {
-                    position: 'top'
-                }
+                tooltip: { shared: true, intersect: false },
+                legend: { position: 'top' }
             };
 
-            const chartEl = document.querySelector("#chartPanganPublic");
+            const chartEl = document.querySelector("#chartPerkebunanTahunanPublic");
             if (chartEl) {
-                chartPangan = new ApexCharts(chartEl, options);
-                chartPangan.render();
+                chartPerkebunanTahunan = new ApexCharts(chartEl, options);
+                chartPerkebunanTahunan.render();
             }
         }
 
-        // Sub-pills listener Tanaman Pangan
-        document.querySelectorAll('.btn-pangan-pill').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.btn-pangan-pill').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const komoditas = this.getAttribute('data-komoditas');
-                updateTanamanPanganView(komoditas);
+        // ================= EVENT LISTENERS & DOM READY =================
+        document.querySelectorAll('[data-bs-toggle="pill"]').forEach(el => {
+            el.addEventListener('shown.bs.tab', function (e) {
+                const target = e.target.getAttribute('data-bs-target');
+
+                if (target === '#ketahanan') {
+                    if (!donutChart) {
+                        donutChart = new ApexCharts(document.querySelector("#donutChart"), donutOptions);
+                        donutChart.render();
+                    }
+                    if (!barChart) {
+                        barChart = new ApexCharts(document.querySelector("#barChart"), barOptions);
+                        barChart.render();
+                    }
+                }
+
+                if (target === '#pertanian') {
+                    refreshCurrentSubsectorChart();
+                }
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Sub-sektor pill buttons
+            document.querySelectorAll('.btn-subsector').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const sub = this.getAttribute('data-subsector');
+                    switchSubsector(sub);
+                });
+            });
+
+            // Segmented mode switcher buttons
+            document.querySelectorAll('.btn-mode-switch').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const sub = this.getAttribute('data-sub');
+                    const mode = this.getAttribute('data-mode');
+                    switchMode(sub, mode);
+                });
+            });
+
+            // 1. Tanaman Pangan Komoditas & Kategori
+            document.querySelectorAll('.btn-padi-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-padi-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentKomoditas = this.getAttribute('data-komoditas');
+                    updatePadiView();
+                });
+            });
+            document.querySelectorAll('.btn-padi-kat-pill:not(.btn-horti-kat-pill):not(.btn-perkebunan-kat-pill)').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-padi-kat-pill:not(.btn-horti-kat-pill):not(.btn-perkebunan-kat-pill)').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentKategori = this.getAttribute('data-kategori');
+                    updatePadiView();
+                });
+            });
+
+            // 2. Tanaman Pangan Tahunan Komoditas
+            document.querySelectorAll('.btn-pangan-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-pangan-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const kmd = this.getAttribute('data-komoditas');
+                    updateTanamanPanganView(kmd);
+                });
+            });
+
+            // 3. Hortikultura Data Utama Komoditas & Kategori
+            document.querySelectorAll('.btn-horti-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-horti-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentHortiKomoditas = this.getAttribute('data-komoditas');
+                    updateHortikulturaUtamaView();
+                });
+            });
+            document.querySelectorAll('.btn-horti-kat-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-horti-kat-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentHortiKategori = this.getAttribute('data-kategori');
+                    updateHortikulturaUtamaView();
+                });
+            });
+
+            // 4. Hortikultura Tahunan (Sayuran)
+            document.querySelectorAll('.btn-sayuran-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-sayuran-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const kmd = this.getAttribute('data-komoditas');
+                    updateSayuranView(kmd);
+                });
+            });
+
+            // 5. Perkebunan Data Utama Komoditas & Kategori
+            document.querySelectorAll('.btn-perkebunan-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-perkebunan-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPerkebunanKomoditas = this.getAttribute('data-komoditas');
+                    updatePerkebunanUtamaView();
+                });
+            });
+            document.querySelectorAll('.btn-perkebunan-kat-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-perkebunan-kat-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentPerkebunanKategori = this.getAttribute('data-kategori');
+                    updatePerkebunanUtamaView();
+                });
+            });
+
+            // 6. Perkebunan Tahunan Komoditas
+            document.querySelectorAll('.btn-perkebunan-th-pill').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.btn-perkebunan-th-pill').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const kmd = this.getAttribute('data-komoditas');
+                    updatePerkebunanTahunanView(kmd);
+                });
+            });
+
+            // Initial view updates
+            updatePadiView();
+            updateTanamanPanganView(currentPangan);
+            updateHortikulturaUtamaView();
+            updateSayuranView(currentSayuran);
+            updatePerkebunanUtamaView();
+            updatePerkebunanTahunanView(currentPerkebunanTahunan);
+
+            // Check URL hash or query params
+            const hash = window.location.hash;
+            const hasTahun = new URLSearchParams(window.location.search).has('tahun');
+
+            if (hash === '#pertanian' || hash === '#padi-palawija' || hasTahun || hash === '#tanaman-pangan' || hash === '#hortikultura' || hash === '#perkebunan') {
+                const btnTabPertanian = document.getElementById('tab-pertanian-btn');
+                if (btnTabPertanian) {
+                    const tabTrigger = new bootstrap.Tab(btnTabPertanian);
+                    tabTrigger.show();
+                }
+
+                if (hash === '#hortikultura') {
+                    switchSubsector('hortikultura');
+                } else if (hash === '#perkebunan') {
+                    switchSubsector('perkebunan');
+                } else {
+                    switchSubsector('tanaman-pangan');
+                }
+            }
         });
     </script>
 

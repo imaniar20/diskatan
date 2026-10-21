@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PadiPalawija;
+use App\Models\Komoditas;
 use App\Services\PadiPalawijaExcelService;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -28,15 +29,7 @@ class AdminPadiPalawijaController extends Controller
     {
         $this->checkAdmin();
 
-        $komoditasList = [
-            'Padi',
-            'Jagung',
-            'Kedelai',
-            'Kacang Tanah',
-            'Kacang Hijau',
-            'Ubi Kayu',
-            'Ubi Jalar',
-        ];
+        $komoditasList = Komoditas::getListBySektor('tanaman_pangan');
 
         $kategoriConfig = [
             'tanam' => [

@@ -20,7 +20,7 @@
         <meta property="twitter:description" content="{{ Str::limit(strip_tags($news->content), 155) }}">
         <meta property="twitter:image" content="{{ asset('storage/' . $news->thumbnail) }}">
     @endif
-    <title>@yield('title') - DISKATAN</title>
+    <title>{{ $menu }} - DISKATAN</title>
     <link rel="icon" type="image" href="{{ asset('img/logo/kuningan.png') }}" />
 
     @include('public.partials.header')
@@ -29,6 +29,7 @@
 
     @stack('styles')
 </head>
+
 <body>
     <!-- Decorative Leaves -->
     <div class="leaf-decoration leaf-1">🌿</div>
@@ -47,7 +48,7 @@
     </div>
 
     @stack('before-script')
-        @include('public.partials.js')
+    @include('public.partials.js')
     @stack('after-script')
 
     @stack('scripts')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sayuran;
+use App\Models\Komoditas;
 use App\Services\SayuranExcelService;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -28,21 +29,7 @@ class AdminSayuranController extends Controller
     {
         $this->checkAdmin();
 
-        $komoditasList = [
-            'Bawang Merah',
-            'Bawang Daun',
-            'Cabe Besar',
-            'Cabe Rawit',
-            'Tomat',
-            'Wortel',
-            'Kubis',
-            'Petsai / Sawi',
-            'Rambutan',
-            'Mangga',
-            'Durian',
-            'Jahe',
-            'Kapulaga',
-        ];
+        $komoditasList = Komoditas::getListBySektor('hortikultura');
 
         $selectedKomoditas = $request->query('komoditas', 'Bawang Merah');
         if (!in_array($selectedKomoditas, $komoditasList)) {
