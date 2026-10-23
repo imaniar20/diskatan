@@ -43,6 +43,61 @@ class Komoditas extends Model
     }
 
     /**
+     * Memastikan komoditas terdaftar di master komoditas.
+     * Jika belum ada, otomatis dibuatkan baris baru.
+     */
+    public static function firstOrCreateBySektor(string $sektor, string $nama, array $extraAttributes = []): ?self
+    {
+        $namaClean = trim($nama);
+        if (empty($namaClean)) {
+            return null;
+        }
+
+        $existing = self::where('sektor', $sektor)
+            ->where(function ($q) use ($namaClean) {
+                $q->whereRaw('LOWER(TRIM(nama)) = ?', [strtolower($namaClean)]);
+            })
+            ->first();
+
+        if ($existing) {
+            return $existing;
+        }
+
+        $lastUrutan = (int) self::where('sektor', $sektor)->max('urutan') ?: 0;
+
+        return self::create([
+            'sektor' => $sektor,
+            'nama' => $namaClean,
+            'kategori_sayuran' => $extraAttributes['kategori_sayuran'] ?? null,
+            'satuan_luas' => $extraAttributes['satuan_luas'] ?? 'Ha',
+            'satuan_produksi' => $extraAttributes['satuan_produksi'] ?? 'Ton',
+            'urutan' => $lastUrutan + 1,
+            'is_active' => true,
+        ]);
+    }
+
+    /**
+     * Sinkronisasi sekumpulan nama komoditas ke master komoditas untuk sektor tertentu.
+     */
+    public static function syncFromImport(string $sektor, array|string $namaList, array $defaults = []): array
+    {
+        $list = is_array($namaList) ? $namaList : [$namaList];
+        $created = [];
+
+        foreach ($list as $nama) {
+            if (empty(trim((string)$nama))) {
+                continue;
+            }
+            $item = self::firstOrCreateBySektor($sektor, (string)$nama, $defaults);
+            if ($item && $item->wasRecentlyCreated) {
+                $created[] = $item->nama;
+            }
+        }
+
+        return $created;
+    }
+
+    /**
      * Mengambil daftar nama komoditas untuk sektor tertentu
      * dengan fallback default jika tabel masih kosong.
      */
@@ -60,7 +115,7 @@ class Komoditas extends Model
         }
 
         // Fallback default jika tabel belum diisi
-        return match ($sektor) {
+        $defaults = match ($sektor) {
             'tanaman_pangan' => [
                 'Padi', 'Jagung', 'Kedelai', 'Kacang Tanah', 'Kacang Hijau', 'Ubi Kayu', 'Ubi Jalar'
             ],
@@ -74,5 +129,15 @@ class Komoditas extends Model
             ],
             default => []
         };
+
+        if (!empty($defaults)) {
+            try {
+                self::syncFromImport($sektor, $defaults);
+            } catch (\Throwable $e) {
+                // Jangan gagalkan eksekusi jika ada kendala koneksi
+            }
+        }
+
+        return $defaults;
     }
 }

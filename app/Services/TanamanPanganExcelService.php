@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\TanamanPangan;
+use App\Models\Komoditas;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -164,6 +165,12 @@ class TanamanPanganExcelService
             foreach (array_chunk($recordsToInsert, 100) as $chunk) {
                 TanamanPangan::insert($chunk);
             }
+
+            // Otomatis daftarkan seluruh komoditas yang diimpor ke Master Komoditas
+            Komoditas::syncFromImport('tanaman_pangan', $processedSheets, [
+                'satuan_luas' => 'Ha',
+                'satuan_produksi' => 'Ton',
+            ]);
         });
 
         $tahunMsg = (!empty($targetTahun) && $targetTahun !== 'ALL') ? "Tahun {$targetTahun}" : "Semua Tahun";

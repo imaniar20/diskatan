@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\PadiPalawija;
+use App\Models\Komoditas;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -17,6 +18,8 @@ class PadiPalawijaExcelService
      * Pemetaan nama sheet Excel ke nama komoditas standar
      */
     public const SHEET_MAPPING = [
+        'padi sawah'   => 'Padi Sawah',
+        'padi ladang'  => 'Padi Ladang',
         'padi'         => 'Padi',
         'jagung'       => 'Jagung',
         'kedele'       => 'Kedelai',
@@ -661,7 +664,13 @@ class PadiPalawijaExcelService
             }
 
             if (!$komoditas) {
-                continue; // Bukan sheet komoditas yang dikenali
+                // Abaikan sheet rekapitulasi, grafik, atau sheet umum
+                $ignoreList = ['rekap', 'rekapitulasi', 'cover', 'grafik', 'sheet1', 'sheet2', 'data', 'total', 'jumlah'];
+                if (!in_array($sheetKey, $ignoreList) && strlen($sheetKey) >= 3) {
+                    $komoditas = ucwords(trim($rawSheetName));
+                } else {
+                    continue; // Bukan sheet komoditas yang dikenali
+                }
             }
 
             $worksheet = $spreadsheet->getSheetByName($rawSheetName);
@@ -845,6 +854,12 @@ class PadiPalawijaExcelService
             foreach (array_chunk($recordsToInsert, 100) as $chunk) {
                 PadiPalawija::insert($chunk);
             }
+
+            // Otomatis daftarkan seluruh komoditas yang diimpor ke Master Komoditas
+            Komoditas::syncFromImport('tanaman_pangan', $processedSheets, [
+                'satuan_luas' => 'Ha',
+                'satuan_produksi' => 'Ton',
+            ]);
         });
 
         return [

@@ -431,6 +431,11 @@ class AdminPadiPalawijaController extends Controller
             'persentase_capaian' => $pTotal,
         ]);
 
+        Komoditas::firstOrCreateBySektor('tanaman_pangan', $komoditas, [
+            'satuan_luas' => 'Ha',
+            'satuan_produksi' => 'Ton',
+        ]);
+
         return redirect()
             ->route('admin-padi-palawija.index', [
                 'komoditas' => $komoditas,

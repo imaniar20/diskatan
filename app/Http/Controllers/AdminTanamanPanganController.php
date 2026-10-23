@@ -190,6 +190,11 @@ class AdminTanamanPanganController extends Controller
             'satuan_produksi' => 'Ton',
         ]);
 
+        Komoditas::firstOrCreateBySektor('tanaman_pangan', $komoditas, [
+            'satuan_luas' => 'Ha',
+            'satuan_produksi' => 'Ton',
+        ]);
+
         return redirect()
             ->route('admin-tanaman-pangan.index', ['komoditas' => $komoditas])
             ->with('success', "Data {$komoditas} Tahun {$tahun} berhasil ditambahkan");

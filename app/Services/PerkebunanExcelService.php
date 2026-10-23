@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Perkebunan;
+use App\Models\Komoditas;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -76,10 +77,12 @@ class PerkebunanExcelService
         $highestRow = $sheet->getHighestRow();
 
         $totalImported = 0;
+        $importedKomoditas = [];
         for ($row = 4; $row <= $highestRow; $row++) {
             $komoditas = trim((string)$sheet->getCell('B' . $row)->getValue());
             $thn = trim((string)$sheet->getCell('C' . $row)->getValue());
             if (empty($komoditas) || empty($thn)) continue;
+            $importedKomoditas[] = $komoditas;
 
             $tanam = (float)$sheet->getCell('D' . $row)->getValue();
             $panen = (float)$sheet->getCell('E' . $row)->getValue();
@@ -101,6 +104,13 @@ class PerkebunanExcelService
                 ]
             );
             $totalImported++;
+        }
+
+        if (!empty($importedKomoditas)) {
+            Komoditas::syncFromImport('perkebunan', array_unique($importedKomoditas), [
+                'satuan_luas' => 'Ha',
+                'satuan_produksi' => 'Ton',
+            ]);
         }
 
         return ['success' => true, 'totalRows' => $totalImported, 'message' => "Berhasil mengimpor {$totalImported} data Perkebunan Tahunan."];

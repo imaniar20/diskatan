@@ -104,6 +104,11 @@ class AdminPerkebunanController extends Controller
 
         Perkebunan::create($validated);
 
+        Komoditas::firstOrCreateBySektor('perkebunan', $validated['komoditas'], [
+            'satuan_luas' => $validated['satuan_luas'] ?? 'Ha',
+            'satuan_produksi' => $validated['satuan_produksi'] ?? 'Ton',
+        ]);
+
         return redirect()->back()->with('success', 'Data Perkebunan Tahunan berhasil ditambahkan.');
     }
 

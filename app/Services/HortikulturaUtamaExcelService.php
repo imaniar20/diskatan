@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\HortikulturaUtama;
+use App\Models\Komoditas;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -105,11 +106,15 @@ class HortikulturaUtamaExcelService
         $spreadsheet = IOFactory::load($realPath);
         $sheetCount = $spreadsheet->getSheetCount();
         $totalImported = 0;
+        $importedKomoditas = [];
 
         for ($i = 0; $i < $sheetCount; $i++) {
             $sheet = $spreadsheet->getSheet($i);
             $sheetTitle = trim($sheet->getTitle());
             $komoditas = $targetKomoditas ?: $sheetTitle;
+            if (!empty($komoditas)) {
+                $importedKomoditas[] = $komoditas;
+            }
 
             $highestRow = $sheet->getHighestRow();
             if ($highestRow < 5) continue;
@@ -182,6 +187,14 @@ class HortikulturaUtamaExcelService
                 );
                 $totalImported++;
             }
+        }
+
+        if (!empty($importedKomoditas)) {
+            Komoditas::syncFromImport('hortikultura', array_unique($importedKomoditas), [
+                'kategori_sayuran' => 'Sayuran',
+                'satuan_luas' => 'Ha',
+                'satuan_produksi' => 'Kuintal',
+            ]);
         }
 
         return ['success' => true, 'totalRows' => $totalImported, 'message' => "Berhasil mengimpor {$totalImported} data Hortikultura Utama."];

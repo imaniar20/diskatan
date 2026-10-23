@@ -207,6 +207,12 @@ class AdminSayuranController extends Controller
             'satuan_produksi' => $satuanProduksi,
         ]);
 
+        Komoditas::firstOrCreateBySektor('hortikultura', $komoditas, [
+            'kategori_sayuran' => $kategori,
+            'satuan_luas' => $satuanLuas,
+            'satuan_produksi' => $satuanProduksi,
+        ]);
+
         return redirect()
             ->route('admin-sayuran.index', ['komoditas' => $komoditas])
             ->with('success', "Data {$komoditas} Tahun {$tahun} berhasil ditambahkan");

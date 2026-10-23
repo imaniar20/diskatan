@@ -230,6 +230,11 @@ class AdminPerkebunanUtamaController extends Controller
 
         $this->calculateTotalsAndSave(new PerkebunanUtama(), $validated);
 
+        Komoditas::firstOrCreateBySektor('perkebunan', $validated['komoditas'], [
+            'satuan_luas' => $validated['satuan'] ?? 'Ha',
+            'satuan_produksi' => 'Ton',
+        ]);
+
         return redirect()->back()->with('success', 'Data Perkebunan Utama berhasil ditambahkan.');
     }
 

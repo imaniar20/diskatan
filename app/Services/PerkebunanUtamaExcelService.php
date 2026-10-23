@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\PerkebunanUtama;
+use App\Models\Komoditas;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -102,11 +103,15 @@ class PerkebunanUtamaExcelService
         $spreadsheet = IOFactory::load($realPath);
         $sheetCount = $spreadsheet->getSheetCount();
         $totalImported = 0;
+        $importedKomoditas = [];
 
         for ($i = 0; $i < $sheetCount; $i++) {
             $sheet = $spreadsheet->getSheet($i);
             $sheetTitle = trim($sheet->getTitle());
             $komoditas = $targetKomoditas ?: $sheetTitle;
+            if (!empty($komoditas)) {
+                $importedKomoditas[] = $komoditas;
+            }
 
             $highestRow = $sheet->getHighestRow();
             if ($highestRow < 5) continue;
@@ -179,6 +184,13 @@ class PerkebunanUtamaExcelService
                 );
                 $totalImported++;
             }
+        }
+
+        if (!empty($importedKomoditas)) {
+            Komoditas::syncFromImport('perkebunan', array_unique($importedKomoditas), [
+                'satuan_luas' => 'Ha',
+                'satuan_produksi' => 'Ton',
+            ]);
         }
 
         return ['success' => true, 'totalRows' => $totalImported, 'message' => "Berhasil mengimpor {$totalImported} data Perkebunan Utama."];

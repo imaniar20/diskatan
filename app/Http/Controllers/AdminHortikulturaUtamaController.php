@@ -230,6 +230,12 @@ class AdminHortikulturaUtamaController extends Controller
 
         $this->calculateTotalsAndSave(new HortikulturaUtama(), $validated);
 
+        Komoditas::firstOrCreateBySektor('hortikultura', $validated['komoditas'], [
+            'kategori_sayuran' => 'Sayuran',
+            'satuan_luas' => $validated['satuan'] ?? 'Ha',
+            'satuan_produksi' => 'Kuintal',
+        ]);
+
         return redirect()->back()->with('success', 'Data Hortikultura Utama berhasil ditambahkan.');
     }
 
