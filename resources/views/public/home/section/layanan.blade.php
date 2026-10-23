@@ -409,17 +409,17 @@
                 </a>
             </div>
             
-            {{-- Card 2: Pengaduan Masyarakat --}}
+            {{-- Card 2: Survei Kepuasan Masyarakat --}}
             <div class="layanan-card blue" data-aos="fade-up" data-aos-delay="150">
                 <div class="layanan-icon">
-                    <i class="bi bi-chat-left-text"></i>
+                    <i class="bi bi-clipboard2-check"></i>
                 </div>
-                <h3 class="layanan-card-title">Pengaduan Masyarakat</h3>
+                <h3 class="layanan-card-title">Survei Kepuasan Masyarakat</h3>
                 <p class="layanan-card-text">
-                    Sampaikan keluhan atau pengaduan terkait layanan kami
+                    Survei Kepuasan Dinas Ketahanan Pangan dan Pertanian Kabupaten Kuningan
                 </p>
-                <a href="http://siwawan.kuningankab.go.id/" target="_blank" class="layanan-link">
-                    Ajukan
+                <a href="{{ route('survei.index') }}" class="layanan-link">
+                    Isi Survei
                     <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
