@@ -80,6 +80,8 @@ Route::get('/datadaninformasi', [HomeController::class, 'dataDanInformasi']);
 
 //layanan
 Route::get('/layanan', [HomeController::class, 'layanan']);
+Route::get('/layanan/survei-kepuasan', [\App\Http\Controllers\Public\SurveiKepuasanPublicController::class, 'index'])->name('survei.index');
+Route::post('/layanan/survei-kepuasan', [\App\Http\Controllers\Public\SurveiKepuasanPublicController::class, 'store'])->name('survei.store');
 
 Route::get('/news/kategori/{id}', [HomeController::class, 'byKategori']);
 
