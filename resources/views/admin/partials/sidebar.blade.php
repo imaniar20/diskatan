@@ -52,6 +52,37 @@
             </a>
         </li>
 
+        <!-- Survei Kepuasan -->
+        @php
+            $isSurvei = in_array($title, ['Survei Kepuasan', 'Master Pertanyaan', 'Master Layanan']);
+        @endphp
+        <li class="menu-item {{ $isSurvei ? 'active open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-poll"></i>
+                <div data-i18n="Survei Kepuasan">Survei Kepuasan</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ $title == 'Survei Kepuasan' ? 'active' : '' }}">
+                    <a href="/admin-survei-kepuasan" class="menu-link">
+                        <i class="bx bx-radio-circle me-1"></i>
+                        <div data-i18n="Rekap Responden">Rekap Responden</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ $title == 'Master Pertanyaan' ? 'active' : '' }}">
+                    <a href="/admin-survei-kepuasan/pertanyaan" class="menu-link">
+                        <i class="bx bx-radio-circle me-1"></i>
+                        <div data-i18n="Master Pertanyaan">Master Pertanyaan</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ $title == 'Master Layanan' ? 'active' : '' }}">
+                    <a href="/admin-survei-kepuasan/layanan" class="menu-link">
+                        <i class="bx bx-radio-circle me-1"></i>
+                        <div data-i18n="Master Layanan">Master Layanan</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         @if (session('user')->username == 'admin')
             <!-- DATA PERTANIAN SECTION -->
             <li class="menu-header small text-uppercase">
