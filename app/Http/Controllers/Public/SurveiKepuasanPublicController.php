@@ -74,7 +74,12 @@ class SurveiKepuasanPublicController extends Controller
             1 => $ratingCounts[1] ?? 0,
         ];
 
+        $title = 'Layanan';
+        $menu = 'Layanan';
+
         return view('public.survei.index', compact(
+            'title',
+            'menu',
             'layanan',
             'pertanyaan',
             'totalResponden',
