@@ -83,6 +83,11 @@ Route::get('/layanan', [HomeController::class, 'layanan']);
 
 Route::get('/news/kategori/{id}', [HomeController::class, 'byKategori']);
 
+// Maintenance preview
+Route::get('/maintenance', function () {
+    return response()->view('errors.503', [], 503);
+})->name('maintenance');
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
