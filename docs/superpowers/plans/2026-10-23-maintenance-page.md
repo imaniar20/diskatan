@@ -23,13 +23,13 @@
 **Interfaces:**
 - Produces: View Blade `errors.503` yang otomatis dipanggil Laravel saat maintenance mode atau melalui `response()->view('errors.503', [], 503)`.
 
-- [ ] **Step 1: Buat file `resources/views/errors/503.blade.php`**
+- [x] **Step 1: Buat file `resources/views/errors/503.blade.php`**
   Membuat file lengkap berisi struktur HTML5, styling embedded modern glassmorphism, logo Kabupaten Kuningan (`img/logo/kuningan.png`), pulsing status badge, SVG ilustrasi agrikultur modern, pesan peningkatan sistem, tombol reload dengan JS, dan kontak bantuan DISKATAN.
 
-- [ ] **Step 2: Validasi sintaks Blade**
+- [x] **Step 2: Validasi sintaks Blade**
   Jalankan `php artisan view:cache` untuk memastikan tidak ada kesalahan sintaksis pada view baru.
 
-- [ ] **Step 3: Commit perubahan Task 1**
+- [x] **Step 3: Commit perubahan Task 1**
   Commit dengan pesan: `feat: create 503 maintenance page view for DISKATAN`
 
 ---
@@ -43,17 +43,17 @@
 - Consumes: View `errors.503` dari Task 1.
 - Produces: Endpoint `GET /maintenance` dengan HTTP response status 503.
 
-- [ ] **Step 1: Tambahkan rute preview di `routes/web.php`**
+- [x] **Step 1: Tambahkan rute preview di `routes/web.php`**
   ```php
   Route::get('/maintenance', function () {
       return response()->view('errors.503', [], 503);
   })->name('maintenance');
   ```
 
-- [ ] **Step 2: Validasi rute dengan artisan**
+- [x] **Step 2: Validasi rute dengan artisan**
   Jalankan `php artisan route:list --path=maintenance` untuk memastikan rute terdaftar dengan benar.
 
-- [ ] **Step 3: Commit perubahan Task 2**
+- [x] **Step 3: Commit perubahan Task 2**
   Commit dengan pesan: `feat: add /maintenance preview route`
 
 ---
@@ -63,10 +63,10 @@
 **Files:**
 - Test via Browser & Artisan CLI
 
-- [ ] **Step 1: Uji rute preview `/maintenance`**
+- [x] **Step 1: Uji rute preview `/maintenance`**
   Akses URL `http://127.0.0.1:8000/maintenance` dan pastikan halaman ter-render sempurna dengan logo, tombol muat ulang, dan tata letak responsif.
 
-- [ ] **Step 2: Simulasi `php artisan down` dan `php artisan up`**
+- [x] **Step 2: Simulasi `php artisan down` dan `php artisan up`**
   Jalankan `php artisan down --render="errors.503"` untuk memverifikasi bahwa halaman publik menampilkan view 503 baru, lalu kembalikan sistem ke status online dengan `php artisan up`.
 
-- [ ] **Step 3: Dokumentasikan hasil pengujian dan laporkan ke pengguna**
+- [x] **Step 3: Dokumentasikan hasil pengujian dan laporkan ke pengguna**
