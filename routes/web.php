@@ -247,4 +247,23 @@ Route::group(['middleware' => 'auth'], function () {
         ->where('filename', '.*')
         ->name('download.file');
 
+    // Survei Kepuasan Admin
+    Route::prefix('admin-survei-kepuasan')->name('admin.survei.')->group(function() {
+        Route::get('/', [\App\Http\Controllers\Admin\SurveiKepuasanAdminController::class, 'index'])->name('index');
+        Route::get('/detail/{id}', [\App\Http\Controllers\Admin\SurveiKepuasanAdminController::class, 'detail'])->name('detail');
+        Route::delete('/destroy/{id}', [\App\Http\Controllers\Admin\SurveiKepuasanAdminController::class, 'destroy'])->name('destroy');
+        Route::get('/export-csv', [\App\Http\Controllers\Admin\SurveiKepuasanAdminController::class, 'exportCsv'])->name('export');
+
+        // Master Pertanyaan
+        Route::get('/pertanyaan', [\App\Http\Controllers\Admin\SurveiPertanyaanAdminController::class, 'index'])->name('pertanyaan.index');
+        Route::post('/pertanyaan', [\App\Http\Controllers\Admin\SurveiPertanyaanAdminController::class, 'store'])->name('pertanyaan.store');
+        Route::put('/pertanyaan/{id}', [\App\Http\Controllers\Admin\SurveiPertanyaanAdminController::class, 'update'])->name('pertanyaan.update');
+        Route::delete('/pertanyaan/{id}', [\App\Http\Controllers\Admin\SurveiPertanyaanAdminController::class, 'destroy'])->name('pertanyaan.destroy');
+
+        // Master Layanan
+        Route::get('/layanan', [\App\Http\Controllers\Admin\SurveiLayananAdminController::class, 'index'])->name('layanan.index');
+        Route::post('/layanan', [\App\Http\Controllers\Admin\SurveiLayananAdminController::class, 'store'])->name('layanan.store');
+        Route::put('/layanan/{id}', [\App\Http\Controllers\Admin\SurveiLayananAdminController::class, 'update'])->name('layanan.update');
+        Route::delete('/layanan/{id}', [\App\Http\Controllers\Admin\SurveiLayananAdminController::class, 'destroy'])->name('layanan.destroy');
+    });
 });
