@@ -16,7 +16,7 @@ class PertanianBaruSeeder extends Seeder
         $tahun = '2026';
 
         // 1. Seed Hortikultura Utama
-        $hortiKomoditas = ['Bawang Merah', 'Cabe Besar', 'Tomat'];
+        $hortiKomoditas = ['Bawang Merah', 'Bawang Daun', 'Cabe Besar', 'Cabe Rawit'];
         $hortiKategori = [
             'tanam' => ['satuan' => 'Ha', 'factor' => 1.0],
             'panen' => ['satuan' => 'Ha', 'factor' => 0.9],
@@ -216,7 +216,7 @@ class PertanianBaruSeeder extends Seeder
 
         // 5. Seed Sayuran & Hortikultura (13 Tahun: 2012 - 2024)
         if (\App\Models\Sayuran::count() === 0) {
-            $sayuranKomoditas = ['Bawang Merah', 'Bawang Daun', 'Cabe Besar', 'Cabe Rawit', 'Tomat', 'Wortel', 'Kubis', 'Petsai / Sawi', 'Rambutan', 'Mangga', 'Durian', 'Jahe', 'Kapulaga'];
+            $sayuranKomoditas = ['Bawang Merah', 'Bawang Daun', 'Cabe Besar', 'Cabe Rawit'];
             $sayuranYears = range(2012, 2024);
             foreach ($sayuranKomoditas as $kmd) {
                 foreach ($sayuranYears as $idx => $yr) {

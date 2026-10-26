@@ -854,12 +854,5 @@
             });
         });
 
-        function confirmDelete(url, info) {
-            if (confirm(`Yakin ingin menghapus data ${info}?`)) {
-                const form = document.getElementById('deleteForm');
-                form.action = url;
-                form.submit();
-            }
-        }
     </script>
 @endsection

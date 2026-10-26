@@ -428,12 +428,5 @@
             });
         });
 
-        function confirmDelete(url, tahun) {
-            if (confirm(`Yakin ingin menghapus data Tahun ${tahun}?`)) {
-                const form = document.getElementById('deleteForm');
-                form.action = url;
-                form.submit();
-            }
-        }
     </script>
 @endsection

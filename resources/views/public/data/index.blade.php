@@ -838,7 +838,7 @@
                                 <button type="button" class="btn-subsector" data-subsector="hortikultura">
                                     <i class="bx bx-leaf me-1"></i> Hortikultura
                                 </button>
-                                <button type="button" class="btn-subsector" data-subsector="perkebunan">
+                                <button type="button" class="btn-subsector d-none" data-subsector="perkebunan">
                                     <i class="bx bx-spa me-1"></i> Perkebunan
                                 </button>
                             </div>
@@ -894,9 +894,6 @@
                                     <button type="button" class="btn-padi-kat-pill" data-kategori="produktivitas">
                                         <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill" data-kategori="puso">
-                                        <i class="bx bx-error-circle"></i> Puso (Ha)
-                                    </button>
                                 </div>
 
                                 <!-- Sub Pills Komoditas -->
@@ -919,32 +916,32 @@
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" id="kpiCard2Border" style="border-left-color: #f59e0b;">
-                                            <span class="text-muted small" id="kpiCard2Title">Target Tanam</span>
+                                            <span class="text-muted small" id="kpiCard2Title">Realisasi MH (Okmar)</span>
                                             <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiTarget">0 Ha</h4>
-                                            <small class="text-secondary" id="kpiCard2Sub">Musim Hujan + Kemarau</small>
+                                            <small class="text-secondary" id="kpiCard2Sub">Oktober - Maret</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" id="kpiCard3Border" style="border-left-color: #10b981;">
-                                            <span class="text-muted small" id="kpiCard3Title">Realisasi Tanam</span>
+                                            <span class="text-muted small" id="kpiCard3Title">Realisasi MK (Asep)</span>
                                             <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha</h4>
-                                            <small class="text-secondary" id="kpiCard3Sub">Total MH + MK</small>
+                                            <small class="text-secondary" id="kpiCard3Sub">April - September</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" id="kpiCard4Border" style="border-left-color: #06b6d4;">
-                                            <span class="text-muted small" id="kpiCard4Title">Capaian Target</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPersen">0%</h4>
-                                            <small class="text-secondary" id="kpiCard4Sub">Persentase Target</small>
+                                            <span class="text-muted small" id="kpiCard4Title">Total Realisasi</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPersen">0 Ha</h4>
+                                            <small class="text-secondary" id="kpiCard4Sub">Total 1 Tahun</small>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Chart Target vs Realisasi per Kecamatan -->
+                                <!-- Chart Realisasi per Kecamatan -->
                                 <div class="card shadow-sm mb-4">
                                     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success" id="chartPadiTitle">
-                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam per Kecamatan (Ha)
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Realisasi Luas Tanam per Kecamatan (Ha)
                                         </h6>
                                         <span class="badge bg-success" id="chartKomoditasBadge">Padi</span>
                                     </div>
@@ -968,13 +965,9 @@
                                                         <th class="text-center" style="width: 4%">No</th>
                                                         <th>Kecamatan</th>
                                                         <th class="text-end">Luas Sawah (Ha)</th>
-                                                        <th class="text-end">Target MH (Ha)</th>
-                                                        <th class="text-end">Target MK (Ha)</th>
-                                                        <th class="text-end">Target Total (Ha)</th>
                                                         <th class="text-end">Realisasi MH (Ha)</th>
                                                         <th class="text-end">Realisasi MK (Ha)</th>
-                                                        <th class="text-end">Total Realisasi (Ha)</th>
-                                                        <th class="text-center">Capaian</th>
+                                                        <th class="text-end text-success fw-bold">Total Realisasi (Ha)</th>
                                                         <th class="text-center" style="width: 8%">Rincian</th>
                                                     </tr>
                                                 </thead>
@@ -1116,12 +1109,6 @@
                                     <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produksi">
                                         <i class="bx bx-package"></i> Produksi (Ton)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produktivitas">
-                                        <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
-                                    </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="puso">
-                                        <i class="bx bx-error-circle"></i> Puso (Ha)
-                                    </button>
                                 </div>
 
                                 <!-- Sub Pills Komoditas Hortikultura -->
@@ -1144,32 +1131,32 @@
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                            <span class="text-muted small" id="kpiHortiCard2Title">Target</span>
+                                            <span class="text-muted small" id="kpiHortiCard2Title">Semester 1</span>
                                             <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiHortiTarget">0 Ha</h4>
-                                            <small class="text-secondary">Musim Hujan + Kemarau</small>
+                                            <small class="text-secondary" id="kpiHortiCard2Sub">Januari - Juni</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                            <span class="text-muted small" id="kpiHortiCard3Title">Realisasi</span>
+                                            <span class="text-muted small" id="kpiHortiCard3Title">Semester 2</span>
                                             <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiHortiRealisasi">0 Ha</h4>
-                                            <small class="text-secondary">Total Realisasi</small>
+                                            <small class="text-secondary" id="kpiHortiCard3Sub">Juli - Desember</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                            <span class="text-muted small">Capaian Target</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiHortiPersen">0%</h4>
-                                            <small class="text-secondary">Persentase Target</small>
+                                            <span class="text-muted small" id="kpiHortiCard4Title">Total Realisasi</span>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiHortiPersen">0 Ha</h4>
+                                            <small class="text-secondary" id="kpiHortiCard4Sub">Total 1 Tahun</small>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Chart Target vs Realisasi Hortikultura -->
+                                <!-- Chart Realisasi Hortikultura -->
                                 <div class="card shadow-sm mb-4">
                                     <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success" id="chartHortiTitle">
-                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Hortikultura per Kecamatan
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Realisasi Hortikultura per Kecamatan
                                         </h6>
                                         <span class="badge bg-success" id="chartHortiKomoditasBadge">Bawang Merah</span>
                                     </div>
@@ -1182,25 +1169,29 @@
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-white py-3">
                                         <h6 class="mb-0 fw-bold text-success" id="tableHortiTitle">
-                                            <i class="bx bx-table me-1"></i> Data Rincian Hortikultura per Kecamatan (Tahun {{ $selectedTahun }})
+                                            <i class="bx bx-table me-1"></i> Data Rincian Bulanan Hortikultura per Kecamatan (Tahun {{ $selectedTahun }})
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover align-middle w-100" id="tableHortikulturaUtama">
-                                                <thead class="table-light">
+                                                <thead class="table-light" id="theadHortikulturaUtama">
                                                     <tr>
                                                         <th class="text-center" style="width: 4%">No</th>
                                                         <th>Kecamatan</th>
-                                                        <th class="text-end">Luas Baku (Ha)</th>
-                                                        <th class="text-end">Target MH</th>
-                                                        <th class="text-end">Target MK</th>
-                                                        <th class="text-end">Target Total</th>
-                                                        <th class="text-end">Realisasi MH</th>
-                                                        <th class="text-end">Realisasi MK</th>
-                                                        <th class="text-end">Total Realisasi</th>
-                                                        <th class="text-center">Capaian</th>
-                                                        <th class="text-center" style="width: 8%">Rincian</th>
+                                                        <th class="text-end">Jan</th>
+                                                        <th class="text-end">Feb</th>
+                                                        <th class="text-end">Mar</th>
+                                                        <th class="text-end">Apr</th>
+                                                        <th class="text-end">Mei</th>
+                                                        <th class="text-end">Jun</th>
+                                                        <th class="text-end">Jul</th>
+                                                        <th class="text-end">Ags</th>
+                                                        <th class="text-end">Sep</th>
+                                                        <th class="text-end">Okt</th>
+                                                        <th class="text-end">Nop</th>
+                                                        <th class="text-end">Des</th>
+                                                        <th class="text-end text-success fw-bold">Total Tahunan</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbodyHortikulturaUtama"></tbody>
@@ -1979,12 +1970,12 @@
 
             const chartTitle = document.getElementById('chartPadiTitle');
             if (chartTitle) {
-                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi ${katConfig.label} ${currentKomoditas} per Kecamatan (${unit})`;
+                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Realisasi ${katConfig.label} ${currentKomoditas} per Kecamatan (${unit})`;
             }
 
             const tableTitle = document.getElementById('tablePadiTitle');
             if (tableTitle) {
-                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
+                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian Realisasi ${katConfig.label} ${currentKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
             }
 
             const c1Title = document.getElementById('kpiCard1Title');
@@ -2003,154 +1994,66 @@
             const c4Val = document.getElementById('kpiPersen');
             const c4Sub = document.getElementById('kpiCard4Sub');
 
-            if (currentKategori === 'produktivitas') {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
-                if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
+            if (c1Title) c1Title.textContent = (currentKategori === 'tanam' ? 'Luas Sawah' : 'Baku Lahan');
+            if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+            if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
 
-                if (c2Title) c2Title.textContent = 'Target Rata-rata';
-                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
-                if (c2Sub) c2Sub.textContent = 'Target Produktivitas';
+            if (c2Title) c2Title.textContent = currentKategori === 'tanam' ? 'Realisasi MH (Okmar)' : 'Realisasi Semester 1';
+            if (c2Val) c2Val.textContent = (currentKategori === 'produktivitas' ? Number(summary.avg_target || 0).toFixed(2) : Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID')) + ' ' + unit;
+            if (c2Sub) c2Sub.textContent = currentKategori === 'tanam' ? 'Oktober - Maret' : 'Januari - Juni';
 
-                if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
-                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
-                if (c3Sub) c3Sub.textContent = 'Realisasi Capaian';
+            if (c3Title) c3Title.textContent = currentKategori === 'tanam' ? 'Realisasi MK (Asep)' : 'Realisasi Semester 2';
+            if (c3Val) c3Val.textContent = (currentKategori === 'produktivitas' ? Number(summary.avg_realisasi || 0).toFixed(2) : Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID')) + ' ' + unit;
+            if (c3Sub) c3Sub.textContent = currentKategori === 'tanam' ? 'April - September' : 'Juli - Desember';
 
-                if (c4Title) c4Title.textContent = 'Capaian';
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
-                if (c4Sub) c4Sub.textContent = 'Terhadap Target';
-            } else if (currentKategori === 'puso') {
-                const affected = rows.filter(r => Number(r.total_realisasi || 0) > 0).length;
-
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
-                if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
-
-                if (c2Title) c2Title.textContent = 'Puso Musim Hujan';
-                if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
-                if (c2Sub) c2Sub.textContent = 'Oktober - Maret';
-
-                if (c3Title) c3Title.textContent = 'Puso Musim Kemarau';
-                if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
-                if (c3Sub) c3Sub.textContent = 'April - September';
-
-                if (c4Title) c4Title.textContent = 'Total Puso';
-                if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
-                if (c4Sub) c4Sub.textContent = `${affected} Kecamatan Terdampak`;
-            } else {
-                if (c1Title) c1Title.textContent = (currentKategori === 'tanam' ? 'Luas Sawah' : 'Baku Lahan');
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
-                if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
-
-                if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
-                if (c2Val) c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
-                if (c2Sub) c2Sub.textContent = currentKategori === 'tanam' ? 'Okmar + Asep' : 'Jan-Jun + Jul-Des';
-
-                if (c3Title) c3Title.textContent = `Realisasi ${katConfig.label}`;
-                if (c3Val) c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
-                if (c3Sub) c3Sub.textContent = currentKategori === 'tanam' ? 'MH + MK' : 'Semester 1 + 2';
-
-                if (c4Title) c4Title.textContent = 'Capaian Target';
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
-                if (c4Sub) c4Sub.textContent = 'Persentase Capaian';
-            }
+            if (c4Title) c4Title.textContent = currentKategori === 'produktivitas' ? 'Rata-rata Tahunan' : 'Total Realisasi';
+            if (c4Val) c4Val.textContent = (currentKategori === 'produktivitas' ? Number(summary.avg_realisasi || 0).toFixed(2) : Number(summary.total_realisasi || 0).toLocaleString('id-ID')) + ' ' + unit;
+            if (c4Sub) c4Sub.textContent = 'Total 1 Tahun';
 
             const thead = document.getElementById('theadPadiPalawija');
             if (thead) {
-                if (currentKategori === 'puso') {
-                    thead.innerHTML = `
-                        <tr>
-                            <th class="text-center" style="width: 4%">No</th>
-                            <th>Kecamatan</th>
-                            <th class="text-end">Baku Lahan (Ha)</th>
-                            <th class="text-end">Puso MH (Ha)</th>
-                            <th class="text-end">Puso MK (Ha)</th>
-                            <th class="text-end">Total Puso (Ha)</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center" style="width: 8%">Rincian</th>
-                        </tr>
-                    `;
-                } else {
-                    thead.innerHTML = `
-                        <tr>
-                            <th class="text-center" style="width: 4%">No</th>
-                            <th>Kecamatan</th>
-                            <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
-                            <th class="text-end">${katConfig.target_sub1_label}</th>
-                            <th class="text-end">${katConfig.target_sub2_label}</th>
-                            <th class="text-end">Target Total</th>
-                            <th class="text-end">${katConfig.realisasi_sub1_label}</th>
-                            <th class="text-end">${katConfig.realisasi_sub2_label}</th>
-                            <th class="text-end">Total Realisasi</th>
-                            <th class="text-center">Capaian</th>
-                            <th class="text-center" style="width: 8%">Rincian</th>
-                        </tr>
-                    `;
-                }
+                thead.innerHTML = `
+                    <tr>
+                        <th class="text-center" style="width: 4%">No</th>
+                        <th>Kecamatan</th>
+                        <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
+                        <th class="text-end">${currentKategori === 'tanam' ? 'Realisasi MH (Ha)' : 'Semester 1 (' + unit + ')'}</th>
+                        <th class="text-end">${currentKategori === 'tanam' ? 'Realisasi MK (Ha)' : 'Semester 2 (' + unit + ')'}</th>
+                        <th class="text-end text-success fw-bold">Total Realisasi (${unit})</th>
+                        <th class="text-center" style="width: 8%">Rincian</th>
+                    </tr>
+                `;
             }
 
             const tbody = document.getElementById('tbodyPadiPalawija');
             if (tbody) {
                 tbody.innerHTML = '';
                 const categories = [];
-                const targetData = [];
                 const realisasiData = [];
 
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);
-                    targetData.push(Number(row.target_total || 0));
                     realisasiData.push(Number(row.total_realisasi || 0));
-
-                    const p = Number(row.persentase_capaian || 0);
-                    let badgeClass = 'badge-capaian-low';
-                    if (p >= 100) badgeClass = 'badge-capaian-high';
-                    else if (p >= 50) badgeClass = 'badge-capaian-medium';
 
                     const tr = document.createElement('tr');
                     const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
 
-                    if (currentKategori === 'puso') {
-                        const totPuso = Number(row.total_realisasi || 0);
-                        const statusBadge = totPuso > 0 
-                            ? `<span class="badge bg-danger">Terdampak Puso</span>`
-                            : `<span class="badge bg-success">Aman (Nihil)</span>`;
+                    const isDec = currentKategori === 'produktivitas';
+                    const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
 
-                        tr.innerHTML = `
-                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                            <td><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end ${totPuso > 0 ? 'text-danger fw-bold' : 'text-success'}">${totPuso.toLocaleString('id-ID')}</td>
-                            <td class="text-center">${statusBadge}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
-                    } else {
-                        const isDec = currentKategori === 'produktivitas';
-                        const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
-
-                        tr.innerHTML = `
-                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                            <td><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                            <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                            <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                            <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                            <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                            <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
-                    }
+                    tr.innerHTML = `
+                        <td class="text-center">${row.no_urut || idx + 1}</td>
+                        <td><strong>${row.kecamatan}</strong></td>
+                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                        <td class="text-center">
+                            <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
+                                <i class="bx bx-calendar"></i>
+                            </button>
+                        </td>
+                    `;
                     tbody.appendChild(tr);
                 });
 
@@ -2174,16 +2077,9 @@
                         }
                     });
 
-                    if (currentKategori === 'puso') {
-                        chartPadi.updateSeries([
-                            { name: `Luas Puso (${unit})`, data: realisasiData }
-                        ]);
-                    } else {
-                        chartPadi.updateSeries([
-                            { name: `Target (${unit})`, data: targetData },
-                            { name: `Realisasi (${unit})`, data: realisasiData }
-                        ]);
-                    }
+                    chartPadi.updateSeries([
+                        { name: `Total Realisasi (${unit})`, data: realisasiData }
+                    ]);
                 }
             }
         }
@@ -2285,8 +2181,7 @@
 
             const options = {
                 series: [
-                    { name: 'Target (Ha)', data: targetData },
-                    { name: 'Realisasi (Ha)', data: realisasiData }
+                    { name: 'Total Realisasi (Ha)', data: realisasiData }
                 ],
                 chart: {
                     type: 'bar',
@@ -2294,7 +2189,7 @@
                     fontFamily: 'Poppins, sans-serif',
                     toolbar: { show: true }
                 },
-                colors: ['#f59e0b', '#16a34a'],
+                colors: ['#16a34a'],
                 plotOptions: {
                     bar: {
                         horizontal: false,
@@ -2484,12 +2379,12 @@
 
             const chartTitle = document.getElementById('chartHortiTitle');
             if (chartTitle) {
-                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (${unit})`;
+                chartTitle.innerHTML = `<i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Realisasi ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (${unit})`;
             }
 
             const tableTitle = document.getElementById('tableHortiTitle');
             if (tableTitle) {
-                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
+                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian Bulanan ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
             }
 
             const c1Title = document.getElementById('kpiHortiCard1Title');
@@ -2498,101 +2393,91 @@
             const c2Val = document.getElementById('kpiHortiTarget');
             const c3Title = document.getElementById('kpiHortiCard3Title');
             const c3Val = document.getElementById('kpiHortiRealisasi');
+            const c4Title = document.getElementById('kpiHortiCard4Title');
             const c4Val = document.getElementById('kpiHortiPersen');
 
-            if (currentHortiKategori === 'produktivitas') {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+            if (c1Title) c1Title.textContent = 'Luas Baku Lahan';
+            if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
-                if (c2Title) c2Title.textContent = 'Target Rata-rata';
-                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+            if (c2Title) c2Title.textContent = 'Realisasi Semester 1';
+            if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' ' + unit;
 
-                if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
-                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+            if (c3Title) c3Title.textContent = 'Realisasi Semester 2';
+            if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' ' + unit;
 
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
-            } else if (currentHortiKategori === 'puso') {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
+            if (c4Title) c4Title.textContent = 'Total Realisasi';
+            if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
 
-                if (c2Title) c2Title.textContent = 'Puso Semester 1';
-                if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
-
-                if (c3Title) c3Title.textContent = 'Puso Semester 2';
-                if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
-
-                if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
-            } else {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
-                if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
-
-                if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
-                if (c2Val) c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
-
-                if (c3Title) c3Title.textContent = `Realisasi ${katConfig.label}`;
-                if (c3Val) c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
-
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+            const thead = document.getElementById('theadHortikulturaUtama');
+            if (thead) {
+                thead.innerHTML = `
+                    <tr>
+                        <th class="text-center" style="width: 4%">No</th>
+                        <th>Kecamatan</th>
+                        <th class="text-end">Jan</th>
+                        <th class="text-end">Feb</th>
+                        <th class="text-end">Mar</th>
+                        <th class="text-end">Apr</th>
+                        <th class="text-end">Mei</th>
+                        <th class="text-end">Jun</th>
+                        <th class="text-end">Jul</th>
+                        <th class="text-end">Ags</th>
+                        <th class="text-end">Sep</th>
+                        <th class="text-end">Okt</th>
+                        <th class="text-end">Nop</th>
+                        <th class="text-end">Des</th>
+                        <th class="text-end text-success fw-bold">Total Tahunan (${unit})</th>
+                    </tr>
+                `;
             }
 
             const tbody = document.getElementById('tbodyHortikulturaUtama');
             if (tbody) {
                 tbody.innerHTML = '';
                 const categories = [];
-                const targetData = [];
                 const realisasiData = [];
 
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);
-                    targetData.push(Number(row.target_total || 0));
                     realisasiData.push(Number(row.total_realisasi || 0));
 
-                    const p = Number(row.persentase_capaian || 0);
-                    let badgeClass = 'badge-capaian-low';
-                    if (p >= 100) badgeClass = 'badge-capaian-high';
-                    else if (p >= 50) badgeClass = 'badge-capaian-medium';
-
                     const tr = document.createElement('tr');
-                    const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
-
-                    const isDec = currentHortiKategori === 'produktivitas';
-                    const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
+                    const formatVal = (v) => Number(v || 0).toLocaleString('id-ID', { maximumFractionDigits: 2 });
 
                     tr.innerHTML = `
                         <td class="text-center">${row.no_urut || idx + 1}</td>
                         <td><strong>${row.kecamatan}</strong></td>
-                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_jan)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_feb)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_mar)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_apr)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_mei)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_jun)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_jul)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_ags)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_sep)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_okt)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_nop)}</td>
+                        <td class="text-end">${formatVal(row.realisasi_des)}</td>
                         <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}'>
-                                <i class="bx bx-calendar"></i>
-                            </button>
-                        </td>
                     `;
                     tbody.appendChild(tr);
-                });
-
-                document.querySelectorAll('.btn-horti-pub-detail').forEach(b => {
-                    b.addEventListener('click', function () {
-                        const r = JSON.parse(this.getAttribute('data-row'));
-                        openHortiPubDetailModal(r, katConfig);
-                    });
                 });
 
                 if (chartHorti) {
                     chartHorti.updateOptions({
                         xaxis: { categories: categories },
-                        yaxis: { title: { text: `${katConfig.label} (${unit})` } }
+                        yaxis: { title: { text: `${katConfig.label} (${unit})` } },
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' ' + unit;
+                                }
+                            }
+                        }
                     });
                     chartHorti.updateSeries([
-                        { name: `Target (${unit})`, data: targetData },
-                        { name: `Realisasi (${unit})`, data: realisasiData }
+                        { name: `Total Realisasi (${unit})`, data: realisasiData }
                     ]);
                 }
             }
@@ -2656,13 +2541,11 @@
             const katData = hortikulturaGrouped[currentHortiKategori] || {};
             const rows = katData[currentHortiKomoditas] || [];
             const categories = rows.map(r => r.kecamatan);
-            const targetData = rows.map(r => Number(r.target_total || 0));
             const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
 
             const options = {
                 series: [
-                    { name: 'Target (Ha)', data: targetData },
-                    { name: 'Realisasi (Ha)', data: realisasiData }
+                    { name: 'Total Realisasi (Ha)', data: realisasiData }
                 ],
                 chart: {
                     type: 'bar',
@@ -2670,7 +2553,7 @@
                     fontFamily: 'Poppins, sans-serif',
                     toolbar: { show: true }
                 },
-                colors: ['#f59e0b', '#10b981'],
+                colors: ['#10b981'],
                 plotOptions: {
                     bar: {
                         horizontal: false,

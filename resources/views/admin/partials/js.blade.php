@@ -57,25 +57,81 @@
             $('.dropify').dropify();
         });
 
-        function confirmDelete(event) {
-            event.preventDefault(); // Mencegah form mengirimkan data sebelum konfirmasi
-
-            // Menampilkan SweetAlert konfirmasi
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data yang dihapus tidak dapat dipulihkan!",
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonColor: "#3085d6",
-                confirmButtonColor: "#d33",
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Jika konfirmasi diterima, kirimkan form untuk menghapus
-                    event.target.closest('form').submit();
+        function confirmDelete(arg1, arg2) {
+            // Kasus 1: Dipanggil dari onsubmit / event handler form (misal: confirmDelete(event))
+            if (arg1 && typeof arg1.preventDefault === 'function') {
+                arg1.preventDefault();
+                const form = arg1.target ? arg1.target.closest('form') : null;
+                if (typeof Swal !== 'undefined') {
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Data yang dihapus tidak dapat dipulihkan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonColor: "#d33",
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal',
+                    }).then((result) => {
+                        if (result.isConfirmed && form) {
+                            form.submit();
+                        }
+                    });
+                } else if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+                    if (form) form.submit();
                 }
-            });
+                return;
+            }
+
+            // Kasus 2: Dipanggil dengan parameter URL dan label info (misal: confirmDelete(url, info))
+            const url = arg1;
+            const infoText = arg2 ? ' ' + arg2 : '';
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: `Data${infoText} akan dihapus dan tidak dapat dipulihkan!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let form = document.getElementById('deleteForm');
+                        if (form) {
+                            form.action = url;
+                            form.submit();
+                        } else {
+                            const dynamicForm = document.createElement('form');
+                            dynamicForm.method = 'POST';
+                            dynamicForm.action = url;
+                            dynamicForm.style.display = 'none';
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                            if (csrfToken) {
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = csrfToken;
+                                dynamicForm.appendChild(csrfInput);
+                            }
+                            const methodInput = document.createElement('input');
+                            methodInput.type = 'hidden';
+                            methodInput.name = '_method';
+                            methodInput.value = 'DELETE';
+                            dynamicForm.appendChild(methodInput);
+                            document.body.appendChild(dynamicForm);
+                            dynamicForm.submit();
+                        }
+                    }
+                });
+            } else if (confirm(`Yakin ingin menghapus data${infoText}?`)) {
+                let form = document.getElementById('deleteForm');
+                if (form) {
+                    form.action = url;
+                    form.submit();
+                }
+            }
         }
         document.addEventListener('DOMContentLoaded', function () {
             tinymce.init({

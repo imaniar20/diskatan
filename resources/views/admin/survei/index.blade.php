@@ -203,10 +203,10 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-primary" onclick="showDetailModal({{ $row->id }})" title="Lihat Detail Penilaian">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-primary btn-detail-survei" data-id="{{ $row->id }}" title="Lihat Detail Penilaian">
                                     <i class="bx bx-show"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger" onclick="confirmDelete({{ $row->id }})" title="Hapus Data">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-delete-survei" data-id="{{ $row->id }}" title="Hapus Data">
                                     <i class="bx bx-trash"></i>
                                 </button>
                                 <form id="formDelete_{{ $row->id }}" action="{{ route('admin.survei.destroy', $row->id) }}" method="POST" class="d-none">
@@ -260,128 +260,131 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@push('after-script')
 <script>
-    function showDetailModal(id) {
-        const modal = new bootstrap.Modal(document.getElementById('modalDetailSurvei'));
-        const body = document.getElementById('modalDetailBody');
-        body.innerHTML = `
-            <div class="text-center py-5">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
+    $(document).ready(function() {
+        $(document).on('click', '.btn-detail-survei', function() {
+            const id = $(this).data('id');
+            const modal = new bootstrap.Modal(document.getElementById('modalDetailSurvei'));
+            const body = document.getElementById('modalDetailBody');
+            body.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-            </div>
-        `;
-        modal.show();
+            `;
+            modal.show();
 
-        fetch(`/admin-survei-kepuasan/detail/${id}`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.status === 'success') {
-                    const data = res.data;
-                    const resp = data.responden || {};
-                    const layanan = data.jenis_layanan || {};
-                    const details = data.detail_rating || [];
+            fetch(`/admin-survei-kepuasan/detail/${id}`)
+                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 'success') {
+                        const data = res.data;
+                        const resp = data.responden || {};
+                        const layanan = data.jenis_layanan || {};
+                        const details = data.detail_rating || [];
 
-                    let detailRows = '';
-                    let totalRating = 0;
+                        let detailRows = '';
+                        let totalRating = 0;
 
-                    details.forEach((item, idx) => {
-                        const pert = item.pertanyaan || {};
-                        totalRating += item.rating;
-                        let stars = '';
-                        for (let s = 1; s <= 5; s++) {
-                            stars += `<span style="color: ${s <= item.rating ? '#f59e0b' : '#cbd5e1'}; font-size: 1.2rem;">★</span>`;
-                        }
+                        details.forEach((item, idx) => {
+                            const pert = item.pertanyaan || {};
+                            totalRating += item.rating;
+                            let stars = '';
+                            for (let s = 1; s <= 5; s++) {
+                                stars += `<span style="color: ${s <= item.rating ? '#f59e0b' : '#cbd5e1'}; font-size: 1.2rem;">★</span>`;
+                            }
 
-                        detailRows += `
-                            <tr>
-                                <td style="width: 35px;" class="fw-bold">${idx + 1}</td>
-                                <td>${pert.teks_pertanyaan || '-'}</td>
-                                <td class="text-end" style="white-space: nowrap;">
-                                    ${stars}
-                                    <span class="badge bg-label-warning ms-2 font-bold">${item.rating} / 5</span>
-                                </td>
-                            </tr>
+                            detailRows += `
+                                <tr>
+                                    <td style="width: 35px;" class="fw-bold">${idx + 1}</td>
+                                    <td>${pert.teks_pertanyaan || '-'}</td>
+                                    <td class="text-end" style="white-space: nowrap;">
+                                        ${stars}
+                                        <span class="badge bg-label-warning ms-2 font-bold">${item.rating} / 5</span>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+
+                        const avg = details.length > 0 ? (totalRating / details.length).toFixed(2) : '0.00';
+
+                        body.innerHTML = `
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <div class="text-muted small">Nama Responden</div>
+                                        <div class="fw-bold fs-5 text-dark">${resp.nama_lengkap || '-'}</div>
+                                        <div class="text-muted small mt-1">
+                                            <i class="bx bx-user me-1"></i>${resp.jenis_kelamin || '-'} (${resp.usia || '-'} Th)
+                                        </div>
+                                        <div class="text-muted small">
+                                            <i class="bx bx-phone me-1"></i>${resp.no_telepon || '-'} | Pekerjaan: ${resp.pekerjaan || '-'}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded">
+                                        <div class="text-muted small">Layanan yang Dinilai</div>
+                                        <div class="fw-bold fs-5 text-primary">${layanan.nama_layanan || 'Lainnya'}</div>
+                                        <div class="text-muted small mt-1">
+                                            <i class="bx bx-calendar me-1"></i>Tanggal Survei: ${data.tanggal_survei || '-'}
+                                        </div>
+                                        <div class="text-muted small">
+                                            <i class="bx bx-star me-1 text-warning"></i>Rata-Rata Penilaian: <strong class="text-dark">${avg} / 5.0</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h6 class="fw-bold text-dark mb-3">Rincian Nilai per Indikator Pertanyaan:</h6>
+                            <div class="table-responsive mb-4">
+                                <table class="table table-bordered table-sm">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Indikator Pertanyaan</th>
+                                            <th class="text-end">Nilai Bintang</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${detailRows}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h6 class="fw-bold text-dark mb-2">Kritik, Saran & Masukan:</h6>
+                            <div class="p-3 bg-light rounded border">
+                                <p class="mb-0 text-dark fst-italic">"${data.komentar ? data.komentar : 'Tidak ada catatan saran tambahan yang dituliskan.'}"</p>
+                            </div>
                         `;
-                    });
-
-                    const avg = details.length > 0 ? (totalRating / details.length).toFixed(2) : '0.00';
-
-                    body.innerHTML = `
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <div class="p-3 bg-light rounded">
-                                    <div class="text-muted small">Nama Responden</div>
-                                    <div class="fw-bold fs-5 text-dark">${resp.nama_lengkap || '-'}</div>
-                                    <div class="text-muted small mt-1">
-                                        <i class="bx bx-user me-1"></i>${resp.jenis_kelamin || '-'} (${resp.usia || '-'} Th)
-                                    </div>
-                                    <div class="text-muted small">
-                                        <i class="bx bx-phone me-1"></i>${resp.no_telepon || '-'} | Pekerjaan: ${resp.pekerjaan || '-'}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 bg-light rounded">
-                                    <div class="text-muted small">Layanan yang Dinilai</div>
-                                    <div class="fw-bold fs-5 text-primary">${layanan.nama_layanan || 'Lainnya'}</div>
-                                    <div class="text-muted small mt-1">
-                                        <i class="bx bx-calendar me-1"></i>Tanggal Survei: ${data.tanggal_survei || '-'}
-                                    </div>
-                                    <div class="text-muted small">
-                                        <i class="bx bx-star me-1 text-warning"></i>Rata-Rata Penilaian: <strong class="text-dark">${avg} / 5.0</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h6 class="fw-bold text-dark mb-3">Rincian Nilai per Indikator Pertanyaan:</h6>
-                        <div class="table-responsive mb-4">
-                            <table class="table table-bordered table-sm">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Indikator Pertanyaan</th>
-                                        <th class="text-end">Nilai Bintang</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${detailRows}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h6 class="fw-bold text-dark mb-2">Kritik, Saran & Masukan:</h6>
-                        <div class="p-3 bg-light rounded border">
-                            <p class="mb-0 text-dark fst-italic">"${data.komentar ? data.komentar : 'Tidak ada catatan saran tambahan yang dituliskan.'}"</p>
-                        </div>
-                    `;
-                } else {
-                    body.innerHTML = `<div class="alert alert-danger mb-0">Gagal mengambil data detail survei.</div>`;
-                }
-            })
-            .catch(() => {
-                body.innerHTML = `<div class="alert alert-danger mb-0">Terjadi kesalahan koneksi server.</div>`;
-            });
-    }
-
-    function confirmDelete(id) {
-        Swal.fire({
-            title: 'Hapus Data Respon Ini?',
-            text: 'Data penilaian dan identitas responden ini akan dihapus permanen dari sistem.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('formDelete_' + id).submit();
-            }
+                    } else {
+                        body.innerHTML = `<div class="alert alert-danger mb-0">Gagal mengambil data detail survei.</div>`;
+                    }
+                })
+                .catch(() => {
+                    body.innerHTML = `<div class="alert alert-danger mb-0">Terjadi kesalahan koneksi server.</div>`;
+                });
         });
-    }
+
+        $(document).on('click', '.btn-delete-survei', function() {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: 'Hapus Data Respon Ini?',
+                text: 'Data penilaian dan identitas responden ini akan dihapus permanen dari sistem.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formDelete_' + id).submit();
+                }
+            });
+        });
+    });
 </script>
 @endpush

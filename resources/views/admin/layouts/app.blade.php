@@ -37,4 +37,5 @@
     @stack('before-script')
     @include('admin.partials.js')
     @stack('after-script')
+    @stack('scripts')
 </html>

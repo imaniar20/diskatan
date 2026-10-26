@@ -81,10 +81,18 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning" onclick='editPertanyaan(@json($item))' title="Edit Pertanyaan">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning btn-edit-pertanyaan" 
+                                    data-id="{{ $item->id }}"
+                                    data-teks="{{ $item->teks_pertanyaan }}"
+                                    data-kunci="{{ $item->kunci_pertanyaan }}"
+                                    data-urutan="{{ $item->urutan }}"
+                                    data-status="{{ $item->status }}"
+                                    title="Edit Pertanyaan">
                                     <i class="bx bx-edit-alt"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger" onclick="confirmDeletePertanyaan({{ $item->id }})" title="Hapus / Nonaktifkan">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-delete-pertanyaan" 
+                                    data-id="{{ $item->id }}"
+                                    title="Hapus / Nonaktifkan">
                                     <i class="bx bx-trash"></i>
                                 </button>
                                 <form id="formDeleteP_{{ $item->id }}" action="{{ route('admin.survei.pertanyaan.destroy', $item->id) }}" method="POST" class="d-none">
@@ -188,35 +196,44 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@push('after-script')
 <script>
-    function editPertanyaan(item) {
-        document.getElementById('formEditPertanyaan').action = `/admin-survei-kepuasan/pertanyaan/${item.id}`;
-        document.getElementById('editTeksPertanyaan').value = item.teks_pertanyaan;
-        document.getElementById('editKunciPertanyaan').value = item.kunci_pertanyaan;
-        document.getElementById('editUrutan').value = item.urutan;
-        document.getElementById('editStatus').value = item.status;
+    $(document).ready(function() {
+        $(document).on('click', '.btn-edit-pertanyaan', function() {
+            const id = $(this).data('id');
+            const teks = $(this).data('teks');
+            const kunci = $(this).data('kunci');
+            const urutan = $(this).data('urutan');
+            const status = $(this).data('status');
 
-        const modal = new bootstrap.Modal(document.getElementById('modalEditPertanyaan'));
-        modal.show();
-    }
+            $('#formEditPertanyaan').attr('action', `/admin-survei-kepuasan/pertanyaan/${id}`);
+            $('#editTeksPertanyaan').val(teks);
+            $('#editKunciPertanyaan').val(kunci);
+            $('#editUrutan').val(urutan);
+            $('#editStatus').val(status);
 
-    function confirmDeletePertanyaan(id) {
-        Swal.fire({
-            title: 'Hapus / Nonaktifkan?',
-            text: 'Jika pertanyaan sudah memiliki data responden, sistem otomatis mengubah statusnya menjadi nonaktif agar tidak merusak rekapitulasi data.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Proses!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('formDeleteP_' + id).submit();
-            }
+            const modal = new bootstrap.Modal(document.getElementById('modalEditPertanyaan'));
+            modal.show();
         });
-    }
+
+        $(document).on('click', '.btn-delete-pertanyaan', function() {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: 'Hapus / Nonaktifkan?',
+                text: 'Jika pertanyaan sudah memiliki data responden, sistem otomatis mengubah statusnya menjadi nonaktif agar tidak merusak rekapitulasi data.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Proses!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formDeleteP_' + id).submit();
+                }
+            });
+        });
+    });
 </script>
 @endpush
+

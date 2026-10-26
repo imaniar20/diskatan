@@ -77,10 +77,17 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning" onclick='editLayanan(@json($item))' title="Edit Layanan">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-warning btn-edit-layanan" 
+                                    data-id="{{ $item->id }}"
+                                    data-nama="{{ $item->nama_layanan }}"
+                                    data-deskripsi="{{ $item->deskripsi }}"
+                                    data-status="{{ $item->status }}"
+                                    title="Edit Layanan">
                                     <i class="bx bx-edit-alt"></i>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger" onclick="confirmDeleteLayanan({{ $item->id }})" title="Hapus / Nonaktifkan">
+                                <button type="button" class="btn btn-sm btn-icon btn-outline-danger btn-delete-layanan" 
+                                    data-id="{{ $item->id }}"
+                                    title="Hapus / Nonaktifkan">
                                     <i class="bx bx-trash"></i>
                                 </button>
                                 <form id="formDeleteL_{{ $item->id }}" action="{{ route('admin.survei.layanan.destroy', $item->id) }}" method="POST" class="d-none">
@@ -172,34 +179,41 @@
 </div>
 @endsection
 
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@push('after-script')
 <script>
-    function editLayanan(item) {
-        document.getElementById('formEditLayanan').action = `/admin-survei-kepuasan/layanan/${item.id}`;
-        document.getElementById('editNamaLayanan').value = item.nama_layanan;
-        document.getElementById('editDeskripsiLayanan').value = item.deskripsi || '';
-        document.getElementById('editStatusLayanan').value = item.status;
+    $(document).ready(function() {
+        $(document).on('click', '.btn-edit-layanan', function() {
+            const id = $(this).data('id');
+            const nama = $(this).data('nama');
+            const deskripsi = $(this).data('deskripsi');
+            const status = $(this).data('status');
 
-        const modal = new bootstrap.Modal(document.getElementById('modalEditLayanan'));
-        modal.show();
-    }
+            $('#formEditLayanan').attr('action', `/admin-survei-kepuasan/layanan/${id}`);
+            $('#editNamaLayanan').val(nama);
+            $('#editDeskripsiLayanan').val(deskripsi || '');
+            $('#editStatusLayanan').val(status);
 
-    function confirmDeleteLayanan(id) {
-        Swal.fire({
-            title: 'Hapus / Nonaktifkan?',
-            text: 'Jika layanan telah memiliki riwayat pengisian survei, sistem otomatis mengubah statusnya menjadi nonaktif.',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Proses!',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('formDeleteL_' + id).submit();
-            }
+            const modal = new bootstrap.Modal(document.getElementById('modalEditLayanan'));
+            modal.show();
         });
-    }
+
+        $(document).on('click', '.btn-delete-layanan', function() {
+            const id = $(this).data('id');
+            Swal.fire({
+                title: 'Hapus / Nonaktifkan?',
+                text: 'Jika layanan telah memiliki riwayat pengisian survei, sistem otomatis mengubah statusnya menjadi nonaktif.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Proses!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('formDeleteL_' + id).submit();
+                }
+            });
+        });
+    });
 </script>
 @endpush
