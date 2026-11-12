@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Komoditas;
+use App\Models\PadiPalawija;
+use App\Models\TanamanPangan;
+use App\Models\HortikulturaUtama;
+use App\Models\Sayuran;
+use App\Models\PerkebunanUtama;
+use App\Models\Perkebunan;
 use Illuminate\Http\Request;
 
 class AdminKomoditasController extends Controller
@@ -42,22 +48,35 @@ class AdminKomoditasController extends Controller
             'perkebunan' => Komoditas::where('sektor', 'perkebunan')->count(),
         ];
 
-        $data = array(
-            'head' => "Komoditas",
-            'title' => "Komoditas",
-            'menu' => "Komoditas",
-            'komoditas' => $komoditas,
-            'selectedSektor' => $selectedSektor,
-            'search' => $search,
-            'counts' => $counts,
-        );
+        // Kumpulkan semua tahun yang tercatat pada seluruh tabel data pertanian
+        $availableYears = collect()
+            ->merge(PadiPalawija::select('tahun')->distinct()->pluck('tahun'))
+            ->merge(TanamanPangan::select('tahun')->distinct()->pluck('tahun'))
+            ->merge(HortikulturaUtama::select('tahun')->distinct()->pluck('tahun'))
+            ->merge(Sayuran::select('tahun')->distinct()->pluck('tahun'))
+            ->merge(PerkebunanUtama::select('tahun')->distinct()->pluck('tahun'))
+            ->merge(Perkebunan::select('tahun')->distinct()->pluck('tahun'))
+            ->filter()
+            ->map(fn($y) => (string) $y)
+            ->unique()
+            ->sortDesc()
+            ->values()
+            ->toArray();
 
         $head = "Komoditas";
         $title = "Komoditas";
         $menu = "Komoditas";
 
-
-        return view('admin.komoditas.index', compact('head', 'title', 'menu', 'komoditas', 'selectedSektor', 'search', 'counts'));
+        return view('admin.komoditas.index', compact(
+            'head',
+            'title',
+            'menu',
+            'komoditas',
+            'selectedSektor',
+            'search',
+            'counts',
+            'availableYears'
+        ));
     }
 
     public function store(Request $request)
@@ -99,6 +118,8 @@ class AdminKomoditasController extends Controller
         $this->checkAdmin();
 
         $komoditas = Komoditas::findOrFail($id);
+        $oldNama = $komoditas->nama;
+        $oldSektor = $komoditas->sektor;
 
         $validated = $request->validate([
             'sektor' => 'required|in:tanaman_pangan,hortikultura,perkebunan',
@@ -127,6 +148,10 @@ class AdminKomoditasController extends Controller
 
         $komoditas->update($validated);
 
+        if ($oldNama !== $komoditas->nama) {
+            Komoditas::renameAgriculturalData($oldSektor, $oldNama, $komoditas->nama);
+        }
+
         return redirect()->route('admin.komoditas.index', ['sektor' => $komoditas->sektor])
             ->with('success', "Komoditas '{$komoditas->nama}' berhasil diperbarui.");
     }
@@ -138,10 +163,82 @@ class AdminKomoditasController extends Controller
         $komoditas = Komoditas::findOrFail($id);
         $nama = $komoditas->nama;
         $sektor = $komoditas->sektor;
+
+        // Hapus seluruh data pertanian terkait komoditas ini
+        $deletedAgriculturalCount = $komoditas->deleteRelatedAgriculturalData();
         $komoditas->delete();
 
+        $infoData = $deletedAgriculturalCount > 0
+            ? " beserta {$deletedAgriculturalCount} data pertaniannya"
+            : " (beserta data pertaniannya)";
+
         return redirect()->route('admin.komoditas.index', ['sektor' => $sektor])
-            ->with('success', "Komoditas '{$nama}' berhasil dihapus.");
+            ->with('success', "Komoditas '{$nama}'{$infoData} berhasil dihapus.");
+    }
+
+    public function clearData(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'sektor' => 'required|in:all,tanaman_pangan,hortikultura,perkebunan',
+            'tahun' => 'required|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun data yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $sektor = $request->input('sektor', 'all');
+        $tahun = $request->input('tahun');
+        $hapusMaster = $request->boolean('hapus_komoditas');
+
+        $deletedRows = 0;
+
+        $applyTahun = function ($query) use ($tahun) {
+            if ($tahun !== 'ALL') {
+                $query->where('tahun', $tahun);
+            }
+            return $query;
+        };
+
+        if ($sektor === 'all' || $sektor === 'tanaman_pangan') {
+            $deletedRows += $applyTahun(PadiPalawija::query())->delete();
+            $deletedRows += $applyTahun(TanamanPangan::query())->delete();
+        }
+
+        if ($sektor === 'all' || $sektor === 'hortikultura') {
+            $deletedRows += $applyTahun(HortikulturaUtama::query())->delete();
+            $deletedRows += $applyTahun(Sayuran::query())->delete();
+        }
+
+        if ($sektor === 'all' || $sektor === 'perkebunan') {
+            $deletedRows += $applyTahun(PerkebunanUtama::query())->delete();
+            $deletedRows += $applyTahun(Perkebunan::query())->delete();
+        }
+
+        $deletedKomoditasCount = 0;
+        if ($hapusMaster && $tahun === 'ALL') {
+            $kQuery = Komoditas::query();
+            if ($sektor !== 'all') {
+                $kQuery->where('sektor', $sektor);
+            }
+            $deletedKomoditasCount = $kQuery->delete();
+        }
+
+        $sektorLabel = match ($sektor) {
+            'tanaman_pangan' => 'Tanaman Pangan',
+            'hortikultura' => 'Hortikultura',
+            'perkebunan' => 'Perkebunan',
+            default => 'Semua Sektor',
+        };
+        $tahunLabel = $tahun === 'ALL' ? 'Semua Tahun' : "Tahun {$tahun}";
+
+        $msg = "Berhasil membersihkan {$deletedRows} data pertanian pada {$sektorLabel} ({$tahunLabel}).";
+        if ($deletedKomoditasCount > 0) {
+            $msg .= " Serta menghapus {$deletedKomoditasCount} daftar Master Komoditas.";
+        }
+
+        return redirect()->route('admin.komoditas.index', ['sektor' => $sektor])
+            ->with('success', $msg);
     }
 
     public function toggleStatus($id)

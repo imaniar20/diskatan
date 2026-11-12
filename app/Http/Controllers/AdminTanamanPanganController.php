@@ -31,9 +31,10 @@ class AdminTanamanPanganController extends Controller
 
         $komoditasList = Komoditas::getListBySektor('tanaman_pangan');
 
-        $selectedKomoditas = $request->query('komoditas', 'Padi');
-        if (!in_array($selectedKomoditas, $komoditasList)) {
-            $selectedKomoditas = 'Padi';
+        $defaultKomoditas = $komoditasList[0] ?? 'Padi';
+        $selectedKomoditas = $request->query('komoditas', $defaultKomoditas);
+        if (!empty($komoditasList) && !in_array($selectedKomoditas, $komoditasList)) {
+            $selectedKomoditas = $defaultKomoditas;
         }
 
         $query = TanamanPangan::where('komoditas', $selectedKomoditas);
@@ -57,12 +58,14 @@ class AdminTanamanPanganController extends Controller
         $chartPanen = $chartItems->pluck('luas_panen')->toArray();
         $chartProduksi = $chartItems->pluck('produksi')->toArray();
 
-        // Daftar tahun
-        $availableYears = TanamanPangan::select('tahun')
-            ->distinct()
+        // Daftar tahun beserta jumlah data
+        $yearCounts = TanamanPangan::selectRaw('tahun, COUNT(*) as total')
+            ->groupBy('tahun')
             ->orderBy('tahun', 'desc')
-            ->pluck('tahun')
+            ->pluck('total', 'tahun')
             ->toArray();
+
+        $availableYears = array_keys($yearCounts);
 
         $data = [
             'head' => 'Tanaman Pangan',
@@ -71,6 +74,7 @@ class AdminTanamanPanganController extends Controller
             'komoditasList' => $komoditasList,
             'selectedKomoditas' => $selectedKomoditas,
             'availableYears' => $availableYears,
+            'yearCounts' => $yearCounts,
             'items' => $items,
             'stats' => [
                 'totalTanam'       => $totalTanam,
@@ -243,5 +247,44 @@ class AdminTanamanPanganController extends Controller
         return redirect()
             ->route('admin-tanaman-pangan.index', ['komoditas' => $komoditas])
             ->with('success', "Data {$komoditas} Tahun {$tahun} berhasil dihapus");
+    }
+
+    /**
+     * Menghapus / membersihkan data Tanaman Pangan berdasarkan pilihan tahun dan komoditas.
+     */
+    public function clear(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'tahun'     => 'required|string',
+            'komoditas' => 'nullable|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun data yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $tahun = $request->input('tahun');
+        $komoditas = $request->input('komoditas', 'ALL');
+
+        $query = TanamanPangan::query();
+
+        if ($tahun !== 'ALL') {
+            $query->where('tahun', $tahun);
+        }
+
+        if (!empty($komoditas) && $komoditas !== 'ALL') {
+            $query->where('komoditas', $komoditas);
+        }
+
+        $deleted = $query->delete();
+
+        $tahunLabel = $tahun === 'ALL' ? 'Semua Tahun' : "Tahun {$tahun}";
+        $komoditasLabel = ($komoditas && $komoditas !== 'ALL') ? "Komoditas {$komoditas}" : 'Semua Komoditas';
+
+        return redirect()
+            ->route('admin-tanaman-pangan.index', [
+                'komoditas' => ($komoditas && $komoditas !== 'ALL') ? $komoditas : ($request->input('current_komoditas') ?: 'Padi'),
+            ])
+            ->with('success', "Berhasil menghapus {$deleted} data Tanaman Pangan ({$tahunLabel}, {$komoditasLabel}).");
     }
 }

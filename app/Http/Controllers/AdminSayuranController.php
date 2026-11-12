@@ -31,9 +31,10 @@ class AdminSayuranController extends Controller
 
         $komoditasList = Komoditas::getListBySektor('hortikultura');
 
-        $selectedKomoditas = $request->query('komoditas', 'Bawang Merah');
-        if (!in_array($selectedKomoditas, $komoditasList)) {
-            $selectedKomoditas = 'Bawang Merah';
+        $defaultKomoditas = $komoditasList[0] ?? 'Bawang Merah';
+        $selectedKomoditas = $request->query('komoditas', $defaultKomoditas);
+        if (!empty($komoditasList) && !in_array($selectedKomoditas, $komoditasList)) {
+            $selectedKomoditas = $defaultKomoditas;
         }
 
         // Ambil info satuan dan kategori komoditas
@@ -63,12 +64,14 @@ class AdminSayuranController extends Controller
         $chartPanen = $chartItems->pluck('luas_panen')->toArray();
         $chartProduksi = $chartItems->pluck('produksi')->toArray();
 
-        // Daftar tahun yang ada
-        $availableYears = Sayuran::select('tahun')
-            ->distinct()
+        // Daftar tahun yang ada beserta jumlah data
+        $yearCounts = Sayuran::selectRaw('tahun, COUNT(*) as total')
+            ->groupBy('tahun')
             ->orderBy('tahun', 'desc')
-            ->pluck('tahun')
+            ->pluck('total', 'tahun')
             ->toArray();
+
+        $availableYears = array_keys($yearCounts);
 
         $data = [
             'head' => 'Sayuran & Hortikultura',
@@ -80,6 +83,7 @@ class AdminSayuranController extends Controller
             'satuanLuas' => $satuanLuas,
             'satuanProduksi' => $satuanProduksi,
             'availableYears' => $availableYears,
+            'yearCounts' => $yearCounts,
             'items' => $items,
             'stats' => [
                 'totalTanam' => $totalTanam,
@@ -261,5 +265,44 @@ class AdminSayuranController extends Controller
         return redirect()
             ->route('admin-sayuran.index', ['komoditas' => $komoditas])
             ->with('success', "Data {$komoditas} Tahun {$tahun} berhasil dihapus");
+    }
+
+    /**
+     * Menghapus / membersihkan data Sayuran & Hortikultura berdasarkan pilihan tahun dan komoditas.
+     */
+    public function clear(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'tahun'     => 'required|string',
+            'komoditas' => 'nullable|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun data yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $tahun = $request->input('tahun');
+        $komoditas = $request->input('komoditas', 'ALL');
+
+        $query = Sayuran::query();
+
+        if ($tahun !== 'ALL') {
+            $query->where('tahun', $tahun);
+        }
+
+        if (!empty($komoditas) && $komoditas !== 'ALL') {
+            $query->where('komoditas', $komoditas);
+        }
+
+        $deleted = $query->delete();
+
+        $tahunLabel = $tahun === 'ALL' ? 'Semua Tahun' : "Tahun {$tahun}";
+        $komoditasLabel = ($komoditas && $komoditas !== 'ALL') ? "Komoditas {$komoditas}" : 'Semua Komoditas';
+
+        return redirect()
+            ->route('admin-sayuran.index', [
+                'komoditas' => ($komoditas && $komoditas !== 'ALL') ? $komoditas : ($request->input('current_komoditas') ?: 'Bawang Merah'),
+            ])
+            ->with('success', "Berhasil menghapus {$deleted} data Sayuran & Hortikultura ({$tahunLabel}, {$komoditasLabel}).");
     }
 }

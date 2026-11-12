@@ -205,25 +205,31 @@ Route::group(['middleware' => 'auth'], function () {
     // Tanaman Pangan
     Route::post('/admin-padi-palawija/import', [AdminPadiPalawijaController::class, 'import'])->name('admin-padi-palawija.import');
     Route::get('/admin-padi-palawija/export', [AdminPadiPalawijaController::class, 'export'])->name('admin-padi-palawija.export');
+    Route::delete('/admin-padi-palawija/clear', [AdminPadiPalawijaController::class, 'clear'])->name('admin-padi-palawija.clear');
     Route::resource('/admin-padi-palawija', AdminPadiPalawijaController::class);
     Route::post('/admin-tanaman-pangan/import', [AdminTanamanPanganController::class, 'import'])->name('admin-tanaman-pangan.import');
     Route::get('/admin-tanaman-pangan/export', [AdminTanamanPanganController::class, 'export'])->name('admin-tanaman-pangan.export');
+    Route::delete('/admin-tanaman-pangan/clear', [AdminTanamanPanganController::class, 'clear'])->name('admin-tanaman-pangan.clear');
     Route::resource('/admin-tanaman-pangan', AdminTanamanPanganController::class);
 
     // Hortikultura
     Route::post('/admin-hortikultura-utama/import', [AdminHortikulturaUtamaController::class, 'import'])->name('admin-hortikultura-utama.import');
     Route::get('/admin-hortikultura-utama/export', [AdminHortikulturaUtamaController::class, 'export'])->name('admin-hortikultura-utama.export');
+    Route::delete('/admin-hortikultura-utama/clear', [AdminHortikulturaUtamaController::class, 'clear'])->name('admin-hortikultura-utama.clear');
     Route::resource('/admin-hortikultura-utama', AdminHortikulturaUtamaController::class);
     Route::post('/admin-sayuran/import', [AdminSayuranController::class, 'import'])->name('admin-sayuran.import');
     Route::get('/admin-sayuran/export', [AdminSayuranController::class, 'export'])->name('admin-sayuran.export');
+    Route::delete('/admin-sayuran/clear', [AdminSayuranController::class, 'clear'])->name('admin-sayuran.clear');
     Route::resource('/admin-sayuran', AdminSayuranController::class);
 
     // Perkebunan
     Route::post('/admin-perkebunan-utama/import', [AdminPerkebunanUtamaController::class, 'import'])->name('admin-perkebunan-utama.import');
     Route::get('/admin-perkebunan-utama/export', [AdminPerkebunanUtamaController::class, 'export'])->name('admin-perkebunan-utama.export');
+    Route::delete('/admin-perkebunan-utama/clear', [AdminPerkebunanUtamaController::class, 'clear'])->name('admin-perkebunan-utama.clear');
     Route::resource('/admin-perkebunan-utama', AdminPerkebunanUtamaController::class);
     Route::post('/admin-perkebunan-tahunan/import', [AdminPerkebunanController::class, 'import'])->name('admin-perkebunan-tahunan.import');
     Route::get('/admin-perkebunan-tahunan/export', [AdminPerkebunanController::class, 'export'])->name('admin-perkebunan-tahunan.export');
+    Route::delete('/admin-perkebunan-tahunan/clear', [AdminPerkebunanController::class, 'clear'])->name('admin-perkebunan-tahunan.clear');
     Route::resource('/admin-perkebunan-tahunan', AdminPerkebunanController::class);
 
     Route::resource('/admin-kategori', KategoriController::class);
@@ -234,6 +240,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/cek-username', [UserController::class, 'cekUsername'])->name('cek.username');
 
     // Master Komoditas
+    Route::delete('/admin-komoditas/clear-data', [AdminKomoditasController::class, 'clearData'])->name('admin.komoditas.clear-data');
     Route::patch('/admin-komoditas/{id}/toggle', [AdminKomoditasController::class, 'toggleStatus'])->name('admin.komoditas.toggle');
     Route::resource('/admin-komoditas', AdminKomoditasController::class)->names('admin.komoditas');
 

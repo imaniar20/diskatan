@@ -103,11 +103,13 @@ class AdminPerkebunanUtamaController extends Controller
             ],
         ];
 
-        $availableYears = PerkebunanUtama::select('tahun')
-            ->distinct()
+        $yearCounts = PerkebunanUtama::selectRaw('tahun, COUNT(*) as total')
+            ->groupBy('tahun')
             ->orderBy('tahun', 'desc')
-            ->pluck('tahun')
+            ->pluck('total', 'tahun')
             ->toArray();
+
+        $availableYears = array_keys($yearCounts);
 
         if (empty($availableYears)) {
             $availableYears = ['2026', '2025'];
@@ -118,9 +120,10 @@ class AdminPerkebunanUtamaController extends Controller
         rsort($availableYears);
 
         $selectedTahun = $request->query('tahun', $availableYears[0] ?? '2026');
-        $selectedKomoditas = $request->query('komoditas', 'Kopi');
-        if (!in_array($selectedKomoditas, $komoditasList)) {
-            $selectedKomoditas = 'Kopi';
+        $defaultKomoditas = $komoditasList[0] ?? 'Kopi';
+        $selectedKomoditas = $request->query('komoditas', $defaultKomoditas);
+        if (!empty($komoditasList) && !in_array($selectedKomoditas, $komoditasList)) {
+            $selectedKomoditas = $defaultKomoditas;
         }
 
         $selectedKategori = $request->query('kategori', 'tanam');
@@ -187,6 +190,7 @@ class AdminPerkebunanUtamaController extends Controller
             'selectedKategori' => $selectedKategori,
             'activeConfig' => $activeConfig,
             'availableYears' => $availableYears,
+            'yearCounts' => $yearCounts,
             'selectedTahun' => $selectedTahun,
             'items' => $items,
             'stats' => $stats,
@@ -274,6 +278,50 @@ class AdminPerkebunanUtamaController extends Controller
         $item->delete();
 
         return redirect()->back()->with('success', 'Data Perkebunan Utama berhasil dihapus.');
+    }
+
+    public function clear(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'tahun'     => 'required|string',
+            'komoditas' => 'nullable|string',
+            'kategori'  => 'nullable|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun data yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $tahun = $request->input('tahun');
+        $komoditas = $request->input('komoditas', 'ALL');
+        $kategori = $request->input('kategori', 'ALL');
+
+        $query = PerkebunanUtama::query();
+
+        if ($tahun !== 'ALL') {
+            $query->where('tahun', $tahun);
+        }
+
+        if (!empty($komoditas) && $komoditas !== 'ALL') {
+            $query->where('komoditas', $komoditas);
+        }
+
+        if (!empty($kategori) && $kategori !== 'ALL') {
+            $query->where('kategori', $kategori);
+        }
+
+        $deleted = $query->delete();
+
+        $tahunLabel = $tahun === 'ALL' ? 'Semua Tahun' : "Tahun {$tahun}";
+        $komoditasLabel = ($komoditas && $komoditas !== 'ALL') ? "Komoditas {$komoditas}" : 'Semua Komoditas';
+        $kategoriLabel = ($kategori && $kategori !== 'ALL') ? "Kategori {$kategori}" : 'Semua Kategori';
+
+        return redirect()
+            ->route('admin-perkebunan-utama.index', [
+                'tahun' => $tahun !== 'ALL' ? $tahun : date('Y'),
+                'komoditas' => ($komoditas && $komoditas !== 'ALL') ? $komoditas : ($request->input('current_komoditas') ?: 'Kopi'),
+            ])
+            ->with('success', "Berhasil menghapus {$deleted} data Perkebunan Utama ({$tahunLabel}, {$komoditasLabel}, {$kategoriLabel}).");
     }
 
     public function export(Request $request, PerkebunanUtamaExcelService $excelService): StreamedResponse

@@ -103,11 +103,13 @@ class AdminHortikulturaUtamaController extends Controller
             ],
         ];
 
-        $availableYears = HortikulturaUtama::select('tahun')
-            ->distinct()
+        $yearCounts = HortikulturaUtama::selectRaw('tahun, COUNT(*) as total')
+            ->groupBy('tahun')
             ->orderBy('tahun', 'desc')
-            ->pluck('tahun')
+            ->pluck('total', 'tahun')
             ->toArray();
+
+        $availableYears = array_keys($yearCounts);
 
         if (empty($availableYears)) {
             $availableYears = ['2026', '2025'];
@@ -118,9 +120,10 @@ class AdminHortikulturaUtamaController extends Controller
         rsort($availableYears);
 
         $selectedTahun = $request->query('tahun', $availableYears[0] ?? '2026');
-        $selectedKomoditas = $request->query('komoditas', 'Bawang Merah');
-        if (!in_array($selectedKomoditas, $komoditasList)) {
-            $selectedKomoditas = 'Bawang Merah';
+        $defaultKomoditas = $komoditasList[0] ?? 'Bawang Merah';
+        $selectedKomoditas = $request->query('komoditas', $defaultKomoditas);
+        if (!empty($komoditasList) && !in_array($selectedKomoditas, $komoditasList)) {
+            $selectedKomoditas = $defaultKomoditas;
         }
 
         $selectedKategori = $request->query('kategori', 'tanam');
@@ -187,6 +190,7 @@ class AdminHortikulturaUtamaController extends Controller
             'selectedKategori' => $selectedKategori,
             'activeConfig' => $activeConfig,
             'availableYears' => $availableYears,
+            'yearCounts' => $yearCounts,
             'selectedTahun' => $selectedTahun,
             'items' => $items,
             'stats' => $stats,
@@ -275,6 +279,50 @@ class AdminHortikulturaUtamaController extends Controller
         $item->delete();
 
         return redirect()->back()->with('success', 'Data Hortikultura Utama berhasil dihapus.');
+    }
+
+    public function clear(Request $request)
+    {
+        $this->checkAdmin();
+
+        $request->validate([
+            'tahun'     => 'required|string',
+            'komoditas' => 'nullable|string',
+            'kategori'  => 'nullable|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun data yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $tahun = $request->input('tahun');
+        $komoditas = $request->input('komoditas', 'ALL');
+        $kategori = $request->input('kategori', 'ALL');
+
+        $query = HortikulturaUtama::query();
+
+        if ($tahun !== 'ALL') {
+            $query->where('tahun', $tahun);
+        }
+
+        if (!empty($komoditas) && $komoditas !== 'ALL') {
+            $query->where('komoditas', $komoditas);
+        }
+
+        if (!empty($kategori) && $kategori !== 'ALL') {
+            $query->where('kategori', $kategori);
+        }
+
+        $deleted = $query->delete();
+
+        $tahunLabel = $tahun === 'ALL' ? 'Semua Tahun' : "Tahun {$tahun}";
+        $komoditasLabel = ($komoditas && $komoditas !== 'ALL') ? "Komoditas {$komoditas}" : 'Semua Komoditas';
+        $kategoriLabel = ($kategori && $kategori !== 'ALL') ? "Kategori {$kategori}" : 'Semua Kategori';
+
+        return redirect()
+            ->route('admin-hortikultura-utama.index', [
+                'tahun' => $tahun !== 'ALL' ? $tahun : date('Y'),
+                'komoditas' => ($komoditas && $komoditas !== 'ALL') ? $komoditas : ($request->input('current_komoditas') ?: 'Bawang Merah'),
+            ])
+            ->with('success', "Berhasil menghapus {$deleted} data Hortikultura Utama ({$tahunLabel}, {$komoditasLabel}, {$kategoriLabel}).");
     }
 
     public function export(Request $request, HortikulturaUtamaExcelService $excelService): StreamedResponse

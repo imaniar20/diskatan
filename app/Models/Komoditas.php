@@ -98,46 +98,91 @@ class Komoditas extends Model
     }
 
     /**
-     * Mengambil daftar nama komoditas untuk sektor tertentu
-     * dengan fallback default jika tabel masih kosong.
+     * Mengambil daftar nama komoditas untuk sektor tertentu.
      */
     public static function getListBySektor(string $sektor): array
     {
-        $list = self::active()
+        return self::active()
             ->forSektor($sektor)
             ->orderBy('urutan', 'asc')
             ->orderBy('id', 'asc')
             ->pluck('nama')
             ->toArray();
+    }
 
-        if (!empty($list)) {
-            return $list;
+    /**
+     * Menghapus seluruh data pertanian terkait komoditas ini
+     * sesuai sektor (Data Utama & Data Tahunan).
+     */
+    public function deleteRelatedAgriculturalData(?string $tahun = null): int
+    {
+        return self::deleteAgriculturalDataBySektorAndNama($this->sektor, $this->nama, $tahun);
+    }
+
+    /**
+     * Menghapus data pertanian berdasarkan sektor dan nama komoditas.
+     */
+    public static function deleteAgriculturalDataBySektorAndNama(string $sektor, string $nama, ?string $tahun = null): int
+    {
+        $namaLower = strtolower(trim($nama));
+        if (empty($namaLower)) {
+            return 0;
         }
 
-        // Fallback default jika tabel belum diisi
-        $defaults = match ($sektor) {
-            'tanaman_pangan' => [
-                'Padi', 'Jagung', 'Kedelai', 'Kacang Tanah', 'Kacang Hijau', 'Ubi Kayu', 'Ubi Jalar'
-            ],
-            'hortikultura' => [
-                'Bawang Merah', 'Bawang Daun', 'Cabe Besar', 'Cabe Rawit', 'Tomat',
-                'Wortel', 'Kubis', 'Petsai / Sawi', 'Rambutan', 'Mangga', 'Durian', 'Jahe', 'Kapulaga'
-            ],
-            'perkebunan' => [
-                'Kopi', 'Cengkeh', 'Kelapa', 'Lada', 'Tembakau',
-                'Aren', 'Kakao', 'Karet', 'Teh', 'Pala'
-            ],
-            default => []
-        };
+        $deleted = 0;
 
-        if (!empty($defaults)) {
-            try {
-                self::syncFromImport($sektor, $defaults);
-            } catch (\Throwable $e) {
-                // Jangan gagalkan eksekusi jika ada kendala koneksi
+        if ($sektor === 'tanaman_pangan') {
+            $q1 = PadiPalawija::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            $q2 = TanamanPangan::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            if ($tahun && $tahun !== 'ALL') {
+                $q1->where('tahun', $tahun);
+                $q2->where('tahun', $tahun);
             }
+            $deleted += $q1->delete();
+            $deleted += $q2->delete();
+        } elseif ($sektor === 'hortikultura') {
+            $q1 = HortikulturaUtama::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            $q2 = Sayuran::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            if ($tahun && $tahun !== 'ALL') {
+                $q1->where('tahun', $tahun);
+                $q2->where('tahun', $tahun);
+            }
+            $deleted += $q1->delete();
+            $deleted += $q2->delete();
+        } elseif ($sektor === 'perkebunan') {
+            $q1 = PerkebunanUtama::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            $q2 = Perkebunan::whereRaw('LOWER(TRIM(komoditas)) = ?', [$namaLower]);
+            if ($tahun && $tahun !== 'ALL') {
+                $q1->where('tahun', $tahun);
+                $q2->where('tahun', $tahun);
+            }
+            $deleted += $q1->delete();
+            $deleted += $q2->delete();
         }
 
-        return $defaults;
+        return $deleted;
+    }
+
+    /**
+     * Memperbarui nama komoditas pada tabel data pertanian jika nama komoditas diubah.
+     */
+    public static function renameAgriculturalData(string $sektor, string $oldNama, string $newNama): void
+    {
+        $oldLower = strtolower(trim($oldNama));
+        $newClean = trim($newNama);
+        if (empty($oldLower) || empty($newClean) || $oldLower === strtolower($newClean)) {
+            return;
+        }
+
+        if ($sektor === 'tanaman_pangan') {
+            PadiPalawija::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+            TanamanPangan::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+        } elseif ($sektor === 'hortikultura') {
+            HortikulturaUtama::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+            Sayuran::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+        } elseif ($sektor === 'perkebunan') {
+            PerkebunanUtama::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+            Perkebunan::whereRaw('LOWER(TRIM(komoditas)) = ?', [$oldLower])->update(['komoditas' => $newClean]);
+        }
     }
 }

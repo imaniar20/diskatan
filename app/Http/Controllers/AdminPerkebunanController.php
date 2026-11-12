@@ -23,10 +23,11 @@ class AdminPerkebunanController extends Controller
         $this->checkAdmin();
 
         $komoditasList = Komoditas::getListBySektor('perkebunan');
+        $defaultKomoditas = $komoditasList[0] ?? 'Kopi';
 
-        $selectedKomoditas = $request->query('komoditas', 'Kopi');
+        $selectedKomoditas = $request->query('komoditas', $defaultKomoditas);
         if (!in_array($selectedKomoditas, $komoditasList)) {
-            $selectedKomoditas = 'Kopi';
+            $selectedKomoditas = $defaultKomoditas;
         }
 
         $query = Perkebunan::where('komoditas', $selectedKomoditas);
@@ -48,11 +49,13 @@ class AdminPerkebunanController extends Controller
         $chartPanen = $chartItems->pluck('luas_panen')->toArray();
         $chartProduksi = $chartItems->pluck('produksi')->toArray();
 
-        $availableYears = Perkebunan::select('tahun')
-            ->distinct()
+        $yearCounts = Perkebunan::selectRaw('tahun, COUNT(*) as total')
+            ->groupBy('tahun')
             ->orderBy('tahun', 'desc')
-            ->pluck('tahun')
+            ->pluck('total', 'tahun')
             ->toArray();
+
+        $availableYears = array_keys($yearCounts);
 
         $data = [
             'head' => 'Data Tahunan Perkebunan',
@@ -61,6 +64,7 @@ class AdminPerkebunanController extends Controller
             'komoditasList' => $komoditasList,
             'selectedKomoditas' => $selectedKomoditas,
             'availableYears' => $availableYears,
+            'yearCounts' => $yearCounts,
             'items' => $items,
             'stats' => [
                 'totalTanam'       => $totalTanam,
@@ -138,6 +142,38 @@ class AdminPerkebunanController extends Controller
         $item->delete();
 
         return redirect()->back()->with('success', 'Data Perkebunan Tahunan berhasil dihapus.');
+    }
+
+    public function clear(Request $request)
+    {
+        $this->checkAdmin();
+
+        $validated = $request->validate([
+            'tahun'     => 'required|string',
+            'komoditas' => 'required|string',
+        ], [
+            'tahun.required' => 'Silakan pilih tahun yang akan dihapus terlebih dahulu.',
+        ]);
+
+        $query = Perkebunan::query();
+
+        if ($validated['tahun'] !== 'ALL') {
+            $query->where('tahun', $validated['tahun']);
+        }
+
+        if ($validated['komoditas'] !== 'ALL') {
+            $query->where('komoditas', $validated['komoditas']);
+        }
+
+        $deletedCount = $query->delete();
+
+        $tahunLabel = $validated['tahun'] === 'ALL' ? 'Semua Tahun' : 'Tahun ' . $validated['tahun'];
+        $komoditasLabel = $validated['komoditas'] === 'ALL' ? 'Semua Komoditas' : 'Komoditas ' . $validated['komoditas'];
+
+        return redirect()->back()->with(
+            'success',
+            "Berhasil membersihkan {$deletedCount} data Perkebunan Tahunan ({$komoditasLabel}, {$tahunLabel})."
+        );
     }
 
     public function export(Request $request, PerkebunanExcelService $excelService): StreamedResponse

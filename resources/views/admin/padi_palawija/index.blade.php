@@ -99,6 +99,10 @@
                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalTambah">
                         <i class="bx bx-plus me-1"></i> Tambah Data ({{ $activeConfig['label'] }})
                     </button>
+
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalHapusData">
+                        <i class="bx bx-trash me-1"></i> Hapus Data Pertanian
+                    </button>
                 </div>
             </div>
         </div>
@@ -680,6 +684,64 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Hapus / Bersihkan Data Pertanian -->
+    <div class="modal fade" id="modalHapusData" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form class="modal-content" action="{{ route('admin-padi-palawija.clear') }}" method="POST"
+                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pertanian sesuai pilihan ini? Data yang dihapus tidak dapat dikembalikan.');">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="current_komoditas" value="{{ $selectedKomoditas }}">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title text-white"><i class="bx bx-trash me-1"></i> Hapus / Bersihkan Data Padi & Palawija</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning py-2 small mb-3">
+                        <i class="bx bx-error me-1"></i>
+                        Pilih terlebih dahulu <strong>Tahun</strong> yang akan dihapus datanya untuk membersihkan data pertanian.
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Pilih Tahun yang Akan Dihapus <span class="text-danger">*</span></label>
+                        <select name="tahun" class="form-select" required>
+                            <option value="" disabled selected>-- Pilih Tahun yang Akan Dihapus --</option>
+                            @foreach ($availableYears as $yr)
+                                <option value="{{ $yr }}">Tahun {{ $yr }} ({{ $yearCounts[$yr] ?? 0 }} baris data)</option>
+                            @endforeach
+                            <option value="ALL">Semua Tahun (Total {{ array_sum($yearCounts ?? []) }} baris data)</option>
+                        </select>
+                        <small class="text-muted">Wajib pilih tahun terlebih dahulu sebelum menghapus.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Cakupan Komoditas</label>
+                        <select name="komoditas" class="form-select">
+                            <option value="ALL">Semua Komoditas Padi & Palawija</option>
+                            @foreach ($komoditasList as $kmd)
+                                <option value="{{ $kmd }}">Hanya Komoditas: {{ $kmd }}{{ $kmd == $selectedKomoditas ? ' (Sedang Aktif)' : '' }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label fw-bold">Cakupan Kategori Indikator</label>
+                        <select name="kategori" class="form-select">
+                            <option value="ALL">Semua Kategori (Tanam, Panen, Produksi, Produktivitas, Puso)</option>
+                            @foreach ($kategoriConfig as $katKey => $kat)
+                                <option value="{{ $katKey }}">Hanya Kategori: {{ $kat['label'] }}{{ $katKey == $selectedKategori ? ' (Sedang Aktif)' : '' }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger"><i class="bx bx-trash me-1"></i> Hapus Data</button>
                 </div>
             </form>
         </div>

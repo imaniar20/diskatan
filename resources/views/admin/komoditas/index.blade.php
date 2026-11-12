@@ -9,7 +9,10 @@
                 <p class="text-muted mb-0">Kelola daftar komoditas yang tampil pada pill filter data publik dan formulir
                     admin.</p>
             </div>
-            <div>
+            <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalHapusDataPertanian">
+                    <i class="bx bx-trash me-1"></i> Hapus Data Pertanian
+                </button>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahKomoditas">
                     <i class="bx bx-plus me-1"></i> Tambah Komoditas
                 </button>
@@ -151,11 +154,11 @@
                                             <i class="bx bx-edit-alt"></i>
                                         </button>
                                         <form action="{{ route('admin.komoditas.destroy', $item->id) }}" method="POST"
-                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus komoditas {{ $item->nama }}?');">
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus komoditas {{ $item->nama }} beserta seluruh data pertaniannya?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-icon btn-outline-danger"
-                                                title="Hapus Komoditas">
+                                                title="Hapus Komoditas & Data Pertaniannya">
                                                 <i class="bx bx-trash"></i>
                                             </button>
                                         </form>
@@ -302,6 +305,67 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary"><i class="bx bx-save me-1"></i> Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Hapus / Bersihkan Data Pertanian -->
+    <div class="modal fade" id="modalHapusDataPertanian" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('admin.komoditas.clear-data') }}" method="POST" class="modal-content"
+                onsubmit="return confirm('Apakah Anda yakin ingin menghapus data pertanian sesuai pilihan ini? Data yang dihapus tidak dapat dikembalikan.');">
+                @csrf
+                @method('DELETE')
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title text-white fw-bold">
+                        <i class="bx bx-trash me-1"></i> Bersihkan Data Pertanian
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning py-2 small mb-3">
+                        <i class="bx bx-error me-1"></i>
+                        Pilih terlebih dahulu <strong>Tahun</strong> dan <strong>Sektor</strong> data pertanian yang ingin dibersihkan.
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Pilih Tahun yang Akan Dihapus <span class="text-danger">*</span></label>
+                        <select name="tahun" class="form-select" id="clear_komoditas_tahun" required
+                            onchange="document.getElementById('wrap_hapus_master').classList.toggle('d-none', this.value !== 'ALL')">
+                            <option value="" disabled selected>-- Pilih Tahun Data --</option>
+                            @foreach ($availableYears ?? [] as $yr)
+                                <option value="{{ $yr }}">Tahun {{ $yr }}</option>
+                            @endforeach
+                            <option value="ALL">Semua Tahun (Bersihkan Seluruh Tahun)</option>
+                        </select>
+                        <small class="text-muted">Wajib pilih tahun terlebih dahulu sebelum menghapus data.</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Sektor Pertanian <span class="text-danger">*</span></label>
+                        <select name="sektor" class="form-select" required>
+                            <option value="all" {{ $selectedSektor === 'all' ? 'selected' : '' }}>Semua Sektor (Tanaman Pangan, Hortikultura, Perkebunan)</option>
+                            <option value="tanaman_pangan" {{ $selectedSektor === 'tanaman_pangan' ? 'selected' : '' }}>Tanaman Pangan (Data Utama & Tahunan)</option>
+                            <option value="hortikultura" {{ $selectedSektor === 'hortikultura' ? 'selected' : '' }}>Hortikultura (Data Utama & Sayuran Tahunan)</option>
+                            <option value="perkebunan" {{ $selectedSektor === 'perkebunan' ? 'selected' : '' }}>Perkebunan (Data Utama & Tahunan)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-2 d-none" id="wrap_hapus_master">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="hapus_komoditas" value="1" id="chk_hapus_master">
+                            <label class="form-check-label text-danger fw-semibold" for="chk_hapus_master">
+                                Hapus juga daftar Master Komoditas pada sektor terpilih
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bx bx-trash me-1"></i> Hapus Data
+                    </button>
                 </div>
             </form>
         </div>
