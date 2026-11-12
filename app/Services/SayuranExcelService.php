@@ -139,6 +139,44 @@ class SayuranExcelService
     ];
 
     /**
+     * Ambil konfigurasi sheet berdasarkan Master Komoditas aktif atau default
+     */
+    protected function getSheetsConfig(): array
+    {
+        $defaultByKomoditas = collect(self::SHEET_CONFIG)->keyBy(fn($x) => strtolower($x['komoditas']));
+        $activeModels = Komoditas::getBySektor('hortikultura');
+
+        if ($activeModels->isEmpty()) {
+            return self::SHEET_CONFIG;
+        }
+
+        $configs = [];
+        foreach ($activeModels as $model) {
+            $lower = strtolower(trim($model->nama));
+            if ($defaultByKomoditas->has($lower)) {
+                $cfg = $defaultByKomoditas->get($lower);
+                $configs[strtolower($cfg['sheet_key'])] = $cfg;
+            } else {
+                $sheetKey = substr($lower, 0, 31);
+                $kat = $model->kategori_sayuran ?: 'Sayuran';
+                $sLuas = $model->satuan_luas ?: 'Ha';
+                $sProd = $model->satuan_produksi ?: 'Kuintal';
+                $configs[$sheetKey] = [
+                    'sheet_key'       => $sheetKey,
+                    'kategori'        => $kat,
+                    'komoditas'       => $model->nama,
+                    'satuan_luas'     => $sLuas,
+                    'satuan_produksi' => $sProd,
+                    'label_tanam'     => 'TANAM',
+                    'label_panen'     => 'PANEN',
+                ];
+            }
+        }
+
+        return $configs;
+    }
+
+    /**
      * Import data dari file Excel (.xlsx / .xls)
      *
      * @param UploadedFile|string $fileOrPath
@@ -153,17 +191,30 @@ class SayuranExcelService
 
         $recordsToInsert = [];
         $processedSheets = [];
+        $allConfigs = array_merge(self::SHEET_CONFIG, $this->getSheetsConfig());
 
         foreach ($sheetNames as $rawSheetName) {
             $sheetKey = strtolower(trim($rawSheetName));
 
             // Cocokkan sheet config
             $cfg = null;
-            foreach (self::SHEET_CONFIG as $key => $conf) {
-                if ($sheetKey === $key || str_contains($sheetKey, $key)) {
+            foreach ($allConfigs as $key => $conf) {
+                if ($sheetKey === strtolower($key) || $sheetKey === strtolower($conf['komoditas']) || str_contains($sheetKey, strtolower($key))) {
                     $cfg = $conf;
                     break;
                 }
+            }
+
+            if (!$cfg && strlen($sheetKey) >= 3 && !in_array($sheetKey, ['sheet1', 'sheet2', 'rekap', 'grafik'])) {
+                $cfg = [
+                    'sheet_key'       => $sheetKey,
+                    'kategori'        => 'Sayuran',
+                    'komoditas'       => ucwords(trim($rawSheetName)),
+                    'satuan_luas'     => 'Ha',
+                    'satuan_produksi' => 'Kuintal',
+                    'label_tanam'     => 'TANAM',
+                    'label_panen'     => 'PANEN',
+                ];
             }
 
             if (!$cfg) {
@@ -260,47 +311,64 @@ class SayuranExcelService
     }
 
     /**
+     * Generate file Excel Template Kosong (XLSX multi-sheet)
+     */
+    public function exportTemplate(?string $filterTahun = null): Spreadsheet
+    {
+        return $this->export($filterTahun, true);
+    }
+
+    /**
      * Export seluruh data sayuran ke file Excel (XLSX multi-sheet)
      *
      * @param string|null $filterTahun
+     * @param bool $isTemplate
      * @return Spreadsheet
      */
-    public function export(?string $filterTahun = null): Spreadsheet
+    public function export(?string $filterTahun = null, bool $isTemplate = false): Spreadsheet
     {
         $spreadsheet = new Spreadsheet();
         $spreadsheet->removeSheetByIndex(0); // Hapus default sheet
 
         $sheetIdx = 0;
-        foreach (self::SHEET_CONFIG as $key => $cfg) {
+        $sheetsConfig = $this->getSheetsConfig();
+
+        foreach ($sheetsConfig as $key => $cfg) {
             $worksheet = $spreadsheet->createSheet($sheetIdx++);
             $worksheet->setTitle(substr($cfg['sheet_key'], 0, 31));
 
-            // Ambil data dari database
-            $query = Sayuran::where('komoditas', $cfg['komoditas'])
-                ->orderBy('tahun', 'asc');
+            // Ambil data dari database (kosongkan jika mode template)
+            if ($isTemplate) {
+                $items = collect();
+            } else {
+                $query = Sayuran::where('komoditas', $cfg['komoditas'])
+                    ->orderBy('tahun', 'asc');
 
-            if (!empty($filterTahun) && $filterTahun !== 'ALL') {
-                $query->where('tahun', $filterTahun);
+                if (!empty($filterTahun) && $filterTahun !== 'ALL') {
+                    $query->where('tahun', $filterTahun);
+                }
+
+                $items = $query->get();
             }
 
-            $items = $query->get();
-
-            // Judul Header
+            // Banner Judul dan Petunjuk
             $worksheet->mergeCells('A1:E1');
-            $worksheet->setCellValue('A1', "DATA REALISASI TANAM, PANEN, PRODUKTIVITAS DAN PRODUKSI");
+            $worksheet->setCellValue('A1', "PEMERINTAH KABUPATEN KUNINGAN - DINAS KETAHANAN PANGAN DAN PERTANIAN");
             $worksheet->getStyle('A1')->getFont()->setBold(true)->setSize(12);
-            $worksheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
             $worksheet->mergeCells('A2:E2');
-            $worksheet->setCellValue('A2', "TANAMAN " . strtoupper($cfg['komoditas']) . " ({$cfg['kategori']})");
+            $worksheet->setCellValue('A2', "DATA HISTORIS TAHUNAN HORTIKULTURA: " . strtoupper($cfg['komoditas']) . " (" . strtoupper($cfg['kategori']) . ")");
             $worksheet->getStyle('A2')->getFont()->setBold(true)->setSize(11);
-            $worksheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+            $worksheet->mergeCells('A3:E3');
+            $worksheet->setCellValue('A3', "* Petunjuk: Cukup isi angka pada kolom Tanam, Panen, dan Produksi. Kolom Produktivitas terhitung otomatis dengan rumus.");
+            $worksheet->getStyle('A3')->getFont()->setItalic(true)->setSize(9)->getColor()->setARGB('FF64748B');
 
             // Baris 4: Header Kolom
             $worksheet->setCellValue('A4', 'TAHUN');
             $worksheet->setCellValue('B4', $cfg['label_tanam'] . " ({$cfg['satuan_luas']})");
             $worksheet->setCellValue('C4', $cfg['label_panen'] . " ({$cfg['satuan_luas']})");
-            $worksheet->setCellValue('D4', 'PRODUKTIVITAS');
+            $worksheet->setCellValue('D4', 'PRODUKTIVITAS (Kw/Ha)');
             $worksheet->setCellValue('E4', "PRODUKSI ({$cfg['satuan_produksi']})");
 
             $headerRange = 'A4:E4';
@@ -312,18 +380,20 @@ class SayuranExcelService
                 ->setFillType(Fill::FILL_SOLID)
                 ->getStartColor()->setARGB('FFE8F5E9');
 
-            // Baris 6 dst: Isi data tahunan
-            $startRow = 6;
+            // Baris 5 dst: Isi data tahunan
+            $startRow = 5;
             $currentRow = $startRow;
 
-            // Jika belum ada data di database untuk komoditas ini, sediakan baris default
+            // Jika belum ada data di database atau mode template, sediakan baris default (data kosong)
             if ($items->isEmpty()) {
-                $defaultYears = range(2013, (int)date('Y'));
+                $defaultYears = (!empty($filterTahun) && $filterTahun !== 'ALL')
+                    ? [(int)$filterTahun]
+                    : range(2013, (int)date('Y'));
                 foreach ($defaultYears as $yr) {
                     $worksheet->setCellValue("A{$currentRow}", $yr);
                     $worksheet->setCellValue("B{$currentRow}", 0);
                     $worksheet->setCellValue("C{$currentRow}", 0);
-                    $worksheet->setCellValue("D{$currentRow}", 0);
+                    $worksheet->setCellValue("D{$currentRow}", "=IF(C{$currentRow}>0, ROUND(E{$currentRow}/C{$currentRow}*10, 2), 0)");
                     $worksheet->setCellValue("E{$currentRow}", 0);
                     $currentRow++;
                 }
@@ -332,25 +402,46 @@ class SayuranExcelService
                     $worksheet->setCellValue("A{$currentRow}", $item->tahun);
                     $worksheet->setCellValue("B{$currentRow}", (float)$item->luas_tanam);
                     $worksheet->setCellValue("C{$currentRow}", (float)$item->luas_panen);
-                    $worksheet->setCellValue("D{$currentRow}", (float)$item->produktivitas);
+                    $worksheet->setCellValue("D{$currentRow}", "=IF(C{$currentRow}>0, ROUND(E{$currentRow}/C{$currentRow}*10, 2), 0)");
                     $worksheet->setCellValue("E{$currentRow}", (float)$item->produksi);
                     $currentRow++;
                 }
             }
 
             $lastDataRow = $currentRow - 1;
+            $totalRow = $currentRow;
 
-            // Styling baris data
-            $worksheet->getStyle("A{$startRow}:A{$lastDataRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            $worksheet->getStyle("B{$startRow}:E{$lastDataRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
-            $worksheet->getStyle("B{$startRow}:E{$lastDataRow}")->getNumberFormat()->setFormatCode('#,##0.##');
+            // Baris Rata-rata
+            $worksheet->setCellValue("A{$totalRow}", 'RATA-RATA');
+            $worksheet->setCellValue("B{$totalRow}", "=AVERAGE(B{$startRow}:B{$lastDataRow})");
+            $worksheet->setCellValue("C{$totalRow}", "=AVERAGE(C{$startRow}:C{$lastDataRow})");
+            $worksheet->setCellValue("D{$totalRow}", "=IF(C{$totalRow}>0, ROUND(E{$totalRow}/C{$totalRow}*10, 2), 0)");
+            $worksheet->setCellValue("E{$totalRow}", "=AVERAGE(E{$startRow}:E{$lastDataRow})");
+
+            // Styling baris data & summary
+            $worksheet->getStyle("A{$startRow}:A{$totalRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $worksheet->getStyle("B{$startRow}:E{$totalRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_RIGHT);
+            $worksheet->getStyle("B{$startRow}:C{$totalRow}")->getNumberFormat()->setFormatCode('#,##0.##');
+            $worksheet->getStyle("D{$startRow}:D{$totalRow}")->getNumberFormat()->setFormatCode('#,##0.00');
+            $worksheet->getStyle("E{$startRow}:E{$totalRow}")->getNumberFormat()->setFormatCode('#,##0.##');
+
+            $worksheet->getStyle("A{$totalRow}:E{$totalRow}")->getFont()->setBold(true);
+            $worksheet->getStyle("A{$totalRow}:E{$totalRow}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFDCFCE7');
 
             // Border seluruh tabel
-            $tableRange = "A4:E{$lastDataRow}";
+            $tableRange = "A4:E{$totalRow}";
             $worksheet->getStyle($tableRange)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
-            foreach (range('A', 'E') as $col) {
-                $worksheet->getColumnDimension($col)->setAutoSize(true);
+            // Lebar kolom rapi dan proporsional
+            $colWidths = [
+                'A' => 14,
+                'B' => 22,
+                'C' => 22,
+                'D' => 24,
+                'E' => 22,
+            ];
+            foreach ($colWidths as $col => $w) {
+                $worksheet->getColumnDimension($col)->setWidth($w);
             }
         }
 

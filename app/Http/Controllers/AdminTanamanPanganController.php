@@ -101,9 +101,12 @@ class AdminTanamanPanganController extends Controller
         $this->checkAdmin();
 
         $tahun = $request->query('tahun', 'ALL');
-        $spreadsheet = $excelService->export($tahun);
+        $isTemplate = $request->boolean('template');
+        $spreadsheet = $excelService->export($tahun, $isTemplate);
 
-        $filename = "Data_Tanaman_Pangan_DKPP_Kuningan.xlsx";
+        $filename = $isTemplate
+            ? "Template_Kosong_Tanaman_Pangan_Tahunan.xlsx"
+            : "Data_Tanaman_Pangan_DKPP_Kuningan.xlsx";
 
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);

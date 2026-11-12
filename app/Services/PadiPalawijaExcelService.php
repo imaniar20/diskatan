@@ -86,27 +86,66 @@ class PadiPalawijaExcelService
     ];
 
     /**
-     * Generate file Excel (XLSX) lengkap dengan 7 sheet dan semua tabel (Tanam, Panen, Produksi, Produktivitas, Puso)
+     * Generate file Excel Template Kosong (XLSX)
      */
-    public function export(string $tahun): Spreadsheet
+    public function exportTemplate(?string $tahun = null): Spreadsheet
+    {
+        return $this->export($tahun ?: date('Y'), true);
+    }
+
+    /**
+     * Ambil daftar sheet komoditas berdasarkan Master Komoditas aktif atau default
+     */
+    protected function getSheetsConfig(): array
+    {
+        $defaultByName = collect(self::DEFAULT_SHEETS)->keyBy(fn($x) => strtolower($x['name']));
+        $activeList = Komoditas::getListBySektor('tanaman_pangan');
+
+        if (empty($activeList)) {
+            return self::DEFAULT_SHEETS;
+        }
+
+        $sheets = [];
+        foreach ($activeList as $name) {
+            $lower = strtolower(trim($name));
+            if ($defaultByName->has($lower)) {
+                $sheets[] = $defaultByName->get($lower);
+            } else {
+                $sheets[] = [
+                    'sheet' => substr($lower, 0, 31),
+                    'name'  => $name,
+                ];
+            }
+        }
+
+        return $sheets;
+    }
+
+    /**
+     * Generate file Excel (XLSX) lengkap dengan sheet komoditas dan semua tabel (Tanam, Panen, Produksi, Produktivitas, Puso)
+     */
+    public function export(string $tahun, bool $isTemplate = false): Spreadsheet
     {
         $spreadsheet = new Spreadsheet();
         $spreadsheet->removeSheetByIndex(0); // Buang sheet default
 
         $prevYear = (int)$tahun - 1;
+        $sheetsConfig = $this->getSheetsConfig();
 
-        foreach (self::DEFAULT_SHEETS as $sheetIndex => $cfg) {
+        foreach ($sheetsConfig as $sheetIndex => $cfg) {
             $sheetKey = $cfg['sheet'];
             $komoditasName = $cfg['name'];
 
             $worksheet = $spreadsheet->createSheet($sheetIndex);
             $worksheet->setTitle($sheetKey);
 
-            // Ambil semua data komoditas ini per kategori
-            $dbItems = PadiPalawija::where('tahun', $tahun)
-                ->where('komoditas', $komoditasName)
-                ->get()
-                ->groupBy('kategori');
+            // Ambil semua data komoditas ini per kategori (kosongkan jika mode template)
+            $dbItems = $isTemplate
+                ? collect()
+                : PadiPalawija::where('tahun', $tahun)
+                    ->where('komoditas', $komoditasName)
+                    ->get()
+                    ->groupBy('kategori');
 
             $tanamItems = ($dbItems->get('tanam') ?? collect())->keyBy(fn($x) => strtoupper(trim($x->kecamatan)));
             $panenItems = ($dbItems->get('panen') ?? collect())->keyBy(fn($x) => strtoupper(trim($x->kecamatan)));
@@ -114,7 +153,20 @@ class PadiPalawijaExcelService
             $produktivitasItems = ($dbItems->get('produktivitas') ?? collect())->keyBy(fn($x) => strtoupper(trim($x->kecamatan)));
             $pusoItems = ($dbItems->get('puso') ?? collect())->keyBy(fn($x) => strtoupper(trim($x->kecamatan)));
 
-            $currentRow = 1;
+            // Banner judul dan petunjuk
+            $worksheet->mergeCells("A1:W1");
+            $worksheet->setCellValue("A1", "PEMERINTAH KABUPATEN KUNINGAN - DINAS KETAHANAN PANGAN DAN PERTANIAN");
+            $worksheet->getStyle("A1")->getFont()->setBold(true)->setSize(12);
+
+            $worksheet->mergeCells("A2:W2");
+            $worksheet->setCellValue("A2", "DATA UTAMA TANAMAN PANGAN: " . strtoupper($komoditasName) . " - TAHUN {$tahun}");
+            $worksheet->getStyle("A2")->getFont()->setBold(true)->setSize(11);
+
+            $worksheet->mergeCells("A3:W3");
+            $worksheet->setCellValue("A3", "* Petunjuk: Cukup isi angka pada kolom Luas Baku, Target, dan Bulan Realisasi. Kolom Total, Jumlah, dan % sudah dilengkapi rumus otomatis.");
+            $worksheet->getStyle("A3")->getFont()->setItalic(true)->setSize(9)->getColor()->setARGB('FF64748B');
+
+            $currentRow = 5;
 
             // 1. TABEL TANAM
             $tanamStartRow = $this->writeTanamTable(
@@ -131,12 +183,14 @@ class PadiPalawijaExcelService
             $panenStartRow = $this->writeStandardTable(
                 $worksheet,
                 $currentRow,
-                "TARGET PANEN DAN REALISASI PANEN " . strtoupper($komoditasName) . " TAHUN {$tahun}",
+                "2. TARGET DAN REALISASI PANEN " . strtoupper($komoditasName) . " TAHUN {$tahun}",
                 "Target Luas Panen " . $komoditasName . " (Ha)",
                 "REALISASI PANEN " . strtoupper($komoditasName),
-                "Total " . $komoditasName,
+                "Total Panen (Ha)",
                 $panenItems,
-                'Ha'
+                'Ha',
+                'FFEFF6FF',
+                'FFDBEAFE'
             );
             $currentRow = $panenStartRow['nextRow'] + 2;
 
@@ -144,12 +198,14 @@ class PadiPalawijaExcelService
             $produksiStartRow = $this->writeStandardTable(
                 $worksheet,
                 $currentRow,
-                "TARGET PRODUKSI DAN REALISASI PRODUKSI " . strtoupper($komoditasName) . " TAHUN {$tahun}",
+                "3. TARGET DAN REALISASI PRODUKSI " . strtoupper($komoditasName) . " TAHUN {$tahun}",
                 "Target Produksi " . $komoditasName . " (Ton)",
-                "REALISASI Produksi " . strtoupper($komoditasName),
-                "Total " . $komoditasName,
+                "REALISASI PRODUKSI " . strtoupper($komoditasName),
+                "Total Produksi (Ton)",
                 $produksiItems,
-                'Ton'
+                'Ton',
+                'FFFFFBEB',
+                'FFFEF3C7'
             );
             $currentRow = $produksiStartRow['nextRow'] + 2;
 
@@ -157,26 +213,49 @@ class PadiPalawijaExcelService
             $produktivitasStartRow = $this->writeProduktivitasTable(
                 $worksheet,
                 $currentRow,
-                "TARGET PRODUKTIVITAS " . strtoupper($komoditasName) . " TAHUN {$tahun}",
+                "4. TARGET DAN REALISASI PRODUKTIVITAS " . strtoupper($komoditasName) . " TAHUN {$tahun}",
                 $produktivitasItems,
                 $panenStartRow['dataStart'],
                 $produksiStartRow['dataStart']
             );
             $currentRow = $produktivitasStartRow['nextRow'] + 2;
 
-            // 5. TABEL PUSO (Khusus Padi atau bila ada data)
-            if ($sheetKey === 'padi' || $pusoItems->count() > 0) {
-                $this->writePusoTable(
-                    $worksheet,
-                    $currentRow,
-                    "DATA PUSO {$tahun}",
-                    $pusoItems
-                );
-            }
+            // 5. TABEL PUSO (Sertakan di semua komoditas untuk template / jika ada data)
+            $this->writePusoTable(
+                $worksheet,
+                $currentRow,
+                "5. DATA PUSO (GAGAL PANEN) " . strtoupper($komoditasName) . " TAHUN {$tahun}",
+                $pusoItems
+            );
 
-            // Auto-size kolom A s/d W
-            foreach (range('A', 'W') as $col) {
-                $worksheet->getColumnDimension($col)->setAutoSize(true);
+            // Set lebar kolom yang proporsional dan mudah dibaca
+            $colWidths = [
+                'A' => 6,
+                'B' => 20,
+                'C' => 15,
+                'D' => 13,
+                'E' => 13,
+                'F' => 13,
+                'G' => 10,
+                'H' => 10,
+                'I' => 10,
+                'J' => 10,
+                'K' => 10,
+                'L' => 10,
+                'M' => 13,
+                'N' => 10,
+                'O' => 10,
+                'P' => 10,
+                'Q' => 10,
+                'R' => 10,
+                'S' => 10,
+                'T' => 13,
+                'U' => 14,
+                'V' => 11,
+                'W' => 11,
+            ];
+            foreach ($colWidths as $col => $w) {
+                $worksheet->getColumnDimension($col)->setWidth($w);
             }
         }
 
@@ -190,23 +269,23 @@ class PadiPalawijaExcelService
     protected function writeTanamTable($ws, int $startR, string $komoditas, string $tahun, int $prevYear, $items): array
     {
         $ws->mergeCells("A{$startR}:W{$startR}");
-        $ws->setCellValue("A{$startR}", "TARGET TANAM DAN REALISASI TANAM " . strtoupper($komoditas) . " TOTAL MT {$prevYear}/{$tahun} DAN MT {$tahun}");
+        $ws->setCellValue("A{$startR}", "1. TARGET TANAM DAN REALISASI TANAM " . strtoupper($komoditas) . " TOTAL MT {$prevYear}/{$tahun} DAN MT {$tahun}");
         $ws->getStyle("A{$startR}")->getFont()->setBold(true)->setSize(11);
+        $ws->getStyle("A{$startR}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFDCFCE7');
 
-        $hR = $startR + 4; // baris header
+        $hR = $startR + 2;
         $hR2 = $hR + 1;
-        $hR3 = $hR2 + 1;
 
         $ws->mergeCells("A{$hR}:A{$hR2}")->setCellValue("A{$hR}", 'No');
         $ws->mergeCells("B{$hR}:B{$hR2}")->setCellValue("B{$hR}", 'Kecamatan');
         $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'Luas Sawah (Ha)');
 
-        $ws->mergeCells("D{$hR}:F{$hR}")->setCellValue("D{$hR}", "Target Luas Tanam " . strtoupper($komoditas) . " (Ha)");
+        $ws->mergeCells("D{$hR}:F{$hR}")->setCellValue("D{$hR}", "Target Luas Tanam (Ha)");
         $ws->setCellValue("D{$hR2}", 'okmar');
         $ws->setCellValue("E{$hR2}", 'asep');
         $ws->setCellValue("F{$hR2}", 'Total');
 
-        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI TANAM " . strtoupper($komoditas) . " MT {$prevYear}/{$tahun}");
+        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI TANAM MUSIM HUJAN (MH)");
         $ws->setCellValue("G{$hR2}", 'Okt');
         $ws->setCellValue("H{$hR2}", 'Nop');
         $ws->setCellValue("I{$hR2}", 'Des');
@@ -215,18 +294,18 @@ class PadiPalawijaExcelService
         $ws->setCellValue("L{$hR2}", 'Mar');
         $ws->setCellValue("M{$hR2}", 'Jumlah MH');
 
-        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "MT {$tahun}");
-        $ws->setCellValue("N{$hR2}", 'Aprl');
+        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "REALISASI TANAM MUSIM KEMARAU (MK)");
+        $ws->setCellValue("N{$hR2}", 'Apr');
         $ws->setCellValue("O{$hR2}", 'Mei');
-        $ws->setCellValue("P{$hR2}", 'Juni');
-        $ws->setCellValue("Q{$hR2}", 'Juli');
+        $ws->setCellValue("P{$hR2}", 'Jun');
+        $ws->setCellValue("Q{$hR2}", 'Jul');
         $ws->setCellValue("R{$hR2}", 'Ags');
         $ws->setCellValue("S{$hR2}", 'Sep');
         $ws->setCellValue("T{$hR2}", 'Jumlah MK');
 
         $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", "Total " . $komoditas);
-        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% Okt-Mar');
-        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '%tahun');
+        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% MH');
+        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '% Tahun');
 
         // Style header
         $ws->getStyle("A{$hR}:W{$hR2}")->getFont()->setBold(true)->setSize(9);
@@ -275,7 +354,7 @@ class PadiPalawijaExcelService
         $dataEnd = $cur - 1;
         $totalRow = $cur;
 
-        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH');
+        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH KABUPATEN');
         $ws->setCellValue("C{$totalRow}", "=SUM(C{$dataStart}:C{$dataEnd})");
         $ws->setCellValue("D{$totalRow}", "=SUM(D{$dataStart}:D{$dataEnd})");
         $ws->setCellValue("E{$totalRow}", "=SUM(E{$dataStart}:E{$dataEnd})");
@@ -301,50 +380,51 @@ class PadiPalawijaExcelService
     /**
      * Tulis Tabel Standar: Panen atau Produksi (Semester 1 Jan-Jun & Semester 2 Jul-Des)
      */
-    protected function writeStandardTable($ws, int $startR, string $title, string $targetTitle, string $realTitle, string $totalTitle, $items, string $unit): array
+    protected function writeStandardTable($ws, int $startR, string $title, string $targetTitle, string $realTitle, string $totalTitle, $items, string $unit, string $headerColor = 'FFE8F5E9', string $footerColor = 'FFDCFCE7'): array
     {
         $ws->mergeCells("A{$startR}:W{$startR}");
         $ws->setCellValue("A{$startR}", $title);
         $ws->getStyle("A{$startR}")->getFont()->setBold(true)->setSize(11);
+        $ws->getStyle("A{$startR}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB($footerColor);
 
-        $hR = $startR + 4;
+        $hR = $startR + 2;
         $hR2 = $hR + 1;
 
         $ws->mergeCells("A{$hR}:A{$hR2}")->setCellValue("A{$hR}", 'No');
         $ws->mergeCells("B{$hR}:B{$hR2}")->setCellValue("B{$hR}", 'Kecamatan');
-        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN');
+        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN (Ha)');
 
         $ws->mergeCells("D{$hR}:F{$hR}")->setCellValue("D{$hR}", $targetTitle);
-        $ws->setCellValue("D{$hR2}", 'Januari-juni');
-        $ws->setCellValue("E{$hR2}", 'Juli-Desember');
+        $ws->setCellValue("D{$hR2}", 'Jan-Jun');
+        $ws->setCellValue("E{$hR2}", 'Jul-Des');
         $ws->setCellValue("F{$hR2}", 'Total');
 
-        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", $realTitle . " JAN-JUN");
-        $ws->setCellValue("G{$hR2}", 'JAN');
-        $ws->setCellValue("H{$hR2}", 'PEB');
-        $ws->setCellValue("I{$hR2}", 'MARET');
-        $ws->setCellValue("J{$hR2}", 'APRIL');
-        $ws->setCellValue("K{$hR2}", 'MEI');
-        $ws->setCellValue("L{$hR2}", 'JUNI');
-        $ws->setCellValue("M{$hR2}", 'Jumlah');
+        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", $realTitle . " SEMESTER 1 (JAN - JUN)");
+        $ws->setCellValue("G{$hR2}", 'Jan');
+        $ws->setCellValue("H{$hR2}", 'Feb');
+        $ws->setCellValue("I{$hR2}", 'Mar');
+        $ws->setCellValue("J{$hR2}", 'Apr');
+        $ws->setCellValue("K{$hR2}", 'Mei');
+        $ws->setCellValue("L{$hR2}", 'Jun');
+        $ws->setCellValue("M{$hR2}", 'Jumlah Sem 1');
 
-        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "JUL-DES");
-        $ws->setCellValue("N{$hR2}", 'JULI');
-        $ws->setCellValue("O{$hR2}", 'AGST');
-        $ws->setCellValue("P{$hR2}", 'SEPT');
-        $ws->setCellValue("Q{$hR2}", 'OKT');
-        $ws->setCellValue("R{$hR2}", 'NOV');
-        $ws->setCellValue("S{$hR2}", 'DES');
-        $ws->setCellValue("T{$hR2}", 'Jumlah');
+        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", $realTitle . " SEMESTER 2 (JUL - DES)");
+        $ws->setCellValue("N{$hR2}", 'Jul');
+        $ws->setCellValue("O{$hR2}", 'Ags');
+        $ws->setCellValue("P{$hR2}", 'Sep');
+        $ws->setCellValue("Q{$hR2}", 'Okt');
+        $ws->setCellValue("R{$hR2}", 'Nop');
+        $ws->setCellValue("S{$hR2}", 'Des');
+        $ws->setCellValue("T{$hR2}", 'Jumlah Sem 2');
 
         $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", $totalTitle);
-        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% Jan-jun');
-        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '%tahun');
+        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% Sem 1');
+        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '% Tahun');
 
         // Style Header
         $ws->getStyle("A{$hR}:W{$hR2}")->getFont()->setBold(true)->setSize(9);
         $ws->getStyle("A{$hR}:W{$hR2}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
-        $ws->getStyle("A{$hR}:W{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFE8F5E9');
+        $ws->getStyle("A{$hR}:W{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB($headerColor);
 
         $dataStart = $hR2 + 1;
         $cur = $dataStart;
@@ -388,7 +468,7 @@ class PadiPalawijaExcelService
         $dataEnd = $cur - 1;
         $totalRow = $cur;
 
-        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH');
+        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH KABUPATEN');
         $ws->setCellValue("C{$totalRow}", "=SUM(C{$dataStart}:C{$dataEnd})");
         $ws->setCellValue("D{$totalRow}", "=SUM(D{$dataStart}:D{$dataEnd})");
         $ws->setCellValue("E{$totalRow}", "=SUM(E{$dataStart}:E{$dataEnd})");
@@ -401,7 +481,7 @@ class PadiPalawijaExcelService
         $ws->setCellValue("W{$totalRow}", "=IF(F{$totalRow}>0, U{$totalRow}/F{$totalRow}*100, 0)");
 
         $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFont()->setBold(true);
-        $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFDCFCE7');
+        $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB($footerColor);
 
         $range = "A{$hR}:W{$totalRow}";
         $ws->getStyle($range)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -419,44 +499,45 @@ class PadiPalawijaExcelService
         $ws->mergeCells("A{$startR}:W{$startR}");
         $ws->setCellValue("A{$startR}", $title);
         $ws->getStyle("A{$startR}")->getFont()->setBold(true)->setSize(11);
+        $ws->getStyle("A{$startR}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFF3E8FF');
 
-        $hR = $startR + 4;
+        $hR = $startR + 2;
         $hR2 = $hR + 1;
 
         $ws->mergeCells("A{$hR}:A{$hR2}")->setCellValue("A{$hR}", 'No');
         $ws->mergeCells("B{$hR}:B{$hR2}")->setCellValue("B{$hR}", 'Kecamatan');
-        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN');
+        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN (Ha)');
 
-        $ws->mergeCells("D{$hR}:F{$hR}")->setCellValue("D{$hR}", "Target Produktivitas (Kw)");
-        $ws->setCellValue("D{$hR2}", 'Januari-juni');
-        $ws->setCellValue("E{$hR2}", 'Juli-Desember');
+        $ws->mergeCells("D{$hR}:F{$hR}")->setCellValue("D{$hR}", "Target Produktivitas (Kw/Ha)");
+        $ws->setCellValue("D{$hR2}", 'Jan-Jun');
+        $ws->setCellValue("E{$hR2}", 'Jul-Des');
         $ws->setCellValue("F{$hR2}", 'Total');
 
-        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI PRODUKTIVITAS JAN-JUN");
-        $ws->setCellValue("G{$hR2}", 'JAN');
-        $ws->setCellValue("H{$hR2}", 'PEB');
-        $ws->setCellValue("I{$hR2}", 'MARET');
-        $ws->setCellValue("J{$hR2}", 'APRIL');
-        $ws->setCellValue("K{$hR2}", 'MEI');
-        $ws->setCellValue("L{$hR2}", 'JUNI');
-        $ws->setCellValue("M{$hR2}", 'Rata-rata');
+        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI PRODUKTIVITAS SEMESTER 1");
+        $ws->setCellValue("G{$hR2}", 'Jan');
+        $ws->setCellValue("H{$hR2}", 'Feb');
+        $ws->setCellValue("I{$hR2}", 'Mar');
+        $ws->setCellValue("J{$hR2}", 'Apr');
+        $ws->setCellValue("K{$hR2}", 'Mei');
+        $ws->setCellValue("L{$hR2}", 'Jun');
+        $ws->setCellValue("M{$hR2}", 'Rata-rata Sem 1');
 
-        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "JUL-DES");
-        $ws->setCellValue("N{$hR2}", 'JULI');
-        $ws->setCellValue("O{$hR2}", 'AGST');
-        $ws->setCellValue("P{$hR2}", 'SEPT');
-        $ws->setCellValue("Q{$hR2}", 'OKT');
-        $ws->setCellValue("R{$hR2}", 'NOV');
-        $ws->setCellValue("S{$hR2}", 'DES');
-        $ws->setCellValue("T{$hR2}", 'Rata-rata');
+        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "REALISASI PRODUKTIVITAS SEMESTER 2");
+        $ws->setCellValue("N{$hR2}", 'Jul');
+        $ws->setCellValue("O{$hR2}", 'Ags');
+        $ws->setCellValue("P{$hR2}", 'Sep');
+        $ws->setCellValue("Q{$hR2}", 'Okt');
+        $ws->setCellValue("R{$hR2}", 'Nop');
+        $ws->setCellValue("S{$hR2}", 'Des');
+        $ws->setCellValue("T{$hR2}", 'Rata-rata Sem 2');
 
-        $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", "Rata-rata");
-        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% Jan-jun');
-        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '%tahun');
+        $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", "Rata-rata Tahunan");
+        $ws->mergeCells("V{$hR}:V{$hR2}")->setCellValue("V{$hR}", '% Sem 1');
+        $ws->mergeCells("W{$hR}:W{$hR2}")->setCellValue("W{$hR}", '% Tahun');
 
         $ws->getStyle("A{$hR}:W{$hR2}")->getFont()->setBold(true)->setSize(9);
         $ws->getStyle("A{$hR}:W{$hR2}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
-        $ws->getStyle("A{$hR}:W{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFE8F5E9');
+        $ws->getStyle("A{$hR}:W{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFFAF5FF');
 
         $dataStart = $hR2 + 1;
         $cur = $dataStart;
@@ -501,13 +582,13 @@ class PadiPalawijaExcelService
         $panenTotalRow = $panenDataStart + 32;
         $prodTotalRow  = $prodDataStart + 32;
 
-        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'RATA-RATA');
+        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'RATA-RATA KABUPATEN');
         $ws->setCellValue("C{$totalRow}", "=AVERAGE(C{$dataStart}:C{$dataEnd})");
         $ws->setCellValue("D{$totalRow}", "=IF(D{$panenTotalRow}>0, D{$prodTotalRow}/D{$panenTotalRow}*10, 0)");
         $ws->setCellValue("E{$totalRow}", "=IF(E{$panenTotalRow}>0, E{$prodTotalRow}/E{$panenTotalRow}*10, 0)");
         $ws->setCellValue("F{$totalRow}", "=IF(F{$panenTotalRow}>0, F{$prodTotalRow}/F{$panenTotalRow}*10, 0)");
 
-        foreach ($monthCols as $c) {
+        foreach (['G','H','I','J','K','L','N','O','P','Q','R','S'] as $c) {
             $ws->setCellValue("{$c}{$totalRow}", "=IF({$c}{$panenTotalRow}>0, {$c}{$prodTotalRow}/{$c}{$panenTotalRow}*10, 0)");
         }
         $ws->setCellValue("M{$totalRow}", "=IF(M{$panenTotalRow}>0, M{$prodTotalRow}/M{$panenTotalRow}*10, 0)");
@@ -517,7 +598,7 @@ class PadiPalawijaExcelService
         $ws->setCellValue("W{$totalRow}", "=IF(F{$totalRow}>0, U{$totalRow}/F{$totalRow}*100, 0)");
 
         $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFont()->setBold(true);
-        $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFDCFCE7');
+        $ws->getStyle("A{$totalRow}:W{$totalRow}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFF3E8FF');
 
         $range = "A{$hR}:W{$totalRow}";
         $ws->getStyle($range)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
@@ -534,39 +615,40 @@ class PadiPalawijaExcelService
         $ws->mergeCells("A{$startR}:U{$startR}");
         $ws->setCellValue("A{$startR}", $title);
         $ws->getStyle("A{$startR}")->getFont()->setBold(true)->setSize(11);
+        $ws->getStyle("A{$startR}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFFEE2E2');
 
-        $hR = $startR + 4;
+        $hR = $startR + 2;
         $hR2 = $hR + 1;
 
         $ws->mergeCells("A{$hR}:A{$hR2}")->setCellValue("A{$hR}", 'No');
         $ws->mergeCells("B{$hR}:B{$hR2}")->setCellValue("B{$hR}", 'Kecamatan');
-        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN');
+        $ws->mergeCells("C{$hR}:C{$hR2}")->setCellValue("C{$hR}", 'BAKU LAHAN (Ha)');
 
         $ws->mergeCells("D{$hR}:F{$hR2}")->setCellValue("D{$hR}", 'TARGET (Ha)');
 
-        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI PUSO JAN-JUN (Ha)");
-        $ws->setCellValue("G{$hR2}", 'JAN');
-        $ws->setCellValue("H{$hR2}", 'PEB');
-        $ws->setCellValue("I{$hR2}", 'MARET');
-        $ws->setCellValue("J{$hR2}", 'APRIL');
-        $ws->setCellValue("K{$hR2}", 'MEI');
-        $ws->setCellValue("L{$hR2}", 'JUNI');
-        $ws->setCellValue("M{$hR2}", 'Jumlah');
+        $ws->mergeCells("G{$hR}:M{$hR}")->setCellValue("G{$hR}", "REALISASI PUSO SEMESTER 1 (Ha)");
+        $ws->setCellValue("G{$hR2}", 'Jan');
+        $ws->setCellValue("H{$hR2}", 'Feb');
+        $ws->setCellValue("I{$hR2}", 'Mar');
+        $ws->setCellValue("J{$hR2}", 'Apr');
+        $ws->setCellValue("K{$hR2}", 'Mei');
+        $ws->setCellValue("L{$hR2}", 'Jun');
+        $ws->setCellValue("M{$hR2}", 'Jumlah Sem 1');
 
-        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "JUL-DES (Ha)");
-        $ws->setCellValue("N{$hR2}", 'JULI');
-        $ws->setCellValue("O{$hR2}", 'AGST');
-        $ws->setCellValue("P{$hR2}", 'SEPT');
-        $ws->setCellValue("Q{$hR2}", 'OKT');
-        $ws->setCellValue("R{$hR2}", 'NOV');
-        $ws->setCellValue("S{$hR2}", 'DES');
-        $ws->setCellValue("T{$hR2}", 'Jumlah');
+        $ws->mergeCells("N{$hR}:T{$hR}")->setCellValue("N{$hR}", "REALISASI PUSO SEMESTER 2 (Ha)");
+        $ws->setCellValue("N{$hR2}", 'Jul');
+        $ws->setCellValue("O{$hR2}", 'Ags');
+        $ws->setCellValue("P{$hR2}", 'Sep');
+        $ws->setCellValue("Q{$hR2}", 'Okt');
+        $ws->setCellValue("R{$hR2}", 'Nop');
+        $ws->setCellValue("S{$hR2}", 'Des');
+        $ws->setCellValue("T{$hR2}", 'Jumlah Sem 2');
 
-        $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", "Total Puso");
+        $ws->mergeCells("U{$hR}:U{$hR2}")->setCellValue("U{$hR}", "Total Puso (Ha)");
 
         $ws->getStyle("A{$hR}:U{$hR2}")->getFont()->setBold(true)->setSize(9);
         $ws->getStyle("A{$hR}:U{$hR2}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER)->setVertical(Alignment::VERTICAL_CENTER);
-        $ws->getStyle("A{$hR}:U{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFFEE2E2');
+        $ws->getStyle("A{$hR}:U{$hR2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setARGB('FFFFF1F2');
 
         $dataStart = $hR2 + 1;
         $cur = $dataStart;
@@ -608,7 +690,7 @@ class PadiPalawijaExcelService
         $dataEnd = $cur - 1;
         $totalRow = $cur;
 
-        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH');
+        $ws->mergeCells("A{$totalRow}:B{$totalRow}")->setCellValue("A{$totalRow}", 'JUMLAH KABUPATEN');
         $ws->setCellValue("C{$totalRow}", "=SUM(C{$dataStart}:C{$dataEnd})");
         $ws->setCellValue("D{$totalRow}", 0);
         $ws->setCellValue("E{$totalRow}", 0);

@@ -83,6 +83,10 @@
                 </form>
 
                 <div class="d-flex flex-wrap align-items-center gap-2">
+                    <a href="{{ route('admin-hortikultura-utama.export', ['tahun' => $selectedTahun, 'template' => 1]) }}" class="btn btn-outline-primary btn-sm" title="Unduh Template Excel Kosong (Nilai 0 & Rumus Otomatis)">
+                        <i class="bx bx-file-blank me-1"></i> Download Template
+                    </a>
+
                     <a href="{{ route('admin-hortikultura-utama.export', ['tahun' => $selectedTahun]) }}" class="btn btn-outline-success btn-sm">
                         <i class="bx bx-download me-1"></i> Export Excel ({{ $selectedTahun }})
                     </a>
@@ -479,22 +483,46 @@
             <div class="modal-content">
                 <form action="{{ route('admin-hortikultura-utama.import') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="tahun" value="{{ $selectedTahun }}">
-                    <input type="hidden" name="komoditas" value="{{ $selectedKomoditas }}">
                     <div class="modal-header bg-primary text-white">
                         <h5 class="modal-title text-white"><i class="bx bx-upload me-1"></i> Import Excel Data Utama Hortikultura</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="text-muted small">Pilih file Excel (.xlsx atau .xls) untuk memperbarui data Hortikultura Utama Tahun {{ $selectedTahun }}.</p>
+                        <div class="alert alert-info py-2 small mb-3">
+                            <i class="bx bx-info-circle me-1"></i>
+                            Template Excel mencakup seluruh komoditas Hortikultura (per sheet), 32 Kecamatan Kabupaten Kuningan, dan 4 kategori (<code>tanam</code>, <code>panen</code>, <code>produksi</code>, <code>produktivitas</code>).
+                        </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">File Excel</label>
+                            <label class="form-label fw-bold">Tahun Data Target <span class="text-danger">*</span></label>
+                            <input type="number" name="tahun" class="form-control" value="{{ $selectedTahun }}" min="2000" max="2060" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Cakupan Komoditas Sheet</label>
+                            <select name="komoditas" class="form-select">
+                                <option value="ALL" selected>Semua Komoditas (Sesuai Nama Sheet di File Excel)</option>
+                                @foreach ($komoditasList as $kmd)
+                                    <option value="{{ $kmd }}">Hanya Komoditas: {{ $kmd }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">File Excel (.xlsx / .xls) <span class="text-danger">*</span></label>
                             <input type="file" name="file_excel" class="form-control" accept=".xlsx,.xls" required>
+                        </div>
+                        <div class="card bg-lighter border p-2 small">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <span class="text-muted">
+                                    <i class="bx bx-bulb text-warning me-1"></i> <strong>Butuh Template Data Kosong?</strong> Unduh format Excel siap isi (32 Kecamatan &amp; rumus otomatis):
+                                </span>
+                                <a href="{{ route('admin-hortikultura-utama.export', ['tahun' => $selectedTahun, 'template' => 1]) }}" class="btn btn-xs btn-outline-primary">
+                                    <i class="bx bx-download me-1"></i> Download Template Kosong (.xlsx)
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Mulai Import</button>
+                        <button type="submit" class="btn btn-primary"><i class="bx bx-check me-1"></i> Mulai Import</button>
                     </div>
                 </form>
             </div>

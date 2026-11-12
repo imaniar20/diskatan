@@ -51,6 +51,10 @@
 
                 <!-- Tombol Export, Import, Tambah -->
                 <div class="d-flex flex-wrap align-items-center gap-2">
+                    <a href="{{ route('admin-sayuran.export', ['template' => 1]) }}" class="btn btn-outline-primary btn-sm" title="Unduh Template Excel Kosong (Nilai 0 & Rumus Otomatis)">
+                        <i class="bx bx-file-blank me-1"></i> Download Template
+                    </a>
+
                     <a href="{{ route('admin-sayuran.export') }}" class="btn btn-outline-success btn-sm">
                         <i class="bx bx-download me-1"></i> Export Excel
                     </a>
@@ -271,10 +275,14 @@
                     </div>
 
                     <div class="card bg-lighter border p-2 small">
-                        <span class="text-muted">
-                            <i class="bx bx-bulb text-warning me-1"></i> <strong>Tips:</strong>
-                            Anda dapat mengunduh seluruh data saat ini melalui tombol <strong>Export Excel</strong>, melakukan pengeditan di Microsoft Excel, lalu mengunggahnya kembali.
-                        </span>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <span class="text-muted">
+                                <i class="bx bx-bulb text-warning me-1"></i> <strong>Butuh Template Data Kosong?</strong> Unduh format Excel siap isi untuk seluruh komoditas Hortikultura Tahunan:
+                            </span>
+                            <a href="{{ route('admin-sayuran.export', ['template' => 1]) }}" class="btn btn-xs btn-outline-primary">
+                                <i class="bx bx-download me-1"></i> Download Template Kosong (.xlsx)
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -88,6 +88,10 @@
 
                 <!-- Tombol Export & Import Excel -->
                 <div class="d-flex flex-wrap align-items-center gap-2">
+                    <a href="{{ route('admin-padi-palawija.export', ['tahun' => $selectedTahun, 'template' => 1]) }}" class="btn btn-outline-primary btn-sm" title="Unduh Template Excel Kosong (Nilai 0 & Rumus Otomatis)">
+                        <i class="bx bx-file-blank me-1"></i> Download Template
+                    </a>
+
                     <a href="{{ route('admin-padi-palawija.export', ['tahun' => $selectedTahun]) }}" class="btn btn-outline-success btn-sm">
                         <i class="bx bx-download me-1"></i> Export Excel Lengkap ({{ $selectedTahun }})
                     </a>
@@ -476,10 +480,14 @@
                     </div>
 
                     <div class="card bg-lighter border p-2 small">
-                        <span class="text-muted">
-                            <i class="bx bx-bulb text-warning me-1"></i> <strong>File Rekomendasi:</strong>
-                            File dinas seperti <code>realisasi dan target padi palawija 2026.xls</code> dapat langsung diunggah di sini tanpa perlu diedit atau dipisah-pisah sheetnya!
-                        </span>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <span class="text-muted">
+                                <i class="bx bx-bulb text-warning me-1"></i> <strong>Belum punya format file?</strong> Unduh template data kosong siap isi (32 Kecamatan &amp; rumus otomatis):
+                            </span>
+                            <a href="{{ route('admin-padi-palawija.export', ['tahun' => $selectedTahun, 'template' => 1]) }}" class="btn btn-xs btn-outline-primary">
+                                <i class="bx bx-download me-1"></i> Download Template Kosong (.xlsx)
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

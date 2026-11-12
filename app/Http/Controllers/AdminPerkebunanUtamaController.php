@@ -328,9 +328,12 @@ class AdminPerkebunanUtamaController extends Controller
     {
         $this->checkAdmin();
         $tahun = $request->query('tahun', date('Y'));
-        $spreadsheet = $excelService->export($tahun);
+        $isTemplate = $request->boolean('template');
+        $spreadsheet = $excelService->export($tahun, $isTemplate);
 
-        $filename = "Data_Utama_Perkebunan_{$tahun}.xlsx";
+        $filename = $isTemplate
+            ? "Template_Kosong_Perkebunan_Utama_{$tahun}.xlsx"
+            : "Data_Utama_Perkebunan_{$tahun}.xlsx";
 
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);

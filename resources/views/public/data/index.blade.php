@@ -678,6 +678,108 @@
         .btn-mode-switch.active i {
             color: #ffffff !important;
         }
+
+        /* ============ TABEL MATRIKS BULANAN HORTIKULTURA ============ */
+        .table-matrix-monthly {
+            font-size: 0.84rem;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        .table-matrix-monthly th,
+        .table-matrix-monthly td {
+            white-space: nowrap;
+            padding: 0.45rem 0.55rem;
+            vertical-align: middle;
+        }
+        .table-matrix-monthly thead th {
+            font-size: 0.76rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border-bottom: 2px solid #cbd5e1;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background-color: #f8fafc;
+        }
+        .table-matrix-monthly thead tr:nth-child(2) th {
+            top: 32px;
+            z-index: 5;
+            font-size: 0.72rem;
+        }
+        .table-matrix-monthly .th-period-1 {
+            background-color: #ecfdf5 !important;
+            color: #065f46;
+            border-left: 1px solid #a7f3d0;
+            border-right: 1px solid #a7f3d0;
+        }
+        .table-matrix-monthly .th-period-2 {
+            background-color: #fffbeb !important;
+            color: #92400e;
+            border-left: 1px solid #fde68a;
+            border-right: 1px solid #fde68a;
+        }
+        .table-matrix-monthly .th-target {
+            background-color: #eff6ff !important;
+            color: #1e40af;
+            border-left: 1px solid #bfdbfe;
+            border-right: 1px solid #bfdbfe;
+        }
+        .table-matrix-monthly .col-period-subtotal-1 {
+            background-color: rgba(16, 185, 129, 0.08) !important;
+            font-weight: 600;
+            color: #047857;
+            border-right: 1px solid #a7f3d0;
+        }
+        .table-matrix-monthly .col-period-subtotal-2 {
+            background-color: rgba(245, 158, 11, 0.08) !important;
+            font-weight: 600;
+            color: #b45309;
+            border-right: 1px solid #fde68a;
+        }
+        .table-matrix-monthly .sticky-col-no {
+            position: sticky;
+            left: 0;
+            z-index: 3;
+            background-color: #ffffff;
+            min-width: 42px;
+            width: 42px;
+            text-align: center;
+        }
+        .table-matrix-monthly .sticky-col-kec {
+            position: sticky;
+            left: 42px;
+            z-index: 3;
+            background-color: #ffffff;
+            min-width: 145px;
+            box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.12);
+        }
+        .table-matrix-monthly thead th.sticky-col-no,
+        .table-matrix-monthly thead th.sticky-col-kec {
+            z-index: 7 !important;
+            background-color: #f1f5f9 !important;
+        }
+        .table-matrix-monthly tfoot th.sticky-col-no,
+        .table-matrix-monthly tfoot th.sticky-col-kec {
+            z-index: 7 !important;
+            background-color: #f1f5f9 !important;
+        }
+        .table-matrix-monthly tbody tr:hover td.sticky-col-no,
+        .table-matrix-monthly tbody tr:hover td.sticky-col-kec {
+            background-color: #f8fafc;
+        }
+        .table-matrix-monthly tfoot {
+            position: sticky;
+            bottom: 0;
+            z-index: 6;
+            background-color: #f1f5f9;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.06);
+        }
+        .table-matrix-monthly tfoot th {
+            border-top: 2px solid #cbd5e1;
+            font-size: 0.8rem;
+            padding: 0.5rem 0.55rem;
+        }
     </style>
 @endpush
 
@@ -1178,32 +1280,20 @@
                                     </div>
                                 </div>
 
-                                <!-- Tabel Detail Per Kecamatan -->
+                                <!-- Tabel Detail Per Kecamatan (Format Matriks Bulanan) -->
                                 <div class="card shadow-sm">
-                                    <div class="card-header bg-white py-3">
+                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
                                         <h6 class="mb-0 fw-bold text-success" id="tableHortiTitle">
                                             <i class="bx bx-table me-1"></i> Data Rincian Hortikultura per Kecamatan (Tahun {{ $selectedTahun }})
                                         </h6>
+                                        <small class="text-muted"><i class="bx bx-info-circle me-1"></i> Geser tabel secara horizontal untuk melihat semua bulan</small>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tableHortikulturaUtama">
-                                                <thead class="table-light">
-                                                    <tr>
-                                                        <th class="text-center" style="width: 4%">No</th>
-                                                        <th>Kecamatan</th>
-                                                        <th class="text-end">Luas Baku (Ha)</th>
-                                                        <th class="text-end">Target MH</th>
-                                                        <th class="text-end">Target MK</th>
-                                                        <th class="text-end">Target Total</th>
-                                                        <th class="text-end">Realisasi MH</th>
-                                                        <th class="text-end">Realisasi MK</th>
-                                                        <th class="text-end">Total Realisasi</th>
-                                                        <th class="text-center">Capaian</th>
-                                                        <th class="text-center" style="width: 8%">Rincian</th>
-                                                    </tr>
-                                                </thead>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive" style="max-height: 650px;">
+                                            <table class="table table-striped table-hover align-middle w-100 table-matrix-monthly mb-0" id="tableHortikulturaUtama">
+                                                <thead class="table-light align-middle" id="theadHortikulturaUtama"></thead>
                                                 <tbody id="tbodyHortikulturaUtama"></tbody>
+                                                <tfoot class="table-light fw-bold" id="tfootHortikulturaUtama"></tfoot>
                                             </table>
                                         </div>
                                     </div>
@@ -1582,7 +1672,7 @@
                                     </div>
                                     <div class="card mb-3 border">
                                         <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
+                                            <span><i class="bx bx-circle text-primary me-1"></i> <span id="horti_pub_detail_label1">Semester 1</span></span>
                                             <span class="text-primary fw-bold">Subtotal: <span id="horti_pub_detail_sub1">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
@@ -1591,7 +1681,7 @@
                                     </div>
                                     <div class="card mb-3 border">
                                         <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
+                                            <span><i class="bx bx-circle text-warning me-1"></i> <span id="horti_pub_detail_label2">Semester 2</span></span>
                                             <span class="text-warning fw-bold">Subtotal: <span id="horti_pub_detail_sub2">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
@@ -2096,6 +2186,11 @@
                 const targetData = [];
                 const realisasiData = [];
 
+                if (rows.length === 0) {
+                    const colCount = currentKategori === 'puso' ? 8 : 11;
+                    tbody.innerHTML = `<tr><td colspan="${colCount}" class="text-center py-4 text-muted">Belum ada data pertanian untuk komoditas dan tahun ini.</td></tr>`;
+                }
+
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);
                     targetData.push(Number(row.target_total || 0));
@@ -2472,6 +2567,10 @@
             const unit = katConfig.satuan;
             const rows = katData[currentHortiKomoditas] || [];
 
+            const isTanam = (currentHortiKategori === 'tanam');
+            const isPuso = (currentHortiKategori === 'puso');
+            const isDec = (currentHortiKategori === 'produktivitas');
+
             const elBadge = document.getElementById('hortiActiveBadge');
             if (elBadge) {
                 elBadge.innerHTML = `<i class="bx bx-check-shield me-1"></i> ${katConfig.label} - ${currentHortiKomoditas} Tahun {{ $selectedTahun }}`;
@@ -2489,7 +2588,7 @@
 
             const tableTitle = document.getElementById('tableHortiTitle');
             if (tableTitle) {
-                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Rincian ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
+                tableTitle.innerHTML = `<i class="bx bx-table me-1"></i> Data Matriks Bulanan ${katConfig.label} ${currentHortiKomoditas} per Kecamatan (Tahun {{ $selectedTahun }})`;
             }
 
             const c1Title = document.getElementById('kpiHortiCard1Title');
@@ -2500,7 +2599,7 @@
             const c3Val = document.getElementById('kpiHortiRealisasi');
             const c4Val = document.getElementById('kpiHortiPersen');
 
-            if (currentHortiKategori === 'produktivitas') {
+            if (isDec) {
                 if (c1Title) c1Title.textContent = 'Baku Lahan';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
@@ -2511,7 +2610,7 @@
                 if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
 
                 if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
-            } else if (currentHortiKategori === 'puso') {
+            } else if (isPuso) {
                 if (c1Title) c1Title.textContent = 'Baku Lahan';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
@@ -2523,7 +2622,7 @@
 
                 if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
             } else {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = isTanam ? 'Luas Baku Sawah' : 'Baku Lahan';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
@@ -2535,49 +2634,300 @@
                 if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
             }
 
+            // Konfigurasi Bulan & Header sesuai Kategori (Tanam vs Lainnya)
+            const period1Months = isTanam
+                ? [
+                    { key: 'realisasi_okt', label: 'Okt' },
+                    { key: 'realisasi_nop', label: 'Nop' },
+                    { key: 'realisasi_des', label: 'Des' },
+                    { key: 'realisasi_jan', label: 'Jan' },
+                    { key: 'realisasi_feb', label: 'Feb' },
+                    { key: 'realisasi_mar', label: 'Mar' }
+                ]
+                : [
+                    { key: 'realisasi_jan', label: 'Jan' },
+                    { key: 'realisasi_feb', label: 'Feb' },
+                    { key: 'realisasi_mar', label: 'Mar' },
+                    { key: 'realisasi_apr', label: 'Apr' },
+                    { key: 'realisasi_mei', label: 'Mei' },
+                    { key: 'realisasi_jun', label: 'Jun' }
+                ];
+
+            const period2Months = isTanam
+                ? [
+                    { key: 'realisasi_apr', label: 'Apr' },
+                    { key: 'realisasi_mei', label: 'Mei' },
+                    { key: 'realisasi_jun', label: 'Jun' },
+                    { key: 'realisasi_jul', label: 'Jul' },
+                    { key: 'realisasi_ags', label: 'Ags' },
+                    { key: 'realisasi_sep', label: 'Sep' }
+                ]
+                : [
+                    { key: 'realisasi_jul', label: 'Jul' },
+                    { key: 'realisasi_ags', label: 'Ags' },
+                    { key: 'realisasi_sep', label: 'Sep' },
+                    { key: 'realisasi_okt', label: 'Okt' },
+                    { key: 'realisasi_nop', label: 'Nop' },
+                    { key: 'realisasi_des', label: 'Des' }
+                ];
+
+            const period1Title = isTanam
+                ? 'REALISASI MUSIM HUJAN (MH: OKT - MAR)'
+                : (isPuso ? 'REALISASI PUSO SEMESTER 1 (JAN - JUN)' : 'REALISASI SEMESTER 1 (JAN - JUN)');
+
+            const period2Title = isTanam
+                ? 'REALISASI MUSIM KEMARAU (MK: APR - SEP)'
+                : (isPuso ? 'REALISASI PUSO SEMESTER 2 (JUL - DES)' : 'REALISASI SEMESTER 2 (JUL - DES)');
+
+            const sub1Label = isTanam
+                ? 'Jumlah MH'
+                : (isDec ? 'Rata-rata Sem 1' : 'Jumlah Sem 1');
+
+            const sub2Label = isTanam
+                ? 'Jumlah MK'
+                : (isDec ? 'Rata-rata Sem 2' : 'Jumlah Sem 2');
+
+            const totalColLabel = isPuso
+                ? 'Total Puso (Ha)'
+                : (isDec ? `Rata-rata (${unit})` : `Total Realisasi (${unit})`);
+
+            // 1. GENERATE THEAD MATRIKS BULANAN
+            const thead = document.getElementById('theadHortikulturaUtama');
+            if (thead) {
+                if (isPuso) {
+                    thead.innerHTML = `
+                        <tr>
+                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                            <th class="text-end" rowspan="2">Baku Lahan (Ha)</th>
+                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                        </tr>
+                        <tr>
+                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                        </tr>
+                    `;
+                } else {
+                    const targetTitle = isTanam
+                        ? `TARGET LUAS TANAM (${unit})`
+                        : `TARGET ${katConfig.label.toUpperCase()} (${unit})`;
+                    const targetSub1 = isTanam ? 'Target MH' : 'Target Sem 1';
+                    const targetSub2 = isTanam ? 'Target MK' : 'Target Sem 2';
+
+                    thead.innerHTML = `
+                        <tr>
+                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                            <th class="text-end" rowspan="2">${isTanam ? 'Luas Sawah (Ha)' : 'Luas Baku (Ha)'}</th>
+                            <th class="text-center th-target" colspan="3">${targetTitle}</th>
+                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                            <th class="text-center" rowspan="2">Capaian</th>
+                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                        </tr>
+                        <tr>
+                            <th class="text-end th-target">${targetSub1}</th>
+                            <th class="text-end th-target">${targetSub2}</th>
+                            <th class="text-end th-target fw-bold">Total Target</th>
+                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                        </tr>
+                    `;
+                }
+            }
+
+            // 2. GENERATE TBODY & TFOOT MATRIKS BULANAN
             const tbody = document.getElementById('tbodyHortikulturaUtama');
+            const tfoot = document.getElementById('tfootHortikulturaUtama');
+
             if (tbody) {
                 tbody.innerHTML = '';
                 const categories = [];
                 const targetData = [];
                 const realisasiData = [];
 
-                rows.forEach((row, idx) => {
-                    categories.push(row.kecamatan);
-                    targetData.push(Number(row.target_total || 0));
-                    realisasiData.push(Number(row.total_realisasi || 0));
+                if (rows.length === 0) {
+                    const colCount = isPuso ? 19 : 23;
+                    tbody.innerHTML = `<tr><td colspan="${colCount}" class="text-center py-4 text-muted">Belum ada data pertanian untuk komoditas dan tahun ini.</td></tr>`;
+                    if (tfoot) tfoot.innerHTML = '';
+                    return;
+                }
 
-                    const p = Number(row.persentase_capaian || 0);
+                const formatVal = (v) => {
+                    const n = Number(v || 0);
+                    return isDec
+                        ? n.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        : n.toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                };
+
+                // Akumulator total se-kabupaten untuk TFOOT
+                let sumSawah = 0;
+                let sumTarget1 = 0;
+                let sumTarget2 = 0;
+                let sumTargetTot = 0;
+                const sumP1Months = [0, 0, 0, 0, 0, 0];
+                let sumSub1 = 0;
+                const sumP2Months = [0, 0, 0, 0, 0, 0];
+                let sumSub2 = 0;
+                let sumGrandTotal = 0;
+
+                rows.forEach((row, idx) => {
+                    const sawah = Number(row.luas_sawah || 0);
+                    sumSawah += sawah;
+
+                    const t1 = Number(row.target_okmar || 0);
+                    const t2 = Number(row.target_asep || 0);
+                    const tTot = Number(row.target_total || (t1 + t2));
+                    sumTarget1 += t1;
+                    sumTarget2 += t2;
+                    sumTargetTot += tTot;
+
+                    // Nilai Periode 1 per Bulan
+                    let rowP1Sum = 0;
+                    const p1Cells = period1Months.map((m, mIdx) => {
+                        const val = Number(row[m.key] || 0);
+                        rowP1Sum += val;
+                        sumP1Months[mIdx] += val;
+                        return `<td class="text-end">${formatVal(val)}</td>`;
+                    }).join('');
+
+                    const sub1Val = isTanam
+                        ? (row.jumlah_mh !== undefined && row.jumlah_mh !== null && Number(row.jumlah_mh) > 0 ? Number(row.jumlah_mh) : rowP1Sum)
+                        : (isDec ? (rowP1Sum / 6) : rowP1Sum);
+                    sumSub1 += sub1Val;
+
+                    // Nilai Periode 2 per Bulan
+                    let rowP2Sum = 0;
+                    const p2Cells = period2Months.map((m, mIdx) => {
+                        const val = Number(row[m.key] || 0);
+                        rowP2Sum += val;
+                        sumP2Months[mIdx] += val;
+                        return `<td class="text-end">${formatVal(val)}</td>`;
+                    }).join('');
+
+                    const sub2Val = isTanam
+                        ? (row.jumlah_mk !== undefined && row.jumlah_mk !== null && Number(row.jumlah_mk) > 0 ? Number(row.jumlah_mk) : rowP2Sum)
+                        : (isDec ? (rowP2Sum / 6) : rowP2Sum);
+                    sumSub2 += sub2Val;
+
+                    // Total Realisasi Baris
+                    const totalRealRow = isDec
+                        ? ((sub1Val + sub2Val) / 2)
+                        : (row.total_realisasi !== undefined && row.total_realisasi !== null && Number(row.total_realisasi) > 0
+                            ? Number(row.total_realisasi)
+                            : (sub1Val + sub2Val));
+                    sumGrandTotal += totalRealRow;
+
+                    // Persentase Capaian
+                    const p = tTot > 0 ? Number(((totalRealRow / tTot) * 100).toFixed(2)) : Number(row.persentase_capaian || 0);
                     let badgeClass = 'badge-capaian-low';
                     if (p >= 100) badgeClass = 'badge-capaian-high';
                     else if (p >= 50) badgeClass = 'badge-capaian-medium';
 
-                    const tr = document.createElement('tr');
+                    categories.push(row.kecamatan);
+                    targetData.push(tTot);
+                    realisasiData.push(totalRealRow);
+
                     const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
+                    const tr = document.createElement('tr');
 
-                    const isDec = currentHortiKategori === 'produktivitas';
-                    const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
-
-                    tr.innerHTML = `
-                        <td class="text-center">${row.no_urut || idx + 1}</td>
-                        <td><strong>${row.kecamatan}</strong></td>
-                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}'>
-                                <i class="bx bx-calendar"></i>
-                            </button>
-                        </td>
-                    `;
+                    if (isPuso) {
+                        tr.innerHTML = `
+                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                            <td class="text-end">${formatVal(sawah)}</td>
+                            ${p1Cells}
+                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                            ${p2Cells}
+                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                            <td class="text-end text-danger fw-bold">${formatVal(totalRealRow)}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                    <i class="bx bx-calendar"></i>
+                                </button>
+                            </td>
+                        `;
+                    } else {
+                        tr.innerHTML = `
+                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                            <td class="text-end">${formatVal(sawah)}</td>
+                            <td class="text-end text-muted">${formatVal(t1)}</td>
+                            <td class="text-end text-muted">${formatVal(t2)}</td>
+                            <td class="text-end text-primary fw-semibold">${formatVal(tTot)}</td>
+                            ${p1Cells}
+                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                            ${p2Cells}
+                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                            <td class="text-end text-success fw-bold">${formatVal(totalRealRow)}</td>
+                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                    <i class="bx bx-calendar"></i>
+                                </button>
+                            </td>
+                        `;
+                    }
                     tbody.appendChild(tr);
                 });
 
+                // Render Summary Row di TFOOT
+                if (tfoot) {
+                    const rowCount = rows.length;
+                    const avgOrSum = (v) => isDec ? (v / rowCount) : v;
+
+                    const fSub1 = avgOrSum(sumSub1);
+                    const fSub2 = avgOrSum(sumSub2);
+                    const fGrandTotal = avgOrSum(sumGrandTotal);
+                    const fCapaian = sumTargetTot > 0 ? ((fGrandTotal / sumTargetTot) * 100).toFixed(2) : '0';
+
+                    const p1FootCells = sumP1Months.map(v => `<th class="text-end th-period-1">${formatVal(avgOrSum(v))}</th>`).join('');
+                    const p2FootCells = sumP2Months.map(v => `<th class="text-end th-period-2">${formatVal(avgOrSum(v))}</th>`).join('');
+
+                    if (isPuso) {
+                        tfoot.innerHTML = `
+                            <tr>
+                                <th class="sticky-col-no text-center"></th>
+                                <th class="sticky-col-kec text-uppercase">TOTAL KABUPATEN</th>
+                                <th class="text-end">${formatVal(sumSawah)}</th>
+                                ${p1FootCells}
+                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                ${p2FootCells}
+                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
+                                <th class="text-end text-danger">${formatVal(fGrandTotal)}</th>
+                                <th class="text-center">-</th>
+                            </tr>
+                        `;
+                    } else {
+                        tfoot.innerHTML = `
+                            <tr>
+                                <th class="sticky-col-no text-center"></th>
+                                <th class="sticky-col-kec text-uppercase">${isDec ? 'RATA-RATA KABUPATEN' : 'TOTAL KABUPATEN'}</th>
+                                <th class="text-end">${formatVal(sumSawah)}</th>
+                                <th class="text-end text-muted">${formatVal(sumTarget1)}</th>
+                                <th class="text-end text-muted">${formatVal(sumTarget2)}</th>
+                                <th class="text-end text-primary">${formatVal(sumTargetTot)}</th>
+                                ${p1FootCells}
+                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                ${p2FootCells}
+                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
+                                <th class="text-end text-success">${formatVal(fGrandTotal)}</th>
+                                <th class="text-center">${fCapaian}%</th>
+                                <th class="text-center">-</th>
+                            </tr>
+                        `;
+                    }
+                }
+
+                // Event listener untuk tombol detail kartu bulanan
                 document.querySelectorAll('.btn-horti-pub-detail').forEach(b => {
                     b.addEventListener('click', function () {
                         const r = JSON.parse(this.getAttribute('data-row'));
@@ -2599,32 +2949,74 @@
         }
 
         function openHortiPubDetailModal(row, katConfig) {
+            const isTanam = (currentHortiKategori === 'tanam');
+            const isDec = (currentHortiKategori === 'produktivitas');
             const sat = katConfig.satuan;
+
             document.getElementById('horti_pub_detail_kecamatan').textContent = row.kecamatan;
             document.getElementById('horti_pub_detail_badge').textContent = `${katConfig.label} - ${currentHortiKomoditas} (${sat})`;
 
-            const formatNum = (n) => (parseFloat(n) || 0).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+            const formatNum = (n) => (parseFloat(n) || 0).toLocaleString('id-ID', {
+                minimumFractionDigits: isDec ? 2 : 0,
+                maximumFractionDigits: 2
+            });
 
-            document.getElementById('horti_pub_detail_sub1').textContent = formatNum(row.jumlah_mh) + ' ' + sat;
-            document.getElementById('horti_pub_detail_sub2').textContent = formatNum(row.jumlah_mk) + ' ' + sat;
-            document.getElementById('horti_pub_detail_total').textContent = formatNum(row.total_realisasi) + ' ' + sat;
+            const label1 = isTanam ? 'Musim Hujan (MH: Okt s/d Mar)' : 'Semester 1 (Jan s/d Jun)';
+            const label2 = isTanam ? 'Musim Kemarau (MK: Apr s/d Sep)' : 'Semester 2 (Jul s/d Des)';
 
-            const mSem1 = [
-                { label: 'Jan', val: row.realisasi_jan },
-                { label: 'Feb', val: row.realisasi_feb },
-                { label: 'Mar', val: row.realisasi_mar },
-                { label: 'Apr', val: row.realisasi_apr },
-                { label: 'Mei', val: row.realisasi_mei },
-                { label: 'Jun', val: row.realisasi_jun },
-            ];
-            const mSem2 = [
-                { label: 'Jul', val: row.realisasi_jul },
-                { label: 'Ags', val: row.realisasi_ags },
-                { label: 'Sep', val: row.realisasi_sep },
-                { label: 'Okt', val: row.realisasi_okt },
-                { label: 'Nov', val: row.realisasi_nop },
-                { label: 'Des', val: row.realisasi_des },
-            ];
+            const lbl1El = document.getElementById('horti_pub_detail_label1');
+            if (lbl1El) lbl1El.textContent = label1;
+            const lbl2El = document.getElementById('horti_pub_detail_label2');
+            if (lbl2El) lbl2El.textContent = label2;
+
+            let mSem1 = [];
+            let mSem2 = [];
+
+            if (isTanam) {
+                mSem1 = [
+                    { label: 'Okt', val: row.realisasi_okt },
+                    { label: 'Nop', val: row.realisasi_nop },
+                    { label: 'Des', val: row.realisasi_des },
+                    { label: 'Jan', val: row.realisasi_jan },
+                    { label: 'Feb', val: row.realisasi_feb },
+                    { label: 'Mar', val: row.realisasi_mar },
+                ];
+                mSem2 = [
+                    { label: 'Apr', val: row.realisasi_apr },
+                    { label: 'Mei', val: row.realisasi_mei },
+                    { label: 'Jun', val: row.realisasi_jun },
+                    { label: 'Jul', val: row.realisasi_jul },
+                    { label: 'Ags', val: row.realisasi_ags },
+                    { label: 'Sep', val: row.realisasi_sep },
+                ];
+            } else {
+                mSem1 = [
+                    { label: 'Jan', val: row.realisasi_jan },
+                    { label: 'Feb', val: row.realisasi_feb },
+                    { label: 'Mar', val: row.realisasi_mar },
+                    { label: 'Apr', val: row.realisasi_apr },
+                    { label: 'Mei', val: row.realisasi_mei },
+                    { label: 'Jun', val: row.realisasi_jun },
+                ];
+                mSem2 = [
+                    { label: 'Jul', val: row.realisasi_jul },
+                    { label: 'Ags', val: row.realisasi_ags },
+                    { label: 'Sep', val: row.realisasi_sep },
+                    { label: 'Okt', val: row.realisasi_okt },
+                    { label: 'Nov', val: row.realisasi_nop },
+                    { label: 'Des', val: row.realisasi_des },
+                ];
+            }
+
+            const sum1 = mSem1.reduce((acc, cur) => acc + (parseFloat(cur.val) || 0), 0);
+            const sum2 = mSem2.reduce((acc, cur) => acc + (parseFloat(cur.val) || 0), 0);
+            const sub1Val = isDec ? (sum1 / 6) : sum1;
+            const sub2Val = isDec ? (sum2 / 6) : sum2;
+            const totVal = isDec ? ((sub1Val + sub2Val) / 2) : (sum1 + sum2);
+
+            document.getElementById('horti_pub_detail_sub1').textContent = formatNum(sub1Val) + ' ' + sat;
+            document.getElementById('horti_pub_detail_sub2').textContent = formatNum(sub2Val) + ' ' + sat;
+            document.getElementById('horti_pub_detail_total').textContent = formatNum(totVal) + ' ' + sat;
 
             document.getElementById('horti_pub_cards_sem1').innerHTML = mSem1.map(m => `
                 <div class="col-4 col-sm-2">
@@ -2761,6 +3153,10 @@
                 const tanamSeries = [];
                 const panenSeries = [];
                 const produksiSeries = [];
+
+                if (rows.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada data untuk komoditas ini.</td></tr>`;
+                }
 
                 rows.forEach((row, idx) => {
                     categories.push(row.tahun);
@@ -2944,6 +3340,11 @@
                 const categories = [];
                 const targetData = [];
                 const realisasiData = [];
+
+                if (rows.length === 0) {
+                    const colCount = currentKategori === 'puso' ? 8 : 11;
+                    tbody.innerHTML = `<tr><td colspan="${colCount}" class="text-center py-4 text-muted">Belum ada data pertanian untuk komoditas dan tahun ini.</td></tr>`;
+                }
 
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);

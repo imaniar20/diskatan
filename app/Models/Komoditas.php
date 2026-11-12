@@ -98,6 +98,18 @@ class Komoditas extends Model
     }
 
     /**
+     * Mengambil koleksi model komoditas aktif untuk sektor tertentu.
+     */
+    public static function getBySektor(string $sektor)
+    {
+        return self::active()
+            ->forSektor($sektor)
+            ->orderBy('urutan', 'asc')
+            ->orderBy('id', 'asc')
+            ->get();
+    }
+
+    /**
      * Mengambil daftar nama komoditas untuk sektor tertentu.
      */
     public static function getListBySektor(string $sektor): array

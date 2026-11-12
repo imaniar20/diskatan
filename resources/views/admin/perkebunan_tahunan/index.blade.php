@@ -33,6 +33,10 @@
                 </div>
 
                 <div class="d-flex flex-wrap align-items-center gap-2">
+                    <a href="{{ route('admin-perkebunan-tahunan.export', ['template' => 1]) }}" class="btn btn-outline-primary btn-sm" title="Unduh Template Excel Kosong (Nilai 0 & Rumus Otomatis)">
+                        <i class="bx bx-file-blank me-1"></i> Download Template
+                    </a>
+
                     <a href="{{ route('admin-perkebunan-tahunan.export') }}" class="btn btn-outline-success btn-sm">
                         <i class="bx bx-download me-1"></i> Export Excel
                     </a>
@@ -281,10 +285,23 @@
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="text-muted small">Pilih file Excel (.xlsx atau .xls) untuk memperbarui data Perkebunan Tahunan.</p>
+                        <div class="alert alert-info py-2 small mb-3">
+                            <i class="bx bx-info-circle me-1"></i>
+                            Format file Excel berisi kolom <code>No</code>, <code>Komoditas</code>, <code>Tahun</code>, <code>Luas Tanam (Ha)</code>, <code>Luas Panen (Ha)</code>, <code>Produktivitas (Kw/Ha)</code>, dan <code>Produksi (Ton)</code>.
+                        </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">File Excel</label>
+                            <label class="form-label fw-bold">File Excel (.xlsx / .xls) <span class="text-danger">*</span></label>
                             <input type="file" name="file_excel" class="form-control" accept=".xlsx,.xls" required>
+                        </div>
+                        <div class="card bg-lighter border p-2 small">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <span class="text-muted">
+                                    <i class="bx bx-bulb text-warning me-1"></i> <strong>Butuh Template Data Kosong?</strong> Unduh format Excel siap isi untuk seluruh komoditas Perkebunan Tahunan:
+                                </span>
+                                <a href="{{ route('admin-perkebunan-tahunan.export', ['template' => 1]) }}" class="btn btn-xs btn-outline-primary">
+                                    <i class="bx bx-download me-1"></i> Download Template Kosong (.xlsx)
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

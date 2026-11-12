@@ -281,9 +281,12 @@ class AdminPadiPalawijaController extends Controller
         $this->checkAdmin();
 
         $tahun = $request->query('tahun', '2026');
-        $spreadsheet = $excelService->export($tahun);
+        $isTemplate = $request->boolean('template');
+        $spreadsheet = $excelService->export($tahun, $isTemplate);
 
-        $filename = "Target_dan_Realisasi_Padi_Palawija_{$tahun}.xlsx";
+        $filename = $isTemplate
+            ? "Template_Kosong_Padi_Palawija_{$tahun}.xlsx"
+            : "Target_dan_Realisasi_Padi_Palawija_{$tahun}.xlsx";
 
         return response()->streamDownload(function () use ($spreadsheet) {
             $writer = new Xlsx($spreadsheet);
