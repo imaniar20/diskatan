@@ -2193,8 +2193,8 @@
 
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);
-                    targetData.push(Number(row.target_total || 0));
-                    realisasiData.push(Number(row.total_realisasi || 0));
+                    targetData.push(Number(Number(row.target_total || 0).toFixed(2)));
+                    realisasiData.push(Number(Number(row.total_realisasi || 0).toFixed(2)));
 
                     const p = Number(row.persentase_capaian || 0);
                     let badgeClass = 'badge-capaian-low';
@@ -2259,7 +2259,14 @@
                 if (chartPadi) {
                     chartPadi.updateOptions({
                         xaxis: { categories: categories },
-                        yaxis: { title: { text: `${katConfig.label} (${unit})` } },
+                        yaxis: {
+                            title: { text: `${katConfig.label} (${unit})` },
+                            labels: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                                }
+                            }
+                        },
                         tooltip: {
                             y: {
                                 formatter: function (val) {
@@ -2375,8 +2382,8 @@
             const katData = padiPalawijaGrouped[currentKategori] || {};
             const rows = katData[currentKomoditas] || [];
             const categories = rows.map(r => r.kecamatan);
-            const targetData = rows.map(r => Number(r.target_total || 0));
-            const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
+            const targetData = rows.map(r => Number(Number(r.target_total || 0).toFixed(2)));
+            const realisasiData = rows.map(r => Number(Number(r.total_realisasi || 0).toFixed(2)));
 
             const options = {
                 series: [
@@ -2406,12 +2413,19 @@
                         style: { fontSize: '11px' }
                     }
                 },
-                yaxis: { title: { text: 'Luas (Hektar)' } },
+                yaxis: {
+                    title: { text: 'Luas (Hektar)' },
+                    labels: {
+                        formatter: function (val) {
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                        }
+                    }
+                },
                 fill: { opacity: 1 },
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return Number(val).toLocaleString('id-ID') + ' Ha';
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' Ha';
                         }
                     }
                 }
@@ -2480,9 +2494,9 @@
             if (chartPangan) {
                 const rows = tanamanPanganData[komoditas] || [];
                 const categories = rows.map(r => r.tahun);
-                const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
-                const panenSeries = rows.map(r => Number(r.luas_panen || 0));
-                const produksiSeries = rows.map(r => Number(r.produksi || 0));
+                const tanamSeries = rows.map(r => Number(Number(r.luas_tanam || 0).toFixed(2)));
+                const panenSeries = rows.map(r => Number(Number(r.luas_panen || 0).toFixed(2)));
+                const produksiSeries = rows.map(r => Number(Number(r.produksi || 0).toFixed(2)));
 
                 chartPangan.updateOptions({ xaxis: { categories: categories } });
                 chartPangan.updateSeries([
@@ -2497,9 +2511,9 @@
             if (chartPangan) return;
             const rows = tanamanPanganData[currentPangan] || [];
             const categories = rows.map(r => r.tahun);
-            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
-            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
-            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+            const tanamSeries = rows.map(r => Number(Number(r.luas_tanam || 0).toFixed(2)));
+            const panenSeries = rows.map(r => Number(Number(r.luas_panen || 0).toFixed(2)));
+            const produksiSeries = rows.map(r => Number(Number(r.produksi || 0).toFixed(2)));
 
             const options = {
                 series: [
@@ -2518,8 +2532,23 @@
                 colors: ['#f59e0b', '#3b82f6', '#10b981'],
                 xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
                 yaxis: [
-                    { title: { text: 'Luas (Ha)' } },
-                    { opposite: true, title: { text: 'Produksi (Ton)' } }
+                    {
+                        title: { text: 'Luas (Ha)' },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    },
+                    {
+                        opposite: true,
+                        title: { text: 'Produksi (Ton)' },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    }
                 ],
                 tooltip: { shared: true, intersect: false },
                 legend: { position: 'top' }
@@ -2833,8 +2862,8 @@
                     else if (p >= 50) badgeClass = 'badge-capaian-medium';
 
                     categories.push(row.kecamatan);
-                    targetData.push(tTot);
-                    realisasiData.push(totalRealRow);
+                    targetData.push(Number(Number(tTot || 0).toFixed(2)));
+                    realisasiData.push(Number(Number(totalRealRow || 0).toFixed(2)));
 
                     const rowJson = JSON.stringify(row).replace(/'/g, "&apos;");
                     const tr = document.createElement('tr');
@@ -2938,12 +2967,32 @@
                 if (chartHorti) {
                     chartHorti.updateOptions({
                         xaxis: { categories: categories },
-                        yaxis: { title: { text: `${katConfig.label} (${unit})` } }
+                        yaxis: {
+                            title: { text: `${katConfig.label} (${unit})` },
+                            labels: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' ' + unit;
+                                }
+                            }
+                        }
                     });
-                    chartHorti.updateSeries([
-                        { name: `Target (${unit})`, data: targetData },
-                        { name: `Realisasi (${unit})`, data: realisasiData }
-                    ]);
+                    if (currentHortiKategori === 'puso') {
+                        chartHorti.updateSeries([
+                            { name: `Luas Puso (${unit})`, data: realisasiData }
+                        ]);
+                    } else {
+                        chartHorti.updateSeries([
+                            { name: `Target (${unit})`, data: targetData },
+                            { name: `Realisasi (${unit})`, data: realisasiData }
+                        ]);
+                    }
                 }
             }
         }
@@ -3048,8 +3097,8 @@
             const katData = hortikulturaGrouped[currentHortiKategori] || {};
             const rows = katData[currentHortiKomoditas] || [];
             const categories = rows.map(r => r.kecamatan);
-            const targetData = rows.map(r => Number(r.target_total || 0));
-            const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
+            const targetData = rows.map(r => Number(Number(r.target_total || 0).toFixed(2)));
+            const realisasiData = rows.map(r => Number(Number(r.total_realisasi || 0).toFixed(2)));
 
             const options = {
                 series: [
@@ -3076,12 +3125,19 @@
                     categories: categories,
                     labels: { rotate: -45, style: { fontSize: '11px' } }
                 },
-                yaxis: { title: { text: 'Luas (Ha)' } },
+                yaxis: {
+                    title: { text: 'Luas (Ha)' },
+                    labels: {
+                        formatter: function (val) {
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                        }
+                    }
+                },
                 fill: { opacity: 1 },
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return Number(val).toLocaleString('id-ID') + ' Ha';
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' Ha';
                         }
                     }
                 }
@@ -3160,9 +3216,9 @@
 
                 rows.forEach((row, idx) => {
                     categories.push(row.tahun);
-                    tanamSeries.push(Number(row.luas_tanam || 0));
-                    panenSeries.push(Number(row.luas_panen || 0));
-                    produksiSeries.push(Number(row.produksi || 0));
+                    tanamSeries.push(Number(Number(row.luas_tanam || 0).toFixed(2)));
+                    panenSeries.push(Number(Number(row.luas_panen || 0).toFixed(2)));
+                    produksiSeries.push(Number(Number(row.produksi || 0).toFixed(2)));
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -3180,8 +3236,23 @@
                     chartSayuran.updateOptions({
                         xaxis: { categories: categories },
                         yaxis: [
-                            { title: { text: `Luas (${sLuas})` } },
-                            { opposite: true, title: { text: `Produksi (${sProd})` } }
+                            {
+                                title: { text: `Luas (${sLuas})` },
+                                labels: {
+                                    formatter: function (val) {
+                                        return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                                    }
+                                }
+                            },
+                            {
+                                opposite: true,
+                                title: { text: `Produksi (${sProd})` },
+                                labels: {
+                                    formatter: function (val) {
+                                        return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                                    }
+                                }
+                            }
                         ]
                     });
                     chartSayuran.updateSeries([
@@ -3197,9 +3268,9 @@
             if (chartSayuran) return;
             const rows = sayuranData[currentSayuran] || [];
             const categories = rows.map(r => r.tahun);
-            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
-            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
-            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+            const tanamSeries = rows.map(r => Number(Number(r.luas_tanam || 0).toFixed(2)));
+            const panenSeries = rows.map(r => Number(Number(r.luas_panen || 0).toFixed(2)));
+            const produksiSeries = rows.map(r => Number(Number(r.produksi || 0).toFixed(2)));
 
             const summary = sayuranSummary[currentSayuran] || {};
             const sLuas = summary.satuan_luas || 'Ha';
@@ -3222,8 +3293,23 @@
                 colors: ['#f59e0b', '#3b82f6', '#10b981'],
                 xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
                 yaxis: [
-                    { title: { text: `Luas (${sLuas})` } },
-                    { opposite: true, title: { text: `Produksi (${sProd})` } }
+                    {
+                        title: { text: `Luas (${sLuas})` },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    },
+                    {
+                        opposite: true,
+                        title: { text: `Produksi (${sProd})` },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    }
                 ],
                 tooltip: { shared: true, intersect: false },
                 legend: { position: 'top' }
@@ -3348,8 +3434,8 @@
 
                 rows.forEach((row, idx) => {
                     categories.push(row.kecamatan);
-                    targetData.push(Number(row.target_total || 0));
-                    realisasiData.push(Number(row.total_realisasi || 0));
+                    targetData.push(Number(Number(row.target_total || 0).toFixed(2)));
+                    realisasiData.push(Number(Number(row.total_realisasi || 0).toFixed(2)));
 
                     const p = Number(row.persentase_capaian || 0);
                     let badgeClass = 'badge-capaian-low';
@@ -3392,12 +3478,32 @@
                 if (chartPerkebunan) {
                     chartPerkebunan.updateOptions({
                         xaxis: { categories: categories },
-                        yaxis: { title: { text: `${katConfig.label} (${unit})` } }
+                        yaxis: {
+                            title: { text: `${katConfig.label} (${unit})` },
+                            labels: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            y: {
+                                formatter: function (val) {
+                                    return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' ' + unit;
+                                }
+                            }
+                        }
                     });
-                    chartPerkebunan.updateSeries([
-                        { name: `Target (${unit})`, data: targetData },
-                        { name: `Realisasi (${unit})`, data: realisasiData }
-                    ]);
+                    if (currentPerkebunanKategori === 'puso') {
+                        chartPerkebunan.updateSeries([
+                            { name: `Luas Puso (${unit})`, data: realisasiData }
+                        ]);
+                    } else {
+                        chartPerkebunan.updateSeries([
+                            { name: `Target (${unit})`, data: targetData },
+                            { name: `Realisasi (${unit})`, data: realisasiData }
+                        ]);
+                    }
                 }
             }
         }
@@ -3460,8 +3566,8 @@
             const katData = perkebunanGrouped[currentPerkebunanKategori] || {};
             const rows = katData[currentPerkebunanKomoditas] || [];
             const categories = rows.map(r => r.kecamatan);
-            const targetData = rows.map(r => Number(r.target_total || 0));
-            const realisasiData = rows.map(r => Number(r.total_realisasi || 0));
+            const targetData = rows.map(r => Number(Number(r.target_total || 0).toFixed(2)));
+            const realisasiData = rows.map(r => Number(Number(r.total_realisasi || 0).toFixed(2)));
 
             const options = {
                 series: [
@@ -3488,12 +3594,19 @@
                     categories: categories,
                     labels: { rotate: -45, style: { fontSize: '11px' } }
                 },
-                yaxis: { title: { text: 'Luas (Ha)' } },
+                yaxis: {
+                    title: { text: 'Luas (Ha)' },
+                    labels: {
+                        formatter: function (val) {
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                        }
+                    }
+                },
                 fill: { opacity: 1 },
                 tooltip: {
                     y: {
                         formatter: function (val) {
-                            return Number(val).toLocaleString('id-ID') + ' Ha';
+                            return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 }) + ' Ha';
                         }
                     }
                 }
@@ -3562,9 +3675,9 @@
             if (chartPerkebunanTahunan) {
                 const rows = perkebunanTahunanData[komoditas] || [];
                 const categories = rows.map(r => r.tahun);
-                const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
-                const panenSeries = rows.map(r => Number(r.luas_panen || 0));
-                const produksiSeries = rows.map(r => Number(r.produksi || 0));
+                const tanamSeries = rows.map(r => Number(Number(r.luas_tanam || 0).toFixed(2)));
+                const panenSeries = rows.map(r => Number(Number(r.luas_panen || 0).toFixed(2)));
+                const produksiSeries = rows.map(r => Number(Number(r.produksi || 0).toFixed(2)));
 
                 chartPerkebunanTahunan.updateOptions({ xaxis: { categories: categories } });
                 chartPerkebunanTahunan.updateSeries([
@@ -3579,9 +3692,9 @@
             if (chartPerkebunanTahunan) return;
             const rows = perkebunanTahunanData[currentPerkebunanTahunan] || [];
             const categories = rows.map(r => r.tahun);
-            const tanamSeries = rows.map(r => Number(r.luas_tanam || 0));
-            const panenSeries = rows.map(r => Number(r.luas_panen || 0));
-            const produksiSeries = rows.map(r => Number(r.produksi || 0));
+            const tanamSeries = rows.map(r => Number(Number(r.luas_tanam || 0).toFixed(2)));
+            const panenSeries = rows.map(r => Number(Number(r.luas_panen || 0).toFixed(2)));
+            const produksiSeries = rows.map(r => Number(Number(r.produksi || 0).toFixed(2)));
 
             const options = {
                 series: [
@@ -3600,8 +3713,23 @@
                 colors: ['#f59e0b', '#3b82f6', '#10b981'],
                 xaxis: { categories: categories, labels: { style: { fontSize: '12px' } } },
                 yaxis: [
-                    { title: { text: 'Luas (Ha)' } },
-                    { opposite: true, title: { text: 'Produksi (Ton)' } }
+                    {
+                        title: { text: 'Luas (Ha)' },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    },
+                    {
+                        opposite: true,
+                        title: { text: 'Produksi (Ton)' },
+                        labels: {
+                            formatter: function (val) {
+                                return Number(val).toLocaleString('id-ID', { maximumFractionDigits: 2 });
+                            }
+                        }
+                    }
                 ],
                 tooltip: { shared: true, intersect: false },
                 legend: { position: 'top' }
