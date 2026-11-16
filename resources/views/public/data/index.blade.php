@@ -1169,40 +1169,40 @@
                                 </div>
 
                                 <!-- 4 KPI Stat Cards -->
-                                <div class="row g-3 mb-4">
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                            <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha
-                                            </h4>
-                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
-                                            <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha
-                                            </h4>
-                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                            <span class="text-muted small">Rata-rata Produktivitas</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha
-                                            </h4>
-                                            <small class="text-secondary">Satuan: Kw/Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                            <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0
-                                                Ton</h4>
-                                            <small class="text-secondary">Satuan: Ton</small>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- <div class="row g-3 mb-4">
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                                            <span class="text-muted small">Total Luas Tanam</span>
+                                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha
+                                                            </h4>
+                                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                                            <span class="text-muted small">Total Luas Panen</span>
+                                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha
+                                                            </h4>
+                                                            <small class="text-secondary">Satuan: Hektar (Ha)</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                                            <span class="text-muted small">Rata-rata Produktivitas</span>
+                                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha
+                                                            </h4>
+                                                            <small class="text-secondary">Satuan: Kw/Ha</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                                            <span class="text-muted small">Total Produksi</span>
+                                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0
+                                                                Ton</h4>
+                                                            <small class="text-secondary">Satuan: Ton</small>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
@@ -1418,40 +1418,40 @@
                                 </div>
 
                                 <!-- 4 KPI Stat Cards -->
-                                <div class="row g-3 mb-4">
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                            <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0
-                                            </h4>
-                                            <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan: Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
-                                            <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0
-                                            </h4>
-                                            <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan: Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                            <span class="text-muted small">Rata-rata Produktivitas</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiSayuranProdv">0</h4>
-                                            <small class="text-secondary">Produktivitas Rata-rata</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                            <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0
-                                            </h4>
-                                            <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan:
-                                                Kuintal</small>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- <div class="row g-3 mb-4">
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                                            <span class="text-muted small">Total Luas Tanam</span>
+                                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0
+                                                            </h4>
+                                                            <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan: Ha</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                                            <span class="text-muted small">Total Luas Panen</span>
+                                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0
+                                                            </h4>
+                                                            <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan: Ha</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                                            <span class="text-muted small">Rata-rata Produktivitas</span>
+                                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiSayuranProdv">0</h4>
+                                                            <small class="text-secondary">Produktivitas Rata-rata</small>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 col-md-3">
+                                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                                            <span class="text-muted small">Total Produksi</span>
+                                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0
+                                                            </h4>
+                                                            <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan:
+                                                                Kuintal</small>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
@@ -1678,40 +1678,40 @@
                                 </div>
 
                                 <!-- 4 KPI Stat Cards -->
-                                <div class="row g-3 mb-4">
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #f59e0b;">
-                                            <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number"
-                                                id="kpiPerkebunanTahunanTanam">0 Ha</h4>
-                                            <small class="text-secondary">Satuan: Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #3b82f6;">
-                                            <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number"
-                                                id="kpiPerkebunanTahunanPanen">0 Ha</h4>
-                                            <small class="text-secondary">Satuan: Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #06b6d4;">
-                                            <span class="text-muted small">Rata-rata Produktivitas</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number"
-                                                id="kpiPerkebunanTahunanProdv">0 Kw/Ha</h4>
-                                            <small class="text-secondary">Satuan: Kw/Ha</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 col-md-3">
-                                        <div class="stat-card-padi" style="border-left-color: #10b981;">
-                                            <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number"
-                                                id="kpiPerkebunanTahunanProduksi">0 Ton</h4>
-                                            <small class="text-secondary">Satuan: Ton</small>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!-- <div class="row g-3 mb-4">
+                                                <div class="col-6 col-md-3">
+                                                    <div class="stat-card-padi" style="border-left-color: #f59e0b;">
+                                                        <span class="text-muted small">Total Luas Tanam</span>
+                                                        <h4 class="mt-1 mb-0 text-warning fw-bold stat-number"
+                                                            id="kpiPerkebunanTahunanTanam">0 Ha</h4>
+                                                        <small class="text-secondary">Satuan: Ha</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="stat-card-padi" style="border-left-color: #3b82f6;">
+                                                        <span class="text-muted small">Total Luas Panen</span>
+                                                        <h4 class="mt-1 mb-0 text-primary fw-bold stat-number"
+                                                            id="kpiPerkebunanTahunanPanen">0 Ha</h4>
+                                                        <small class="text-secondary">Satuan: Ha</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="stat-card-padi" style="border-left-color: #06b6d4;">
+                                                        <span class="text-muted small">Rata-rata Produktivitas</span>
+                                                        <h4 class="mt-1 mb-0 text-info fw-bold stat-number"
+                                                            id="kpiPerkebunanTahunanProdv">0 Kw/Ha</h4>
+                                                        <small class="text-secondary">Satuan: Kw/Ha</small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3">
+                                                    <div class="stat-card-padi" style="border-left-color: #10b981;">
+                                                        <span class="text-muted small">Total Produksi</span>
+                                                        <h4 class="mt-1 mb-0 text-success fw-bold stat-number"
+                                                            id="kpiPerkebunanTahunanProduksi">0 Ton</h4>
+                                                        <small class="text-secondary">Satuan: Ton</small>
+                                                    </div>
+                                                </div>
+                                            </div> -->
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
@@ -2358,33 +2358,33 @@
             if (thead) {
                 if (currentKategori === 'puso') {
                     thead.innerHTML = `
-                                        <tr>
-                                            <th class="text-center" style="width: 4%">No</th>
-                                            <th>Kecamatan</th>
-                                            <th class="text-end">Baku Lahan (Ha)</th>
-                                            <th class="text-end">Puso MH (Ha)</th>
-                                            <th class="text-end">Puso MK (Ha)</th>
-                                            <th class="text-end">Total Puso (Ha)</th>
-                                            <th class="text-center">Status</th>
-                                            <th class="text-center" style="width: 8%">Rincian</th>
-                                        </tr>
-                                    `;
+                                                        <tr>
+                                                            <th class="text-center" style="width: 4%">No</th>
+                                                            <th>Kecamatan</th>
+                                                            <th class="text-end">Baku Lahan (Ha)</th>
+                                                            <th class="text-end">Puso MH (Ha)</th>
+                                                            <th class="text-end">Puso MK (Ha)</th>
+                                                            <th class="text-end">Total Puso (Ha)</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="text-center" style="width: 8%">Rincian</th>
+                                                        </tr>
+                                                    `;
                 } else {
                     thead.innerHTML = `
-                                        <tr>
-                                            <th class="text-center" style="width: 4%">No</th>
-                                            <th>Kecamatan</th>
-                                            <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
-                                            <th class="text-end">${katConfig.target_sub1_label}</th>
-                                            <th class="text-end">${katConfig.target_sub2_label}</th>
-                                            <th class="text-end">Target Total</th>
-                                            <th class="text-end">${katConfig.realisasi_sub1_label}</th>
-                                            <th class="text-end">${katConfig.realisasi_sub2_label}</th>
-                                            <th class="text-end">${currentKategori === 'produktivitas' ? 'Rata-rata Tahunan' : 'Total Realisasi'}</th>
-                                            <th class="text-center">Capaian</th>
-                                            <th class="text-center" style="width: 8%">Rincian</th>
-                                        </tr>
-                                    `;
+                                                        <tr>
+                                                            <th class="text-center" style="width: 4%">No</th>
+                                                            <th>Kecamatan</th>
+                                                            <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
+                                                            <th class="text-end">${katConfig.target_sub1_label}</th>
+                                                            <th class="text-end">${katConfig.target_sub2_label}</th>
+                                                            <th class="text-end">Target Total</th>
+                                                            <th class="text-end">${katConfig.realisasi_sub1_label}</th>
+                                                            <th class="text-end">${katConfig.realisasi_sub2_label}</th>
+                                                            <th class="text-end">${currentKategori === 'produktivitas' ? 'Rata-rata Tahunan' : 'Total Realisasi'}</th>
+                                                            <th class="text-center">Capaian</th>
+                                                            <th class="text-center" style="width: 8%">Rincian</th>
+                                                        </tr>
+                                                    `;
                 }
             }
 
@@ -2420,40 +2420,40 @@
                             : `<span class="badge bg-success">Aman (Nihil)</span>`;
 
                         tr.innerHTML = `
-                                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                                            <td><strong>${row.kecamatan}</strong></td>
-                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end ${totPuso > 0 ? 'text-danger fw-bold' : 'text-success'}">${totPuso.toLocaleString('id-ID')}</td>
-                                            <td class="text-center">${statusBadge}</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                                    <i class="bx bx-calendar"></i>
-                                                </button>
-                                            </td>
-                                        `;
+                                                            <td class="text-center">${row.no_urut || idx + 1}</td>
+                                                            <td><strong>${row.kecamatan}</strong></td>
+                                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
+                                                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
+                                                            <td class="text-end ${totPuso > 0 ? 'text-danger fw-bold' : 'text-success'}">${totPuso.toLocaleString('id-ID')}</td>
+                                                            <td class="text-center">${statusBadge}</td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
+                                                                    <i class="bx bx-calendar"></i>
+                                                                </button>
+                                                            </td>
+                                                        `;
                     } else {
                         const isDec = currentKategori === 'produktivitas';
                         const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
 
                         tr.innerHTML = `
-                                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                                            <td><strong>${row.kecamatan}</strong></td>
-                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                                            <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                                            <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                                            <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                                            <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                                            <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                                            <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                                    <i class="bx bx-calendar"></i>
-                                                </button>
-                                            </td>
-                                        `;
+                                                            <td class="text-center">${row.no_urut || idx + 1}</td>
+                                                            <td><strong>${row.kecamatan}</strong></td>
+                                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                                            <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                                                            <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                                                            <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                                                            <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                                                            <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                                                            <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
+                                                                    <i class="bx bx-calendar"></i>
+                                                                </button>
+                                                            </td>
+                                                        `;
                     }
                     tbody.appendChild(tr);
                 });
@@ -2466,17 +2466,17 @@
                     } else if (currentKategori === 'puso') {
                         const affected = rows.filter(r => Number(r.total_realisasi || 0) > 0).length;
                         tfoot.innerHTML = `
-                                            <tr class="table-light">
-                                                <th class="text-center"></th>
-                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
-                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
-                                                <th class="text-end">${Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID')}</th>
-                                                <th class="text-end">${Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID')}</th>
-                                                <th class="text-end ${Number(summary.total_realisasi || 0) > 0 ? 'text-danger fw-bold' : 'text-success'}">${Number(summary.total_realisasi || 0).toLocaleString('id-ID')}</th>
-                                                <th class="text-center"><span class="badge bg-secondary">${affected} Kecamatan</span></th>
-                                                <th class="text-center">-</th>
-                                            </tr>
-                                        `;
+                                                            <tr class="table-light">
+                                                                <th class="text-center"></th>
+                                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
+                                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
+                                                                <th class="text-end">${Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID')}</th>
+                                                                <th class="text-end">${Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID')}</th>
+                                                                <th class="text-end ${Number(summary.total_realisasi || 0) > 0 ? 'text-danger fw-bold' : 'text-success'}">${Number(summary.total_realisasi || 0).toLocaleString('id-ID')}</th>
+                                                                <th class="text-center"><span class="badge bg-secondary">${affected} Kecamatan</span></th>
+                                                                <th class="text-center">-</th>
+                                                            </tr>
+                                                        `;
                     } else if (currentKategori === 'produktivitas') {
                         const formatVal = (v) => Number(v || 0).toFixed(2);
                         const summaryRowObj = {
@@ -2505,24 +2505,24 @@
                         const summaryJson = JSON.stringify(summaryRowObj).replace(/'/g, "&apos;");
 
                         tfoot.innerHTML = `
-                                            <tr class="table-light">
-                                                <th class="text-center"></th>
-                                                <th class="text-uppercase fw-bold text-dark">RATA-RATA KABUPATEN</th>
-                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
-                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
-                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
-                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.target_total)}</th>
-                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
-                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.realisasi_sub2)}</th>
-                                                <th class="text-end text-success fw-bold fs-6">${formatVal(summary.total_realisasi)}</th>
-                                                <th class="text-center"><span class="badge bg-danger px-2 py-1 text-white fs-7">${Number(summary.persentase || 0).toFixed(2)}%</span></th>
-                                                <th class="text-center">
-                                                    <button type="button" class="btn btn-sm btn-danger text-white btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Rata-Rata Kabupaten">
-                                                        <i class="bx bx-calendar"></i>
-                                                    </button>
-                                                </th>
-                                            </tr>
-                                        `;
+                                                            <tr class="table-light">
+                                                                <th class="text-center"></th>
+                                                                <th class="text-uppercase fw-bold text-dark">RATA-RATA KABUPATEN</th>
+                                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
+                                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
+                                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
+                                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.target_total)}</th>
+                                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
+                                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.realisasi_sub2)}</th>
+                                                                <th class="text-end text-success fw-bold fs-6">${formatVal(summary.total_realisasi)}</th>
+                                                                <th class="text-center"><span class="badge bg-danger px-2 py-1 text-white fs-7">${Number(summary.persentase || 0).toFixed(2)}%</span></th>
+                                                                <th class="text-center">
+                                                                    <button type="button" class="btn btn-sm btn-danger text-white btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Rata-Rata Kabupaten">
+                                                                        <i class="bx bx-calendar"></i>
+                                                                    </button>
+                                                                </th>
+                                                            </tr>
+                                                        `;
                     } else {
                         const formatVal = (v) => Number(v || 0).toLocaleString('id-ID');
                         const p = Number(summary.persentase || 0);
@@ -2556,24 +2556,24 @@
                         const summaryJson = JSON.stringify(summaryRowObj).replace(/'/g, "&apos;");
 
                         tfoot.innerHTML = `
-                                            <tr class="table-light">
-                                                <th class="text-center"></th>
-                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
-                                                <th class="text-end">${formatVal(summary.total_sawah)}</th>
-                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
-                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
-                                                <th class="text-end text-primary fw-semibold">${formatVal(summary.target_total)}</th>
-                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
-                                                <th class="text-end">${formatVal(summary.realisasi_sub2)}</th>
-                                                <th class="text-end text-success fw-bold">${formatVal(summary.total_realisasi)}</th>
-                                                <th class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p.toFixed(2)}%</span></th>
-                                                <th class="text-center">
-                                                    <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Total Kabupaten">
-                                                        <i class="bx bx-calendar"></i>
-                                                    </button>
-                                                </th>
-                                            </tr>
-                                        `;
+                                                            <tr class="table-light">
+                                                                <th class="text-center"></th>
+                                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
+                                                                <th class="text-end">${formatVal(summary.total_sawah)}</th>
+                                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
+                                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
+                                                                <th class="text-end text-primary fw-semibold">${formatVal(summary.target_total)}</th>
+                                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
+                                                                <th class="text-end">${formatVal(summary.realisasi_sub2)}</th>
+                                                                <th class="text-end text-success fw-bold">${formatVal(summary.total_realisasi)}</th>
+                                                                <th class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p.toFixed(2)}%</span></th>
+                                                                <th class="text-center">
+                                                                    <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Total Kabupaten">
+                                                                        <i class="bx bx-calendar"></i>
+                                                                    </button>
+                                                                </th>
+                                                            </tr>
+                                                        `;
                     }
                 }
 
@@ -2681,22 +2681,22 @@
             }
 
             document.getElementById('pub_cards_sem1').innerHTML = mSem1.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             document.getElementById('pub_cards_sem2').innerHTML = mSem2.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananPublik');
             if (modalEl) {
@@ -2805,15 +2805,15 @@
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                                            <tr>
-                                                <td class="text-center">${idx + 1}</td>
-                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
-                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
-                                            </tr>
-                                        `;
+                                                            <tr>
+                                                                <td class="text-center">${idx + 1}</td>
+                                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                                                            </tr>
+                                                        `;
                     });
                     tbody.innerHTML = html;
                 }
@@ -2957,16 +2957,20 @@
             const c4Val = document.getElementById('kpiHortiPersen');
 
             if (isDec) {
+                const tarVal = Number(summary.avg_target !== undefined && summary.avg_target !== null ? summary.avg_target : (summary.target_total || 0));
+                const realVal = Number(summary.avg_realisasi !== undefined && summary.avg_realisasi !== null ? summary.avg_realisasi : (summary.total_realisasi || 0));
+                const pVal = Number(summary.persentase || (tarVal > 0 ? (realVal / tarVal) * 100 : 0));
+
                 if (c1Title) c1Title.textContent = 'Baku Sawah Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = 'Target Rata-rata';
-                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+                if (c2Val) c2Val.textContent = tarVal.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
 
                 if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
-                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+                if (c3Val) c3Val.textContent = realVal.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
 
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+                if (c4Val) c4Val.textContent = pVal.toFixed(2) + '%';
             } else if (isPuso) {
                 if (c1Title) c1Title.textContent = 'Baku Sawah Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
@@ -3053,22 +3057,22 @@
             if (thead) {
                 if (isPuso) {
                     thead.innerHTML = `
-                                        <tr>
-                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
-                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
-                                            <th class="text-end" rowspan="2">Baku Lahan (Ha)</th>
-                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
-                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
-                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
-                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
-                                        </tr>
-                                        <tr>
-                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
-                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
-                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
-                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
-                                        </tr>
-                                    `;
+                                                        <tr>
+                                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                                                            <th class="text-end" rowspan="2">Baku Lahan (Ha)</th>
+                                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                                                        </tr>
+                                                        <tr>
+                                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                                                        </tr>
+                                                    `;
                 } else {
                     const targetTitle = isTanam
                         ? `TARGET LUAS TANAM (${unit})`
@@ -3077,27 +3081,27 @@
                     const targetSub2 = isTanam ? 'Target MK' : 'Target Sem 2';
 
                     thead.innerHTML = `
-                                        <tr>
-                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
-                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
-                                            <th class="text-end" rowspan="2">${isTanam ? 'Luas Sawah (Ha)' : 'Luas Baku (Ha)'}</th>
-                                            <th class="text-center th-target" colspan="3">${targetTitle}</th>
-                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
-                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
-                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
-                                            <th class="text-center" rowspan="2">Capaian</th>
-                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-end th-target">${targetSub1}</th>
-                                            <th class="text-end th-target">${targetSub2}</th>
-                                            <th class="text-end th-target fw-bold">Total Target</th>
-                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
-                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
-                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
-                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
-                                        </tr>
-                                    `;
+                                                        <tr>
+                                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                                                            <th class="text-end" rowspan="2">${isTanam ? 'Luas Sawah (Ha)' : 'Luas Baku (Ha)'}</th>
+                                                            <th class="text-center th-target" colspan="3">${targetTitle}</th>
+                                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                                                            <th class="text-center" rowspan="2">Capaian</th>
+                                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="text-end th-target">${targetSub1}</th>
+                                                            <th class="text-end th-target">${targetSub2}</th>
+                                                            <th class="text-end th-target fw-bold">Total Target</th>
+                                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                                                        </tr>
+                                                    `;
                 }
             }
 
@@ -3156,9 +3160,9 @@
                         return `<td class="text-end">${formatVal(val)}</td>`;
                     }).join('');
 
-                    const sub1Val = isTanam
-                        ? (row.jumlah_mh !== undefined && row.jumlah_mh !== null && Number(row.jumlah_mh) > 0 ? Number(row.jumlah_mh) : rowP1Sum)
-                        : (isDec ? (rowP1Sum / 6) : rowP1Sum);
+                    const sub1Val = (row.jumlah_mh !== undefined && row.jumlah_mh !== null && (Number(row.jumlah_mh) > 0 || isDec))
+                        ? Number(row.jumlah_mh)
+                        : rowP1Sum;
                     sumSub1 += sub1Val;
 
                     // Nilai Periode 2 per Bulan
@@ -3170,17 +3174,15 @@
                         return `<td class="text-end">${formatVal(val)}</td>`;
                     }).join('');
 
-                    const sub2Val = isTanam
-                        ? (row.jumlah_mk !== undefined && row.jumlah_mk !== null && Number(row.jumlah_mk) > 0 ? Number(row.jumlah_mk) : rowP2Sum)
-                        : (isDec ? (rowP2Sum / 6) : rowP2Sum);
+                    const sub2Val = (row.jumlah_mk !== undefined && row.jumlah_mk !== null && (Number(row.jumlah_mk) > 0 || isDec))
+                        ? Number(row.jumlah_mk)
+                        : rowP2Sum;
                     sumSub2 += sub2Val;
 
                     // Total Realisasi Baris
-                    const totalRealRow = isDec
-                        ? ((sub1Val + sub2Val) / 2)
-                        : (row.total_realisasi !== undefined && row.total_realisasi !== null && Number(row.total_realisasi) > 0
-                            ? Number(row.total_realisasi)
-                            : (sub1Val + sub2Val));
+                    const totalRealRow = (row.total_realisasi !== undefined && row.total_realisasi !== null && (Number(row.total_realisasi) > 0 || isDec))
+                        ? Number(row.total_realisasi)
+                        : (sub1Val + sub2Val);
                     sumGrandTotal += totalRealRow;
 
                     // Persentase Capaian
@@ -3198,89 +3200,134 @@
 
                     if (isPuso) {
                         tr.innerHTML = `
-                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
-                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
-                                            <td class="text-end">${formatVal(sawah)}</td>
-                                            ${p1Cells}
-                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
-                                            ${p2Cells}
-                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
-                                            <td class="text-end text-danger fw-bold">${formatVal(totalRealRow)}</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
-                                                    <i class="bx bx-calendar"></i>
-                                                </button>
-                                            </td>
-                                        `;
+                                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                                                            <td class="text-end">${formatVal(sawah)}</td>
+                                                            ${p1Cells}
+                                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                                                            ${p2Cells}
+                                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                                                            <td class="text-end text-danger fw-bold">${formatVal(totalRealRow)}</td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                                                    <i class="bx bx-calendar"></i>
+                                                                </button>
+                                                            </td>
+                                                        `;
                     } else {
                         tr.innerHTML = `
-                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
-                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
-                                            <td class="text-end">${formatVal(sawah)}</td>
-                                            <td class="text-end text-muted">${formatVal(t1)}</td>
-                                            <td class="text-end text-muted">${formatVal(t2)}</td>
-                                            <td class="text-end text-primary fw-semibold">${formatVal(tTot)}</td>
-                                            ${p1Cells}
-                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
-                                            ${p2Cells}
-                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
-                                            <td class="text-end text-success fw-bold">${formatVal(totalRealRow)}</td>
-                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
-                                                    <i class="bx bx-calendar"></i>
-                                                </button>
-                                            </td>
-                                        `;
+                                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                                                            <td class="text-end">${formatVal(sawah)}</td>
+                                                            <td class="text-end text-muted">${formatVal(t1)}</td>
+                                                            <td class="text-end text-muted">${formatVal(t2)}</td>
+                                                            <td class="text-end text-primary fw-semibold">${formatVal(tTot)}</td>
+                                                            ${p1Cells}
+                                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                                                            ${p2Cells}
+                                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                                                            <td class="text-end text-success fw-bold">${formatVal(totalRealRow)}</td>
+                                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                                                    <i class="bx bx-calendar"></i>
+                                                                </button>
+                                                            </td>
+                                                        `;
                     }
                     tbody.appendChild(tr);
                 });
 
                 // Render Summary Row di TFOOT
                 if (tfoot) {
-                    const rowCount = rows.length;
-                    const avgOrSum = (v) => isDec ? (v / rowCount) : v;
-
-                    const fSub1 = isDec ? Number(summary.realisasi_sub1 || avgOrSum(sumSub1)) : avgOrSum(sumSub1);
-                    const fSub2 = isDec ? Number(summary.realisasi_sub2 || avgOrSum(sumSub2)) : avgOrSum(sumSub2);
-                    const fTarget1 = isDec ? Number(summary.target_sub1 || sumTarget1) : sumTarget1;
-                    const fTarget2 = isDec ? Number(summary.target_sub2 || sumTarget2) : sumTarget2;
-                    const fTargetTot = isDec ? Number(summary.target_total || sumTargetTot) : sumTargetTot;
-                    const fGrandTotal = isDec ? Number(summary.total_realisasi || avgOrSum(sumGrandTotal)) : avgOrSum(sumGrandTotal);
-                    const fCapaian = isDec ? Number(summary.persentase || 0).toFixed(2) : (sumTargetTot > 0 ? ((fGrandTotal / sumTargetTot) * 100).toFixed(2) : '0');
-
-                    const p1FootCells = sumP1Months.map(v => `<th class="text-end th-period-1">${formatVal(avgOrSum(v))}</th>`).join('');
-                    const p2FootCells = sumP2Months.map(v => `<th class="text-end th-period-2">${formatVal(avgOrSum(v))}</th>`).join('');
-
                     if (isPuso) {
+                        const p1FootCells = sumP1Months.map(v => `<th class="text-end th-period-1">${formatVal(v)}</th>`).join('');
+                        const p2FootCells = sumP2Months.map(v => `<th class="text-end th-period-2">${formatVal(v)}</th>`).join('');
+
                         tfoot.innerHTML = `
                                             <tr>
                                                 <th class="sticky-col-no text-center"></th>
                                                 <th class="sticky-col-kec text-uppercase">TOTAL KABUPATEN</th>
                                                 <th class="text-end">${formatVal(sumSawah)}</th>
                                                 ${p1FootCells}
-                                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                                <th class="text-end th-period-1">${formatVal(sumSub1)}</th>
                                                 ${p2FootCells}
-                                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
-                                                <th class="text-end text-danger">${formatVal(fGrandTotal)}</th>
+                                                <th class="text-end th-period-2">${formatVal(sumSub2)}</th>
+                                                <th class="text-end text-danger">${formatVal(sumGrandTotal)}</th>
                                                 <th class="text-center">-</th>
                                             </tr>
                                         `;
+                    } else if (isDec) {
+                        const formatDec = (v) => Number(v || 0).toFixed(2);
+                        const summaryRowObj = {
+                            kecamatan: 'RATA-RATA KABUPATEN KUNINGAN',
+                            luas_sawah: summary.total_sawah || sumSawah,
+                            target_okmar: summary.target_sub1,
+                            target_asep: summary.target_sub2,
+                            target_total: summary.target_total,
+                            jumlah_mh: summary.realisasi_sub1,
+                            jumlah_mk: summary.realisasi_sub2,
+                            total_realisasi: summary.total_realisasi,
+                            persentase_capaian: summary.persentase,
+                            realisasi_jan: summary.realisasi_jan,
+                            realisasi_feb: summary.realisasi_feb,
+                            realisasi_mar: summary.realisasi_mar,
+                            realisasi_apr: summary.realisasi_apr,
+                            realisasi_mei: summary.realisasi_mei,
+                            realisasi_jun: summary.realisasi_jun,
+                            realisasi_jul: summary.realisasi_jul,
+                            realisasi_ags: summary.realisasi_ags,
+                            realisasi_sep: summary.realisasi_sep,
+                            realisasi_okt: summary.realisasi_okt,
+                            realisasi_nop: summary.realisasi_nop,
+                            realisasi_des: summary.realisasi_des,
+                        };
+                        const summaryJson = JSON.stringify(summaryRowObj).replace(/'/g, "&apos;");
+
+                        const p1FootCells = period1Months.map(m => `<th class="text-end th-period-1">${formatDec(summary[m.key] || 0)}</th>`).join('');
+                        const p2FootCells = period2Months.map(m => `<th class="text-end th-period-2">${formatDec(summary[m.key] || 0)}</th>`).join('');
+                        const pCapaian = Number(summary.persentase || 0).toFixed(2);
+
+                        tfoot.innerHTML = `
+                                            <tr class="table-light">
+                                                <th class="sticky-col-no text-center"></th>
+                                                <th class="sticky-col-kec text-uppercase fw-bold text-dark">RATA-RATA KABUPATEN</th>
+                                                <th class="text-end">${Number(summary.total_sawah || sumSawah).toLocaleString('id-ID')}</th>
+                                                <th class="text-end text-muted">${formatDec(summary.target_sub1)}</th>
+                                                <th class="text-end text-muted">${formatDec(summary.target_sub2)}</th>
+                                                <th class="text-end text-danger fw-bold fs-6">${formatDec(summary.target_total)}</th>
+                                                ${p1FootCells}
+                                                <th class="text-end th-period-1">${formatDec(summary.realisasi_sub1)}</th>
+                                                ${p2FootCells}
+                                                <th class="text-end th-period-2">${formatDec(summary.realisasi_sub2)}</th>
+                                                <th class="text-end text-danger fw-bold fs-6">${formatDec(summary.total_realisasi)}</th>
+                                                <th class="text-center"><span class="badge bg-danger text-white px-2 py-1 fs-7">${pCapaian}%</span></th>
+                                                <th class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-danger text-white btn-horti-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Rata-Rata Kabupaten">
+                                                        <i class="bx bx-calendar"></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        `;
                     } else {
+                        const p1FootCells = sumP1Months.map(v => `<th class="text-end th-period-1">${formatVal(v)}</th>`).join('');
+                        const p2FootCells = sumP2Months.map(v => `<th class="text-end th-period-2">${formatVal(v)}</th>`).join('');
+                        const fCapaian = sumTargetTot > 0 ? ((sumGrandTotal / sumTargetTot) * 100).toFixed(2) : (summary.persentase ? Number(summary.persentase).toFixed(2) : '0');
+
                         tfoot.innerHTML = `
                                             <tr>
                                                 <th class="sticky-col-no text-center"></th>
-                                                <th class="sticky-col-kec text-uppercase">${isDec ? 'RATA-RATA KABUPATEN' : 'TOTAL KABUPATEN'}</th>
+                                                <th class="sticky-col-kec text-uppercase">TOTAL KABUPATEN</th>
                                                 <th class="text-end">${formatVal(sumSawah)}</th>
-                                                <th class="text-end text-muted">${formatVal(fTarget1)}</th>
-                                                <th class="text-end text-muted">${formatVal(fTarget2)}</th>
-                                                <th class="text-end ${isDec ? 'text-danger fw-bold' : 'text-primary'}">${formatVal(fTargetTot)}</th>
+                                                <th class="text-end text-muted">${formatVal(sumTarget1)}</th>
+                                                <th class="text-end text-muted">${formatVal(sumTarget2)}</th>
+                                                <th class="text-end text-primary fw-semibold">${formatVal(sumTargetTot)}</th>
                                                 ${p1FootCells}
-                                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                                <th class="text-end th-period-1">${formatVal(sumSub1)}</th>
                                                 ${p2FootCells}
-                                                <th class="text-end th-period-2 ${isDec ? 'text-danger fw-bold' : ''}">${formatVal(fSub2)}</th>
-                                                <th class="text-end text-success">${formatVal(fGrandTotal)}</th>
-                                                <th class="text-center ${isDec ? 'text-danger fw-bold' : ''}">${fCapaian}%</th>
+                                                <th class="text-end th-period-2">${formatVal(sumSub2)}</th>
+                                                <th class="text-end text-success fw-bold">${formatVal(sumGrandTotal)}</th>
+                                                <th class="text-center"><span class="badge ${Number(fCapaian) >= 100 ? 'badge-capaian-high' : (Number(fCapaian) >= 50 ? 'badge-capaian-medium' : 'badge-capaian-low')} px-2 py-1">${fCapaian}%</span></th>
                                                 <th class="text-center">-</th>
                                             </tr>
                                         `;
@@ -3299,6 +3346,7 @@
                     chartHorti.updateOptions({
                         xaxis: { categories: categories },
                         yaxis: {
+                            decimalsInFloat: 2,
                             title: { text: `${katConfig.label} (${unit})` },
                             labels: {
                                 formatter: function (val) {
@@ -3399,22 +3447,22 @@
             document.getElementById('horti_pub_detail_total').textContent = formatNum(totVal) + ' ' + sat;
 
             document.getElementById('horti_pub_cards_sem1').innerHTML = mSem1.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             document.getElementById('horti_pub_cards_sem2').innerHTML = mSem2.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananHorti');
             if (modalEl) {
@@ -3457,6 +3505,7 @@
                     labels: { rotate: -45, style: { fontSize: '11px' } }
                 },
                 yaxis: {
+                    decimalsInFloat: 2,
                     title: { text: 'Luas (Ha)' },
                     labels: {
                         formatter: function (val) {
@@ -3553,13 +3602,13 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                                        <td class="text-center">${idx + 1}</td>
-                                        <td class="text-center fw-bold text-success">${row.tahun}</td>
-                                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
-                                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
-                                    `;
+                                                        <td class="text-center">${idx + 1}</td>
+                                                        <td class="text-center fw-bold text-success">${row.tahun}</td>
+                                                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
+                                                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
+                                                    `;
                     tbody.appendChild(tr);
                 });
 
@@ -3780,22 +3829,22 @@
                     const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
 
                     tr.innerHTML = `
-                                        <td class="text-center">${row.no_urut || idx + 1}</td>
-                                        <td><strong>${row.kecamatan}</strong></td>
-                                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn btn-sm btn-outline-success btn-perkebunan-pub-detail" data-row='${rowJson}'>
-                                                <i class="bx bx-calendar"></i>
-                                            </button>
-                                        </td>
-                                    `;
+                                                        <td class="text-center">${row.no_urut || idx + 1}</td>
+                                                        <td><strong>${row.kecamatan}</strong></td>
+                                                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                                                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                                                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                                                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                                                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                                                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                                                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-sm btn-outline-success btn-perkebunan-pub-detail" data-row='${rowJson}'>
+                                                                <i class="bx bx-calendar"></i>
+                                                            </button>
+                                                        </td>
+                                                    `;
                     tbody.appendChild(tr);
                 });
 
@@ -3868,22 +3917,22 @@
             ];
 
             document.getElementById('perkebunan_pub_cards_sem1').innerHTML = mSem1.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             document.getElementById('perkebunan_pub_cards_sem2').innerHTML = mSem2.map(m => `
-                                <div class="col-4 col-sm-2">
-                                    <div class="p-2 border rounded bg-white">
-                                        <div class="text-muted small">${m.label}</div>
-                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                                    </div>
-                                </div>
-                            `).join('');
+                                                <div class="col-4 col-sm-2">
+                                                    <div class="p-2 border rounded bg-white">
+                                                        <div class="text-muted small">${m.label}</div>
+                                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                                    </div>
+                                                </div>
+                                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananPerkebunan');
             if (modalEl) {
@@ -3926,6 +3975,7 @@
                     labels: { rotate: -45, style: { fontSize: '11px' } }
                 },
                 yaxis: {
+                    decimalsInFloat: 2,
                     title: { text: 'Luas (Ha)' },
                     labels: {
                         formatter: function (val) {
@@ -3989,15 +4039,15 @@
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                                            <tr>
-                                                <td class="text-center">${idx + 1}</td>
-                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
-                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
-                                            </tr>
-                                        `;
+                                                            <tr>
+                                                                <td class="text-center">${idx + 1}</td>
+                                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                                                            </tr>
+                                                        `;
                     });
                     tbody.innerHTML = html;
                 }

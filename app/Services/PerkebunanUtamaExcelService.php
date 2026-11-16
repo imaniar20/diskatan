@@ -656,16 +656,16 @@ class PerkebunanUtamaExcelService
 
                 // Deteksi pergantian section tabel (Format Vertikal / Multi-Table Dinas)
                 if (str_contains($combinedRow, 'TARGET') || str_contains($combinedRow, 'DATA PUSO') || str_contains($combinedRow, 'REALISASI')) {
-                    if (str_contains($combinedRow, 'TANAM')) {
-                        $currentCategory = 'tanam';
+                    if (str_contains($combinedRow, 'PUSO')) {
+                        $currentCategory = 'puso';
                     } elseif (str_contains($combinedRow, 'PRODUKTIVITAS') || str_contains($combinedRow, 'PRODTIVITAS')) {
                         $currentCategory = 'produktivitas';
+                    } elseif (str_contains($combinedRow, 'TANAM')) {
+                        $currentCategory = 'tanam';
                     } elseif (str_contains($combinedRow, 'PANEN')) {
                         $currentCategory = 'panen';
                     } elseif (str_contains($combinedRow, 'PRODUKSI')) {
                         $currentCategory = 'produksi';
-                    } elseif (str_contains($combinedRow, 'PUSO')) {
-                        $currentCategory = 'puso';
                     }
                 }
 

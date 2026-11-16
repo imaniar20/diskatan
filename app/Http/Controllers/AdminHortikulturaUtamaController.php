@@ -148,31 +148,76 @@ class AdminHortikulturaUtamaController extends Controller
         $totalRealisasiSub2 = $items->sum('jumlah_mk');
         $totalRealisasi = $items->sum('total_realisasi');
 
-        $stats = [
-            'card1_title' => 'Luas Lahan/Sawah',
-            'card1_value' => number_format($totalSawah, 1) . ' Ha',
-            'card1_sub' => 'Total Se-Kabupaten',
-            'card1_icon' => 'bx-map-alt',
-            'card1_badge' => 'bg-label-primary',
+        if ($selectedKategori === 'produktivitas') {
+            $panenRows = HortikulturaUtama::where('tahun', $selectedTahun)->where('komoditas', $selectedKomoditas)->where('kategori', 'panen')->get();
+            $prodRows = HortikulturaUtama::where('tahun', $selectedTahun)->where('komoditas', $selectedKomoditas)->where('kategori', 'produksi')->get();
+            $totPanenTarget = (float) $panenRows->sum('target_total');
+            $totProdTarget = (float) $prodRows->sum('target_total');
+            $totPanenSub1 = (float) $panenRows->sum('jumlah_mh');
+            $totProdSub1 = (float) $prodRows->sum('jumlah_mh');
+            $totPanenSub2 = (float) $panenRows->sum('jumlah_mk');
+            $totProdSub2 = (float) $prodRows->sum('jumlah_mk');
+            $totPanenReal = (float) $panenRows->sum('total_realisasi');
+            $totProdReal = (float) $prodRows->sum('total_realisasi');
 
-            'card2_title' => 'Target Total',
-            'card2_value' => number_format($totalTarget, 1) . ' ' . $activeConfig['satuan'],
-            'card2_sub' => 'Musim Hujan + Kemarau',
-            'card2_icon' => 'bx-target-lock',
-            'card2_badge' => 'bg-label-warning',
+            $avgTarget = $totPanenTarget > 0 ? round(($totProdTarget / $totPanenTarget) * 10, 2) : ($items->count() > 0 ? round($items->avg('target_total'), 2) : 0);
+            $avgSub1 = $totPanenSub1 > 0 ? round(($totProdSub1 / $totPanenSub1) * 10, 2) : ($items->count() > 0 ? round($items->avg('jumlah_mh'), 2) : 0);
+            $avgSub2 = $totPanenSub2 > 0 ? round(($totProdSub2 / $totPanenSub2) * 10, 2) : ($items->count() > 0 ? round($items->avg('jumlah_mk'), 2) : 0);
+            $avgTotal = $totPanenReal > 0 ? round(($totProdReal / $totPanenReal) * 10, 2) : ($items->count() > 0 ? round($items->avg('total_realisasi'), 2) : 0);
+            $persenProdv = $avgTarget > 0 ? round(($avgTotal / $avgTarget) * 100, 2) : 0;
 
-            'card3_title' => 'Total Realisasi',
-            'card3_value' => number_format($totalRealisasi, 1) . ' ' . $activeConfig['satuan'],
-            'card3_sub' => 'Total MH + MK',
-            'card3_icon' => 'bx-check-double',
-            'card3_badge' => 'bg-label-success',
+            $stats = [
+                'card1_title' => 'Target Rata-rata',
+                'card1_value' => $avgTarget . ' Kw/Ha',
+                'card1_sub' => "Target Produktivitas {$selectedKomoditas}",
+                'card1_icon' => 'bx-target-lock',
+                'card1_badge' => 'bg-label-danger',
 
-            'card4_title' => 'Persentase Capaian',
-            'card4_value' => ($totalTarget > 0 ? round(($totalRealisasi / $totalTarget) * 100, 2) : 0) . '%',
-            'card4_sub' => 'Capaian Terhadap Target',
-            'card4_icon' => 'bx-pie-chart-alt',
-            'card4_badge' => 'bg-label-info',
-        ];
+                'card2_title' => 'Rata-rata Jan-Jun',
+                'card2_value' => $avgSub1 . ' Kw/Ha',
+                'card2_sub' => 'Realisasi Semester 1',
+                'card2_icon' => 'bx-calendar-alt',
+                'card2_badge' => 'bg-label-primary',
+
+                'card3_title' => 'Rata-rata Jul-Des',
+                'card3_value' => $avgSub2 . ' Kw/Ha',
+                'card3_sub' => 'Realisasi Semester 2',
+                'card3_icon' => 'bx-calendar',
+                'card3_badge' => 'bg-label-info',
+
+                'card4_title' => 'Rata-rata Tahunan',
+                'card4_value' => $avgTotal . ' Kw/Ha',
+                'card4_sub' => "Capaian: {$persenProdv}%",
+                'card4_icon' => 'bx-line-chart',
+                'card4_badge' => 'bg-label-success',
+            ];
+        } else {
+            $stats = [
+                'card1_title' => 'Luas Lahan/Sawah',
+                'card1_value' => number_format($totalSawah, 1) . ' Ha',
+                'card1_sub' => 'Total Se-Kabupaten',
+                'card1_icon' => 'bx-map-alt',
+                'card1_badge' => 'bg-label-primary',
+
+                'card2_title' => 'Target Total',
+                'card2_value' => number_format($totalTarget, 1) . ' ' . $activeConfig['satuan'],
+                'card2_sub' => 'Semester 1 + Semester 2',
+                'card2_icon' => 'bx-target-lock',
+                'card2_badge' => 'bg-label-warning',
+
+                'card3_title' => 'Total Realisasi',
+                'card3_value' => number_format($totalRealisasi, 1) . ' ' . $activeConfig['satuan'],
+                'card3_sub' => 'Total Realisasi',
+                'card3_icon' => 'bx-check-double',
+                'card3_badge' => 'bg-label-success',
+
+                'card4_title' => 'Persentase Capaian',
+                'card4_value' => ($totalTarget > 0 ? round(($totalRealisasi / $totalTarget) * 100, 2) : 0) . '%',
+                'card4_sub' => 'Capaian Terhadap Target',
+                'card4_icon' => 'bx-pie-chart-alt',
+                'card4_badge' => 'bg-label-info',
+            ];
+        }
 
         $chartCategories = $items->pluck('kecamatan')->toArray();
         $chartTarget = $items->pluck('target_total')->toArray();

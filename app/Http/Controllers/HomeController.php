@@ -762,6 +762,7 @@ class HomeController extends Controller
 
                     $hProdv['avg_target'] = $hProdv['target_total'];
                     $hProdv['avg_realisasi'] = $hProdv['total_realisasi'];
+                    $hProdv['persentase_sub'] = $hProdv['target_sub1'] > 0 ? round(($hProdv['realisasi_sub1'] / $hProdv['target_sub1']) * 100, 2) : 0;
                     $hProdv['persentase'] = $hProdv['target_total'] > 0 ? round(($hProdv['total_realisasi'] / $hProdv['target_total']) * 100, 2) : 0;
                 }
             }
