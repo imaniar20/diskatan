@@ -305,9 +305,9 @@
                             <td class="text-end">{{ number_format($row->luas_sawah, 0) }}</td>
 
                             @if ($selectedKategori !== 'puso')
-                                <td class="text-end text-muted">{{ number_format($row->target_okmar, 0) }}</td>
-                                <td class="text-end text-muted">{{ number_format($row->target_asep, 0) }}</td>
-                                <td class="text-end text-primary fw-semibold">{{ number_format($row->target_total, 0) }}</td>
+                                <td class="text-end text-muted">{{ $selectedKategori === 'produktivitas' ? number_format($row->target_okmar, 2) : number_format($row->target_okmar, 0) }}</td>
+                                <td class="text-end text-muted">{{ $selectedKategori === 'produktivitas' ? number_format($row->target_asep, 2) : number_format($row->target_asep, 0) }}</td>
+                                <td class="text-end text-primary fw-semibold">{{ $selectedKategori === 'produktivitas' ? number_format($row->target_total, 2) : number_format($row->target_total, 0) }}</td>
                             @endif
 
                             <td class="text-end">
@@ -395,6 +395,45 @@
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot class="table-light fw-bold">
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-uppercase fw-bold text-dark">{{ $selectedKategori === 'produktivitas' ? 'RATA-RATA KABUPATEN' : 'TOTAL KABUPATEN' }}</th>
+                        <th class="text-end">{{ number_format($totalSawah, 0, ',', '.') }}</th>
+                        @if ($selectedKategori === 'produktivitas')
+                            @php
+                                $tSub1 = $totPanenSub1 > 0 ? ($totProdSub1 / $totPanenSub1) * 10 : 0;
+                                $tSub2 = $totPanenSub2 > 0 ? ($totProdSub2 / $totPanenSub2) * 10 : 0;
+                                $pCapaian = $avgTarget > 0 ? ($avgTotal / $avgTarget) * 100 : 0;
+                            @endphp
+                            <th class="text-end text-muted">{{ number_format($tSub1, 2, ',', '.') }}</th>
+                            <th class="text-end text-muted">{{ number_format($tSub2, 2, ',', '.') }}</th>
+                            <th class="text-end text-danger fw-bold fs-6">{{ number_format($avgTarget, 2, ',', '.') }}</th>
+                            <th class="text-end">{{ number_format($avgSub1, 2, ',', '.') }}</th>
+                            <th class="text-end text-danger fw-bold fs-6">{{ number_format($avgSub2, 2, ',', '.') }}</th>
+                            <th class="text-end text-success fw-bold fs-6">{{ number_format($avgTotal, 2, ',', '.') }}</th>
+                            <th class="text-center"><span class="badge bg-danger px-2 py-1 text-white fs-7">{{ number_format($pCapaian, 2, ',', '.') }}%</span></th>
+                            <th class="text-center">-</th>
+                        @elseif ($selectedKategori === 'puso')
+                            <th class="text-end">{{ number_format($totalRealisasiSub1, 0, ',', '.') }}</th>
+                            <th class="text-end">{{ number_format($totalRealisasiSub2, 0, ',', '.') }}</th>
+                            <th class="text-end text-danger fw-bold fs-6">{{ number_format($totalRealisasi, 0, ',', '.') }}</th>
+                            <th class="text-center">-</th>
+                        @else
+                            @php
+                                $pCapaian = $totalTarget > 0 ? ($totalRealisasi / $totalTarget) * 100 : 0;
+                            @endphp
+                            <th class="text-end text-muted">{{ number_format($totalTargetSub1, 0, ',', '.') }}</th>
+                            <th class="text-end text-muted">{{ number_format($totalTargetSub2, 0, ',', '.') }}</th>
+                            <th class="text-end text-primary fw-semibold">{{ number_format($totalTarget, 0, ',', '.') }}</th>
+                            <th class="text-end">{{ number_format($totalRealisasiSub1, 0, ',', '.') }}</th>
+                            <th class="text-end">{{ number_format($totalRealisasiSub2, 0, ',', '.') }}</th>
+                            <th class="text-end text-success fw-bold fs-6">{{ number_format($totalRealisasi, 0, ',', '.') }}</th>
+                            <th class="text-center"><span class="badge bg-success px-2 py-1 text-white fs-7">{{ number_format($pCapaian, 2, ',', '.') }}%</span></th>
+                            <th class="text-center">-</th>
+                        @endif
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>

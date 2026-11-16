@@ -506,6 +506,18 @@ class HomeController extends Controller
             SUM(target_okmar) as target_okmar,
             SUM(target_asep) as target_asep,
             SUM(target_total) as target_total,
+            SUM(realisasi_okt) as realisasi_okt,
+            SUM(realisasi_nop) as realisasi_nop,
+            SUM(realisasi_des) as realisasi_des,
+            SUM(realisasi_jan) as realisasi_jan,
+            SUM(realisasi_feb) as realisasi_feb,
+            SUM(realisasi_mar) as realisasi_mar,
+            SUM(realisasi_apr) as realisasi_apr,
+            SUM(realisasi_mei) as realisasi_mei,
+            SUM(realisasi_jun) as realisasi_jun,
+            SUM(realisasi_jul) as realisasi_jul,
+            SUM(realisasi_ags) as realisasi_ags,
+            SUM(realisasi_sep) as realisasi_sep,
             SUM(jumlah_mh) as realisasi_mh,
             SUM(jumlah_mk) as realisasi_mk,
             SUM(total_realisasi) as total_realisasi,
@@ -523,6 +535,18 @@ class HomeController extends Controller
                 'target_sub1' => (float) $sr->target_okmar,
                 'target_sub2' => (float) $sr->target_asep,
                 'target_total' => (float) $sr->target_total,
+                'realisasi_okt' => (float) $sr->realisasi_okt,
+                'realisasi_nop' => (float) $sr->realisasi_nop,
+                'realisasi_des' => (float) $sr->realisasi_des,
+                'realisasi_jan' => (float) $sr->realisasi_jan,
+                'realisasi_feb' => (float) $sr->realisasi_feb,
+                'realisasi_mar' => (float) $sr->realisasi_mar,
+                'realisasi_apr' => (float) $sr->realisasi_apr,
+                'realisasi_mei' => (float) $sr->realisasi_mei,
+                'realisasi_jun' => (float) $sr->realisasi_jun,
+                'realisasi_jul' => (float) $sr->realisasi_jul,
+                'realisasi_ags' => (float) $sr->realisasi_ags,
+                'realisasi_sep' => (float) $sr->realisasi_sep,
                 'realisasi_sub1' => (float) $sr->realisasi_mh,
                 'realisasi_sub2' => (float) $sr->realisasi_mk,
                 'total_realisasi' => (float) $sr->total_realisasi,
@@ -530,6 +554,48 @@ class HomeController extends Controller
                 'avg_realisasi' => round((float) $sr->avg_realisasi, 2),
                 'persentase' => (float) $sr->target_total > 0 ? round(((float) $sr->total_realisasi / (float) $sr->target_total) * 100, 2) : 0,
             ];
+        }
+
+        // Hitung ulang ringkasan produktivitas se-kabupaten sesuai rumus Excel: (Produksi Ton / Panen Ha) * 10
+        if (isset($padiPalawijaSummaryGrouped['produktivitas'])) {
+            $monthKeys = ['okt', 'nop', 'des', 'jan', 'feb', 'mar', 'apr', 'mei', 'jun', 'jul', 'ags', 'sep'];
+            foreach ($padiPalawijaSummaryGrouped['produktivitas'] as $kmd => &$prodv) {
+                $panen = $padiPalawijaSummaryGrouped['panen'][$kmd] ?? null;
+                $produksi = $padiPalawijaSummaryGrouped['produksi'][$kmd] ?? null;
+                if ($panen && $produksi) {
+                    $tPanen1 = (float) $panen['target_sub1'];
+                    $tPanen2 = (float) $panen['target_sub2'];
+                    $tPanenTot = (float) $panen['target_total'];
+                    $rPanen1 = (float) $panen['realisasi_sub1'];
+                    $rPanen2 = (float) $panen['realisasi_sub2'];
+                    $rPanenTot = (float) $panen['total_realisasi'];
+
+                    $tProd1 = (float) $produksi['target_sub1'];
+                    $tProd2 = (float) $produksi['target_sub2'];
+                    $tProdTot = (float) $produksi['target_total'];
+                    $rProd1 = (float) $produksi['realisasi_sub1'];
+                    $rProd2 = (float) $produksi['realisasi_sub2'];
+                    $rProdTot = (float) $produksi['total_realisasi'];
+
+                    $prodv['target_sub1'] = $tPanen1 > 0 ? round(($tProd1 / $tPanen1) * 10, 2) : 0;
+                    $prodv['target_sub2'] = $tPanen2 > 0 ? round(($tProd2 / $tPanen2) * 10, 2) : 0;
+                    $prodv['target_total'] = $tPanenTot > 0 ? round(($tProdTot / $tPanenTot) * 10, 2) : 0;
+                    $prodv['realisasi_sub1'] = $rPanen1 > 0 ? round(($rProd1 / $rPanen1) * 10, 2) : 0;
+                    $prodv['realisasi_sub2'] = $rPanen2 > 0 ? round(($rProd2 / $rPanen2) * 10, 2) : 0;
+                    $prodv['total_realisasi'] = $rPanenTot > 0 ? round(($rProdTot / $rPanenTot) * 10, 2) : 0;
+
+                    foreach ($monthKeys as $mk) {
+                        $pM = (float) ($panen['realisasi_' . $mk] ?? 0);
+                        $prM = (float) ($produksi['realisasi_' . $mk] ?? 0);
+                        $prodv['realisasi_' . $mk] = $pM > 0 ? round(($prM / $pM) * 10, 2) : 0;
+                    }
+
+                    $prodv['avg_target'] = $prodv['target_total'];
+                    $prodv['avg_realisasi'] = $prodv['total_realisasi'];
+                    $prodv['persentase'] = $prodv['target_total'] > 0 ? round(($prodv['total_realisasi'] / $prodv['target_total']) * 100, 2) : 0;
+                }
+            }
+            unset($prodv);
         }
 
         $padiPalawijaData = $padiPalawijaGrouped['tanam'] ?? [];
@@ -610,6 +676,18 @@ class HomeController extends Controller
             SUM(target_okmar) as target_okmar,
             SUM(target_asep) as target_asep,
             SUM(target_total) as target_total,
+            SUM(realisasi_okt) as realisasi_okt,
+            SUM(realisasi_nop) as realisasi_nop,
+            SUM(realisasi_des) as realisasi_des,
+            SUM(realisasi_jan) as realisasi_jan,
+            SUM(realisasi_feb) as realisasi_feb,
+            SUM(realisasi_mar) as realisasi_mar,
+            SUM(realisasi_apr) as realisasi_apr,
+            SUM(realisasi_mei) as realisasi_mei,
+            SUM(realisasi_jun) as realisasi_jun,
+            SUM(realisasi_jul) as realisasi_jul,
+            SUM(realisasi_ags) as realisasi_ags,
+            SUM(realisasi_sep) as realisasi_sep,
             SUM(jumlah_mh) as realisasi_mh,
             SUM(jumlah_mk) as realisasi_mk,
             SUM(total_realisasi) as total_realisasi,
@@ -627,6 +705,18 @@ class HomeController extends Controller
                 'target_sub1' => (float) $sr->target_okmar,
                 'target_sub2' => (float) $sr->target_asep,
                 'target_total' => (float) $sr->target_total,
+                'realisasi_okt' => (float) $sr->realisasi_okt,
+                'realisasi_nop' => (float) $sr->realisasi_nop,
+                'realisasi_des' => (float) $sr->realisasi_des,
+                'realisasi_jan' => (float) $sr->realisasi_jan,
+                'realisasi_feb' => (float) $sr->realisasi_feb,
+                'realisasi_mar' => (float) $sr->realisasi_mar,
+                'realisasi_apr' => (float) $sr->realisasi_apr,
+                'realisasi_mei' => (float) $sr->realisasi_mei,
+                'realisasi_jun' => (float) $sr->realisasi_jun,
+                'realisasi_jul' => (float) $sr->realisasi_jul,
+                'realisasi_ags' => (float) $sr->realisasi_ags,
+                'realisasi_sep' => (float) $sr->realisasi_sep,
                 'realisasi_sub1' => (float) $sr->realisasi_mh,
                 'realisasi_sub2' => (float) $sr->realisasi_mk,
                 'total_realisasi' => (float) $sr->total_realisasi,
@@ -634,6 +724,48 @@ class HomeController extends Controller
                 'avg_realisasi' => round((float) $sr->avg_realisasi, 2),
                 'persentase' => (float) $sr->target_total > 0 ? round(((float) $sr->total_realisasi / (float) $sr->target_total) * 100, 2) : 0,
             ];
+        }
+
+        // Hitung ulang ringkasan produktivitas hortikultura se-kabupaten: (Produksi Ton / Panen Ha) * 10
+        if (isset($hortikulturaSummaryGrouped['produktivitas'])) {
+            $monthKeys = ['okt', 'nop', 'des', 'jan', 'feb', 'mar', 'apr', 'mei', 'jun', 'jul', 'ags', 'sep'];
+            foreach ($hortikulturaSummaryGrouped['produktivitas'] as $kmd => &$hProdv) {
+                $hPanen = $hortikulturaSummaryGrouped['panen'][$kmd] ?? null;
+                $hProduksi = $hortikulturaSummaryGrouped['produksi'][$kmd] ?? null;
+                if ($hPanen && $hProduksi) {
+                    $tPanen1 = (float) $hPanen['target_sub1'];
+                    $tPanen2 = (float) $hPanen['target_sub2'];
+                    $tPanenTot = (float) $hPanen['target_total'];
+                    $rPanen1 = (float) $hPanen['realisasi_sub1'];
+                    $rPanen2 = (float) $hPanen['realisasi_sub2'];
+                    $rPanenTot = (float) $hPanen['total_realisasi'];
+
+                    $tProd1 = (float) $hProduksi['target_sub1'];
+                    $tProd2 = (float) $hProduksi['target_sub2'];
+                    $tProdTot = (float) $hProduksi['target_total'];
+                    $rProd1 = (float) $hProduksi['realisasi_sub1'];
+                    $rProd2 = (float) $hProduksi['realisasi_sub2'];
+                    $rProdTot = (float) $hProduksi['total_realisasi'];
+
+                    $hProdv['target_sub1'] = $tPanen1 > 0 ? round(($tProd1 / $tPanen1) * 10, 2) : 0;
+                    $hProdv['target_sub2'] = $tPanen2 > 0 ? round(($tProd2 / $tPanen2) * 10, 2) : 0;
+                    $hProdv['target_total'] = $tPanenTot > 0 ? round(($tProdTot / $tPanenTot) * 10, 2) : 0;
+                    $hProdv['realisasi_sub1'] = $rPanen1 > 0 ? round(($rProd1 / $rPanen1) * 10, 2) : 0;
+                    $hProdv['realisasi_sub2'] = $rPanen2 > 0 ? round(($rProd2 / $rPanen2) * 10, 2) : 0;
+                    $hProdv['total_realisasi'] = $rPanenTot > 0 ? round(($rProdTot / $rPanenTot) * 10, 2) : 0;
+
+                    foreach ($monthKeys as $mk) {
+                        $pM = (float) ($hPanen['realisasi_' . $mk] ?? 0);
+                        $prM = (float) ($hProduksi['realisasi_' . $mk] ?? 0);
+                        $hProdv['realisasi_' . $mk] = $pM > 0 ? round(($prM / $pM) * 10, 2) : 0;
+                    }
+
+                    $hProdv['avg_target'] = $hProdv['target_total'];
+                    $hProdv['avg_realisasi'] = $hProdv['total_realisasi'];
+                    $hProdv['persentase'] = $hProdv['target_total'] > 0 ? round(($hProdv['total_realisasi'] / $hProdv['target_total']) * 100, 2) : 0;
+                }
+            }
+            unset($hProdv);
         }
 
         $hortikulturaUtamaData = $hortikulturaGrouped['tanam'] ?? [];

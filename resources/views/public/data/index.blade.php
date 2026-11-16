@@ -527,6 +527,7 @@
             color: #fff !important;
             box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
         }
+
         .btn-padi-kat-pill {
             padding: 8px 18px;
             font-size: 0.88rem;
@@ -541,21 +542,44 @@
             align-items: center;
             gap: 6px;
         }
+
         .btn-padi-kat-pill:hover {
             background: #f8fafc;
             color: #1e293b;
             border-color: #cbd5e1;
         }
+
         .btn-padi-kat-pill.active {
             background: #16a34a;
             color: #fff !important;
             border-color: #16a34a;
             box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
         }
-        .btn-padi-kat-pill.active[data-kategori="panen"] { background: #2563eb; border-color: #2563eb; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
-        .btn-padi-kat-pill.active[data-kategori="produksi"] { background: #d97706; border-color: #d97706; box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25); }
-        .btn-padi-kat-pill.active[data-kategori="produktivitas"] { background: #0891b2; border-color: #0891b2; box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25); }
-        .btn-padi-kat-pill.active[data-kategori="puso"] { background: #dc2626; border-color: #dc2626; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25); }
+
+        .btn-padi-kat-pill.active[data-kategori="panen"] {
+            background: #2563eb;
+            border-color: #2563eb;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-padi-kat-pill.active[data-kategori="produksi"] {
+            background: #d97706;
+            border-color: #d97706;
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+        }
+
+        .btn-padi-kat-pill.active[data-kategori="produktivitas"] {
+            background: #0891b2;
+            border-color: #0891b2;
+            box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+        }
+
+        .btn-padi-kat-pill.active[data-kategori="puso"] {
+            background: #dc2626;
+            border-color: #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+        }
+
         .stat-card-padi {
             background: #ffffff;
             border-radius: 12px;
@@ -593,6 +617,7 @@
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
             border: 1px solid #cbd5e1;
         }
+
         .btn-subsector {
             border-radius: 40px;
             font-weight: 600;
@@ -608,24 +633,29 @@
             outline: none !important;
             text-decoration: none;
         }
+
         .btn-subsector i {
             color: #16a34a !important;
             font-size: 1.15rem;
             transition: color 0.25s ease;
         }
+
         .btn-subsector:hover:not(.active) {
             color: #15803d !important;
             background: rgba(255, 255, 255, 0.85);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
+
         .btn-subsector:hover:not(.active) i {
             color: #15803d !important;
         }
+
         .btn-subsector.active {
             background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
             color: #ffffff !important;
             box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
         }
+
         .btn-subsector.active i {
             color: #ffffff !important;
         }
@@ -640,6 +670,7 @@
             gap: 6px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
+
         .btn-mode-switch {
             border: 1px solid transparent;
             outline: none !important;
@@ -656,25 +687,30 @@
             cursor: pointer;
             text-decoration: none;
         }
+
         .btn-mode-switch i {
             color: #16a34a !important;
             font-size: 1.1rem;
             transition: color 0.25s ease;
         }
+
         .btn-mode-switch:hover:not(.active) {
             background: #ffffff;
             color: #0f172a !important;
             border-color: #e2e8f0;
         }
+
         .btn-mode-switch:hover:not(.active) i {
             color: #15803d !important;
         }
+
         .btn-mode-switch.active {
             background: #16a34a !important;
             color: #ffffff !important;
             border-color: #16a34a !important;
             box-shadow: 0 3px 10px rgba(22, 163, 74, 0.28);
         }
+
         .btn-mode-switch.active i {
             color: #ffffff !important;
         }
@@ -685,12 +721,14 @@
             border-collapse: separate;
             border-spacing: 0;
         }
+
         .table-matrix-monthly th,
         .table-matrix-monthly td {
             white-space: nowrap;
             padding: 0.45rem 0.55rem;
             vertical-align: middle;
         }
+
         .table-matrix-monthly thead th {
             font-size: 0.76rem;
             font-weight: 600;
@@ -702,41 +740,48 @@
             z-index: 5;
             background-color: #f8fafc;
         }
+
         .table-matrix-monthly thead tr:nth-child(2) th {
             top: 32px;
             z-index: 5;
             font-size: 0.72rem;
         }
+
         .table-matrix-monthly .th-period-1 {
             background-color: #ecfdf5 !important;
             color: #065f46;
             border-left: 1px solid #a7f3d0;
             border-right: 1px solid #a7f3d0;
         }
+
         .table-matrix-monthly .th-period-2 {
             background-color: #fffbeb !important;
             color: #92400e;
             border-left: 1px solid #fde68a;
             border-right: 1px solid #fde68a;
         }
+
         .table-matrix-monthly .th-target {
             background-color: #eff6ff !important;
             color: #1e40af;
             border-left: 1px solid #bfdbfe;
             border-right: 1px solid #bfdbfe;
         }
+
         .table-matrix-monthly .col-period-subtotal-1 {
             background-color: rgba(16, 185, 129, 0.08) !important;
             font-weight: 600;
             color: #047857;
             border-right: 1px solid #a7f3d0;
         }
+
         .table-matrix-monthly .col-period-subtotal-2 {
             background-color: rgba(245, 158, 11, 0.08) !important;
             font-weight: 600;
             color: #b45309;
             border-right: 1px solid #fde68a;
         }
+
         .table-matrix-monthly .sticky-col-no {
             position: sticky;
             left: 0;
@@ -746,6 +791,7 @@
             width: 42px;
             text-align: center;
         }
+
         .table-matrix-monthly .sticky-col-kec {
             position: sticky;
             left: 42px;
@@ -754,27 +800,32 @@
             min-width: 145px;
             box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.12);
         }
+
         .table-matrix-monthly thead th.sticky-col-no,
         .table-matrix-monthly thead th.sticky-col-kec {
             z-index: 7 !important;
             background-color: #f1f5f9 !important;
         }
+
         .table-matrix-monthly tfoot th.sticky-col-no,
         .table-matrix-monthly tfoot th.sticky-col-kec {
             z-index: 7 !important;
             background-color: #f1f5f9 !important;
         }
+
         .table-matrix-monthly tbody tr:hover td.sticky-col-no,
         .table-matrix-monthly tbody tr:hover td.sticky-col-kec {
             background-color: #f8fafc;
         }
+
         .table-matrix-monthly tfoot {
             position: sticky;
             bottom: 0;
             z-index: 6;
             background-color: #f1f5f9;
-            box-shadow: 0 -2px 5px rgba(0,0,0,0.06);
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.06);
         }
+
         .table-matrix-monthly tfoot th {
             border-top: 2px solid #cbd5e1;
             font-size: 0.8rem;
@@ -819,7 +870,8 @@
                     </li>
 
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pertanian" type="button" id="tab-pertanian-btn">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pertanian" type="button"
+                            id="tab-pertanian-btn">
                             <i class='bx bx-spa text-pils'></i>
                             <span class="ms-2 text-pils">Pertanian</span>
                         </button>
@@ -951,10 +1003,12 @@
                             <!-- Segmented Switcher Data Utama vs Data Tahunan -->
                             <div class="d-flex justify-content-center mb-4">
                                 <div class="segmented-mode-switcher">
-                                    <button type="button" class="btn-mode-switch active" data-sub="tanaman-pangan" data-mode="utama">
+                                    <button type="button" class="btn-mode-switch active" data-sub="tanaman-pangan"
+                                        data-mode="utama">
                                         <i class="bx bx-bar-chart-alt-2"></i> Data Utama (Padi & Palawija)
                                     </button>
-                                    <button type="button" class="btn-mode-switch" data-sub="tanaman-pangan" data-mode="tahunan">
+                                    <button type="button" class="btn-mode-switch" data-sub="tanaman-pangan"
+                                        data-mode="tahunan">
                                         <i class="bx bx-line-chart"></i> Tanaman Pangan {{ $tanamanPanganTahunCount }} Tahun
                                     </button>
                                 </div>
@@ -963,21 +1017,27 @@
                             <!-- Mode Utama: Padi & Palawija (Kecamatan & Bulanan) -->
                             <div class="mode-container" id="pangan-mode-utama">
                                 <!-- Selector Tahun Bar -->
-                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                <div
+                                    class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
                                     <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
                                         <label for="publicSelectTahun" class="fw-bold text-success mb-0 text-nowrap">
                                             <i class="bx bx-calendar me-1"></i> Pilih Tahun:
                                         </label>
-                                        <select id="publicSelectTahun" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                        <select id="publicSelectTahun"
+                                            class="form-select form-select-sm fw-bold border-success text-success"
+                                            style="width: 120px;"
                                             onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
                                             @foreach ($availableYears as $yr)
-                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div>
-                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="padiActiveBadge">
-                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Padi Tahun {{ $selectedTahun }}
+                                        <span class="badge bg-light text-success border border-success px-3 py-2"
+                                            id="padiActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Padi Tahun
+                                            {{ $selectedTahun }}
                                         </span>
                                     </div>
                                 </div>
@@ -1004,7 +1064,9 @@
                                 <!-- Sub Pills Komoditas -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($komoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-padi-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-leaf"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1029,7 +1091,8 @@
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" id="kpiCard3Border" style="border-left-color: #10b981;">
                                             <span class="text-muted small" id="kpiCard3Title">Realisasi Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiRealisasi">0 Ha
+                                            </h4>
                                             <small class="text-secondary" id="kpiCard3Sub">Total MH + MK</small>
                                         </div>
                                     </div>
@@ -1044,9 +1107,11 @@
 
                                 <!-- Chart Target vs Realisasi per Kecamatan -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success" id="chartPadiTitle">
-                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam per Kecamatan (Ha)
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Luas Tanam
+                                            per Kecamatan (Ha)
                                         </h6>
                                         <span class="badge bg-success" id="chartKomoditasBadge">Padi</span>
                                     </div>
@@ -1059,12 +1124,14 @@
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-white py-3">
                                         <h6 class="mb-0 fw-bold text-success" id="tablePadiTitle">
-                                            <i class="bx bx-table me-1"></i> Data Rincian Luas Tanam per Kecamatan (Tahun {{ $selectedTahun }})
+                                            <i class="bx bx-table me-1"></i> Data Rincian Luas Tanam per Kecamatan (Tahun
+                                            {{ $selectedTahun }})
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tablePadiPalawija">
+                                            <table class="table table-striped table-hover align-middle w-100"
+                                                id="tablePadiPalawija">
                                                 <thead class="table-light" id="theadPadiPalawija">
                                                     <tr>
                                                         <th class="text-center" style="width: 4%">No</th>
@@ -1081,6 +1148,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tbodyPadiPalawija"></tbody>
+                                                <tfoot class="table-light fw-bold" id="tfootPadiPalawija"></tfoot>
                                             </table>
                                         </div>
                                     </div>
@@ -1092,7 +1160,9 @@
                                 <!-- Sub Pills Komoditas Tanaman Pangan -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($tanamanPanganKomoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-pangan-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-spa"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1103,28 +1173,32 @@
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                             <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPanganTanam">0 Ha
+                                            </h4>
                                             <small class="text-secondary">Satuan: Hektar (Ha)</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #3b82f6;">
                                             <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPanganPanen">0 Ha
+                                            </h4>
                                             <small class="text-secondary">Satuan: Hektar (Ha)</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                             <span class="text-muted small">Rata-rata Produktivitas</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPanganProdv">0 Kw/Ha
+                                            </h4>
                                             <small class="text-secondary">Satuan: Kw/Ha</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
                                             <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0 Ton</h4>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPanganProduksi">0
+                                                Ton</h4>
                                             <small class="text-secondary">Satuan: Ton</small>
                                         </div>
                                     </div>
@@ -1132,11 +1206,14 @@
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPanganKomoditasTitle">Padi</span>
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
+                                                id="chartPanganKomoditasTitle">Padi</span>
                                         </h6>
-                                        <span class="badge bg-warning text-dark">Tanaman Pangan {{ $tanamanPanganTahunCount }} Tahun</span>
+                                        <span class="badge bg-warning text-dark">Tanaman Pangan
+                                            {{ $tanamanPanganTahunCount }} Tahun</span>
                                     </div>
                                     <div class="card-body">
                                         <div id="chartPanganPublic"></div>
@@ -1145,14 +1222,17 @@
 
                                 <!-- Tabel Detail Per Tahun -->
                                 <div class="card shadow-sm">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePanganTitle">Padi</span>
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
+                                                id="tablePanganTitle">Padi</span>
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tablePanganPublic">
+                                            <table class="table table-striped table-hover align-middle w-100"
+                                                id="tablePanganPublic">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="text-center" style="width: 5%">No</th>
@@ -1176,10 +1256,12 @@
                             <!-- Segmented Switcher Data Utama vs Data Tahunan -->
                             <div class="d-flex justify-content-center mb-4">
                                 <div class="segmented-mode-switcher">
-                                    <button type="button" class="btn-mode-switch active" data-sub="hortikultura" data-mode="utama">
+                                    <button type="button" class="btn-mode-switch active" data-sub="hortikultura"
+                                        data-mode="utama">
                                         <i class="bx bx-bar-chart-alt-2"></i> Data Utama Hortikultura
                                     </button>
-                                    <button type="button" class="btn-mode-switch" data-sub="hortikultura" data-mode="tahunan">
+                                    <button type="button" class="btn-mode-switch" data-sub="hortikultura"
+                                        data-mode="tahunan">
                                         <i class="bx bx-line-chart"></i> Hortikultura {{ $sayuranTahunCount }} Tahun
                                     </button>
                                 </div>
@@ -1188,37 +1270,47 @@
                             <!-- Mode Utama Hortikultura (Kecamatan & Bulanan) -->
                             <div class="mode-container" id="hortikultura-mode-utama">
                                 <!-- Selector Tahun Bar -->
-                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                <div
+                                    class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
                                     <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
                                         <label for="publicSelectTahunHorti" class="fw-bold text-success mb-0 text-nowrap">
                                             <i class="bx bx-calendar me-1"></i> Pilih Tahun:
                                         </label>
-                                        <select id="publicSelectTahunHorti" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                        <select id="publicSelectTahunHorti"
+                                            class="form-select form-select-sm fw-bold border-success text-success"
+                                            style="width: 120px;"
                                             onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
                                             @foreach ($availableYears as $yr)
-                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div>
-                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="hortiActiveBadge">
-                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Bawang Merah Tahun {{ $selectedTahun }}
+                                        <span class="badge bg-light text-success border border-success px-3 py-2"
+                                            id="hortiActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Bawang Merah Tahun
+                                            {{ $selectedTahun }}
                                         </span>
                                     </div>
                                 </div>
 
                                 <!-- Sub Pills Kategori / Indikator Data -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-                                    <button type="button" class="btn-padi-kat-pill active btn-horti-kat-pill" data-kategori="tanam">
+                                    <button type="button" class="btn-padi-kat-pill active btn-horti-kat-pill"
+                                        data-kategori="tanam">
                                         <i class="bx bx-spa"></i> Luas Tanam (Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="panen">
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill"
+                                        data-kategori="panen">
                                         <i class="bx bx-cut"></i> Luas Panen (Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produksi">
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill"
+                                        data-kategori="produksi">
                                         <i class="bx bx-package"></i> Produksi (Ton)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="produktivitas">
+                                    <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill"
+                                        data-kategori="produktivitas">
                                         <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
                                     </button>
                                     <button type="button" class="btn-padi-kat-pill btn-horti-kat-pill" data-kategori="puso">
@@ -1229,7 +1321,9 @@
                                 <!-- Sub Pills Komoditas Hortikultura -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($sayuranKomoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-horti-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-horti-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-leaf"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1239,22 +1333,25 @@
                                 <div class="row g-3 mb-4">
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi">
-                                            <span class="text-muted small" id="kpiHortiCard1Title">Luas Baku Lahan</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiHortiSawah">0 Ha</h4>
+                                            <span class="text-muted small" id="kpiHortiCard1Title">Baku Sawah Wilayah</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiHortiSawah">0 Ha
+                                            </h4>
                                             <small class="text-secondary">Kabupaten Kuningan</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                             <span class="text-muted small" id="kpiHortiCard2Title">Target</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiHortiTarget">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiHortiTarget">0 Ha
+                                            </h4>
                                             <small class="text-secondary">Musim Hujan + Kemarau</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
                                             <span class="text-muted small" id="kpiHortiCard3Title">Realisasi</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiHortiRealisasi">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiHortiRealisasi">0
+                                                Ha</h4>
                                             <small class="text-secondary">Total Realisasi</small>
                                         </div>
                                     </div>
@@ -1269,9 +1366,11 @@
 
                                 <!-- Chart Target vs Realisasi Hortikultura -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success" id="chartHortiTitle">
-                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Hortikultura per Kecamatan
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi
+                                            Hortikultura per Kecamatan
                                         </h6>
                                         <span class="badge bg-success" id="chartHortiKomoditasBadge">Bawang Merah</span>
                                     </div>
@@ -1282,15 +1381,20 @@
 
                                 <!-- Tabel Detail Per Kecamatan (Format Matriks Bulanan) -->
                                 <div class="card shadow-sm">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap gap-2">
                                         <h6 class="mb-0 fw-bold text-success" id="tableHortiTitle">
-                                            <i class="bx bx-table me-1"></i> Data Rincian Hortikultura per Kecamatan (Tahun {{ $selectedTahun }})
+                                            <i class="bx bx-table me-1"></i> Data Rincian Hortikultura per Kecamatan (Tahun
+                                            {{ $selectedTahun }})
                                         </h6>
-                                        <small class="text-muted"><i class="bx bx-info-circle me-1"></i> Geser tabel secara horizontal untuk melihat semua bulan</small>
+                                        <small class="text-muted"><i class="bx bx-info-circle me-1"></i> Geser tabel secara
+                                            horizontal untuk melihat semua bulan</small>
                                     </div>
                                     <div class="card-body p-0">
                                         <div class="table-responsive" style="max-height: 650px;">
-                                            <table class="table table-striped table-hover align-middle w-100 table-matrix-monthly mb-0" id="tableHortikulturaUtama">
+                                            <table
+                                                class="table table-striped table-hover align-middle w-100 table-matrix-monthly mb-0"
+                                                id="tableHortikulturaUtama">
                                                 <thead class="table-light align-middle" id="theadHortikulturaUtama"></thead>
                                                 <tbody id="tbodyHortikulturaUtama"></tbody>
                                                 <tfoot class="table-light fw-bold" id="tfootHortikulturaUtama"></tfoot>
@@ -1305,7 +1409,9 @@
                                 <!-- Sub Pills Komoditas Sayuran & Hortikultura -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($sayuranKomoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-sayuran-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-spa"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1316,14 +1422,16 @@
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                             <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0</h4>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiSayuranTanam">0
+                                            </h4>
                                             <small class="text-secondary" id="kpiSayuranSatuanTanam">Satuan: Ha</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #3b82f6;">
                                             <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiSayuranPanen">0
+                                            </h4>
                                             <small class="text-secondary" id="kpiSayuranSatuanPanen">Satuan: Ha</small>
                                         </div>
                                     </div>
@@ -1337,17 +1445,21 @@
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
                                             <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0</h4>
-                                            <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan: Kuintal</small>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiSayuranProduksi">0
+                                            </h4>
+                                            <small class="text-secondary" id="kpiSayuranSatuanProduksi">Satuan:
+                                                Kuintal</small>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartSayuranKomoditasTitle">Bawang Merah</span>
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
+                                                id="chartSayuranKomoditasTitle">Bawang Merah</span>
                                         </h6>
                                         <span class="badge bg-success" id="chartSayuranBadge">Sayuran</span>
                                     </div>
@@ -1358,14 +1470,17 @@
 
                                 <!-- Tabel Detail Per Tahun -->
                                 <div class="card shadow-sm">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tableSayuranTitle">Bawang Merah</span>
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
+                                                id="tableSayuranTitle">Bawang Merah</span>
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tableSayuranPublic">
+                                            <table class="table table-striped table-hover align-middle w-100"
+                                                id="tableSayuranPublic">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="text-center" style="width: 5%">No</th>
@@ -1389,7 +1504,8 @@
                             <!-- Segmented Switcher Data Utama vs Data Tahunan -->
                             <div class="d-flex justify-content-center mb-4">
                                 <div class="segmented-mode-switcher">
-                                    <button type="button" class="btn-mode-switch active" data-sub="perkebunan" data-mode="utama">
+                                    <button type="button" class="btn-mode-switch active" data-sub="perkebunan"
+                                        data-mode="utama">
                                         <i class="bx bx-bar-chart-alt-2"></i> Data Utama Perkebunan
                                     </button>
                                     <button type="button" class="btn-mode-switch" data-sub="perkebunan" data-mode="tahunan">
@@ -1401,40 +1517,52 @@
                             <!-- Mode Utama Perkebunan (Kecamatan & Bulanan) -->
                             <div class="mode-container" id="perkebunan-mode-utama">
                                 <!-- Selector Tahun Bar -->
-                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
+                                <div
+                                    class="d-flex flex-wrap justify-content-between align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm border border-success-subtle">
                                     <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
-                                        <label for="publicSelectTahunPerkebunan" class="fw-bold text-success mb-0 text-nowrap">
+                                        <label for="publicSelectTahunPerkebunan"
+                                            class="fw-bold text-success mb-0 text-nowrap">
                                             <i class="bx bx-calendar me-1"></i> Pilih Tahun:
                                         </label>
-                                        <select id="publicSelectTahunPerkebunan" class="form-select form-select-sm fw-bold border-success text-success" style="width: 120px;"
+                                        <select id="publicSelectTahunPerkebunan"
+                                            class="form-select form-select-sm fw-bold border-success text-success"
+                                            style="width: 120px;"
                                             onchange="window.location.href = '{{ url('/datadaninformasi') }}?tahun=' + this.value + '#pertanian'">
                                             @foreach ($availableYears as $yr)
-                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}</option>
+                                                <option value="{{ $yr }}" {{ $selectedTahun == $yr ? 'selected' : '' }}>{{ $yr }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div>
-                                        <span class="badge bg-light text-success border border-success px-3 py-2" id="perkebunanActiveBadge">
-                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Kopi Tahun {{ $selectedTahun }}
+                                        <span class="badge bg-light text-success border border-success px-3 py-2"
+                                            id="perkebunanActiveBadge">
+                                            <i class="bx bx-check-shield me-1"></i> Luas Tanam - Kopi Tahun
+                                            {{ $selectedTahun }}
                                         </span>
                                     </div>
                                 </div>
 
                                 <!-- Sub Pills Kategori / Indikator Data -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
-                                    <button type="button" class="btn-padi-kat-pill active btn-perkebunan-kat-pill" data-kategori="tanam">
+                                    <button type="button" class="btn-padi-kat-pill active btn-perkebunan-kat-pill"
+                                        data-kategori="tanam">
                                         <i class="bx bx-spa"></i> Luas Tanam (Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="panen">
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill"
+                                        data-kategori="panen">
                                         <i class="bx bx-cut"></i> Luas Panen (Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="produksi">
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill"
+                                        data-kategori="produksi">
                                         <i class="bx bx-package"></i> Produksi (Ton)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="produktivitas">
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill"
+                                        data-kategori="produktivitas">
                                         <i class="bx bx-line-chart"></i> Produktivitas (Kw/Ha)
                                     </button>
-                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill" data-kategori="puso">
+                                    <button type="button" class="btn-padi-kat-pill btn-perkebunan-kat-pill"
+                                        data-kategori="puso">
                                         <i class="bx bx-error-circle"></i> Puso (Ha)
                                     </button>
                                 </div>
@@ -1442,7 +1570,9 @@
                                 <!-- Sub Pills Komoditas Perkebunan -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($perkebunanKomoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-perkebunan-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-perkebunan-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-spa"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1452,29 +1582,34 @@
                                 <div class="row g-3 mb-4">
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi">
-                                            <span class="text-muted small" id="kpiPerkebunanCard1Title">Luas Baku Lahan</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPerkebunanSawah">0 Ha</h4>
+                                            <span class="text-muted small" id="kpiPerkebunanCard1Title">Baku Lahan
+                                                Wilayah</span>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPerkebunanSawah">0
+                                                Ha</h4>
                                             <small class="text-secondary">Kabupaten Kuningan</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                             <span class="text-muted small" id="kpiPerkebunanCard2Title">Target</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPerkebunanTarget">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPerkebunanTarget">
+                                                0 Ha</h4>
                                             <small class="text-secondary">Musim Hujan + Kemarau</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
                                             <span class="text-muted small" id="kpiPerkebunanCard3Title">Realisasi</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPerkebunanRealisasi">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number"
+                                                id="kpiPerkebunanRealisasi">0 Ha</h4>
                                             <small class="text-secondary">Total Realisasi</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                             <span class="text-muted small">Capaian Target</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPerkebunanPersen">0%</h4>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPerkebunanPersen">0%
+                                            </h4>
                                             <small class="text-secondary">Persentase Target</small>
                                         </div>
                                     </div>
@@ -1482,9 +1617,11 @@
 
                                 <!-- Chart Target vs Realisasi Perkebunan -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success" id="chartPerkebunanTitle">
-                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Perkebunan per Kecamatan
+                                            <i class="bx bx-bar-chart-alt-2 me-1"></i> Grafik Target vs Realisasi Perkebunan
+                                            per Kecamatan
                                         </h6>
                                         <span class="badge bg-success" id="chartPerkebunanKomoditasBadge">Kopi</span>
                                     </div>
@@ -1497,12 +1634,14 @@
                                 <div class="card shadow-sm">
                                     <div class="card-header bg-white py-3">
                                         <h6 class="mb-0 fw-bold text-success" id="tablePerkebunanTitle">
-                                            <i class="bx bx-table me-1"></i> Data Rincian Perkebunan per Kecamatan (Tahun {{ $selectedTahun }})
+                                            <i class="bx bx-table me-1"></i> Data Rincian Perkebunan per Kecamatan (Tahun
+                                            {{ $selectedTahun }})
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tablePerkebunanUtama">
+                                            <table class="table table-striped table-hover align-middle w-100"
+                                                id="tablePerkebunanUtama">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="text-center" style="width: 4%">No</th>
@@ -1530,7 +1669,9 @@
                                 <!-- Sub Pills Komoditas Perkebunan Tahunan -->
                                 <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
                                     @foreach ($perkebunanKomoditasList as $idx => $kmd)
-                                        <button type="button" class="btn-komoditas-pill btn-perkebunan-th-pill {{ $idx == 0 ? 'active' : '' }}" data-komoditas="{{ $kmd }}">
+                                        <button type="button"
+                                            class="btn-komoditas-pill btn-perkebunan-th-pill {{ $idx == 0 ? 'active' : '' }}"
+                                            data-komoditas="{{ $kmd }}">
                                             <i class="bx bx-spa"></i> {{ $kmd }}
                                         </button>
                                     @endforeach
@@ -1541,28 +1682,32 @@
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #f59e0b;">
                                             <span class="text-muted small">Total Luas Tanam</span>
-                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number" id="kpiPerkebunanTahunanTanam">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-warning fw-bold stat-number"
+                                                id="kpiPerkebunanTahunanTanam">0 Ha</h4>
                                             <small class="text-secondary">Satuan: Ha</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #3b82f6;">
                                             <span class="text-muted small">Total Luas Panen</span>
-                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number" id="kpiPerkebunanTahunanPanen">0 Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-primary fw-bold stat-number"
+                                                id="kpiPerkebunanTahunanPanen">0 Ha</h4>
                                             <small class="text-secondary">Satuan: Ha</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #06b6d4;">
                                             <span class="text-muted small">Rata-rata Produktivitas</span>
-                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number" id="kpiPerkebunanTahunanProdv">0 Kw/Ha</h4>
+                                            <h4 class="mt-1 mb-0 text-info fw-bold stat-number"
+                                                id="kpiPerkebunanTahunanProdv">0 Kw/Ha</h4>
                                             <small class="text-secondary">Satuan: Kw/Ha</small>
                                         </div>
                                     </div>
                                     <div class="col-6 col-md-3">
                                         <div class="stat-card-padi" style="border-left-color: #10b981;">
                                             <span class="text-muted small">Total Produksi</span>
-                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number" id="kpiPerkebunanTahunanProduksi">0 Ton</h4>
+                                            <h4 class="mt-1 mb-0 text-success fw-bold stat-number"
+                                                id="kpiPerkebunanTahunanProduksi">0 Ton</h4>
                                             <small class="text-secondary">Satuan: Ton</small>
                                         </div>
                                     </div>
@@ -1570,9 +1715,11 @@
 
                                 <!-- Grafik Tren Tahunan ApexCharts -->
                                 <div class="card shadow-sm mb-4">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span id="chartPerkebunanTahunanKomoditasTitle">Kopi</span>
+                                            <i class="bx bx-line-chart me-1"></i> Grafik Perkembangan Tahunan: <span
+                                                id="chartPerkebunanTahunanKomoditasTitle">Kopi</span>
                                         </h6>
                                         <span class="badge bg-success">Perkebunan {{ $perkebunanTahunCount }} Tahun</span>
                                     </div>
@@ -1583,14 +1730,17 @@
 
                                 <!-- Tabel Detail Per Tahun -->
                                 <div class="card shadow-sm">
-                                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
+                                    <div
+                                        class="card-header bg-white py-3 d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 class="mb-0 fw-bold text-success">
-                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span id="tablePerkebunanTahunanTitle">Kopi</span>
+                                            <i class="bx bx-table me-1"></i> Data Historis Tahunan: <span
+                                                id="tablePerkebunanTahunanTitle">Kopi</span>
                                         </h6>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover align-middle w-100" id="tablePerkebunanTahunanPublic">
+                                            <table class="table table-striped table-hover align-middle w-100"
+                                                id="tablePerkebunanTahunanPublic">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="text-center" style="width: 5%">No</th>
@@ -1616,9 +1766,11 @@
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
                                     <h5 class="modal-title fw-bold text-dark">
-                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Kecamatan <span id="pub_detail_kecamatan" class="text-success"></span>
+                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Kecamatan
+                                        <span id="pub_detail_kecamatan" class="text-success"></span>
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -1626,30 +1778,38 @@
                                         <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span id="pub_label_sem1"><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
-                                            <span class="text-primary fw-bold">Subtotal: <span id="pub_detail_sub1">0</span></span>
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span id="pub_label_sem1"><i class="bx bx-circle text-primary me-1"></i>
+                                                Semester 1</span>
+                                            <span class="text-primary fw-bold">Subtotal: <span
+                                                    id="pub_detail_sub1">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="pub_cards_sem1"></div>
                                         </div>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span id="pub_label_sem2"><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
-                                            <span class="text-warning fw-bold">Subtotal: <span id="pub_detail_sub2">0</span></span>
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span id="pub_label_sem2"><i class="bx bx-circle text-warning me-1"></i>
+                                                Semester 2</span>
+                                            <span class="text-warning fw-bold">Subtotal: <span
+                                                    id="pub_detail_sub2">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="pub_cards_sem2"></div>
                                         </div>
                                     </div>
-                                    <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
+                                    <div
+                                        class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
                                         <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
                                         <strong class="fs-5 text-success" id="pub_detail_total">0</strong>
                                     </div>
                                 </div>
                                 <div class="modal-footer py-2">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        data-bs-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
@@ -1661,9 +1821,11 @@
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
                                     <h5 class="modal-title fw-bold text-dark">
-                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Hortikultura: <span id="horti_pub_detail_kecamatan" class="text-success"></span>
+                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Hortikultura:
+                                        <span id="horti_pub_detail_kecamatan" class="text-success"></span>
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -1671,30 +1833,38 @@
                                         <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span><i class="bx bx-circle text-primary me-1"></i> <span id="horti_pub_detail_label1">Semester 1</span></span>
-                                            <span class="text-primary fw-bold">Subtotal: <span id="horti_pub_detail_sub1">0</span></span>
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-primary me-1"></i> <span
+                                                    id="horti_pub_detail_label1">Semester 1</span></span>
+                                            <span class="text-primary fw-bold">Subtotal: <span
+                                                    id="horti_pub_detail_sub1">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="horti_pub_cards_sem1"></div>
                                         </div>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
-                                            <span><i class="bx bx-circle text-warning me-1"></i> <span id="horti_pub_detail_label2">Semester 2</span></span>
-                                            <span class="text-warning fw-bold">Subtotal: <span id="horti_pub_detail_sub2">0</span></span>
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                            <span><i class="bx bx-circle text-warning me-1"></i> <span
+                                                    id="horti_pub_detail_label2">Semester 2</span></span>
+                                            <span class="text-warning fw-bold">Subtotal: <span
+                                                    id="horti_pub_detail_sub2">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="horti_pub_cards_sem2"></div>
                                         </div>
                                     </div>
-                                    <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
+                                    <div
+                                        class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
                                         <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
                                         <strong class="fs-5 text-success" id="horti_pub_detail_total">0</strong>
                                     </div>
                                 </div>
                                 <div class="modal-footer py-2">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        data-bs-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
@@ -1706,9 +1876,11 @@
                             <div class="modal-content">
                                 <div class="modal-header bg-light">
                                     <h5 class="modal-title fw-bold text-dark">
-                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Perkebunan: <span id="perkebunan_pub_detail_kecamatan" class="text-success"></span>
+                                        <i class="bx bx-calendar-check text-success me-1"></i> Rincian Bulanan Perkebunan:
+                                        <span id="perkebunan_pub_detail_kecamatan" class="text-success"></span>
                                     </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -1716,30 +1888,36 @@
                                         <span class="text-muted small">Tahun: <strong>{{ $selectedTahun }}</strong></span>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
                                             <span><i class="bx bx-circle text-primary me-1"></i> Semester 1</span>
-                                            <span class="text-primary fw-bold">Subtotal: <span id="perkebunan_pub_detail_sub1">0</span></span>
+                                            <span class="text-primary fw-bold">Subtotal: <span
+                                                    id="perkebunan_pub_detail_sub1">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="perkebunan_pub_cards_sem1"></div>
                                         </div>
                                     </div>
                                     <div class="card mb-3 border">
-                                        <div class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
+                                        <div
+                                            class="card-header bg-lighter py-2 fw-bold text-dark d-flex justify-content-between">
                                             <span><i class="bx bx-circle text-warning me-1"></i> Semester 2</span>
-                                            <span class="text-warning fw-bold">Subtotal: <span id="perkebunan_pub_detail_sub2">0</span></span>
+                                            <span class="text-warning fw-bold">Subtotal: <span
+                                                    id="perkebunan_pub_detail_sub2">0</span></span>
                                         </div>
                                         <div class="card-body p-2">
                                             <div class="row g-2 text-center" id="perkebunan_pub_cards_sem2"></div>
                                         </div>
                                     </div>
-                                    <div class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
+                                    <div
+                                        class="alert alert-success d-flex justify-content-between align-items-center py-2 mb-0">
                                         <strong class="fs-6">TOTAL REALISASI TAHUN {{ $selectedTahun }}:</strong>
                                         <strong class="fs-5 text-success" id="perkebunan_pub_detail_total">0</strong>
                                     </div>
                                 </div>
                                 <div class="modal-footer py-2">
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-secondary btn-sm"
+                                        data-bs-dismiss="modal">Tutup</button>
                                 </div>
                             </div>
                         </div>
@@ -2099,16 +2277,29 @@
                 if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
 
                 if (c2Title) c2Title.textContent = 'Target Rata-rata';
-                if (c2Val) c2Val.textContent = Number(summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
-                if (c2Sub) c2Sub.textContent = 'Target Produktivitas';
+                if (c2Val) {
+                    c2Val.className = 'mt-1 mb-0 text-danger fw-bold stat-number';
+                    c2Val.textContent = Number(summary.target_total || summary.avg_target || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+                }
+                if (c2Sub) c2Sub.textContent = 'Target Produktivitas (Kabupaten)';
 
                 if (c3Title) c3Title.textContent = 'Rata-rata Tahunan';
-                if (c3Val) c3Val.textContent = Number(summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
-                if (c3Sub) c3Sub.textContent = 'Realisasi Capaian';
+                if (c3Val) {
+                    c3Val.className = 'mt-1 mb-0 text-success fw-bold stat-number';
+                    c3Val.textContent = Number(summary.total_realisasi || summary.avg_realisasi || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Kw/Ha';
+                }
+                if (c3Sub) {
+                    const s1 = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    const s2 = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    c3Sub.innerHTML = `Sem 1: ${s1} | <span class="text-danger fw-bold">Sem 2: ${s2}</span>`;
+                }
 
                 if (c4Title) c4Title.textContent = 'Capaian';
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
-                if (c4Sub) c4Sub.textContent = 'Terhadap Target';
+                if (c4Val) {
+                    c4Val.className = 'mt-1 mb-0 text-danger fw-bold stat-number';
+                    c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+                }
+                if (c4Sub) c4Sub.textContent = 'Terhadap Target Tahunan';
             } else if (currentKategori === 'puso') {
                 const affected = rows.filter(r => Number(r.total_realisasi || 0) > 0).length;
 
@@ -2117,15 +2308,24 @@
                 if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
 
                 if (c2Title) c2Title.textContent = 'Puso Musim Hujan';
-                if (c2Val) c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
+                if (c2Val) {
+                    c2Val.className = 'mt-1 mb-0 text-warning fw-bold stat-number';
+                    c2Val.textContent = Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID') + ' Ha';
+                }
                 if (c2Sub) c2Sub.textContent = 'Oktober - Maret';
 
                 if (c3Title) c3Title.textContent = 'Puso Musim Kemarau';
-                if (c3Val) c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
+                if (c3Val) {
+                    c3Val.className = 'mt-1 mb-0 text-primary fw-bold stat-number';
+                    c3Val.textContent = Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID') + ' Ha';
+                }
                 if (c3Sub) c3Sub.textContent = 'April - September';
 
                 if (c4Title) c4Title.textContent = 'Total Puso';
-                if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
+                if (c4Val) {
+                    c4Val.className = 'mt-1 mb-0 text-danger fw-bold stat-number';
+                    c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
+                }
                 if (c4Sub) c4Sub.textContent = `${affected} Kecamatan Terdampak`;
             } else {
                 if (c1Title) c1Title.textContent = (currentKategori === 'tanam' ? 'Luas Sawah' : 'Baku Lahan');
@@ -2133,15 +2333,24 @@
                 if (c1Sub) c1Sub.textContent = 'Kabupaten Kuningan';
 
                 if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
-                if (c2Val) c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
+                if (c2Val) {
+                    c2Val.className = 'mt-1 mb-0 text-warning fw-bold stat-number';
+                    c2Val.textContent = Number(summary.target_total || 0).toLocaleString('id-ID') + ' ' + unit;
+                }
                 if (c2Sub) c2Sub.textContent = currentKategori === 'tanam' ? 'Okmar + Asep' : 'Jan-Jun + Jul-Des';
 
                 if (c3Title) c3Title.textContent = `Realisasi ${katConfig.label}`;
-                if (c3Val) c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
+                if (c3Val) {
+                    c3Val.className = 'mt-1 mb-0 text-primary fw-bold stat-number';
+                    c3Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' ' + unit;
+                }
                 if (c3Sub) c3Sub.textContent = currentKategori === 'tanam' ? 'MH + MK' : 'Semester 1 + 2';
 
                 if (c4Title) c4Title.textContent = 'Capaian Target';
-                if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+                if (c4Val) {
+                    c4Val.className = 'mt-1 mb-0 text-info fw-bold stat-number';
+                    c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
+                }
                 if (c4Sub) c4Sub.textContent = 'Persentase Capaian';
             }
 
@@ -2149,33 +2358,33 @@
             if (thead) {
                 if (currentKategori === 'puso') {
                     thead.innerHTML = `
-                        <tr>
-                            <th class="text-center" style="width: 4%">No</th>
-                            <th>Kecamatan</th>
-                            <th class="text-end">Baku Lahan (Ha)</th>
-                            <th class="text-end">Puso MH (Ha)</th>
-                            <th class="text-end">Puso MK (Ha)</th>
-                            <th class="text-end">Total Puso (Ha)</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center" style="width: 8%">Rincian</th>
-                        </tr>
-                    `;
+                                        <tr>
+                                            <th class="text-center" style="width: 4%">No</th>
+                                            <th>Kecamatan</th>
+                                            <th class="text-end">Baku Lahan (Ha)</th>
+                                            <th class="text-end">Puso MH (Ha)</th>
+                                            <th class="text-end">Puso MK (Ha)</th>
+                                            <th class="text-end">Total Puso (Ha)</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center" style="width: 8%">Rincian</th>
+                                        </tr>
+                                    `;
                 } else {
                     thead.innerHTML = `
-                        <tr>
-                            <th class="text-center" style="width: 4%">No</th>
-                            <th>Kecamatan</th>
-                            <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
-                            <th class="text-end">${katConfig.target_sub1_label}</th>
-                            <th class="text-end">${katConfig.target_sub2_label}</th>
-                            <th class="text-end">Target Total</th>
-                            <th class="text-end">${katConfig.realisasi_sub1_label}</th>
-                            <th class="text-end">${katConfig.realisasi_sub2_label}</th>
-                            <th class="text-end">Total Realisasi</th>
-                            <th class="text-center">Capaian</th>
-                            <th class="text-center" style="width: 8%">Rincian</th>
-                        </tr>
-                    `;
+                                        <tr>
+                                            <th class="text-center" style="width: 4%">No</th>
+                                            <th>Kecamatan</th>
+                                            <th class="text-end">${currentKategori === 'tanam' ? 'Luas Sawah (Ha)' : 'Baku Lahan (Ha)'}</th>
+                                            <th class="text-end">${katConfig.target_sub1_label}</th>
+                                            <th class="text-end">${katConfig.target_sub2_label}</th>
+                                            <th class="text-end">Target Total</th>
+                                            <th class="text-end">${katConfig.realisasi_sub1_label}</th>
+                                            <th class="text-end">${katConfig.realisasi_sub2_label}</th>
+                                            <th class="text-end">${currentKategori === 'produktivitas' ? 'Rata-rata Tahunan' : 'Total Realisasi'}</th>
+                                            <th class="text-center">Capaian</th>
+                                            <th class="text-center" style="width: 8%">Rincian</th>
+                                        </tr>
+                                    `;
                 }
             }
 
@@ -2206,48 +2415,167 @@
 
                     if (currentKategori === 'puso') {
                         const totPuso = Number(row.total_realisasi || 0);
-                        const statusBadge = totPuso > 0 
+                        const statusBadge = totPuso > 0
                             ? `<span class="badge bg-danger">Terdampak Puso</span>`
                             : `<span class="badge bg-success">Aman (Nihil)</span>`;
 
                         tr.innerHTML = `
-                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                            <td><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end ${totPuso > 0 ? 'text-danger fw-bold' : 'text-success'}">${totPuso.toLocaleString('id-ID')}</td>
-                            <td class="text-center">${statusBadge}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
+                                            <td class="text-center">${row.no_urut || idx + 1}</td>
+                                            <td><strong>${row.kecamatan}</strong></td>
+                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end">${Number(row.jumlah_mh || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end">${Number(row.jumlah_mk || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end ${totPuso > 0 ? 'text-danger fw-bold' : 'text-success'}">${totPuso.toLocaleString('id-ID')}</td>
+                                            <td class="text-center">${statusBadge}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
+                                                    <i class="bx bx-calendar"></i>
+                                                </button>
+                                            </td>
+                                        `;
                     } else {
                         const isDec = currentKategori === 'produktivitas';
                         const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
 
                         tr.innerHTML = `
-                            <td class="text-center">${row.no_urut || idx + 1}</td>
-                            <td><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                            <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                            <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                            <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                            <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                            <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                            <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
+                                            <td class="text-center">${row.no_urut || idx + 1}</td>
+                                            <td><strong>${row.kecamatan}</strong></td>
+                                            <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                            <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                                            <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                                            <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                                            <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                                            <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                                            <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${rowJson}'>
+                                                    <i class="bx bx-calendar"></i>
+                                                </button>
+                                            </td>
+                                        `;
                     }
                     tbody.appendChild(tr);
                 });
+
+                // Render Footer Ringkasan Kabupaten (TFOOT)
+                const tfoot = document.getElementById('tfootPadiPalawija');
+                if (tfoot) {
+                    if (rows.length === 0) {
+                        tfoot.innerHTML = '';
+                    } else if (currentKategori === 'puso') {
+                        const affected = rows.filter(r => Number(r.total_realisasi || 0) > 0).length;
+                        tfoot.innerHTML = `
+                                            <tr class="table-light">
+                                                <th class="text-center"></th>
+                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
+                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
+                                                <th class="text-end">${Number(summary.realisasi_sub1 || 0).toLocaleString('id-ID')}</th>
+                                                <th class="text-end">${Number(summary.realisasi_sub2 || 0).toLocaleString('id-ID')}</th>
+                                                <th class="text-end ${Number(summary.total_realisasi || 0) > 0 ? 'text-danger fw-bold' : 'text-success'}">${Number(summary.total_realisasi || 0).toLocaleString('id-ID')}</th>
+                                                <th class="text-center"><span class="badge bg-secondary">${affected} Kecamatan</span></th>
+                                                <th class="text-center">-</th>
+                                            </tr>
+                                        `;
+                    } else if (currentKategori === 'produktivitas') {
+                        const formatVal = (v) => Number(v || 0).toFixed(2);
+                        const summaryRowObj = {
+                            kecamatan: 'RATA-RATA KABUPATEN KUNINGAN',
+                            luas_sawah: summary.total_sawah,
+                            target_okmar: summary.target_sub1,
+                            target_asep: summary.target_sub2,
+                            target_total: summary.target_total,
+                            jumlah_mh: summary.realisasi_sub1,
+                            jumlah_mk: summary.realisasi_sub2,
+                            total_realisasi: summary.total_realisasi,
+                            persentase_capaian: summary.persentase,
+                            realisasi_jan: summary.realisasi_jan,
+                            realisasi_feb: summary.realisasi_feb,
+                            realisasi_mar: summary.realisasi_mar,
+                            realisasi_apr: summary.realisasi_apr,
+                            realisasi_mei: summary.realisasi_mei,
+                            realisasi_jun: summary.realisasi_jun,
+                            realisasi_jul: summary.realisasi_jul,
+                            realisasi_ags: summary.realisasi_ags,
+                            realisasi_sep: summary.realisasi_sep,
+                            realisasi_okt: summary.realisasi_okt,
+                            realisasi_nop: summary.realisasi_nop,
+                            realisasi_des: summary.realisasi_des,
+                        };
+                        const summaryJson = JSON.stringify(summaryRowObj).replace(/'/g, "&apos;");
+
+                        tfoot.innerHTML = `
+                                            <tr class="table-light">
+                                                <th class="text-center"></th>
+                                                <th class="text-uppercase fw-bold text-dark">RATA-RATA KABUPATEN</th>
+                                                <th class="text-end">${Number(summary.total_sawah || 0).toLocaleString('id-ID')}</th>
+                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
+                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
+                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.target_total)}</th>
+                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
+                                                <th class="text-end text-danger fw-bold fs-6">${formatVal(summary.realisasi_sub2)}</th>
+                                                <th class="text-end text-success fw-bold fs-6">${formatVal(summary.total_realisasi)}</th>
+                                                <th class="text-center"><span class="badge bg-danger px-2 py-1 text-white fs-7">${Number(summary.persentase || 0).toFixed(2)}%</span></th>
+                                                <th class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-danger text-white btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Rata-Rata Kabupaten">
+                                                        <i class="bx bx-calendar"></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        `;
+                    } else {
+                        const formatVal = (v) => Number(v || 0).toLocaleString('id-ID');
+                        const p = Number(summary.persentase || 0);
+                        let badgeClass = 'badge-capaian-low';
+                        if (p >= 100) badgeClass = 'badge-capaian-high';
+                        else if (p >= 50) badgeClass = 'badge-capaian-medium';
+
+                        const summaryRowObj = {
+                            kecamatan: 'TOTAL KABUPATEN KUNINGAN',
+                            luas_sawah: summary.total_sawah,
+                            target_okmar: summary.target_sub1,
+                            target_asep: summary.target_sub2,
+                            target_total: summary.target_total,
+                            jumlah_mh: summary.realisasi_sub1,
+                            jumlah_mk: summary.realisasi_sub2,
+                            total_realisasi: summary.total_realisasi,
+                            persentase_capaian: summary.persentase,
+                            realisasi_jan: summary.realisasi_jan,
+                            realisasi_feb: summary.realisasi_feb,
+                            realisasi_mar: summary.realisasi_mar,
+                            realisasi_apr: summary.realisasi_apr,
+                            realisasi_mei: summary.realisasi_mei,
+                            realisasi_jun: summary.realisasi_jun,
+                            realisasi_jul: summary.realisasi_jul,
+                            realisasi_ags: summary.realisasi_ags,
+                            realisasi_sep: summary.realisasi_sep,
+                            realisasi_okt: summary.realisasi_okt,
+                            realisasi_nop: summary.realisasi_nop,
+                            realisasi_des: summary.realisasi_des,
+                        };
+                        const summaryJson = JSON.stringify(summaryRowObj).replace(/'/g, "&apos;");
+
+                        tfoot.innerHTML = `
+                                            <tr class="table-light">
+                                                <th class="text-center"></th>
+                                                <th class="text-uppercase fw-bold text-dark">TOTAL KABUPATEN</th>
+                                                <th class="text-end">${formatVal(summary.total_sawah)}</th>
+                                                <th class="text-end text-muted">${formatVal(summary.target_sub1)}</th>
+                                                <th class="text-end text-muted">${formatVal(summary.target_sub2)}</th>
+                                                <th class="text-end text-primary fw-semibold">${formatVal(summary.target_total)}</th>
+                                                <th class="text-end">${formatVal(summary.realisasi_sub1)}</th>
+                                                <th class="text-end">${formatVal(summary.realisasi_sub2)}</th>
+                                                <th class="text-end text-success fw-bold">${formatVal(summary.total_realisasi)}</th>
+                                                <th class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p.toFixed(2)}%</span></th>
+                                                <th class="text-center">
+                                                    <button type="button" class="btn btn-sm btn-outline-success btn-pub-detail" data-row='${summaryJson}' title="Lihat Rincian Total Kabupaten">
+                                                        <i class="bx bx-calendar"></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        `;
+                    }
+                }
 
                 document.querySelectorAll('.btn-pub-detail').forEach(b => {
                     b.addEventListener('click', function () {
@@ -2306,11 +2634,11 @@
             document.getElementById('pub_detail_sub2').textContent = formatNum(row.jumlah_mk) + ' ' + sat;
             document.getElementById('pub_detail_total').textContent = formatNum(row.total_realisasi) + ' ' + sat;
 
-            document.getElementById('pub_label_sem1').innerHTML = isTanam 
-                ? '<i class="bx bx-circle text-primary me-1"></i> Musim Hujan (MH)' 
+            document.getElementById('pub_label_sem1').innerHTML = isTanam
+                ? '<i class="bx bx-circle text-primary me-1"></i> Musim Hujan (MH)'
                 : '<i class="bx bx-circle text-primary me-1"></i> Semester 1 (Jan - Jun)';
-            document.getElementById('pub_label_sem2').innerHTML = isTanam 
-                ? '<i class="bx bx-circle text-warning me-1"></i> Musim Kemarau (MK)' 
+            document.getElementById('pub_label_sem2').innerHTML = isTanam
+                ? '<i class="bx bx-circle text-warning me-1"></i> Musim Kemarau (MK)'
                 : '<i class="bx bx-circle text-warning me-1"></i> Semester 2 (Jul - Des)';
 
             let mSem1 = [];
@@ -2353,22 +2681,22 @@
             }
 
             document.getElementById('pub_cards_sem1').innerHTML = mSem1.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             document.getElementById('pub_cards_sem2').innerHTML = mSem2.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananPublik');
             if (modalEl) {
@@ -2477,15 +2805,15 @@
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                            <tr>
-                                <td class="text-center">${idx + 1}</td>
-                                <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
-                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
-                            </tr>
-                        `;
+                                            <tr>
+                                                <td class="text-center">${idx + 1}</td>
+                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                                            </tr>
+                                        `;
                     });
                     tbody.innerHTML = html;
                 }
@@ -2629,7 +2957,7 @@
             const c4Val = document.getElementById('kpiHortiPersen');
 
             if (isDec) {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = 'Baku Sawah Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = 'Target Rata-rata';
@@ -2640,7 +2968,7 @@
 
                 if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
             } else if (isPuso) {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = 'Baku Sawah Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = 'Puso Semester 1';
@@ -2651,7 +2979,7 @@
 
                 if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
             } else {
-                if (c1Title) c1Title.textContent = isTanam ? 'Luas Baku Sawah' : 'Baku Lahan';
+                if (c1Title) c1Title.textContent = isTanam ? 'Luas Baku Sawah' : 'Baku Sawah Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
@@ -2725,22 +3053,22 @@
             if (thead) {
                 if (isPuso) {
                     thead.innerHTML = `
-                        <tr>
-                            <th class="sticky-col-no text-center" rowspan="2">No</th>
-                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
-                            <th class="text-end" rowspan="2">Baku Lahan (Ha)</th>
-                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
-                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
-                            <th class="text-end" rowspan="2">${totalColLabel}</th>
-                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
-                        </tr>
-                        <tr>
-                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
-                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
-                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
-                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
-                        </tr>
-                    `;
+                                        <tr>
+                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                                            <th class="text-end" rowspan="2">Baku Lahan (Ha)</th>
+                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                                        </tr>
+                                        <tr>
+                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                                        </tr>
+                                    `;
                 } else {
                     const targetTitle = isTanam
                         ? `TARGET LUAS TANAM (${unit})`
@@ -2749,27 +3077,27 @@
                     const targetSub2 = isTanam ? 'Target MK' : 'Target Sem 2';
 
                     thead.innerHTML = `
-                        <tr>
-                            <th class="sticky-col-no text-center" rowspan="2">No</th>
-                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
-                            <th class="text-end" rowspan="2">${isTanam ? 'Luas Sawah (Ha)' : 'Luas Baku (Ha)'}</th>
-                            <th class="text-center th-target" colspan="3">${targetTitle}</th>
-                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
-                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
-                            <th class="text-end" rowspan="2">${totalColLabel}</th>
-                            <th class="text-center" rowspan="2">Capaian</th>
-                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
-                        </tr>
-                        <tr>
-                            <th class="text-end th-target">${targetSub1}</th>
-                            <th class="text-end th-target">${targetSub2}</th>
-                            <th class="text-end th-target fw-bold">Total Target</th>
-                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
-                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
-                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
-                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
-                        </tr>
-                    `;
+                                        <tr>
+                                            <th class="sticky-col-no text-center" rowspan="2">No</th>
+                                            <th class="sticky-col-kec" rowspan="2">Kecamatan</th>
+                                            <th class="text-end" rowspan="2">${isTanam ? 'Luas Sawah (Ha)' : 'Luas Baku (Ha)'}</th>
+                                            <th class="text-center th-target" colspan="3">${targetTitle}</th>
+                                            <th class="text-center th-period-1" colspan="7">${period1Title}</th>
+                                            <th class="text-center th-period-2" colspan="7">${period2Title}</th>
+                                            <th class="text-end" rowspan="2">${totalColLabel}</th>
+                                            <th class="text-center" rowspan="2">Capaian</th>
+                                            <th class="text-center" rowspan="2" style="width: 45px;">Rincian</th>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-end th-target">${targetSub1}</th>
+                                            <th class="text-end th-target">${targetSub2}</th>
+                                            <th class="text-end th-target fw-bold">Total Target</th>
+                                            ${period1Months.map(m => `<th class="text-end th-period-1">${m.label}</th>`).join('')}
+                                            <th class="text-end th-period-1 fw-bold">${sub1Label}</th>
+                                            ${period2Months.map(m => `<th class="text-end th-period-2">${m.label}</th>`).join('')}
+                                            <th class="text-end th-period-2 fw-bold">${sub2Label}</th>
+                                        </tr>
+                                    `;
                 }
             }
 
@@ -2870,40 +3198,40 @@
 
                     if (isPuso) {
                         tr.innerHTML = `
-                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
-                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${formatVal(sawah)}</td>
-                            ${p1Cells}
-                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
-                            ${p2Cells}
-                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
-                            <td class="text-end text-danger fw-bold">${formatVal(totalRealRow)}</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
+                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                                            <td class="text-end">${formatVal(sawah)}</td>
+                                            ${p1Cells}
+                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                                            ${p2Cells}
+                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                                            <td class="text-end text-danger fw-bold">${formatVal(totalRealRow)}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                                    <i class="bx bx-calendar"></i>
+                                                </button>
+                                            </td>
+                                        `;
                     } else {
                         tr.innerHTML = `
-                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
-                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
-                            <td class="text-end">${formatVal(sawah)}</td>
-                            <td class="text-end text-muted">${formatVal(t1)}</td>
-                            <td class="text-end text-muted">${formatVal(t2)}</td>
-                            <td class="text-end text-primary fw-semibold">${formatVal(tTot)}</td>
-                            ${p1Cells}
-                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
-                            ${p2Cells}
-                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
-                            <td class="text-end text-success fw-bold">${formatVal(totalRealRow)}</td>
-                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
-                                    <i class="bx bx-calendar"></i>
-                                </button>
-                            </td>
-                        `;
+                                            <td class="sticky-col-no text-center">${row.no_urut || idx + 1}</td>
+                                            <td class="sticky-col-kec"><strong>${row.kecamatan}</strong></td>
+                                            <td class="text-end">${formatVal(sawah)}</td>
+                                            <td class="text-end text-muted">${formatVal(t1)}</td>
+                                            <td class="text-end text-muted">${formatVal(t2)}</td>
+                                            <td class="text-end text-primary fw-semibold">${formatVal(tTot)}</td>
+                                            ${p1Cells}
+                                            <td class="text-end col-period-subtotal-1">${formatVal(sub1Val)}</td>
+                                            ${p2Cells}
+                                            <td class="text-end col-period-subtotal-2">${formatVal(sub2Val)}</td>
+                                            <td class="text-end text-success fw-bold">${formatVal(totalRealRow)}</td>
+                                            <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-sm btn-outline-success btn-horti-pub-detail" data-row='${rowJson}' title="Lihat Kartu Rincian">
+                                                    <i class="bx bx-calendar"></i>
+                                                </button>
+                                            </td>
+                                        `;
                     }
                     tbody.appendChild(tr);
                 });
@@ -2913,46 +3241,49 @@
                     const rowCount = rows.length;
                     const avgOrSum = (v) => isDec ? (v / rowCount) : v;
 
-                    const fSub1 = avgOrSum(sumSub1);
-                    const fSub2 = avgOrSum(sumSub2);
-                    const fGrandTotal = avgOrSum(sumGrandTotal);
-                    const fCapaian = sumTargetTot > 0 ? ((fGrandTotal / sumTargetTot) * 100).toFixed(2) : '0';
+                    const fSub1 = isDec ? Number(summary.realisasi_sub1 || avgOrSum(sumSub1)) : avgOrSum(sumSub1);
+                    const fSub2 = isDec ? Number(summary.realisasi_sub2 || avgOrSum(sumSub2)) : avgOrSum(sumSub2);
+                    const fTarget1 = isDec ? Number(summary.target_sub1 || sumTarget1) : sumTarget1;
+                    const fTarget2 = isDec ? Number(summary.target_sub2 || sumTarget2) : sumTarget2;
+                    const fTargetTot = isDec ? Number(summary.target_total || sumTargetTot) : sumTargetTot;
+                    const fGrandTotal = isDec ? Number(summary.total_realisasi || avgOrSum(sumGrandTotal)) : avgOrSum(sumGrandTotal);
+                    const fCapaian = isDec ? Number(summary.persentase || 0).toFixed(2) : (sumTargetTot > 0 ? ((fGrandTotal / sumTargetTot) * 100).toFixed(2) : '0');
 
                     const p1FootCells = sumP1Months.map(v => `<th class="text-end th-period-1">${formatVal(avgOrSum(v))}</th>`).join('');
                     const p2FootCells = sumP2Months.map(v => `<th class="text-end th-period-2">${formatVal(avgOrSum(v))}</th>`).join('');
 
                     if (isPuso) {
                         tfoot.innerHTML = `
-                            <tr>
-                                <th class="sticky-col-no text-center"></th>
-                                <th class="sticky-col-kec text-uppercase">TOTAL KABUPATEN</th>
-                                <th class="text-end">${formatVal(sumSawah)}</th>
-                                ${p1FootCells}
-                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
-                                ${p2FootCells}
-                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
-                                <th class="text-end text-danger">${formatVal(fGrandTotal)}</th>
-                                <th class="text-center">-</th>
-                            </tr>
-                        `;
+                                            <tr>
+                                                <th class="sticky-col-no text-center"></th>
+                                                <th class="sticky-col-kec text-uppercase">TOTAL KABUPATEN</th>
+                                                <th class="text-end">${formatVal(sumSawah)}</th>
+                                                ${p1FootCells}
+                                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                                ${p2FootCells}
+                                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
+                                                <th class="text-end text-danger">${formatVal(fGrandTotal)}</th>
+                                                <th class="text-center">-</th>
+                                            </tr>
+                                        `;
                     } else {
                         tfoot.innerHTML = `
-                            <tr>
-                                <th class="sticky-col-no text-center"></th>
-                                <th class="sticky-col-kec text-uppercase">${isDec ? 'RATA-RATA KABUPATEN' : 'TOTAL KABUPATEN'}</th>
-                                <th class="text-end">${formatVal(sumSawah)}</th>
-                                <th class="text-end text-muted">${formatVal(sumTarget1)}</th>
-                                <th class="text-end text-muted">${formatVal(sumTarget2)}</th>
-                                <th class="text-end text-primary">${formatVal(sumTargetTot)}</th>
-                                ${p1FootCells}
-                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
-                                ${p2FootCells}
-                                <th class="text-end th-period-2">${formatVal(fSub2)}</th>
-                                <th class="text-end text-success">${formatVal(fGrandTotal)}</th>
-                                <th class="text-center">${fCapaian}%</th>
-                                <th class="text-center">-</th>
-                            </tr>
-                        `;
+                                            <tr>
+                                                <th class="sticky-col-no text-center"></th>
+                                                <th class="sticky-col-kec text-uppercase">${isDec ? 'RATA-RATA KABUPATEN' : 'TOTAL KABUPATEN'}</th>
+                                                <th class="text-end">${formatVal(sumSawah)}</th>
+                                                <th class="text-end text-muted">${formatVal(fTarget1)}</th>
+                                                <th class="text-end text-muted">${formatVal(fTarget2)}</th>
+                                                <th class="text-end ${isDec ? 'text-danger fw-bold' : 'text-primary'}">${formatVal(fTargetTot)}</th>
+                                                ${p1FootCells}
+                                                <th class="text-end th-period-1">${formatVal(fSub1)}</th>
+                                                ${p2FootCells}
+                                                <th class="text-end th-period-2 ${isDec ? 'text-danger fw-bold' : ''}">${formatVal(fSub2)}</th>
+                                                <th class="text-end text-success">${formatVal(fGrandTotal)}</th>
+                                                <th class="text-center ${isDec ? 'text-danger fw-bold' : ''}">${fCapaian}%</th>
+                                                <th class="text-center">-</th>
+                                            </tr>
+                                        `;
                     }
                 }
 
@@ -3068,22 +3399,22 @@
             document.getElementById('horti_pub_detail_total').textContent = formatNum(totVal) + ' ' + sat;
 
             document.getElementById('horti_pub_cards_sem1').innerHTML = mSem1.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             document.getElementById('horti_pub_cards_sem2').innerHTML = mSem2.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananHorti');
             if (modalEl) {
@@ -3222,13 +3553,13 @@
 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
-                        <td class="text-center">${idx + 1}</td>
-                        <td class="text-center fw-bold text-success">${row.tahun}</td>
-                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
-                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
-                    `;
+                                        <td class="text-center">${idx + 1}</td>
+                                        <td class="text-center fw-bold text-success">${row.tahun}</td>
+                                        <td class="text-end">${Number(row.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                        <td class="text-end">${Number(row.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                        <td class="text-end text-primary fw-semibold">${Number(row.produktivitas || 0).toFixed(2)}</td>
+                                        <td class="text-end text-success fw-bold">${Number(row.produksi || 0).toLocaleString('id-ID')}</td>
+                                    `;
                     tbody.appendChild(tr);
                 });
 
@@ -3386,7 +3717,7 @@
             const c4Val = document.getElementById('kpiPerkebunanPersen');
 
             if (currentPerkebunanKategori === 'produktivitas') {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = 'Baku Lahan Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = 'Target Rata-rata';
@@ -3397,7 +3728,7 @@
 
                 if (c4Val) c4Val.textContent = Number(summary.persentase || 0).toFixed(2) + '%';
             } else if (currentPerkebunanKategori === 'puso') {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = 'Baku Lahan Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = 'Puso Semester 1';
@@ -3408,7 +3739,7 @@
 
                 if (c4Val) c4Val.textContent = Number(summary.total_realisasi || 0).toLocaleString('id-ID') + ' Ha';
             } else {
-                if (c1Title) c1Title.textContent = 'Baku Lahan';
+                if (c1Title) c1Title.textContent = 'Baku Lahan Wilayah';
                 if (c1Val) c1Val.textContent = Number(summary.total_sawah || 0).toLocaleString('id-ID') + ' Ha';
 
                 if (c2Title) c2Title.textContent = `Target ${katConfig.label}`;
@@ -3449,22 +3780,22 @@
                     const formatVal = (v) => isDec ? Number(v || 0).toFixed(2) : Number(v || 0).toLocaleString('id-ID');
 
                     tr.innerHTML = `
-                        <td class="text-center">${row.no_urut || idx + 1}</td>
-                        <td><strong>${row.kecamatan}</strong></td>
-                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
-                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
-                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
-                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
-                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
-                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-outline-success btn-perkebunan-pub-detail" data-row='${rowJson}'>
-                                <i class="bx bx-calendar"></i>
-                            </button>
-                        </td>
-                    `;
+                                        <td class="text-center">${row.no_urut || idx + 1}</td>
+                                        <td><strong>${row.kecamatan}</strong></td>
+                                        <td class="text-end">${Number(row.luas_sawah || 0).toLocaleString('id-ID')}</td>
+                                        <td class="text-end text-muted">${formatVal(row.target_okmar)}</td>
+                                        <td class="text-end text-muted">${formatVal(row.target_asep)}</td>
+                                        <td class="text-end text-primary fw-semibold">${formatVal(row.target_total)}</td>
+                                        <td class="text-end">${formatVal(row.jumlah_mh)}</td>
+                                        <td class="text-end">${formatVal(row.jumlah_mk)}</td>
+                                        <td class="text-end text-success fw-bold">${formatVal(row.total_realisasi)}</td>
+                                        <td class="text-center"><span class="badge ${badgeClass} px-2 py-1">${p}%</span></td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-sm btn-outline-success btn-perkebunan-pub-detail" data-row='${rowJson}'>
+                                                <i class="bx bx-calendar"></i>
+                                            </button>
+                                        </td>
+                                    `;
                     tbody.appendChild(tr);
                 });
 
@@ -3537,22 +3868,22 @@
             ];
 
             document.getElementById('perkebunan_pub_cards_sem1').innerHTML = mSem1.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             document.getElementById('perkebunan_pub_cards_sem2').innerHTML = mSem2.map(m => `
-                <div class="col-4 col-sm-2">
-                    <div class="p-2 border rounded bg-white">
-                        <div class="text-muted small">${m.label}</div>
-                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
-                    </div>
-                </div>
-            `).join('');
+                                <div class="col-4 col-sm-2">
+                                    <div class="p-2 border rounded bg-white">
+                                        <div class="text-muted small">${m.label}</div>
+                                        <div class="fw-bold text-dark fs-7">${formatNum(m.val)}</div>
+                                    </div>
+                                </div>
+                            `).join('');
 
             const modalEl = document.getElementById('modalDetailBulananPerkebunan');
             if (modalEl) {
@@ -3658,15 +3989,15 @@
                     let html = '';
                     rows.forEach((r, idx) => {
                         html += `
-                            <tr>
-                                <td class="text-center">${idx + 1}</td>
-                                <td class="text-center fw-bold text-success">${r.tahun}</td>
-                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
-                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
-                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
-                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
-                            </tr>
-                        `;
+                                            <tr>
+                                                <td class="text-center">${idx + 1}</td>
+                                                <td class="text-center fw-bold text-success">${r.tahun}</td>
+                                                <td class="text-end">${Number(r.luas_tanam || 0).toLocaleString('id-ID')}</td>
+                                                <td class="text-end">${Number(r.luas_panen || 0).toLocaleString('id-ID')}</td>
+                                                <td class="text-end">${Number(r.produktivitas || 0).toFixed(2)}</td>
+                                                <td class="text-end fw-semibold text-primary">${Number(r.produksi || 0).toLocaleString('id-ID')}</td>
+                                            </tr>
+                                        `;
                     });
                     tbody.innerHTML = html;
                 }

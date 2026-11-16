@@ -164,17 +164,29 @@ class AdminPadiPalawijaController extends Controller
         $totalRealisasi = $items->sum('total_realisasi');
 
         if ($selectedKategori === 'produktivitas') {
-            $avgTarget = $items->count() > 0 ? round($items->avg('target_total'), 2) : 0;
-            $avgSub1 = $items->count() > 0 ? round($items->avg('jumlah_mh'), 2) : 0;
-            $avgSub2 = $items->count() > 0 ? round($items->avg('jumlah_mk'), 2) : 0;
-            $avgTotal = $items->count() > 0 ? round($items->avg('total_realisasi'), 2) : 0;
+            $panenRows = PadiPalawija::where('tahun', $selectedTahun)->where('komoditas', $selectedKomoditas)->where('kategori', 'panen')->get();
+            $prodRows = PadiPalawija::where('tahun', $selectedTahun)->where('komoditas', $selectedKomoditas)->where('kategori', 'produksi')->get();
+            $totPanenTarget = (float) $panenRows->sum('target_total');
+            $totProdTarget = (float) $prodRows->sum('target_total');
+            $totPanenSub1 = (float) $panenRows->sum('jumlah_mh');
+            $totProdSub1 = (float) $prodRows->sum('jumlah_mh');
+            $totPanenSub2 = (float) $panenRows->sum('jumlah_mk');
+            $totProdSub2 = (float) $prodRows->sum('jumlah_mk');
+            $totPanenReal = (float) $panenRows->sum('total_realisasi');
+            $totProdReal = (float) $prodRows->sum('total_realisasi');
+
+            $avgTarget = $totPanenTarget > 0 ? round(($totProdTarget / $totPanenTarget) * 10, 2) : ($items->count() > 0 ? round($items->avg('target_total'), 2) : 0);
+            $avgSub1 = $totPanenSub1 > 0 ? round(($totProdSub1 / $totPanenSub1) * 10, 2) : ($items->count() > 0 ? round($items->avg('jumlah_mh'), 2) : 0);
+            $avgSub2 = $totPanenSub2 > 0 ? round(($totProdSub2 / $totPanenSub2) * 10, 2) : ($items->count() > 0 ? round($items->avg('jumlah_mk'), 2) : 0);
+            $avgTotal = $totPanenReal > 0 ? round(($totProdReal / $totPanenReal) * 10, 2) : ($items->count() > 0 ? round($items->avg('total_realisasi'), 2) : 0);
+            $persenProdv = $avgTarget > 0 ? round(($avgTotal / $avgTarget) * 100, 2) : 0;
 
             $stats = [
                 'card1_title' => 'Target Rata-rata',
                 'card1_value' => $avgTarget . ' Kw/Ha',
                 'card1_sub' => "Target Produktivitas {$selectedKomoditas}",
                 'card1_icon' => 'bx-target-lock',
-                'card1_badge' => 'bg-label-warning',
+                'card1_badge' => 'bg-label-danger',
 
                 'card2_title' => 'Rata-rata Jan-Jun',
                 'card2_value' => $avgSub1 . ' Kw/Ha',
@@ -186,13 +198,13 @@ class AdminPadiPalawijaController extends Controller
                 'card3_value' => $avgSub2 . ' Kw/Ha',
                 'card3_sub' => 'Realisasi Semester 2',
                 'card3_icon' => 'bx-calendar',
-                'card3_badge' => 'bg-label-info',
+                'card3_badge' => 'bg-label-danger',
 
                 'card4_title' => 'Rata-rata Total',
-                'card4_value' => $avgTotal . ' Kw/Ha',
+                'card4_value' => $avgTotal . ' Kw/Ha (' . $persenProdv . '%)',
                 'card4_sub' => "Capaian Produktivitas Tahun {$selectedTahun}",
                 'card4_icon' => 'bx-line-chart',
-                'card4_badge' => 'bg-label-success',
+                'card4_badge' => 'bg-label-danger',
             ];
         } elseif ($selectedKategori === 'puso') {
             $kecamatanTerdampak = $items->filter(fn($x) => $x->total_realisasi > 0)->count();
@@ -268,6 +280,21 @@ class AdminPadiPalawijaController extends Controller
             'selectedTahun' => $selectedTahun,
             'items' => $items,
             'stats' => $stats,
+            'totalSawah' => $totalSawah,
+            'totalTargetSub1' => $totalTargetSub1,
+            'totalTargetSub2' => $totalTargetSub2,
+            'totalTarget' => $totalTarget,
+            'totalRealisasiSub1' => $totalRealisasiSub1,
+            'totalRealisasiSub2' => $totalRealisasiSub2,
+            'totalRealisasi' => $totalRealisasi,
+            'avgTarget' => $avgTarget ?? 0,
+            'avgSub1' => $avgSub1 ?? 0,
+            'avgSub2' => $avgSub2 ?? 0,
+            'avgTotal' => $avgTotal ?? 0,
+            'totPanenSub1' => $totPanenSub1 ?? 0,
+            'totPanenSub2' => $totPanenSub2 ?? 0,
+            'totProdSub1' => $totProdSub1 ?? 0,
+            'totProdSub2' => $totProdSub2 ?? 0,
         ];
 
         return view('admin.padi_palawija.index', $data);
@@ -327,6 +354,13 @@ class AdminPadiPalawijaController extends Controller
             }
 
             $detailMsg = "Berhasil mengimpor {$result['totalRows']} data Tahun {$tahun} (" . implode(', ', $result['sheets']) . ").";
+
+            // Otomatis sinkronkan agregasi ke Data Tahunan
+            try {
+                \Illuminate\Support\Facades\Artisan::call('pertanian:sync-tahunan');
+            } catch (\Throwable $e) {
+                // Abaikan jika artisan call gagal agar proses impor utama tidak terganggu
+            }
 
             return redirect()
                 ->route('admin-padi-palawija.index', ['tahun' => $tahun])

@@ -358,6 +358,11 @@ class AdminHortikulturaUtamaController extends Controller
 
         try {
             $result = $excelService->import($request->file('file_excel'), $tahun, $komoditas);
+
+            try {
+                \Illuminate\Support\Facades\Artisan::call('pertanian:sync-tahunan');
+            } catch (\Throwable $e) {}
+
             return redirect()->back()->with('success', $result['message']);
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal impor data: ' . $e->getMessage());
